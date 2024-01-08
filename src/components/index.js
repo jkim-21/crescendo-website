@@ -8,7 +8,7 @@ import Footer from './Footer'
 import Hero from './Hero'
 import Navbar from './Navbar'
 import Stats from './Stats'
-import Testimonials from './Testimonials'
+import Founders from './Founders'
 
 export {
     Billing,
@@ -21,5 +21,5 @@ export {
     Hero,
     Navbar,
     Stats,
-    Testimonials
+    Founders,
 }

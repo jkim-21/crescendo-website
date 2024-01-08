@@ -12,7 +12,10 @@ import {
   dropbox, 
   send, 
   shield, 
-  star
+  star,
+  founder01,
+  founder02,
+  founder03
 } from "../assets";
 
 export const navLinks = [
@@ -25,8 +28,8 @@ export const navLinks = [
     title: "Features",
   },
   {
-    id: "product",
-    title: "Product",
+    id: "about-us",
+    title: "About Us",
   },
   {
     id: "clients",
@@ -55,6 +58,33 @@ export const features = [
     title: "Balance Transfer",
     content:
       "A balance transfer credit card can save you a lot of money in interest charges.",
+  },
+];
+
+export const founders = [
+  {
+    id: "founder-1",
+    img: founder01,
+    name: "Allen Beckwith",
+    title: "Co-Founder and President",
+    content1: "Allen Beckwith serves as Co-Founder and President of Crescendo for a Cause. He is a Junior undergraduate student at Northwestern University, Robert R. McCormick School of Engineering and Applied Science, pursuing a Bachelor of Science in Electrical Engineering. He is also the Principal Clarinetist of the Northwestern Philharmonia Orchestra.",
+    content2: "Allen has studied the piano since age four and the clarinet since age ten. His favorite composer is Sergei Rachmaninoff, and he is also an avid fan of jazz artists such as Count Basie, Stan Kenton, Roy Hargrove, and many others. His favorite musical memories are from his time as Drum Major of the 2018-2019 and 2019-2020 Adlai E. Stevenson High School Marching and Pep Bands, serving as Principal Clarinetist of the 2017 Macy’s Great American Marching Band, and performing in the 2018 and 2020 Illinois Music Education Association All-State Honor Bands",
+  },
+  {
+    id: "founder-2",
+    img: founder02,
+    name: "Kiran Mohan",
+    title: "Co-Founder and President",
+    content1: "Kiran Mohan serves as Co-Founder and President of Crescendo for a Cause. He is a Junior undergraduate student at Harvard University, pursuing a Bachelor of Arts in History of Science with a secondary in Global Health & Health Policy. Kiran is particularly interested in how music can affect the brain and has conducted research at Northwestern University and Harvard University.",
+    content2: "Kiran has played a variety of instruments, including the piano, oboe, English horn and alto saxophone. In addition to pursuing performance opportunities on campus, he has taken several courses at Harvard on how music can shape culture. Kiran has also completed music therapy courses from the Berklee College of Music that have inspired Crescendo for a Cause’s approach to conducting in-person and virtual therapeutic music performances. Some of Kiran’s favorite composers include Maurice Ravel and Johannes Brahms. His favorite musical memory has been organizing Crescendo for a Cause assisted living facility concerts and seeing the impact music has on the residents.",
+  },
+  {
+    id: "founder-3",
+    img: founder03,
+    name: "Jonathan Raymond",
+    title: "Co-Founder and President",
+    content1: "Jonathan Raymond serves as the President of Music Outreach of Crescendo for a Cause. He is a Junior undergraduate student at the University of Illinois--Urbana-Champaign, pursuing a Bachelor of Science in Behavioral Neuroscience. He performs in two jazz combos at the university as well as in his own group, The Nebelung Quintet.",
+    content2: "Jonathan has studied the piano since age four and the trumpet since age ten. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. The work of Clifford Brown is a notable inspiration for Jonathan. His favorite musical memories were during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble.",
   },
 ];
 

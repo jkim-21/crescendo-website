@@ -16,6 +16,8 @@
 
 * {
   scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
 }
 
 .text-gradient {
@@ -110,6 +112,10 @@
 .feature-card:hover {
   background: var(--black-gradient);
   box-shadow: var(--card-shadow);
+}
+
+.founder-title {
+  color: #cfa524;
 }
 
 .feedback-container .feedback-card:last-child {
