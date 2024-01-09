@@ -1,7 +1,6 @@
 import React from 'react'
 import { feedback, founders } from '../constants'
 import styles from '../style'
-import Feedback from './Feedback'
 
 const Founders = () => {
   return (
