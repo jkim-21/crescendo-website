@@ -27,7 +27,12 @@ import founder01 from "./founder01.png";
 import founder02 from "./founder02.png";
 import founder03 from "./founder03.png";
 import founder04 from "./founder04.png";
-
+import colby from "./colby.png";
+import harvard from "./harvard.png";
+import northwestern from "./northwestern.png";
+import ucsb from "./ucsb.png";
+import uiuc from "./uiuc.png";
+import stevenson from "./stevenson.png";
 
 export {
   airbnb,
@@ -58,5 +63,11 @@ export {
   founder01,
   founder02,
   founder03,
-  founder04
+  founder04,
+  colby,
+  harvard,
+  northwestern,
+  ucsb,
+  uiuc,
+  stevenson
 };

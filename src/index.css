@@ -35,7 +35,10 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+}
+
+.highlight-color {
+  color: #cfa524;
 }
 
 .bg-blue-gradient {
@@ -114,10 +117,6 @@
 .feature-card:hover {
   background: var(--black-gradient);
   box-shadow: var(--card-shadow);
-}
-
-.founder-title {
-  color: #cfa524;
 }
 
 .feedback-container .feedback-card:last-child {

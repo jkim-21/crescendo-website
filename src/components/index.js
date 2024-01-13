@@ -2,7 +2,7 @@ import AboutUs from './AboutUs'
 import Billing from './Billing'
 import Business from './Business'
 import CardDeal from './CardDeal'
-import Clients from './Clients'
+import Chapters from './Chapters'
 import CTA from './CTA'
 import Footer from './Footer'
 import Founders from './Founders'
@@ -15,7 +15,7 @@ export {
     Billing,
     Business,
     CardDeal,
-    Clients,
+    Chapters,
     CTA,
     Footer,
     Founders,
