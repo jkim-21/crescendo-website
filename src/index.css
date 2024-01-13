@@ -18,6 +18,8 @@
   scroll-behavior: smooth;
   padding: 0;
   margin: 0;
+  border: 1px red dotted;
+  box-sizing: border-box;
 }
 
 .text-gradient {

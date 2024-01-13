@@ -26,6 +26,7 @@ import people03 from "./people03.png";
 import founder01 from "./founder01.png";
 import founder02 from "./founder02.png";
 import founder03 from "./founder03.png";
+import founder04 from "./founder04.png";
 
 
 export {
@@ -56,5 +57,6 @@ export {
   people03,
   founder01,
   founder02,
-  founder03
+  founder03,
+  founder04
 };
