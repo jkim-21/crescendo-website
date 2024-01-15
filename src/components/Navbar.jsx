@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { close, logo, menu } from '../assets'
-import { navLinks } from '../constants'
+import { navLinks } from '../data/home-page-info'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
 
@@ -11,14 +12,14 @@ const Navbar = () => {
       <img src={logo} alt='hoobank' className='w-[124px] h-[32px]'/>
       <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
         {navLinks.map((nav, i) => (
-          <li 
-            key={nav.id}
-            className={`font-poppins font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white mr-10`}
-          >
-            <a href={`#${nav.id}`}>
-              {nav.title}
-            </a>
-          </li>        
+            <li 
+              key={nav.id}
+              className={`font-poppins font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white mr-10`}
+            >
+              <a href={`#${nav.id}`}>
+                {nav.title}
+              </a>
+            </li>
         ))}
       </ul>
       <div className='sm:hidden flex flex-1 justify-end items-center'>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {founders} from '../constants'
+import {founders} from '../data/home-page-info'
 import styles from '../style'
 import Founders from './Founders'
 
@@ -13,7 +13,6 @@ const AboutUs = () => {
           <Founders key={founder.id} {...founder}/>
         ))}
       </div>
-
     </section>
   )
 }

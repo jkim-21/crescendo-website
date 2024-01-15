@@ -1,9 +1,5 @@
-import airbnb from "./airbnb.png";
 import bill from "./bill.png";
-import binance from "./binance.png";
 import card from "./card.png";
-import coinbase from "./coinbase.png";
-import dropbox from "./dropbox.png";
 import logo from "./logo.svg";
 import quotes from "./quotes.svg";
 import robot from "./robot.png";
@@ -20,13 +16,12 @@ import facebook from "./facebook.svg";
 import instagram from "./instagram.svg";
 import linkedin from "./linkedin.svg";
 import twitter from "./twitter.svg";
-import people01 from "./people01.png";
-import people02 from "./people02.png";
-import people03 from "./people03.png";
-import founder01 from "./founder01.png";
-import founder02 from "./founder02.png";
-import founder03 from "./founder03.png";
-import founder04 from "./founder04.png";
+
+import allenBeckwith from "./allen-beckwith.png";
+import kiranMohan from "./kiran-mohan.png";
+import jonathanRaymond from "./jonathan-raymond.png";
+import justinKim from "./justin-kim.png";
+
 import colby from "./colby.png";
 import harvard from "./harvard.png";
 import northwestern from "./northwestern.png";
@@ -34,13 +29,21 @@ import ucsb from "./ucsb.png";
 import uiuc from "./uiuc.png";
 import stevenson from "./stevenson.png";
 
+import colbyBackground from "./colby-background.png";
+import harvardBackground from "./harvard-background.png";
+import northwesternBackground from "./northwestern-background.png";
+import ucsbBackground from "./ucsb-background.png";
+import uiucBackground from "./uiuc-background.png";
+import stevensonBackground from "./stevenson-background.png";
+
+import lucasGazianis from "./lucas-gazianis.png";
+import marcCourtenmanche from "./marc-courtemanche.png";
+import rosieWang from "./rosie-wang.png";
+import gwynethGraham from "./gwyneth-graham.png";
+
 export {
-  airbnb,
   bill,
-  binance,
   card,
-  coinbase,
-  dropbox,
   logo,
   quotes,
   robot,
@@ -57,17 +60,28 @@ export {
   instagram,
   linkedin,
   twitter,
-  people01,
-  people02,
-  people03,
-  founder01,
-  founder02,
-  founder03,
-  founder04,
+
+  allenBeckwith,
+  kiranMohan,
+  jonathanRaymond,
+  justinKim,
+  
   colby,
   harvard,
   northwestern,
   ucsb,
   uiuc,
-  stevenson
+  stevenson,
+
+  colbyBackground,
+  harvardBackground,
+  northwesternBackground,
+  ucsbBackground,
+  uiucBackground,
+  stevensonBackground,
+
+  lucasGazianis,
+  marcCourtenmanche,
+  rosieWang,
+  gwynethGraham
 };
