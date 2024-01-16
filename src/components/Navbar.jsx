@@ -3,6 +3,7 @@ import { close, logo, menu } from '../assets'
 import { navLinks } from '../data/home-page-info'
 import { HashLink } from 'react-router-hash-link';
 
+import logo2 from '../assets/logo2.webp';
 
 const Navbar = () => {
 
@@ -10,9 +11,9 @@ const Navbar = () => {
 
   return (
     <nav className='w-full flex py-6 justify-between items-center navbar'>
-      <img src={logo} alt='hoobank' className='w-[124px] h-[32px]'/>
-      <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
-        {navLinks.map((nav, i) => (
+    <img src={logo2} alt='hoobank' className='w-[124px] h-[auto]'/>
+    <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
+      {navLinks.map((nav, i) => (
             <li 
               key={nav.id}
               className={`font-poppins font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white mr-10`}

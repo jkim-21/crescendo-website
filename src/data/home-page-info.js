@@ -20,6 +20,10 @@ import {
   stevenson
 } from "../assets";
 
+import pic1 from '../assets/pic1.png';
+import pic2 from '../assets/pic2.png';
+import pic3 from '../assets/pic3.png';
+
 export const navLinks = [
   {
     id: "home",
@@ -154,20 +158,21 @@ export const chapters = [
 export const stats = [
   {
     id: "stats-1",
-    title: "User Active",
-    value: "3800+",
+    title: "K-12 Students in our Coast-to-Coast programs",
+    value: "200+",
   },
   {
     id: "stats-2",
-    title: "Trusted by Company",
-    value: "230+",
+    title: "of instruments donated to under-priviledged communities",
+    value: "$30,000+",
   },
   {
     id: "stats-3",
-    title: "Transaction",
-    value: "$230M+",
+    title: "live/virtual therapeutic performances",
+    value: "100+",
   },
 ];
+
 
 export const footerLinks = [
   {
@@ -255,5 +260,29 @@ export const socialMedia = [
     id: "social-media-4",
     icon: linkedin,
     link: "https://www.linkedin.com/",
+  },
+];
+
+export const feedback = [
+  {
+    id: "feedback-1",
+    picture: pic1, // replace with your picture import or URL
+    name: "Gathering",
+    title: "C4C Colby",
+    
+  },
+  {
+    id: "feedback-2",
+    picture: pic2, // replace with your picture import or URL
+    name: "Instrument Drive",
+    title: "C4C Nation",
+    
+  },
+  {
+    id: "feedback-3",
+    picture: pic3, // replace with your picture import or URL
+    name: "Benefit Concert",
+    title: "C4C UCSB",
+    
   },
 ];
