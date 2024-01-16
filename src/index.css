@@ -1,8 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/************ Template Styling ***************/
+
 
 :root {
   --black-gradient: linear-gradient(
@@ -35,10 +42,6 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-.highlight-color {
-  color: #cfa524;
 }
 
 .bg-blue-gradient {
@@ -144,4 +147,13 @@
 .white__gradient {
   background: rgba(255, 255, 255, 0.6);
   filter: blur(300px);
+}
+
+
+
+/************ Custom Styling ***************/
+
+
+.highlight-color {
+  color: #cfa524;
 }

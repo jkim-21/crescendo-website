@@ -24,7 +24,6 @@ export const navLinks = [
   {
     id: "home",
     title: "Home",
-    link: "../"
   },
   {
     id: "features",
@@ -91,7 +90,7 @@ export const founders = [
     name: "Jonathan Raymond",
     title: "Co-Founder and President",
     content: {
-      content1: "Jonathan Raymond serves as the President of Music Outreach of Crescendo for a Cause. He is a Senior undergraduate student at the University of Illinois--Urbana-Champaign, pursuing a Bachelor of Science in Behavioral Neuroscience. He performs in two jazz combos at the university as well as in his own group, The Nebelung Quintet.",
+      content1: "Jonathan Raymond co-founded and serves on the executive board for Crescendo for a Cause. He is a Senior undergraduate student at the University of Illinois Urbana-Champaign, pursuing a Bachelor of Science in Chemistry. When Jonathan isn’t at the bench in various research groups at school, he loves to time to play in jazz bands around campus and compose music.",
       content2: "Jonathan has studied the piano since age four and the trumpet since age ten. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. The work of Clifford Brown is a notable inspiration for Jonathan. His favorite musical memories were during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble.",
     },
   },
@@ -101,7 +100,7 @@ export const founders = [
     name: "Justin Kim",
     title: "President",
     content: {
-      content1: "Justin Kim is a senior at Colby majoring in Biochemistry and is on the premed track. He grew up playing the piano and picked up the saxophone during his musical journey. Though he's been a part of many different ensembles, his favorite is playing in a concert band. He is currently a saxophonist in the Colby Wind Ensemble and a solo pianist at Colby. In his spare time, Justin loves to play soccer, paint, and listen to music!",
+      content1: "Justin Kim is an undergraduate student at Colby College studying neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. At C4C, Justin is particularly interested in the mentorship aspect of music education, eager to give back the same inspiring guidance that he once received from his mentors.",
     },
   },
 ];
@@ -145,24 +144,6 @@ export const chapters = [
     name: "Stevenson High School",
   },
 ];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

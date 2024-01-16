@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { close, logo, menu } from '../assets'
 import { navLinks } from '../data/home-page-info'
-import { Link } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
+
 
 const Navbar = () => {
 
@@ -16,9 +17,9 @@ const Navbar = () => {
               key={nav.id}
               className={`font-poppins font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white mr-10`}
             >
-              <a href={`#${nav.id}`}>
+              <HashLink to={`/#${nav.id}`}>
                 {nav.title}
-              </a>
+              </HashLink>
             </li>
         ))}
       </ul>
@@ -36,9 +37,9 @@ const Navbar = () => {
                 key={nav.id}
                 className={`font-poppins font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mb-4'} text-white mr-10`}
               >
-                <a href={`#${nav.id}`}>
+                <HashLink to={`/#${nav.id}`}>
                   {nav.title}
-                </a>
+                </HashLink>
               </li>        
             ))}
           </ul>

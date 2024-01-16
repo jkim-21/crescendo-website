@@ -20,11 +20,11 @@ import {
 
 } from "../assets";
 
-export const chapterInformation = [
+export const chapterData = [
     {
         id: "chapter-01",
         background: colbyBackground,
-        header: "Colby",
+        header: "Colby College",
         Officers: [
             {
                 id: "colby-officer-01",
@@ -40,7 +40,7 @@ export const chapterInformation = [
 
     {
         id: "chapter-02",
-        background: harvardBackground,
+        background: "harvardBackground",
         header: "Harvard",
         Leadership: [
             {
@@ -66,13 +66,13 @@ export const chapterInformation = [
 
     {
         id: "chapter-03",
-        background: northwesternBackground,
-        header: "NorthWestern",
+        background: "northwesternBackground",
+        header: "Northwestern",
     },
 
     {
         id: "chapter-04",
-        background: ucsbBackground,
+        background: "ucsbBackground",
         header: "UC Santa Barbara",
         Leadership: [
             {
@@ -119,7 +119,7 @@ export const chapterInformation = [
     },
     {
         id: "chapter-05",
-        background: uiucBackground,
+        background: "uiucBackground",
         header: "University of Illinois UC",
         Leadership: [
             {
@@ -132,7 +132,7 @@ export const chapterInformation = [
     },
     {
         id: "chapter-06",
-        background: stevensonBackground,
+        background: "stevensonBackground",
         header: "Adlai E. Stevenson High School",
         Leadership: [
             {

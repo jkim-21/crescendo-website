@@ -12,6 +12,17 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        spectral: ["Spectral", "sans-serif"],
+        raleway: ["Raleway", "sans-serif"],
+      },
+
+      backgroundImage: {
+        'colbyBackground': "url('../src/assets/colby-background.png')",
+        'harvardBackground': "url('./src/harvard-background.png')",
+        'northwesternBackground': "url('./src/northwestern-background.png')",
+        'ucsbBackground': "url('./src/ucsb-background.png')",
+        'uiucBackground': "url('./src/uiuc-background.png')",
+        'stevensonBackground': "url('./src/stevenson-background.png')",
       },
     },
     screens: {

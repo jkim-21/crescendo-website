@@ -29,7 +29,7 @@ import ucsb from "./ucsb.png";
 import uiuc from "./uiuc.png";
 import stevenson from "./stevenson.png";
 
-import colbyBackground from "./colby-background.png";
+import colbyBackground from "./colby-background5.png";
 import harvardBackground from "./harvard-background.png";
 import northwesternBackground from "./northwestern-background.png";
 import ucsbBackground from "./ucsb-background.png";
