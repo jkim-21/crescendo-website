@@ -40,7 +40,7 @@ export const chapterData = [
 
     {
         id: "chapter-02",
-        background: "harvardBackground",
+        background: harvardBackground,
         header: "Harvard",
         Leadership: [
             {
@@ -72,7 +72,7 @@ export const chapterData = [
 
     {
         id: "chapter-04",
-        background: "ucsbBackground",
+        background: ucsbBackground,
         header: "UC Santa Barbara",
         Leadership: [
             {
@@ -119,7 +119,7 @@ export const chapterData = [
     },
     {
         id: "chapter-05",
-        background: "uiucBackground",
+        background: uiucBackground,
         header: "University of Illinois UC",
         Leadership: [
             {
@@ -132,7 +132,7 @@ export const chapterData = [
     },
     {
         id: "chapter-06",
-        background: "stevensonBackground",
+        background: stevensonBackground,
         header: "Adlai E. Stevenson High School",
         Leadership: [
             {

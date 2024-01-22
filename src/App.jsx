@@ -1,5 +1,5 @@
 import React from 'react'
-import {AboutUs, Billing, Business, CardDeal, Chapters, CTA, Footer, Founders, Hero, Navbar, Stats} from './components'
+import {AboutUs, Chapters, CTA, Footer, Hero, Navbar, Stats} from './components'
 
 import styles from './style'
 
@@ -19,9 +19,6 @@ const App = () => {
       <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Stats/>
-    
-          
-
           <AboutUs/>
           <Chapters/>
           <CTA/>

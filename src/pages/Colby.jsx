@@ -6,7 +6,8 @@ import styles from "../style"
 const Colby = () => {
     return (
 
-        <div className='bg-primary w-full overflow-hidden'>
+        <div style={{backgroundImage: `url(${chapterData[0].background})`}}
+        className='bg-primary w-full overflow-hidden'>
             <div className={` ${styles.flexCenter}`}>
                 <div className={`${styles.boxWidth}`}>
                         <Navbar></Navbar>
@@ -17,6 +18,7 @@ const Colby = () => {
             </div>
             <h3>Officers</h3>
         </div>
+        
     )
 }
 

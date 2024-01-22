@@ -41,6 +41,8 @@ import marcCourtenmanche from "./marc-courtemanche.png";
 import rosieWang from "./rosie-wang.png";
 import gwynethGraham from "./gwyneth-graham.png";
 
+import chapterBackground from "./chapter-background.png";
+
 export {
   bill,
   card,
@@ -83,5 +85,7 @@ export {
   lucasGazianis,
   marcCourtenmanche,
   rosieWang,
-  gwynethGraham
+  gwynethGraham,
+
+  chapterBackground
 };

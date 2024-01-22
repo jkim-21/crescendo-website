@@ -1,7 +1,5 @@
 import AboutUs from './AboutUs'
 import Billing from './Billing'
-import Business from './Business'
-import CardDeal from './CardDeal'
 import Chapters from './Chapters'
 import CTA from './CTA'
 import Footer from './Footer'
@@ -13,8 +11,6 @@ import Stats from './Stats'
 export {
     AboutUs,
     Billing,
-    Business,
-    CardDeal,
     Chapters,
     CTA,
     Footer,
