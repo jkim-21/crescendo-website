@@ -10,7 +10,6 @@ const Chapters = () => {
       <div className='w-full grid grid-cols-[repeat(3,_1fr)] gap-x-24 gap-y-20'>
         {chapters.map((chapter) => (
           <div key={chapter.id} className='text-center'>
-          
               <Link to={chapter.link} className='block mb-8'>
                   <img
                     src={chapter.img}

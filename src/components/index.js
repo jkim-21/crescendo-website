@@ -7,6 +7,7 @@ import Founders from './Founders'
 import Hero from './Hero'
 import Navbar from './Navbar'
 import Stats from './Stats'
+import GetStarted from './GetStarted'
 
 export {
     AboutUs,
@@ -18,4 +19,5 @@ export {
     Hero,
     Navbar,
     Stats,
+    GetStarted
 }

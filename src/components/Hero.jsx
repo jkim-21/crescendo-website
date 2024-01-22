@@ -1,7 +1,7 @@
 import styles from '../style'
-import { discount, robot } from '../assets'
-import GetStarted from './GetStarted'
+import { discount, robot} from '../assets';
 import logo2 from '../assets/logo2.webp';
+import {GetStarted} from '.';
 import together from '../assets/together.png';
 
 

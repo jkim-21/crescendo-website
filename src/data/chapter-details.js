@@ -66,7 +66,7 @@ export const chapterData = [
 
     {
         id: "chapter-03",
-        background: "northwesternBackground",
+        background: northwesternBackground,
         header: "Northwestern",
     },
 
