@@ -1,8 +1,7 @@
 import styles from '../style'
-import { discount, robot} from '../assets';
-import logo2 from '../assets/logo2.webp';
-import {GetStarted} from '.';
-import together from '../assets/together.png';
+import { discount } from '../assets';
+import { GetStarted } from '.';
+import { slideshow } from '../data/home-page.js'
 
 
 const Hero = () => {
@@ -39,7 +38,7 @@ const Hero = () => {
       <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}>
       
         <img
-         src={together}
+         src={slideshow[0].picture}
          alt='Together'
          style={{
            width: '90%', // Image will take full width of its container

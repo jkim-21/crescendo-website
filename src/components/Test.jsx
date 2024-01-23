@@ -1,5 +1,4 @@
 import React from 'react'
-import { feedback } from '../data/home-page-info'
 import styles from '../style'
 import Feedback from './Feedback.jsx';
 

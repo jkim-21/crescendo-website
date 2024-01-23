@@ -5,6 +5,7 @@ import {colby, harvard, northwestern, stevenson, ucsb, uiuc} from '../data/chapt
 import { Involvements, Officers, Contacts } from '../components'
 import styles from "../style"
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const chapters = {
     colby, harvard, northwestern, stevenson, ucsb, uiuc
@@ -14,12 +15,16 @@ const chapterPage = () => {
     let {chapterName} = useParams();
     const chapterData = chapters[chapterName];
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div>
             <div style={{backgroundImage: `url(${chapterData.background})`}}
             className='w-full overflow-hidden bg-center bg-cover'>
                 <div className={`${styles.flexCenter}`}>
-                    <div className={`${styles.boxWidth}`}>
+                    <div className={`${styles.boxWidth} sm:px-16 px-6`}>
                         <Navbar pageStyles='[filter:drop-shadow(2px_2px_0px_rgb(0_0_0_/_0.9))]'/>
                     </div>
                 </div>
@@ -34,7 +39,7 @@ const chapterPage = () => {
                 <div className={`${styles.chaptersWidth}`}>
                     <p className={`${styles.paragraph} mb-5`}>{chapterData.aboutInformation}</p>
                     {chapterData.aboutInformation2 && <p className={`${styles.paragraph} mb-5`}>{chapterData.aboutInformation2}</p>}
-                    <p className='mb-10'>You can contact us at {chapterData.emailAddress}</p>
+                    <p className={`${styles.paragraph} mb-10`}>You can contact us at {chapterData.emailAddress}</p>
 
                     <h2 className='gold-color text-[2.5rem] font-medium text-center mb-5'>Get Involved</h2>
                     <div className='flex w-full gap-[1rem] mb-10'>

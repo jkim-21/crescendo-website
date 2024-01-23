@@ -3,9 +3,11 @@ import {
   instagram, 
   linkedin, 
   twitter, 
-  send, 
-  shield, 
-  star,
+
+  slideshowPic1,
+  slideshowPic2,
+  slideshowPic3,
+  slideshowPic4,
 
   allenBeckwith,
   kiranMohan,
@@ -20,18 +22,14 @@ import {
   stevenson
 } from "../assets";
 
-import pic1 from '../assets/pic1.png';
-import pic2 from '../assets/pic2.png';
-import pic3 from '../assets/pic3.png';
-
 export const navLinks = [
   {
     id: "home",
     title: "Home",
   },
   {
-    id: "features",
-    title: "Features",
+    id: "donate",
+    title: "Donate",
   },
   {
     id: "about-us",
@@ -43,27 +41,33 @@ export const navLinks = [
   },
 ];
 
-export const features = [
+export const slideshow = [
   {
-    id: "feature-1",
-    icon: star,
-    title: "Rewards",
-    content:
-      "The best credit cards offer some tantalizing combinations of promotions and prizes",
+    id: "slideshow-1",
+    picture: slideshowPic1,
+    name: "Gathering",
+    title: "C4C Organization",
+    
   },
   {
-    id: "feature-2",
-    icon: shield,
-    title: "100% Secured",
-    content:
-      "We take proactive steps make sure your information and transactions are secure.",
+    id: "slideshow-2",
+    picture: slideshowPic2,
+    name: "Gathering",
+    title: "C4C Colby",
+    
   },
   {
-    id: "feature-3",
-    icon: send,
-    title: "Balance Transfer",
-    content:
-      "A balance transfer credit card can save you a lot of money in interest charges.",
+    id: "slideshow-3",
+    picture: slideshowPic3, 
+    name: "Instrument Drive",
+    title: "C4C Nation",
+    
+  },
+  {
+    id: "slideshow-4",
+    picture: slideshowPic4, 
+    name: "Benefit Concert",
+    title: "C4C UCSB",
   },
 ];
 
@@ -149,6 +153,8 @@ export const chapters = [
     link: "./chapters/stevenson"
   },
 ];
+
+
 
 
 
@@ -261,29 +267,5 @@ export const socialMedia = [
     id: "social-media-4",
     icon: linkedin,
     link: "https://www.linkedin.com/",
-  },
-];
-
-export const feedback = [
-  {
-    id: "feedback-1",
-    picture: pic1, // replace with your picture import or URL
-    name: "Gathering",
-    title: "C4C Colby",
-    
-  },
-  {
-    id: "feedback-2",
-    picture: pic2, // replace with your picture import or URL
-    name: "Instrument Drive",
-    title: "C4C Nation",
-    
-  },
-  {
-    id: "feedback-3",
-    picture: pic3, // replace with your picture import or URL
-    name: "Benefit Concert",
-    title: "C4C UCSB",
-    
   },
 ];

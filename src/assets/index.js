@@ -1,21 +1,17 @@
 import bill from "./bill.png";
-import card from "./card.png";
-import logo from "./logo.svg";
-import quotes from "./quotes.svg";
-import robot from "./robot.png";
-import send from "./Send.svg";
-import shield from "./Shield.svg";
-import star from "./Star.svg";
 import menu from "./menu.svg";
 import close from "./close.svg";
 import google from "./google.svg";
 import apple from "./apple.svg";
+
 import arrowUp from "./arrow-up.svg";
 import discount from "./Discount.svg";
-import facebook from "./facebook.svg";
-import instagram from "./instagram.svg";
-import linkedin from "./linkedin.svg";
-import twitter from "./twitter.svg";
+
+import slideshowPic1 from "./slideshow-pic-1.png"
+import slideshowPic2 from "./slideshow-pic-2.png";
+import slideshowPic3 from "./slideshow-pic-3.png";
+import slideshowPic4 from "./slideshow-pic-4.png";
+
 
 import allenBeckwith from "./allen-beckwith.png";
 import kiranMohan from "./kiran-mohan.png";
@@ -45,25 +41,30 @@ import chapterBackground from "./chapter-background.png";
 import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
 
+import facebook from "./facebook.svg";
+import instagram from "./instagram.svg";
+import linkedin from "./linkedin.svg";
+import twitter from "./twitter.svg";
+
 export {
   bill,
-  card,
-  logo,
-  quotes,
-  robot,
-  send,
-  shield,
-  star,
   menu,
   close,
   google,
   apple,
+
   arrowUp,
   discount,
+
   facebook,
   instagram,
   linkedin,
   twitter,
+
+  slideshowPic1,
+  slideshowPic2,
+  slideshowPic3,
+  slideshowPic4,
 
   allenBeckwith,
   kiranMohan,
@@ -77,6 +78,10 @@ export {
   uiuc,
   stevenson,
 
+  chapterBackground,
+  involvementLogo,
+  placeholder,
+
   colbyBackground,
   harvardBackground,
   northwesternBackground,
@@ -87,9 +92,5 @@ export {
   lucasGazianis,
   marcCourtenmanche,
   rosieWang,
-  gwynethGraham,
-
-  chapterBackground,
-  involvementLogo,
-  placeholder
+  gwynethGraham
 };
