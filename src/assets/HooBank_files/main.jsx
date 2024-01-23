@@ -3,7 +3,7 @@ import __vite__cjsImport1_react from "/node_modules/.vite/deps/react.js?v=f5e4c2
 import __vite__cjsImport2_reactDom_client from "/node_modules/.vite/deps/react-dom_client.js?v=2ba99abd"; const ReactDOM = __vite__cjsImport2_reactDom_client.__esModule ? __vite__cjsImport2_reactDom_client.default : __vite__cjsImport2_reactDom_client;
 import App from "/src/App.jsx";
 import "/src/index.css";
-import Colby from "/src/pages/Colby.jsx";
+import chapterPage from "/src/pages/ChpaterPage.jsx";
 import { createBrowserRouter, RouterProvider } from "/node_modules/.vite/deps/react-router-dom.js?v=c22eb764";
 const router = createBrowserRouter([{
   path: "/",

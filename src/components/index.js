@@ -8,6 +8,9 @@ import Hero from './Hero'
 import Navbar from './Navbar'
 import Stats from './Stats'
 import GetStarted from './GetStarted'
+import Involvements from './Involvements'
+import Officers from './Officers'
+import Contacts from "./Contacts"
 
 export {
     AboutUs,
@@ -19,5 +22,8 @@ export {
     Hero,
     Navbar,
     Stats,
-    GetStarted
+    GetStarted,
+    Involvements,
+    Officers,
+    Contacts
 }

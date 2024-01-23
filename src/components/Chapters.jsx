@@ -1,5 +1,5 @@
 import React from 'react';
-import { chapters } from '../data/home-page-info';
+import { chapters } from '../data/home-page';
 import styles from '../style';
 import { Link } from "react-router-dom";
 
@@ -18,7 +18,7 @@ const Chapters = () => {
                   />
               </Link>
                
-              <h3 className={`text-[2rem] text-white w-fit m-auto`}>
+              <h3 className={`text-[1.9rem] text-white w-fit m-auto`}>
                 <Link to={chapter.link} className='block'>
                   {chapter.name}
                 </Link>

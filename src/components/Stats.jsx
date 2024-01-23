@@ -1,5 +1,5 @@
 import React from 'react'
-import { stats } from '../data/home-page-info'
+import { stats } from '../data/home-page'
 import styles from '../style'
 
 const Stats = () => {

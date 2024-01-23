@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../style'
 import { logo } from '../assets'
-import { footerLinks, socialMedia } from '../data/home-page-info'
+import { footerLinks, socialMedia } from '../data/home-page'
 import logo2 from '../assets/logo2.webp';
 
 const Footer = () => {

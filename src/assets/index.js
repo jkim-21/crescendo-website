@@ -29,7 +29,7 @@ import ucsb from "./ucsb.png";
 import uiuc from "./uiuc.png";
 import stevenson from "./stevenson.png";
 
-import colbyBackground from "./colby-background5.png";
+import colbyBackground from "./colby-background.png";
 import harvardBackground from "./harvard-background.png";
 import northwesternBackground from "./northwestern-background.png";
 import ucsbBackground from "./ucsb-background.png";
@@ -42,6 +42,8 @@ import rosieWang from "./rosie-wang.png";
 import gwynethGraham from "./gwyneth-graham.png";
 
 import chapterBackground from "./chapter-background.png";
+import involvementLogo from "./get-involved-link.png";
+import placeholder from "./placeholder.png";
 
 export {
   bill,
@@ -87,5 +89,7 @@ export {
   rosieWang,
   gwynethGraham,
 
-  chapterBackground
+  chapterBackground,
+  involvementLogo,
+  placeholder
 };

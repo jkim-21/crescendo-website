@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { close, menu } from '../assets'
-import { navLinks } from '../data/home-page-info'
+import { navLinks } from '../data/home-page'
 import { HashLink } from 'react-router-hash-link';
 
 import logo2 from '../assets/logo2.webp';
