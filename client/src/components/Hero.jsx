@@ -1,6 +1,7 @@
 import styles from '../style'
 import { discount } from '../assets';
 import { GetStarted, Slideshow } from '.';
+import React from "react";
 
 
 const Hero = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { close, menu } from '../assets'
-import { navLinks } from '../data/home-page'
+import { close, menu } from '../assets/index.js'
+import { navLinks } from '../data/home-page.js'
 import { HashLink } from 'react-router-hash-link';
 import styles from '../style.js';
 
