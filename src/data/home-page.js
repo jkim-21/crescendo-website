@@ -41,7 +41,7 @@ export const navLinks = [
   },
 ];
 
-export const slideshow = [
+export const slideshows = [
   {
     id: "slideshow-1",
     picture: slideshowPic1,
@@ -73,7 +73,7 @@ export const slideshow = [
 
 export const founders = [
   {
-    id: "founder-1",
+    id: "founder-01",
     img: allenBeckwith,
     name: "Allen Beckwith",
     title: "Co-Founder and President",
@@ -83,7 +83,7 @@ export const founders = [
     },
   },
   {
-    id: "founder-2",
+    id: "founder-02",
     img: kiranMohan,
     name: "Kiran Mohan",
     title: "Co-Founder and President",
@@ -93,7 +93,7 @@ export const founders = [
     },
   },
   {
-    id: "founder-3",
+    id: "founder-03",
     img: jonathanRaymond,
     name: "Jonathan Raymond",
     title: "Co-Founder and President",
@@ -103,7 +103,7 @@ export const founders = [
     },
   },
   {
-    id: "founder-4",
+    id: "founder-04",
     img: justinKim,
     name: "Justin Kim",
     title: "President",
@@ -153,13 +153,6 @@ export const chapters = [
     link: "./chapters/stevenson"
   },
 ];
-
-
-
-
-
-
-
 
 
 export const stats = [
@@ -251,7 +244,7 @@ export const socialMedia = [
   {
     id: "social-media-1",
     icon: instagram,
-    link: "https://www.instagram.com/",
+    link: "https://www.instagram.com/crescendo_for_a_cause/",
   },
   {
     id: "social-media-2",

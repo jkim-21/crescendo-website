@@ -1,7 +1,7 @@
 import {
 
 } from "../assets";
-import { faFacebookF, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faInstagram, faYoutube, faLinkedin} from '@fortawesome/free-brands-svg-icons';
 
 export const general = 
     {
@@ -14,21 +14,23 @@ export const general =
 export const socialMedias = [
     {
         id: "instagram-icon",
-        instagram: "https://www.instagram.com/crescendo_for_a_cause/",
+        link: "https://www.instagram.com/crescendo_for_a_cause/",
         smIcon: faInstagram,
     },
     {
         id: "youtube-icon",
-        socialMedia: "https://www.youtube.com/channel/UCaTDEpynGvYmYFW5r0c6Rhw",
+        link: "https://www.youtube.com/channel/UCaTDEpynGvYmYFW5r0c6Rhw",
         smIcon: faYoutube,
     },
     {
         id: "facebook-icon",
-        socialMedia: "https://www.facebook.com/crescendoforacause/",
+        link: "https://www.facebook.com/crescendoforacause/",
         smIcon: faFacebookF,
-    }
-    
-    
-    
+    },
+    {
+        id: "linkedin-icon",
+        link: "https://www.linkedin.com/company/crescendo-for-a-cause/",
+        smIcon: faLinkedin,
+    },
 ]
 

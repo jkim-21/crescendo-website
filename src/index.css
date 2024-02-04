@@ -6,6 +6,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "react-slideshow-image/dist/styles.css";
+
 /************ Template Styling ***************/
 
 :root {
@@ -24,6 +26,8 @@
   margin: 0;
   /* border: 1px red dotted; */
   box-sizing: border-box;
+  min-height: 0; 
+  min-width: 0;
 }
 
 .text-gradient {
@@ -130,7 +134,7 @@
 .feedback-card:hover {
   background: var(--black-gradient);
 }
-/*
+
 .blue__gradient {
   background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
   filter: blur(100px);
@@ -142,10 +146,10 @@
 }
 
 .white__gradient {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.4);
   filter: blur(300px);
 }
-*/
+
 /************ Custom Styling ***************/
 
 /* general styling */
@@ -173,3 +177,27 @@ h4 {
   font-size: 0.9rem;
   color: rgb(229 231 235);
 }
+
+
+/* Slideshow Componet */
+.img-body img {
+  display: flex;
+  margin: 0 auto;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.img-body {
+  width: 100%;
+  height: 500px;
+  outline-color: red;
+  display: inline-block;
+}
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+  border-color: white;
+}
+

@@ -1,29 +1,31 @@
 import React from 'react'
-import {AboutUs, Chapters, CTA, Footer, Hero, Navbar, Stats} from './components'
-
+import {AboutUs, Chapters, Donation, Footer, Hero, Navbar, Stats} from './components'
 import styles from './style'
 
 const App = () => {
   return (
     
-    <div className='bg-third w-full overflow-hidden'>
+    <div className='background-navy-color w-full overflow-hidden'>
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
-          
+          <Navbar/> 
         </div>
       </div>
-      <div className={`bg-harvardBackground ${styles.flexStart}`}>
+      <div className={`${styles.flexStart} ${styles.paddingX}`}>
         <div className={`${styles.boxWidth}`}>
-        <Navbar/>
-          <Hero/>      
+          <Hero/>
         </div>
       </div>
       <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Stats/>
+          <Donation/>
           <AboutUs/>
           <Chapters/>
-          <CTA/>
+        </div>
+      </div>
+      <div className={`${styles.paddingX} ${styles.flexStart} background-navy-color`}>
+        <div className={`${styles.boxWidth}`}>
           <Footer/>     
         </div>
       </div>

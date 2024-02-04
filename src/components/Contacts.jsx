@@ -14,7 +14,9 @@ const Contacts = () => {
                 <p className='mb-5'>{general.location}</p>
                 <div>
                 {socialMedias.map((socialMedia) => (
-                    <FontAwesomeIcon className='text-white w-[2.3rem] mr-[1rem]' size="2x" key={socialMedia.id} icon={socialMedia.smIcon}/>
+                    <a href={socialMedia.link} target="_blank" rel="noreferrer noopener">
+                        <FontAwesomeIcon className='text-white w-[2.3rem] mr-[1rem]' size="2x" key={socialMedia.id} icon={socialMedia.smIcon}/>
+                    </a>
                 ))}
                 </div>
             </div>

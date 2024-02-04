@@ -10,8 +10,8 @@ const AboutUs = () => {
       <h1 className={`${styles.heading2} text-white text-center mb-10 ss:text-[4.5rem]`}>About Us</h1>
       <div className='w-full z-[1]'>
         {founders.map((founder) => (
-          <div className="mb-8"> {/* Fixed margin */}
-            <Founders key={founder.id} {...founder}/>
+          <div className="mb-8" key={founder.id}> {/* Fixed margin */}
+            <Founders {...founder}/>
           </div>
         ))}
       </div>

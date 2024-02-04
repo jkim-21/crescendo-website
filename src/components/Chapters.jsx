@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Chapters = () => {
   return (
-    <section id="chapters">
+    <section id="chapters" className={`${styles.paddingB}`}>
       <h1 className={`${styles.heading2} text-center mb-10 ss:text-[4.5rem]`}>Chapters</h1>
       <div className='w-full grid grid-cols-[repeat(3,_1fr)] gap-x-24 gap-y-20'>
         {chapters.map((chapter) => (
@@ -23,7 +23,6 @@ const Chapters = () => {
                   {chapter.name}
                 </Link>
               </h3>
-              
           </div>
         ))}
       </div>

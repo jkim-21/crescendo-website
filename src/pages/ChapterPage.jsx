@@ -1,8 +1,7 @@
 import React from 'react'
-import { Navbar } from '../components'
 import { chapterBackground } from '../assets'
 import {colby, harvard, northwestern, stevenson, ucsb, uiuc} from '../data/chapter-details'
-import { Involvements, Officers, Contacts } from '../components'
+import { Involvements, Officers, Contacts, Navbar} from '../components'
 import styles from "../style"
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -55,7 +54,6 @@ const chapterPage = () => {
                         ))}
                     </div>
                 </div>
-
             </div>
             <Contacts />
         </div>

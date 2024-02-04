@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { close, menu } from '../assets'
 import { navLinks } from '../data/home-page'
 import { HashLink } from 'react-router-hash-link';
+import styles from '../style.js';
 
 import logo2 from '../assets/logo2.webp';
 
@@ -11,20 +12,20 @@ const Navbar = ({pageStyles}) => {
 
   return (
     <nav className='w-full flex py-6 justify-between items-center navbar'>
-    <HashLink to={`/#home`}>
-      <img src={logo2} alt='Crescendo for Cause logo' className={`w-[124px] h-[auto] ${pageStyles}`}/>
-    </HashLink>
-    <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
-      {navLinks.map((nav, i) => (
-            <li 
-              key={nav.id}
-              className={`font-poppins font-normal cursor-pointer text-[16px] ${pageStyles} ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white mr-10`}
-            >
-              <HashLink to={`/#${nav.id}`}>
-                {nav.title}
-              </HashLink>
-            </li>
-        ))}
+      <HashLink to={`/#home`}>
+        <img src={logo2} alt='Crescendo for a Cause logo' className={`w-[124px] h-[auto] ${pageStyles}`}/>
+      </HashLink>
+      <ul className={`list-none sm:flex hidden justify-end items-center flex-1`}>
+        {navLinks.map((nav, i) => (
+              <li 
+                key={nav.id}
+                className={`font-poppins font-normal cursor-pointer text-[16px] ${pageStyles} ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white`}
+              >
+                <HashLink to={`/#${nav.id}`}>
+                  {nav.title}
+                </HashLink>
+              </li>
+          ))}
       </ul>
       <div className='sm:hidden flex flex-1 justify-end items-center'>
         <img

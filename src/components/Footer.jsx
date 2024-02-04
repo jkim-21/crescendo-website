@@ -1,13 +1,15 @@
 import React from 'react'
 import styles from '../style'
-import { footerLinks, socialMedia } from '../data/home-page'
+import { footerLinks } from '../data/home-page'
+import { socialMedias } from '../data/global'
 import logo2 from '../assets/logo2.webp';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Footer = () => {
   return (
     <section className={`${styles.flexCenter} ${styles.paddingY} flex-col`}>
-  <div className='w-full mb-8 flex flex-col md:flex-row justify-center items-center'>
-    <div className='flex flex-col items-center justify-center'>
+      <div className='w-full mb-8 flex flex-col md:flex-row justify-center items-center'>
+      <div className='flex flex-col items-center justify-center'>
       <img
         src={logo2}
         alt='logo2'
@@ -41,14 +43,11 @@ const Footer = () => {
         <p className='font-poppins font-normal text-center text-[18px] leading-[27px] text-white'>
           2024 Crescendo For A Cause. All Rights Reserved.
         </p>  
-        <div className='flex flex-row md:mt-0 mt-6'>
-          {socialMedia.map((social, index) => (
-            <img
-              src={social.icon}
-              key={social.id}
-              alt={social.id}
-              className={`w-[21px] h-[21px] object-contain cursor-pointer ${index !== socialMedia.length - 1 ? 'mr-6' : 'mr-0'}`}
-            />
+        <div className='flex flex-row md:mt-0 mt-6'>      
+          {socialMedias.map((social, index) => (
+            <a href={social.link} target="_blank" rel="noreferrer noopener">
+              <FontAwesomeIcon className={`text-white w-[21px] h-[21px] object-contain cursor-pointer ${index !== social.length - 1 ? 'mr-6' : 'mr-0'}`} size="2x" key={social.id} icon={social.smIcon}/>
+            </a>
           ))}
         </div>    
       </div>

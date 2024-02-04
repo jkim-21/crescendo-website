@@ -1,3 +1,5 @@
+import 'react-slideshow-image/dist/styles.css'
+
 const styles = {
   boxWidth: "xl:max-w-[1280px] w-full",
   chaptersWidth: "max-w-[1100px]",
@@ -10,6 +12,7 @@ const styles = {
 
   paddingX: "sm:px-16 px-6",
   paddingY: "sm:py-16 py-6",
+  paddingB: "sm:pb-16 pb-6",
   padding: "sm:px-16 px-6 sm:py-12 py-4",
 
   marginX: "sm:mx-16 mx-6",
@@ -25,5 +28,7 @@ export const layout = {
 
   sectionInfo: `flex-1 ${styles.flexStart} flex-col`,
 }
+
+
 
 export default styles;
