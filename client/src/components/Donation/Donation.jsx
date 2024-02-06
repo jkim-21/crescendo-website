@@ -1,6 +1,7 @@
-import React from 'react'
-import styles from '../style'
-import Button from './Button'
+import React, {useState} from 'react'
+import styles from '../../style'
+import Button from '../Button'
+import StripeCheckout from "react-stripe-checkout"
 
 const Donation = () => {
   return (
@@ -12,7 +13,9 @@ const Donation = () => {
         </p>
       </div>
       <div className={`${styles.flexCenter} sm:ml-10 ml-0`}>
-        <Button/>
+        <queryProvider>
+          <Button/>
+        </queryProvider>
       </div>
     </section>
   )

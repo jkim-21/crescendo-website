@@ -1,8 +1,11 @@
 import React from 'react'
-import {AboutUs, Chapters, Donation, Footer, Hero, Navbar, Stats} from './components'
+import {AboutUs, Chapters, Donation, Footer, Hero, Navbar, Stats, DonationForm, QueryProvider} from './components'
 import styles from './style'
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './themes/theme';
 
 const App = () => {
+
   return (
     
     <div className='background-navy-color w-full overflow-hidden'>
@@ -19,7 +22,11 @@ const App = () => {
       <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Stats/>
-          <Donation/>
+          <ThemeProvider theme={theme}>
+            <QueryProvider>
+              <DonationForm/> 
+            </QueryProvider>
+          </ThemeProvider>
           <AboutUs/>
           <Chapters/>
         </div>
