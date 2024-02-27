@@ -5,6 +5,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import {loadStripe } from "@stripe/stripe-js";
 import DonationInput from "./DonationInput";
 import StripeForm from "./StripeForm";
+import styles from "../../style.js"
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -39,7 +40,7 @@ const DonationForm = () => {
     }, [data]);
 
     return (
-        <Card>
+        <Card id = 'donate' className = "sm:mb-20 mb-6" sx={{bgcolor: '#002e5d' }}>
             <Fade in={!paymentIntent && !confirmedPayment} unmountOnExit>
                 <Container>
                     <DonationInput amount={amount} handleChange={handleChange} handleSubmit={handleSubmit} isLoading={isLoading} data={data} error={error} />

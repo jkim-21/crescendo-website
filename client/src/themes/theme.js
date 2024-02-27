@@ -1,9 +1,11 @@
 import { createTheme } from '@mui/material/styles';
+import '../index.css'
 
 const theme = createTheme({
     palette: {
-      primary: { main: '#bc232a', },
-      secondary: { main: '#c9dde9' },
+      primary: { main: '#33bbcf'},
+      secondary: { main: 'rgb(51, 187, 207, 0.4)' },
+      secondary: { main: '#FFF' },
     },
     typography:{
         fontFamily: [
