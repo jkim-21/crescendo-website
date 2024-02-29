@@ -26,7 +26,7 @@
   margin: 0;
   /* border: 1px red dotted; */
   box-sizing: border-box;
-  min-height: 0; 
+  min-height: 0;
   min-width: 0;
 }
 
@@ -142,7 +142,7 @@
 
 .pink__gradient {
   background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
-  filter: blur(200px);
+  filter: blur(100px);
 }
 
 .white__gradient {
@@ -178,7 +178,6 @@ h4 {
   color: rgb(229 231 235);
 }
 
-
 /* Slideshow Componet */
 .img-body img {
   display: flex;
@@ -200,4 +199,3 @@ h4 {
   width: 90%;
   border-color: white;
 }
-

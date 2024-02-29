@@ -1,4 +1,5 @@
 import React from 'react';
+import { feedback } from '../data/home-page'
 
 const Feedback = ({ picture, name, title, img }) => {
   return (

@@ -7,6 +7,7 @@ import Founders from './Founders'
 import Hero from './Hero'
 import Navbar from './Navbar'
 import Stats from './Stats'
+import Testimonials from './Testimonials'
 import GetStarted from './GetStarted'
 import Involvements from './Involvements'
 import Officers from './Officers'
@@ -34,4 +35,5 @@ export {
     DonationForm,
     QueryProvider,
     DonationInput,
+    Testimonials,
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import {AboutUs, Chapters, Donation, Footer, Hero, Navbar, Stats, DonationForm, QueryProvider} from './components'
+import {AboutUs, Chapters, Donation, Footer, Hero, Navbar, Stats, DonationForm, QueryProvider, Testimonials} from './components'
 import styles from './style'
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './themes/theme';
@@ -19,7 +19,7 @@ const App = () => {
           <Hero/>
         </div>
       </div>
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
+      <div className={`background-navy-color ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Stats/>
           <ThemeProvider theme={theme}>
@@ -28,6 +28,7 @@ const App = () => {
             </QueryProvider>
           </ThemeProvider>
           <AboutUs/>
+          <Testimonials/>
           <Chapters/>
         </div>
       </div>

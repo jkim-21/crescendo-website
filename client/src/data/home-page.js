@@ -252,3 +252,29 @@ export const socialMedia = [
     link: "https://www.linkedin.com/",
   },
 ];
+
+export const feedback = [
+  {
+    id: "feedback-1",
+    picture: uiuc.png, // replace with your picture import or URL
+    name: "Gathering",
+    title: "C4C Colby",
+    img: uiuc.png,
+    
+  },
+  {
+    id: "feedback-2",
+    picture: uiuc.png, // replace with your picture import or URL
+    name: "Instrument Drive",
+    title: "C4C Nation",
+    img: uiuc.png,
+    
+  },
+  {
+    id: "feedback-3",
+    picture: uiuc.png, // replace with your picture import or URL
+    name: "Benefit Concert",
+    title: "C4C UCSB",
+    img: uiuc.png,
+   
+  }]
