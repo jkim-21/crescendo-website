@@ -1,11 +1,18 @@
 {
     "scripts": {
-        "start": "cd ./client && npm run dev"
+        "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+        "server": "cd ./server && npm run devStart",
+        "client": "cd ./client && npm run dev"
     },
     "devDependencies": {
+        "concurrently": "^8.2.2",
         "nodemon": "^3.0.3"
     },
     "dependencies": {
+<<<<<<< Updated upstream
         "all": "^0.0.0"
+=======
+        "mongoose": "^8.2.1"
+>>>>>>> Stashed changes
     }
 }

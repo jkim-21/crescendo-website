@@ -3,6 +3,7 @@ import express, {json} from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import createStripeRoutes from './routes/stripe.js';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -11,6 +12,18 @@ const app = express();
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 const stripeRoutes = createStripeRoutes(stripe);
 
+const uri = `mongodb+srv://jjkjon21:${process.env.DATABASE_PASSWORD}@crescendowebsite.ssxyrz4.mongodb.net/?retryWrites=true&w=majority&appName=CrescendoWebsite`
+
+async function connect() {
+    try {
+        await mongoose.connect(uri)
+        console.log("Connected to MongoDB")
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+connect();
 
 app.use(cors());
 app.use(json());

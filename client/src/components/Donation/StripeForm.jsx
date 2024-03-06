@@ -29,7 +29,7 @@ const StripeForm = ({ client_secret, amount, handleClear, handleConfirmPayment }
             <PaymentElement/>
             <CardActions sx={{mt:3, display:'flex', justifyContent: 'space-between'}}>
                 <Button variant="outlined" onClick={handleClear}>Cancel</Button>
-                <Button variant="contained" onClick={handleSubmit} disabled={isLoading}>{isLoading? <CircularProgress/> : `Donate ${amount / 100}`}</Button>
+                <Button variant="contained" onClick={handleSubmit} disabled={isLoading}>{isLoading? <CircularProgress/> : `Donate $${amount / 100}`}</Button>
             </CardActions>
         </CardContent>
     )

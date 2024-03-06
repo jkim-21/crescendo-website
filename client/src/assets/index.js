@@ -46,6 +46,8 @@ import instagram from "./instagram.svg";
 import linkedin from "./linkedin.svg";
 import twitter from "./twitter.svg";
 
+import donationPlaceholder from "./donation-placeholder.png"
+
 export {
   bill,
   menu,
@@ -92,5 +94,7 @@ export {
   lucasGazianis,
   marcCourtenmanche,
   rosieWang,
-  gwynethGraham
+  gwynethGraham,
+
+  donationPlaceholder
 };

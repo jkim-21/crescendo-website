@@ -3,9 +3,8 @@ import '../index.css'
 
 const theme = createTheme({
     palette: {
-      primary: { main: '#33bbcf'},
+      primary: { main: "rgb(51, 187, 207)"},
       secondary: { main: 'rgb(51, 187, 207, 0.4)' },
-      secondary: { main: '#FFF' },
     },
     typography:{
         fontFamily: [

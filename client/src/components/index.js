@@ -1,7 +1,6 @@
 import AboutUs from './AboutUs'
 import Billing from './Billing'
 import Chapters from './Chapters'
-import Donation from './Donation/Donation'
 import Footer from './Footer'
 import Founders from './Founders'
 import Hero from './Hero'
@@ -21,7 +20,6 @@ export {
     AboutUs,
     Billing,
     Chapters,
-    Donation,
     Footer,
     Founders,
     Hero,

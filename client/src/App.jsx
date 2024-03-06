@@ -1,5 +1,9 @@
 import React from 'react'
+<<<<<<< Updated upstream
 import {AboutUs, Chapters, Donation, Footer, Hero, Navbar, Stats, DonationForm, QueryProvider, Testimonials} from './components'
+=======
+import {AboutUs, Chapters, Footer, Hero, Navbar, Stats, DonationForm, QueryProvider} from './components'
+>>>>>>> Stashed changes
 import styles from './style'
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './themes/theme';
