@@ -2,7 +2,7 @@ const capturePayment = async(elements, stripe, clientSecret) => {
     if (!stripe) {
         throw new Error("Stripe hasn't yet loaded.");
     }
-    const { error: submitError } = await elements.submit();
+    const { error: submitError, } = await elements.submit();
     if (submitError) {
         throw submitError;
     }

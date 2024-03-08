@@ -1,4 +1,5 @@
 const createPaymentIntent = async (amount, firstName, lastName, email) => {
+    
     const response = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: {
@@ -16,6 +17,7 @@ const createPaymentIntent = async (amount, firstName, lastName, email) => {
         throw new Error('Failed to fetch payment intent client secret');
     }
     const data = await response.json();
+
     return data.paymentIntent;
 };
 

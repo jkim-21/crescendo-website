@@ -7,10 +7,8 @@ const createStripeRoutes = (stripe) => {
         const { amount, firstName, lastName, email } = req.body;
         try {
             const customer = await stripe.customers.create({
-                metadata: {
-                    totalAmount: JSON.stringify(req.body.amount),
-                    email: email
-                }
+                email: email,
+                name: `${firstName} ${lastName}`
             })
 
             const paymentIntent = await stripe.paymentIntents.create ({
@@ -19,10 +17,6 @@ const createStripeRoutes = (stripe) => {
                 automatic_payment_methods: { enabled: true },
                 customer: customer.id,
                 receipt_email: email,
-                metadata: {
-                    firstName,
-                    lastName
-                }
             });
             res.send({
                 paymentIntent
@@ -33,13 +27,52 @@ const createStripeRoutes = (stripe) => {
         }
     })
 
+    router.post('/api/create-subscription', async (req, res) => {
+        const { firstName, lastName, email, amount } = req.body;
+        try {
+            const customer = await stripe.customers.create({
+                email: email,
+                name: `${firstName} ${lastName}`,
+            });
+
+            const product = await stripe.products.create({
+                name: "Monthly subscription",
+            })
+
+            const price = await stripe.prices.create({
+                unit_amount: amount * 100,
+                currency: 'usd',
+                recurring: { interval: 'month'},
+                product: product.id,
+            });
+
+            const subscription = await stripe.subscriptions.create({
+                customer: customer.id,
+                items: [{
+                  price: price.id
+                }],
+                payment_behavior: 'default_incomplete',
+                payment_settings: { save_default_payment_method: 'on_subscription' },
+                expand: ['latest_invoice.payment_intent'],
+              });
+              res.send({
+                paymentIntent: subscription.latest_invoice.payment_intent
+              });
+            } catch (error) {
+                return res.status(400).send({ error: { message: error.message } });
+            }
+        })
+
     // Create order
     const createOrder = async(customer, data) => {
         const newOrder = new Order({
             donatorId: customer.id,
             paymentIntentId: data.id,
             totalAmount: customer.metadata.totalAmount,
-            payment_status: data.status
+            paymentStatus: data.status,
+            name: customer.name,
+            email: customer.email
+
         });
         try {
             const savedOrder = await newOrder.save();

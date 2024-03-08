@@ -1,19 +1,22 @@
-import { Button, CardActions, CardContent, CircularProgress, Typography } from "@mui/material";
+import { Button, Box, CardContent, CircularProgress, Typography, Alert } from "@mui/material";
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { PaymentElement } from "@stripe/react-stripe-js";
 import useCapturePayment  from "../../hooks/useCapturePayment";
+import useCaptureSubscription  from "../../hooks/useCaptureSubscription";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect } from "react";
 
-
-const StripeForm = ({ client_secret, amount, handleClear, handleConfirmPayment }) => {
+const StripeForm = ({ client_secret, amount, handlePaymentClear, handleConfirmPayment, donationType }) => {
 
     const stripe = useStripe();
     const elements = useElements();
 
-    const { mutate, isLoading, data, error } = useCapturePayment(elements, stripe, client_secret);
+
+
+    
+   const {mutate, isLoading, data, error} =  useCapturePayment(elements, stripe, client_secret);
 
     const handleSubmit = async (e) => {
-        elements.submit();
         e.preventDefault();
         mutate();
     };
@@ -25,12 +28,20 @@ const StripeForm = ({ client_secret, amount, handleClear, handleConfirmPayment }
 
     return (
         <CardContent>
-            <Typography variant="h6" pb={3} color="primary">Thank you for your support!</Typography>
+            <Box my={3} sx={{display:'flex', position: 'relative', justifyContent:'center'}}>
+                <Button onClick={handlePaymentClear} sx={{position: 'absolute', left: 0, padding: 0, minWidth:0}}>
+                    <ChevronLeftIcon fontSize='large'/>
+                </Button>
+                <Typography variant="h5" mb={3} className="text-white">Thank you for your support!</Typography>
+            </Box>
             <PaymentElement/>
-            <CardActions sx={{mt:3, display:'flex', justifyContent: 'space-between'}}>
-                <Button variant="outlined" onClick={handleClear}>Cancel</Button>
-                <Button variant="contained" onClick={handleSubmit} disabled={isLoading}>{isLoading? <CircularProgress/> : `Donate $${amount / 100}`}</Button>
-            </CardActions>
+            <Box sx={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+                <Button variant="contained" onClick={handleSubmit} disabled={isLoading} sx={{mt:5}}>
+                    {isLoading ? <CircularProgress/> : `Donate $${amount / 100}`}
+                </Button>
+                {error && <Alert severity = "error" sx={{backgroundColor: "#FFD6D7"}}>Something went wrong</Alert>}
+            </Box>
+
         </CardContent>
     )
 }

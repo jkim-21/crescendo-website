@@ -3,8 +3,7 @@ import { styled } from '@mui/material/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import * as React from 'react';
 
-const DonationInput = ({ amount, handleAmountChange, handleInputSubmit, isLoading, error }) => {
-    const [donationType, setDonationType] = React.useState('oneTime');
+const DonationInput = ({ amount, donationType, setDonationType, handleAmountChange, handleInputSubmit, amountError, isLoading}) => {
     const [donationAmount, setDonationAmount] = React.useState('10');
 
     const handleDonationType = (event, newDonationType) => {
@@ -16,9 +15,20 @@ const DonationInput = ({ amount, handleAmountChange, handleInputSubmit, isLoadin
     const handleDonationAmount = (event, newDonationAmount) => {
         if (newDonationAmount !== null) {
             setDonationAmount(newDonationAmount);
-            handleAmountChange({target: {value: newDonationAmount}});
+            handleAmountChange(event);
         }
     };
+
+    React.useEffect(() => {
+        const numericAmount = Number(amount);
+        const validAmounts = [10, 20, 30, 50, 100, 250];
+        if (validAmounts.includes(numericAmount)) {
+            setDonationAmount(String(numericAmount));
+        }
+        else {
+            setDonationAmount('');
+        }
+    }, [amount]);
 
     const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({  
         "&&": {
@@ -131,10 +141,17 @@ const DonationInput = ({ amount, handleAmountChange, handleInputSubmit, isLoadin
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Button fullWidth variant="contained" type="submit" onClick={handleInputSubmit} disabled={isLoading}>
+                            <Button 
+                            fullWidth 
+                            variant="contained" 
+                            type="submit" 
+                            onClick = {(event) => {
+                                handleInputSubmit(event);
+                            }}
+                            disabled={isLoading}>
                                 {isLoading ? <CircularProgress/> : 'Donate'}
                             </Button>
-                            {error && <Alert severity = "error" sx={{backgroundColor: "#FFD6D7"}}>Something went wrong</Alert>}
+                            {amountError && <Alert severity = "error" sx={{backgroundColor: "#FFD6D7"}}>Invalid Donation Amount</Alert>}
                         </Grid>
                     </Grid>
                 </Grid>

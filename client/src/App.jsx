@@ -1,15 +1,13 @@
 import React from 'react'
-<<<<<<< Updated upstream
-import {AboutUs, Chapters, Donation, Footer, Hero, Navbar, Stats, DonationForm, QueryProvider, Testimonials} from './components'
-=======
-import {AboutUs, Chapters, Footer, Hero, Navbar, Stats, DonationForm, QueryProvider} from './components'
->>>>>>> Stashed changes
+import {AboutUs, Chapters, Footer, Hero, Navbar, Stats, DonationForm, QueryProvider, Testimonials} from './components'
 import styles from './style'
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './themes/theme';
 
 const App = () => {
 
+
+  
   return (
     
     <div className='background-navy-color w-full overflow-hidden'>
@@ -23,7 +21,7 @@ const App = () => {
           <Hero/>
         </div>
       </div>
-      <div className={`background-navy-color ${styles.paddingX} ${styles.flexStart}`}>
+      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Stats/>
           <ThemeProvider theme={theme}>
