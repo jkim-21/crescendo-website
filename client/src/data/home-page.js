@@ -19,7 +19,15 @@ import {
   northwestern,
   ucsb,
   uiuc,
-  stevenson
+  stevenson,
+
+  finance,
+  wim,
+  musubi, 
+  heritage,
+  trulee, 
+  merion,
+  colby2,
 } from "../assets";
 
 export const navLinks = [
@@ -253,28 +261,58 @@ export const socialMedia = [
   },
 ];
 
+
 export const feedback = [
   {
     id: "feedback-1",
-    picture: uiuc.png, // replace with your picture import or URL
-    name: "Gathering",
+    picture: finance,
+    name: "Finance Equity Presentation",
     title: "C4C Colby",
-    img: uiuc.png,
+    img: colby2,
     
   },
   {
     id: "feedback-2",
-    picture: uiuc.png, // replace with your picture import or URL
-    name: "Instrument Drive",
-    title: "C4C Nation",
-    img: uiuc.png,
+    picture: trulee, 
+    name: "Trulee Concert",
+    title: "C4C Northwestern",
+    img: northwestern,
     
   },
   {
     id: "feedback-3",
-    picture: uiuc.png, // replace with your picture import or URL
-    name: "Benefit Concert",
-    title: "C4C UCSB",
-    img: uiuc.png,
+    picture: wim,
+    name: "Women in Music Presentation",
+    title: "C4C Colby",
+    img: colby2,
    
-  }]
+  },
+
+  {
+    id: "feedback-4",
+    picture: musubi, 
+    name: "Spam Musubi Fundraiser",
+    title: "C4C UCSB",
+    img: ucsb,
+   
+  },
+
+  {
+    id: "feedback-5",
+    picture: heritage,
+    name: "Heritage Concert",
+    title: "C4C UCSB",
+    img: ucsb,
+   
+  },
+
+  {
+    id: "feedback-6",
+    picture: merion, 
+    name: "Merion Concert",
+    title: "C4C Northwestern",
+    img: northwestern,
+   
+  },
+
+]

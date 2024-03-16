@@ -15,6 +15,7 @@ import Slideshow from "./Slideshow"
 import DonationForm from "./Donation/DonationForm"
 import {QueryProvider} from "./Donation/QueryProvider"
 import DonationInput from "./Donation/DonationInput"
+import Feedback from "./Feedback"
 
 export {
     AboutUs,
@@ -34,4 +35,5 @@ export {
     QueryProvider,
     DonationInput,
     Testimonials,
+    Feedback,
 }

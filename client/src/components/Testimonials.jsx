@@ -13,7 +13,7 @@ const Testimonials = () => {
         </h2>
         <div className='w-full md:mt-0 mt-6'>
           <p className={`${styles.paragraph} text-center max-w-[450px] mx-auto`}>
-            Crescendo strives to make a difference, wherever we are!
+            Here are just some of our recent events!
           </p>  
         </div>
       </div>

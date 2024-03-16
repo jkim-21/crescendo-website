@@ -52,6 +52,16 @@ import twitter from "./twitter.svg";
 import donationPlaceholder from "./donation-placeholder.png"
 import donationPic from "./donation-pic.png"
 
+import finance from "./Finance.png";
+import wim from "./wim.png";
+import merion from "./Merion.png";
+import trulee from "./Trulee.png";
+import musubi from "./musubi.png";
+import heritage from "./Heritage.png";
+import colby2 from "./colby2.png"
+
+
+
 export {
   bill,
   menu,
@@ -101,6 +111,15 @@ export {
   rosieWang,
   gwynethGraham,
 
+  finance,
+  wim,
+  merion, 
+  trulee,
+  musubi, 
+  heritage,
+  colby2,
+
   donationPlaceholder,
   donationPic
+
 };
