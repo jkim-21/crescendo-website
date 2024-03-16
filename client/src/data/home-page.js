@@ -154,7 +154,7 @@ export const stats = [
   {
     id: "stats-2",
     title: "of instruments donated to under-priviledged communities",
-    value: "$30,000+",
+    value: "$35,000+",
   },
   {
     id: "stats-3",

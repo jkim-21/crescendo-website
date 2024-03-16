@@ -7,7 +7,7 @@ import {loadStripe } from "@stripe/stripe-js";
 import DonationInput from "./DonationInput";
 import DonatorInfo from "./DonatorInfo";
 import StripeForm from "./StripeForm";
-import { donationPlaceholder } from "../../assets";
+import { donationPic } from "../../assets";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -103,7 +103,7 @@ const DonationForm = () => {
     
     return (
         <div className='flex gap-8'>
-            <img src={donationPlaceholder} className='[flex-basis:45%] self-start mt-11'/>    
+            <img src={donationPic} className='[flex-basis:45%] self-start max-h-[31rem] object-contain rounded'/>    
             <Card id = 'donate' className = "sm:mb-20 mb-6 [flex-basis:55%] " sx={{bgcolor: '#002e5d' }}>
                 <Fade in={!paymentIntent && !confirmedPayment && !collectingDonatorInfo} unmountOnExit timeout={{ enter: 1000, exit: 10 }}>
                     <div>

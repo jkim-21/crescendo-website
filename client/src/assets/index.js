@@ -7,10 +7,13 @@ import apple from "./apple.svg";
 import arrowUp from "./arrow-up.svg";
 import discount from "./Discount.svg";
 
+
+import slideshowVideo1 from "./slideshow-video-1.mp4"
 import slideshowPic1 from "./slideshow-pic-1.png"
 import slideshowPic2 from "./slideshow-pic-2.png";
 import slideshowPic3 from "./slideshow-pic-3.png";
 import slideshowPic4 from "./slideshow-pic-4.png";
+
 
 
 import allenBeckwith from "./allen-beckwith.png";
@@ -47,6 +50,7 @@ import linkedin from "./linkedin.svg";
 import twitter from "./twitter.svg";
 
 import donationPlaceholder from "./donation-placeholder.png"
+import donationPic from "./donation-pic.png"
 
 export {
   bill,
@@ -63,6 +67,7 @@ export {
   linkedin,
   twitter,
 
+  slideshowVideo1,
   slideshowPic1,
   slideshowPic2,
   slideshowPic3,
@@ -96,5 +101,6 @@ export {
   rosieWang,
   gwynethGraham,
 
-  donationPlaceholder
+  donationPlaceholder,
+  donationPic
 };

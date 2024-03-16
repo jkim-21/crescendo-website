@@ -30,7 +30,6 @@ const App = () => {
             </QueryProvider>
           </ThemeProvider>
           <AboutUs/>
-          <Testimonials/>
           <Chapters/>
         </div>
       </div>

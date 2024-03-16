@@ -1,0 +1,4 @@
+;/*FB_PKG_DELIM*/
+
+__d("isFeatureLimitEnabled",["qex"],(function(a,b,c,d,e,f,g){"use strict";function a(){return c("qex")._("588")===!0}g["default"]=a}),98);
+__d("LSIssueNewTaskUsingSyncChannel",["LSIssueNewTaskAndGetTaskID"],(function(a,b,c,d,e,f){function a(){var a=arguments,c=a[a.length-1],d=[],e=[];return c.sequence([function(f){return c.sequence([function(e){return c.storedProcedure(b("LSIssueNewTaskAndGetTaskID"),a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[12]).then(function(a){return a=a,d[0]=a[0],a})},function(b){return c.db.table(306).add({taskId:d[0],syncChannel:a[10],requiresAuthentication:a[11]})},function(a){return e[0]=d[0]}])},function(a){return c.resolve(e)}])}e.exports=a}),null);
