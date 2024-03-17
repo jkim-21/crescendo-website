@@ -151,11 +151,16 @@
 }
 
 .feedback-card {
-  background: var(--black-gradient);
+  background: linear-gradient(to right, #ffffff, #289dc4);
+  border: 10px solid rgb(41, 41, 41);
+}
+
+.feedback-card img {
+  border: 3px solid black; /* Black border around images within the feedback box */
 }
 
 .feedback-card:hover {
-  background: var(--black-hover-gradient);
+  background: rgb(168, 168, 168);
 }
 
 .blue__gradient {
@@ -196,7 +201,7 @@ h4 {
 }
 
 .background-beige-color {
-  background-color: rgba(243,246,236,255);
+  background-color: rgba(243, 246, 236, 255);
 }
 
 /* Contact Component */
@@ -243,9 +248,8 @@ h4 {
 }
 
 .swipe-in-left {
-  animation: swipeInLeft 0.5s ease forwards
+  animation: swipeInLeft 0.5s ease forwards;
 }
-
 
 @keyframes swipeInRight {
   from {
@@ -273,7 +277,7 @@ h4 {
   animation: swipeOutLeft 0.5s ease forwards;
 }
 
-@keyframes swipeOutRight{
+@keyframes swipeOutRight {
   from {
     transform: translateX(0);
   }
@@ -284,4 +288,8 @@ h4 {
 
 .swipe-out-right {
   animation: swipeOutRight 0.5s ease forwards;
+}
+
+.navbar {
+  background-color: #00346b; /* Or any color you prefer */
 }
