@@ -53,6 +53,21 @@
   background-clip: text;
 }
 
+.text-gradient-dark {
+  background: radial-gradient(
+    64.18% 64.18% at 71.16% 35.69%,
+    #0a6c74 0.89%,
+    #084d60 17.23%,
+    #063349 42.04%,
+    #041e2f 55.12%,
+    #020d1a 71.54%,
+    #000000 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .bg-blue-gradient {
   background: linear-gradient(
     157.81deg,
@@ -166,7 +181,7 @@ h1,
 h2,
 h3,
 h4 {
-  color: white;
+  color: black;
   font-family: "Poppins", sans-serif;
 }
 .gold-color {
@@ -178,6 +193,10 @@ h4 {
 }
 .background-navy-color {
   background-color: #002e5d;
+}
+
+.background-beige-color {
+  background-color: rgba(243,246,236,255);
 }
 
 /* Contact Component */

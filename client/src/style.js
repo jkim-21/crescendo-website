@@ -4,8 +4,11 @@ const styles = {
   boxWidth: "xl:max-w-[1280px] w-full",
   chaptersWidth: "max-w-[1100px]",
 
-  heading2: "font-semibold xs:text-[3rem] text-[2.5rem] text-white xs:leading-[76.8px] leading-[66.8px] w-full",
-  paragraph: "font-poppins font-normal text-gray-200 text-[18px] leading-[30.8px]",
+  heading2: "font-semibold xs:text-[3rem] text-[2.5rem] xs:leading-[76.8px] leading-[66.8px] w-full",
+  paragraphBlack: "font-poppins font-normal text-black text-[18px] leading-[30.8px]",
+  paragraphWhite: "font-poppins font-normal text-white text-[18px] leading-[30.8px]",
+  paragraphGray: "font-poppins font-normal text-gray-200 text-[18px] leading-[30.8px]",
+
 
   flexCenter: "flex justify-center items-center",
   flexStart: "flex justify-center items-start",

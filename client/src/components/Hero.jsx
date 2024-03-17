@@ -6,7 +6,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section id='home' className={`flex md:flex-row flex-col ${styles.paddingY}`}>
+    <section id='home' className={`flex flex-1 md:flex-row flex-col items-center`}>
       <div className={`flex-1 ${styles.flexStart} flex-col`}>
         <div className='flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2'>
           <img
@@ -14,7 +14,7 @@ const Hero = () => {
             alt='discount'
             className='w-[32px] h-[32px]'
           />
-          <p className={`${styles.paragraph} ml-2`}>
+          <p className={`${styles.paragraphWhite} ml-2`}>
             <span className='text-white'>100%</span> of proceeds go to Students in Need
           </p>
         </div>
@@ -29,7 +29,7 @@ const Hero = () => {
         <h1 className='font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100px] leading-[75px] w-full'>
           Meaning.
         </h1>
-        <p className={`${styles.paragraph} max-w-[600px] mt-5`}>
+        <p className={`${styles.paragraphWhite} max-w-[600px] mt-5`}>
         We are Crescendo for a Cause, a registered 501(c)(3) non-profit and Presidential Volunteer Service Award certifying organization. Our mission is to improve music education in underserved areas and to utilize music performance as a vehicle for advocacy and community service.
         </p>
         <div className='relative'>
@@ -37,7 +37,7 @@ const Hero = () => {
         </div>
         
       </div>
-      <div className={`flex-1 md:my-0 my-10 relative flex item-center`}>
+      <div className={`flex-1 md:my-0 relative flex item-center`}>
         <Slideshow/>
       </div>
 

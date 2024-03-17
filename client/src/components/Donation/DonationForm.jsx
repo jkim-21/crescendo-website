@@ -8,6 +8,7 @@ import DonationInput from "./DonationInput";
 import DonatorInfo from "./DonatorInfo";
 import StripeForm from "./StripeForm";
 import { donationPic } from "../../assets";
+import styles from '../../style';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -102,15 +103,17 @@ const DonationForm = () => {
     }, [paymentData, subscriptionData]);
     
     return (
-        <div className='flex gap-8'>
-            <img src={donationPic} className='[flex-basis:45%] self-start max-h-[31rem] object-contain rounded'/>    
-            <Card id = 'donate' className = "sm:mb-20 mb-6 [flex-basis:55%] " sx={{bgcolor: '#002e5d' }}>
-                <Fade in={!paymentIntent && !confirmedPayment && !collectingDonatorInfo} unmountOnExit timeout={{ enter: 1000, exit: 10 }}>
-                    <div>
-                        <DonationInput 
-                        amount={amount} 
-                        handleAmountChange={handleAmountChange} 
-                        handleInputSubmit={handleInputSubmit}
+        <section>
+            <h1 className={`${styles.heading2} text-black text-center mb-20 ss:text-[4.5rem]`}>Get Involved</h1>
+            <div className='flex gap-8'>
+                <img src={donationPic} className='[flex-basis:45%] self-start max-h-[31rem] object-contain rounded'/>    
+                <Card id = 'donate' className = "sm:mb-20 mb-6 [flex-basis:55%] " sx={{bgcolor: '#002e5d' }}>
+                    <Fade in={!paymentIntent && !confirmedPayment && !collectingDonatorInfo} unmountOnExit timeout={{ enter: 1000, exit: 10 }}>
+                        <div>
+                            <DonationInput 
+                            amount={amount} 
+                            handleAmountChange={handleAmountChange} 
+                            handleInputSubmit={handleInputSubmit}
                         amountError={amountError} 
                         isLoading={donationType === 'oneTime' ? paymentIsLoading : subscriptionIsLoading} 
                         donationType={donationType}
@@ -154,6 +157,7 @@ const DonationForm = () => {
                 </Fade>
             </Card>
         </div>
+        </section>
     )
 }
 export default DonationForm

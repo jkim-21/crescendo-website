@@ -10,30 +10,51 @@ const App = () => {
   
   return (
     
-    <div className='background-navy-color w-full overflow-hidden'>
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Navbar/> 
+    <div className={`background-navy-color w-full overflow-hidden`}>
+      <div className={`${styles.paddingX} ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth} h-screen flex flex-col`}>
+          <Navbar/>
+          <Hero/> 
         </div>
       </div>
-      <div className={`${styles.flexStart} ${styles.paddingX}`}>
+      <div className={`background-beige-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
         <div className={`${styles.boxWidth}`}>
-          <Hero/>
+        <Stats/>
         </div>
       </div>
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
+
+      <div className={`background-navy-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
         <div className={`${styles.boxWidth}`}>
-          <Stats/>
+          <Testimonials/>
+        </div>
+      </div>
+        
+      <div className={`background-beige-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
+        <div className={`${styles.boxWidth}`}>
           <ThemeProvider theme={theme}>
             <QueryProvider>
               <DonationForm/> 
             </QueryProvider>
           </ThemeProvider>
+        </div>
+      </div>
+      
+      <div className={`background-navy-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
+        <div className={`${styles.boxWidth}`}>
           <AboutUs/>
+<<<<<<< Updated upstream
           <Testimonials/>
+=======
+        </div>
+      </div>
+
+      <div className={`background-beige-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
+        <div className={`${styles.boxWidth}`}>
+>>>>>>> Stashed changes
           <Chapters/>
         </div>
       </div>
+      
       <div className={`${styles.paddingX} ${styles.flexStart} background-navy-color`}>
         <div className={`${styles.boxWidth}`}>
           <Footer/>     

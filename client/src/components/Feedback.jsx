@@ -10,13 +10,13 @@ const Feedback = ({ picture, name, title, img }) => {
       <img
         src={picture}
         alt='Feedback'
-        className='w-full h-auto object-contain'
+        className='w-full h-auto object-contain text-white'
       />
       <div className='flex flex-row mt-4'>
         <img
           src={img}
           alt={name}
-          className='w-[48px] h-[48px] rounded-full'
+          className='w-[48px] h-[48px] rounded-full text-white'
         />
         <div className='flex flex-col ml-4'>
           <h4 className='font-poppins font-semibold text-[20px] leading-[32px] text-white'>{name}</h4>

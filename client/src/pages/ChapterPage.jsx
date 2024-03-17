@@ -28,7 +28,7 @@ const chapterPage = () => {
                     </div>
                 </div>
                 <div className={`h-[25rem] bg-no-repeat w-full ${styles.flexCenter}`}>
-                    <h1 className={`font-medium xs:text-[3rem] text-[2.5rem] xs:leading-[76.8px] leading-[66.8px] w-full font-raleway text-center [text-shadow:2px_2px_2px_black] text-outline`}>
+                    <h1 className={`font-medium xs:text-[3rem] text-[2.5rem] xs:leading-[76.8px] leading-[66.8px] w-full font-raleway text-center [text-shadow:2px_2px_2px_black] text-outline text-white`}>
                     {chapterData.header}</h1>
                 </div>
             </div>
@@ -36,9 +36,9 @@ const chapterPage = () => {
             <div style={{backgroundImage: `url(${chapterBackground})`}} className={`${styles.flexCenter} py-10`}>
 
                 <div className={`${styles.chaptersWidth}`}>
-                    <p className={`${styles.paragraph} mb-5`}>{chapterData.aboutInformation}</p>
-                    {chapterData.aboutInformation2 && <p className={`${styles.paragraph} mb-5`}>{chapterData.aboutInformation2}</p>}
-                    <p className={`${styles.paragraph} mb-10`}>You can contact us at {chapterData.emailAddress}</p>
+                    <p className={`${styles.paragraphWhite} mb-5`}>{chapterData.aboutInformation}</p>
+                    {chapterData.aboutInformation2 && <p className={`${styles.paragraphWhite} mb-5`}>{chapterData.aboutInformation2}</p>}
+                    <p className={`${styles.paragraphWhite} mb-10`}>You can contact us at {chapterData.emailAddress}</p>
 
                     <h2 className='gold-color text-[2.5rem] font-medium text-center mb-5'>Get Involved</h2>
                     <div className='flex w-full gap-[1rem] mb-10'>
