@@ -103,11 +103,11 @@ const DonationForm = () => {
     }, [paymentData, subscriptionData]);
     
     return (
-        <section>
-            <h1 className={`${styles.heading2} text-black text-center mb-20 ss:text-[4.5rem]`}>Get Involved</h1>
+        <section id = 'donate' className= 'pt-16'>
+            <h1 className={`${styles.heading2} text-black text-center pb-20 ss:text-[4.5rem]`}>Get Involved</h1>
             <div className='flex gap-8'>
                 <img src={donationPic} className='[flex-basis:45%] self-start max-h-[31rem] object-contain rounded'/>    
-                <Card id = 'donate' className = "sm:mb-20 mb-6 [flex-basis:55%] " sx={{bgcolor: '#002e5d' }}>
+                <Card className = "sm:mb-20 mb-6 [flex-basis:55%]" sx={{bgcolor: '#002e5d', height: 550 }}>
                     <Fade in={!paymentIntent && !confirmedPayment && !collectingDonatorInfo} unmountOnExit timeout={{ enter: 1000, exit: 10 }}>
                         <div>
                             <DonationInput 

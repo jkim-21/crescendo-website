@@ -17,19 +17,19 @@ const App = () => {
           <Hero/> 
         </div>
       </div>
-      <div className={`background-beige-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
+      <div className={`background-beige-color ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
         <Stats/>
         </div>
       </div>
 
-      <div className={`background-navy-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
+      <div className={`background-navy-color ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Testimonials/>
         </div>
       </div>
         
-      <div className={`background-beige-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
+      <div className={`background-beige-color ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <ThemeProvider theme={theme}>
             <QueryProvider>
@@ -39,18 +39,14 @@ const App = () => {
         </div>
       </div>
       
-      <div className={`background-navy-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
+      <div className={`background-navy-color ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <AboutUs/>
-<<<<<<< Updated upstream
-          <Testimonials/>
-=======
         </div>
       </div>
 
       <div className={`background-beige-color ${styles.paddingX} ${styles.flexStart} pt-16`}>
         <div className={`${styles.boxWidth}`}>
->>>>>>> Stashed changes
           <Chapters/>
         </div>
       </div>

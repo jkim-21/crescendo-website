@@ -4,7 +4,7 @@ import styles from '../style'
 
 const Stats = () => {
   return (
-    <section id = 'our-work'>
+    <section id = 'our-work' className='pt-16'>
       <h1 className={`${styles.heading2} text-center ss:text-[4.5rem] mb-10`}>
         Our Work
       </h1>

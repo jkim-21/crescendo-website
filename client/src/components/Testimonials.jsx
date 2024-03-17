@@ -12,13 +12,8 @@ const Testimonials = () => {
           Our Impact <br className='sm:block hidden'/>
         </h2>
         <div className='w-full md:mt-0 mt-6'>
-<<<<<<< Updated upstream
-          <p className={`${styles.paragraph} text-center max-w-[450px] mx-auto`}>
+          <p className={`${styles.paragraphWhite} text-center max-w-[450px] mx-auto`}>
             Here are just some of our recent events!
-=======
-          <p className={`${styles.paragraph} text-center max-w-[450px] mx-auto text-white`}>
-            Crescendo strives to make a difference, wherever we are!
->>>>>>> Stashed changes
           </p>  
         </div>
       </div>
