@@ -189,6 +189,11 @@ h4 {
   color: black;
   font-family: "Poppins", sans-serif;
 }
+
+.donationForm {
+  color: black;
+}
+
 .gold-color {
   color: #cfa524;
 }
@@ -207,7 +212,7 @@ h4 {
 /* Contact Component */
 .contact-information p:nth-child(n + 2) {
   font-size: 0.9rem;
-  color: rgb(229 231 235);
+  color: rgb(252,248,232)
 }
 
 /* Slideshow Componet */
@@ -288,8 +293,4 @@ h4 {
 
 .swipe-out-right {
   animation: swipeOutRight 0.5s ease forwards;
-}
-
-.navbar {
-  background-color: #00346b; /* Or any color you prefer */
 }
