@@ -8,7 +8,7 @@ const Contacts = () => {
     return (
         <div className={`background-navy-color ${styles.flexCenter}]`}>
             <div className={`contact-information w-[1100px] pt-10 pb-10`}>
-                <p className='font-medium text-[1.3rem] mb-5'>{general.name}</p>
+                <p className='font-medium text-[1.3rem] mb-5 white-color'>{general.name}</p>
                 <p>{general.phoneNumber}</p>
                 <p className='mb-5'>{general.email}</p>
                 <p className='mb-5'>{general.location}</p>

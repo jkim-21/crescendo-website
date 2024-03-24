@@ -8,7 +8,7 @@ const styles = {
   paragraphBlack: "font-normal black-color text-[18px] leading-[30.8px]",
   paragraphWhite: "font-normal text-white text-[18px] leading-[30.8px]",
   paragraphGray: "font-normal text-gray-200 text-[18px] leading-[30.8px]",
-
+  paragraphDarkGray: "text-[#586069] font-normal text-[18px] leading-[30.8px]",
 
   flexCenter: "flex justify-center items-center",
   flexStart: "flex justify-center items-start",

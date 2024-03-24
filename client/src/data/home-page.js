@@ -84,6 +84,7 @@ export const stats = [
     title: "K-12 Students in our Coast-to-Coast programs",
     value: "200+",
     img: connection,
+    firstStat: true,
   },
   {
     id: "stats-2",

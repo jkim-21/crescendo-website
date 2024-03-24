@@ -14,6 +14,7 @@ import DonationForm from "./Donation/DonationForm"
 import {QueryProvider} from "./Donation/QueryProvider"
 import DonationInput from "./Donation/DonationInput"
 import Feedback from "./Feedback"
+import YoutubeVideo from "./YoutubeVideo"
 
 export {
     AboutUs,
@@ -32,4 +33,5 @@ export {
     DonationInput,
     Testimonials,
     Feedback,
+    YoutubeVideo
 }

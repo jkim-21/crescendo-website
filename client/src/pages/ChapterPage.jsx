@@ -47,7 +47,7 @@ const chapterPage = () => {
                         ))}
                     </div>
 
-                    <h3 className='gold-color text-[2.5rem] font-medium text-center mb-5'>Officers</h3>
+                    <h4 className='gold-color text-[2.5rem] font-medium text-center mb-5'>Officers</h4>
                     <div className={`${styles.flexCenter} gap-x-[7rem] gap-y-[4rem] flex-wrap`}>
                         {chapterData.officers.map((officer) => (
                             <Officers key={officer.id} {...officer}/>

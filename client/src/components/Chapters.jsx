@@ -18,11 +18,11 @@ const Chapters = () => {
                   />
               </Link>
                
-              <h3 className={`text-[1.9rem] black-color w-fit m-auto`}>
+              <h5 className={`text-[1.9rem] black-color w-fit m-auto`}>
                 <Link to={chapter.link} className='block'>
                   {chapter.name}
                 </Link>
-              </h3>
+              </h5>
           </div>
         ))}
       </div>

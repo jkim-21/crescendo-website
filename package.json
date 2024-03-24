@@ -17,6 +17,7 @@
         "mongoose": "^8.2.1",
         "popmotion": "^11.0.5",
         "react-awesome-slider": "^4.1.0",
+        "react-player": "^2.15.1",
         "react-spring": "^9.7.3"
     }
 }

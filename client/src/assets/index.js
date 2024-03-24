@@ -4,7 +4,6 @@ import discount from "./Discount.svg";
 
 import logo from "./logo.png"
 
-import slideshowVideo1 from "./slideshow-video-1.mp4"
 import slideshowPic1 from "./slideshow-pic-1.png"
 import slideshowPic2 from "./slideshow-pic-2.png";
 import slideshowPic3 from "./slideshow-pic-3.png";
@@ -13,6 +12,7 @@ import slideshowPic4 from "./slideshow-pic-4.png";
 import connection from "./connection.png";
 import instrument from "./instrument.png";
 import performance from "./performance.png";
+import orgIntroduction from "./orgIntroduction.mp4"
 
 import allenBeckwith from "./allen-beckwith.png";
 import kiranMohan from "./kiran-mohan.png";
@@ -58,8 +58,7 @@ export {
   discount,
 
   logo,
-
-  slideshowVideo1,
+  
   slideshowPic1,
   slideshowPic2,
   slideshowPic3,
@@ -68,6 +67,7 @@ export {
   connection,
   instrument,
   performance,
+  orgIntroduction,
 
   allenBeckwith,
   kiranMohan,
