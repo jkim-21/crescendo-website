@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../style'
+import {styles} from '../style'
 import Feedback from './Feedback'
 import { feedback } from '../data/home-page'
 

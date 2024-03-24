@@ -1,6 +1,6 @@
 import React from 'react'
 import {AboutUs, Chapters, Footer, Hero, Navbar, Stats, DonationForm, QueryProvider, Testimonials} from './components'
-import styles from './style'
+import {styles} from './style'
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './themes/theme';
 

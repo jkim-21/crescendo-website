@@ -1,6 +1,6 @@
 import React from 'react'
 import {founders} from '../data/home-page'
-import styles from '../style'
+import {styles} from '../style'
 import Founders from './Founders'
 
 const AboutUs = () => {

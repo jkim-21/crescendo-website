@@ -15,17 +15,13 @@ const Slideshow = () => {
       };
 
     return (
-        <div className="container">
-            <Slider {...settings}>
-                {slideshows.map((slideImage, index) => (
-                <div key={index}>
-                    <div className=' object-contain flex items-center justify-center bg-cover img-body'>
-                        <img src = {slideImage.picture} alt = {""}/>
-                    </div>
+        <Slider {...settings} className="container">
+            {slideshows.map((slideImage, index) => (
+                <div key={index} className='img-body'>
+                    <img src = {slideImage.picture} alt = {""}/>
                 </div>
-                ))} 
-            </Slider>
-        </div>
+            ))} 
+        </Slider>
     )}
 
 export default Slideshow

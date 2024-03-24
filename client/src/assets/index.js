@@ -1,12 +1,8 @@
-import bill from "./bill.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
-import google from "./google.svg";
-import apple from "./apple.svg";
-
-import arrowUp from "./arrow-up.svg";
 import discount from "./Discount.svg";
 
+import logo from "./logo.png"
 
 import slideshowVideo1 from "./slideshow-video-1.mp4"
 import slideshowPic1 from "./slideshow-pic-1.png"
@@ -14,7 +10,9 @@ import slideshowPic2 from "./slideshow-pic-2.png";
 import slideshowPic3 from "./slideshow-pic-3.png";
 import slideshowPic4 from "./slideshow-pic-4.png";
 
-
+import connection from "./connection.png";
+import instrument from "./instrument.png";
+import performance from "./performance.png";
 
 import allenBeckwith from "./allen-beckwith.png";
 import kiranMohan from "./kiran-mohan.png";
@@ -44,12 +42,6 @@ import chapterBackground from "./chapter-background.png";
 import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
 
-import facebook from "./facebook.svg";
-import instagram from "./instagram.svg";
-import linkedin from "./linkedin.svg";
-import twitter from "./twitter.svg";
-
-import donationPlaceholder from "./donation-placeholder.png"
 import donationPic from "./donation-pic.png"
 
 import finance from "./Finance.png";
@@ -60,28 +52,22 @@ import musubi from "./musubi.png";
 import heritage from "./Heritage.png";
 import colby2 from "./colby2.png"
 
-
-
 export {
-  bill,
   menu,
   close,
-  google,
-  apple,
-
-  arrowUp,
   discount,
 
-  facebook,
-  instagram,
-  linkedin,
-  twitter,
+  logo,
 
   slideshowVideo1,
   slideshowPic1,
   slideshowPic2,
   slideshowPic3,
   slideshowPic4,
+
+  connection,
+  instrument,
+  performance,
 
   allenBeckwith,
   kiranMohan,
@@ -119,7 +105,6 @@ export {
   heritage,
   colby2,
 
-  donationPlaceholder,
   donationPic
 
 };

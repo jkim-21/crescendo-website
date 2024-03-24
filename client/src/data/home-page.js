@@ -1,15 +1,11 @@
 import { 
-  facebook, 
-  instagram, 
-  linkedin, 
-  twitter, 
+  
 
   slideshowPic1,
   slideshowPic2,
   slideshowPic3,
   slideshowPic4,
 
-  allenBeckwith,
   kiranMohan,
   jonathanRaymond,
   justinKim,
@@ -158,6 +154,7 @@ export const stats = [
     id: "stats-1",
     title: "K-12 Students in our Coast-to-Coast programs",
     value: "200+",
+    img: 
   },
   {
     id: "stats-2",
@@ -168,6 +165,7 @@ export const stats = [
     id: "stats-3",
     title: "live/virtual therapeutic performances",
     value: "100+",
+    lastStat: true,
   },
 ];
 
@@ -237,30 +235,6 @@ export const footerLinks = [
     ],
   },
 ];
-
-export const socialMedia = [
-  {
-    id: "social-media-1",
-    icon: instagram,
-    link: "https://www.instagram.com/crescendo_for_a_cause/",
-  },
-  {
-    id: "social-media-2",
-    icon: facebook,
-    link: "https://www.facebook.com/",
-  },
-  {
-    id: "social-media-3",
-    icon: twitter,
-    link: "https://www.twitter.com/",
-  },
-  {
-    id: "social-media-4",
-    icon: linkedin,
-    link: "https://www.linkedin.com/",
-  },
-];
-
 
 export const feedback = [
   {

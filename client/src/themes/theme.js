@@ -8,6 +8,7 @@ const theme = createTheme({
     },
     typography:{
         fontFamily: [
+            'IBM Plex Sans',
             'Poppins',
             '-apple-system',
             'sans-serif',

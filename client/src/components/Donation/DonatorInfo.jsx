@@ -1,53 +1,32 @@
-import {CardContent, Typography, OutlinedInput, Button, Box, CircularProgress, Alert} from "@mui/material";
+import {CardContent, Typography, OutlinedInput, Button, Box, CircularProgress, Alert, Card} from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useState, React } from "react";
 import { motion } from "framer-motion";
+import {donationStyle} from '../../style'
 
+const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailChange, handleDonatorInfoSubmit, firstName, lastName, email, isLoading, error, handleInfoClear, slideAnimation}) => {
 
-
-const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailChange, handleDonatorInfoSubmit, firstName, lastName, email, isLoading, error, handleInfoClear, infoAnimationType}) => {
-
-    const dropIn = {
-        hidden: {
-            x: infoAnimationType === 'submit' ? "-100vh" : "100vh",
-            opacity: 0,
-        },
-        visible: {
-            x: "0",
-            opacity: 1,
-            transition: {
-                duration: 10,
-                type: "spring",
-                damping: 50,
-                stiffness: 750, 
-            },
-        },
-        exit: {
-            x: infoAnimationType === 'submit' ? "-100vh" : "100vh",
-            opacity: 0,
-        }
-    }
     return (
         <motion.div
         onClick = {(e) => e.stopPropagation()}
-        variants={dropIn}
+        variants={slideAnimation}
         initial="hidden"
         animate="visible"
-        exit="exit">
-            <CardContent sx={{position: 'absolute'}}>
-                <form onSubmit = {handleDonatorInfoSubmit}>
-                    <Box sx={{display:'flex', my:3, position: 'relative', justifyContent:'center'}}>
+        exit="exit"
+        className='w-full h-full absolute'>
+            <CardContent className='w-full h-full'>
+                <form onSubmit = {handleDonatorInfoSubmit} className='h-full flex flex-col'>
+                    <Box sx={{display:'flex', position: 'relative', justifyContent:'center'}}>
                         <Button 
                         onClick = {handleInfoClear}
-                        sx={{position: 'absolute', left: 0, top:4, padding: 0, minWidth:0}}>
+                        sx={{position: 'absolute', left: 0, top:21, padding: 0, minWidth:0, ...donationStyle.cancelButtonStyle}}>
                             <ChevronLeftIcon fontSize='large'/>
                         </Button>
-                        <Typography className='text-white' align='center' variant='h4' sx={{fontWeight: 'bold'}}>
+                        <Typography className='black-color border-b border-[#c7cdd6] container' align='center' variant='h4' sx={{pt: 2, pb: 3, mb: 4, fontWeight: 'bold'}}>
                             Donator Information
                         </Typography>
-                        
                     </Box>
-                    <Typography className='text-white' align='center' variant='body1' sx={{mb: 5, fontWeight: 'regular'}}>
+                    <Typography className='black-color' align='center' variant='body1' sx={{mb: 5, fontWeight: 'regular'}}>
                             Please provide your details to continue with your donation.
                         </Typography>
                     
@@ -59,9 +38,9 @@ const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailCh
                         fullWidth
                         required
                         sx={{
-                            backgroundColor:'#f0f0f0',
                             borderBottomLeftRadius: 0, 
-                            borderBottomRightRadius: 0
+                            borderBottomRightRadius: 0,
+                            ...donationStyle.outlinedInputStyle
                         }}
                     />
                     <OutlinedInput
@@ -72,14 +51,14 @@ const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailCh
                         fullWidth
                         required
                         sx={{
-                            backgroundColor:'#f0f0f0',
                             borderTopLeftRadius: 0,
                             borderTopRightRadius: 0,
-                            mb: 3
+                            mb: 3,
+                            ...donationStyle.outlinedInputStyle
                         }}
                     />
-                    
-                    <OutlinedInput
+                    <div className='flex-grow'>
+                        <OutlinedInput
                         type="email"
                         placeholder='Email Address'
                         value={email}
@@ -87,14 +66,15 @@ const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailCh
                         fullWidth
                         required
                         sx={{
-                            backgroundColor:'#f0f0f0',
-                            mb: 5
-                        }}
-                    />
-                    <Button fullWidth variant="contained" type="submit" disabled={isLoading}>
-                        {isLoading ? <CircularProgress/> : 'Continue'}
+                            flexGrow: 1,
+                            ...donationStyle.outlinedInputStyle
+                        }}/>
+                    </div>
+                    
+                    <Button fullWidth variant="contained" type="submit" disabled={isLoading} className='py-4' sx={{...donationStyle.buttonStyle}}>
+                        {isLoading ? <CircularProgress sx={{color:'#3874e4'}}/> : 'Continue'}
                     </Button>
-                    {error && <Alert severity = "error" sx={{width: '100%', backgroundColor: "#FFD6D7", display: 'block'}}>Something went wrong</Alert>}
+                    {error && <Alert severity = "error" sx={{width: '100%', backgroundColor: "#FFD6D7", flexShrink: 0}}>Something went wrong</Alert>}
                 </form>
             </CardContent>
         </motion.div>

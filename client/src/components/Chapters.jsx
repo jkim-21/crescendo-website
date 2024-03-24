@@ -1,12 +1,12 @@
 import React from 'react';
 import { chapters } from '../data/home-page';
-import styles from '../style';
+import {styles} from '../style';
 import { Link } from "react-router-dom";
 
 const Chapters = () => {
   return (
     <section id="chapters" className={`${styles.paddingB}`}>
-      <h1 className={`${styles.heading2} text-black text-center mb-20 ss:text-[4.5rem]`}>Chapters</h1>
+      <h1 className={`${styles.heading2} black-color text-center mb-20 ss:text-[4.5rem]`}>Chapters</h1>
       <div className='w-full grid grid-cols-[repeat(3,_1fr)] gap-x-24 gap-y-20'>
         {chapters.map((chapter) => (
           <div key={chapter.id} className='text-center'>
@@ -18,7 +18,7 @@ const Chapters = () => {
                   />
               </Link>
                
-              <h3 className={`text-[1.9rem] text-black w-fit m-auto`}>
+              <h3 className={`text-[1.9rem] black-color w-fit m-auto`}>
                 <Link to={chapter.link} className='block'>
                   {chapter.name}
                 </Link>

@@ -1,5 +1,0 @@
-;/*FB_PKG_DELIM*/
-
-__d("PolarisStoriesV3TrayQuery$Parameters",[],(function(a,b,c,d,e,f){"use strict";a={kind:"PreloadableConcreteRequest",params:{id:"7156364804433366",metadata:{},name:"PolarisStoriesV3TrayQuery",operationKind:"query",text:null}};e.exports=a}),null);
-__d("PolarisFBSignupRoot.entrypoint",["JSResourceForInteraction"],(function(a,b,c,d,e,f,g){"use strict";a={getPreloadProps:function(a){return{queries:{}}},root:c("JSResourceForInteraction")("PolarisFBSignupRoot.react").__setRef("PolarisFBSignupRoot.entrypoint")};g["default"]=a}),98);
-__d("PolarisFBSignupRoot.react",["PolarisFBSignupPage.react","react"],(function(a,b,c,d,e,f,g){"use strict";var h,i=(h||(h=d("react"))).unstable_useMemoCache,j=h;function a(a){a=i(1);var b;a[0]===Symbol["for"]("react.memo_cache_sentinel")?(b=j.jsx(d("PolarisFBSignupPage.react").FBSignupPage,{}),a[0]=b):b=a[0];return b}g["default"]=a}),98);

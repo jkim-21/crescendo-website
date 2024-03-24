@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from "../style"
 import { involvementLogo } from "../assets"
 
 const Involvements = ({header, restOfHeader, boxColor}) => {

@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { close, menu } from '../assets/index.js';
+import { close, menu, logo } from '../assets';
 import { navLinks } from '../data/home-page.js';
 import { HashLink } from 'react-router-hash-link';
-import styles from '../style.js';
-
-import logo2 from '../assets/logo2.webp';
 
 const Navbar = ({pageStyles}) => {
   const [toggle, setToggle] = useState(false);
@@ -12,14 +9,14 @@ const Navbar = ({pageStyles}) => {
   return (
     <nav className='w-full flex py-6 justify-between items-center z-50 px-4 sm:px-8'>
       <HashLink to={`/#home`}>
-        <img src={logo2} alt='Crescendo for a Cause logo' className={`w-[124px] h-[auto] ${pageStyles}`} />
+        <img src={logo} alt='Crescendo for a Cause logo' className={`w-[124px] h-[auto] ${pageStyles}`} />
       </HashLink>
       <ul className={`list-none sm:flex hidden justify-end items-center flex-1`}>
         {navLinks.map((nav, i) => (
           <li 
             key={nav.id}
             id={`nav-item-${nav.id}`} // Assigning a unique ID based on nav.id
-            className={`font-poppins font-normal cursor-pointer text-[16px] ${pageStyles} ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white`}
+            className={`font-normal cursor-pointer text-[16px] ${pageStyles} ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white`}
           >
             <HashLink to={`/#${nav.id}`}>
               {nav.title}
@@ -39,7 +36,7 @@ const Navbar = ({pageStyles}) => {
             {navLinks.map((nav, i) => (
               <li 
                 key={nav.id}
-                className={`font-poppins font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mb-4'} ${pageStyles} text-white mr-10`}
+                className={`font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mb-4'} ${pageStyles} text-white mr-10`}
               >
                 <HashLink to={`/#${nav.id}`}>
                   {nav.title}

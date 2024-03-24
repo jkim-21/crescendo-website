@@ -4,10 +4,10 @@ const styles = {
   boxWidth: "xl:max-w-[1280px] w-full",
   chaptersWidth: "max-w-[1100px]",
 
-  heading2: "font-semibold xs:text-[3rem] text-[2.5rem] xs:leading-[76.8px] leading-[66.8px] w-full",
-  paragraphBlack: "font-poppins font-normal text-black text-[18px] leading-[30.8px]",
-  paragraphWhite: "font-poppins font-normal text-white text-[18px] leading-[30.8px]",
-  paragraphGray: "font-poppins font-normal text-gray-200 text-[18px] leading-[30.8px]",
+  heading2: "font-bold xs:text-[3rem] text-[2.5rem] xs:leading-[76.8px] leading-[66.8px] w-full",
+  paragraphBlack: "font-normal black-color text-[18px] leading-[30.8px]",
+  paragraphWhite: "font-normal text-white text-[18px] leading-[30.8px]",
+  paragraphGray: "font-normal text-gray-200 text-[18px] leading-[30.8px]",
 
 
   flexCenter: "flex justify-center items-center",
@@ -22,7 +22,7 @@ const styles = {
   marginY: "sm:my-16 my-6",
 }
 
-export const layout = {
+const layout = {
   section: `flex md:flex-row flex-col ${styles.paddingY}`,
   sectionReverse: `flex md:flex-row flex-col-reverse ${styles.paddingY}`,
 
@@ -32,6 +32,29 @@ export const layout = {
   sectionInfo: `flex-1 ${styles.flexStart} flex-col`,
 }
 
+const donationStyle = {
+  outlinedInputStyle: {
+    '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: '#c9cfd7',
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+        borderColor: '#c9cfd7', 
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    borderColor: '#3272e6',
+    }
+  },
+  buttonStyle: {
+    backgroundColor:'#3874e4', 
+    color:'white',
+    "&:hover": {backgroundColor: "#2e66cf"}
+  },
+
+  cancelButtonStyle: {
+    color:'#3874e4',
+    "&:hover": {backgroundColor: "#ebf1fc"}
+  }
+}
 
 
-export default styles;
+export {layout, styles, donationStyle};

@@ -2,7 +2,7 @@ import React from 'react'
 import { chapterBackground } from '../assets'
 import {colby, harvard, northwestern, stevenson, ucsb, uiuc} from '../data/chapter-details'
 import { Involvements, Officers, Contacts, Navbar} from '../components'
-import styles from "../style"
+import {styles} from "../style"
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -40,7 +40,7 @@ const chapterPage = () => {
                     {chapterData.aboutInformation2 && <p className={`${styles.paragraphWhite} mb-5`}>{chapterData.aboutInformation2}</p>}
                     <p className={`${styles.paragraphWhite} mb-10`}>You can contact us at {chapterData.emailAddress}</p>
 
-                    <h2 className='gold-color text-[2.5rem] font-medium text-center mb-5'>Get Involved</h2>
+                    <h2 className='gold-color text-[2.5rem] font-bold text-center mb-5'>Get Involved</h2>
                     <div className='flex w-full gap-[1rem] mb-10'>
                         {chapterData.involvements.map((involvement, index) => (
                             <Involvements key={involvement.id} {...involvement} boxColor = {index % 2 === 0 ? 'background-navy-color' : 'background-gold-color'} />

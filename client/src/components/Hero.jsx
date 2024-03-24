@@ -1,13 +1,13 @@
-import styles from '../style'
+import {styles} from '../style'
 import { discount } from '../assets';
-import { GetStarted, Slideshow } from '.';
+import { Slideshow } from '.';
 import React from "react";
 
 
 const Hero = () => {
   return (
-    <section id='home' className={`flex flex-1 md:flex-row flex-col items-center`}>
-      <div className={`flex-1 ${styles.flexStart} flex-col`}>
+    <section id='home' className={`flex flex-1 md:flex-row flex-col items-center justify-between`}>
+      <div className={`[flex-basis:50%] ${styles.flexStart} flex-col`}>
         <div className='flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2'>
           <img
             src={discount}
@@ -19,14 +19,12 @@ const Hero = () => {
           </p>
         </div>
         <div className='flex flex-row justify-between items-center w-full'>
-          <h1 className='flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]'>
+          <h1 className='flex-1 font-bold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]'>
             Music <br className='sm:block hidden'/> {" "}
-            <span className='text-gradient'>Motivates</span> {" "}
+            <span className='text-gradient font-bold'>Motivates</span> {" "}
           </h1>
-          <div className='ss:flex hidden md:mr-4 mr-0'>
-          </div>
         </div>
-        <h1 className='font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100px] leading-[75px] w-full'>
+        <h1 className='font-bold ss:text-[68px] text-[52px] text-white ss:leading-[100px] leading-[75px] w-full'>
           Meaning.
         </h1>
         <p className={`${styles.paragraphWhite} max-w-[600px] mt-5`}>
@@ -37,13 +35,10 @@ const Hero = () => {
         </div>
         
       </div>
-      <div className={`flex-1 md:my-0 relative flex item-center`}>
+      <div className='[flex-basis:45%] md:my-0'>
         <Slideshow/>
       </div>
 
-      <div className={`ss:hidden ${styles.flexCenter}`}>
-        <GetStarted/>
-      </div>
     </section>
   )
 }
