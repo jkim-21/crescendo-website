@@ -1,10 +1,20 @@
 import { 
-  
-
   slideshowPic1,
   slideshowPic2,
   slideshowPic3,
   slideshowPic4,
+
+  finance,
+  wim,
+  musubi, 
+  heritage,
+  trulee, 
+  merion,
+  colby2,
+
+  connection,
+  instrument,
+  performance,
 
   kiranMohan,
   jonathanRaymond,
@@ -17,13 +27,6 @@ import {
   uiuc,
   stevenson,
 
-  finance,
-  wim,
-  musubi, 
-  heritage,
-  trulee, 
-  merion,
-  colby2,
 } from "../assets";
 
 export const navLinks = [
@@ -72,6 +75,82 @@ export const slideshows = [
     picture: slideshowPic4, 
     name: "Benefit Concert",
     title: "C4C UCSB",
+  },
+];
+
+export const stats = [
+  {
+    id: "stats-1",
+    title: "K-12 Students in our Coast-to-Coast programs",
+    value: "200+",
+    img: connection,
+  },
+  {
+    id: "stats-2",
+    title: "of instruments donated to under-priviledged communities",
+    value: "$35,000+",
+    img: instrument,
+  },
+  {
+    id: "stats-3",
+    title: "live/virtual therapeutic performances",
+    value: "100+",
+    img: performance,
+    lastStat: true,
+  },
+];
+
+export const feedback = [
+  {
+    id: "feedback-1",
+    picture: finance,
+    name: "Finance Equity Presentation",
+    title: "C4C Colby",
+    img: colby2,
+    
+  },
+  {
+    id: "feedback-2",
+    picture: trulee, 
+    name: "Trulee Concert",
+    title: "C4C Northwestern",
+    img: northwestern,
+    
+  },
+  {
+    id: "feedback-3",
+    picture: wim,
+    name: "Women in Music Presentation",
+    title: "C4C Colby",
+    img: colby2,
+   
+  },
+
+  {
+    id: "feedback-4",
+    picture: musubi, 
+    name: "Spam Musubi Fundraiser",
+    title: "C4C UCSB",
+    img: ucsb,
+   
+  },
+
+  {
+    id: "feedback-5",
+    picture: heritage,
+    name: "Heritage Concert",
+    title: "C4C UCSB",
+    img: ucsb,
+   
+  },
+
+  {
+    id: "feedback-6",
+    picture: merion, 
+    name: "Merion Concert",
+    title: "C4C Northwestern",
+    img: northwestern,
+   
   },
 ];
 
@@ -149,27 +228,6 @@ export const chapters = [
 ];
 
 
-export const stats = [
-  {
-    id: "stats-1",
-    title: "K-12 Students in our Coast-to-Coast programs",
-    value: "200+",
-    img: 
-  },
-  {
-    id: "stats-2",
-    title: "of instruments donated to under-priviledged communities",
-    value: "$35,000+",
-  },
-  {
-    id: "stats-3",
-    title: "live/virtual therapeutic performances",
-    value: "100+",
-    lastStat: true,
-  },
-];
-
-
 export const footerLinks = [
   {
     title: "Useful Links",
@@ -235,58 +293,3 @@ export const footerLinks = [
     ],
   },
 ];
-
-export const feedback = [
-  {
-    id: "feedback-1",
-    picture: finance,
-    name: "Finance Equity Presentation",
-    title: "C4C Colby",
-    img: colby2,
-    
-  },
-  {
-    id: "feedback-2",
-    picture: trulee, 
-    name: "Trulee Concert",
-    title: "C4C Northwestern",
-    img: northwestern,
-    
-  },
-  {
-    id: "feedback-3",
-    picture: wim,
-    name: "Women in Music Presentation",
-    title: "C4C Colby",
-    img: colby2,
-   
-  },
-
-  {
-    id: "feedback-4",
-    picture: musubi, 
-    name: "Spam Musubi Fundraiser",
-    title: "C4C UCSB",
-    img: ucsb,
-   
-  },
-
-  {
-    id: "feedback-5",
-    picture: heritage,
-    name: "Heritage Concert",
-    title: "C4C UCSB",
-    img: ucsb,
-   
-  },
-
-  {
-    id: "feedback-6",
-    picture: merion, 
-    name: "Merion Concert",
-    title: "C4C Northwestern",
-    img: northwestern,
-   
-  },
-
-]
