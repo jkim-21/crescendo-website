@@ -8,17 +8,17 @@ const Feedback = ({ picture, name, title, img }) => {
       <img
         src={picture}
         alt='Feedback'
-        className='w-full h-auto object-contain black-color'
+        className='w-full h-auto object-contain dark-color'
       />
       <div className='flex flex-row mt-4'>
         <img
           src={img}
           alt={name}
-          className='w-[48px] h-[48px] rounded-full black-color'
+          className='w-[48px] h-[48px] rounded-full dark-color'
         />
         <div className='flex flex-col ml-4'>
-          <h4 className='font-semibold text-[20px] leading-[32px] black-color'>{name}</h4>
-          <p className='font-normal text-[16px] leading-[24px] black-color'>{title}</p>
+          <h4 className='font-semibold text-[20px] leading-[32px] dark-color'>{name}</h4>
+          <p className='font-normal text-[16px] leading-[24px] dark-color'>{title}</p>
         </div>
       </div>
     </div>

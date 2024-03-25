@@ -22,11 +22,11 @@ const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailCh
                         sx={{position: 'absolute', left: 0, top:21, padding: 0, minWidth:0, ...donationStyle.cancelButtonStyle}}>
                             <ChevronLeftIcon fontSize='large'/>
                         </Button>
-                        <Typography className='black-color border-b border-[#c7cdd6] container' align='center' variant='h4' sx={{pt: 2, pb: 3, mb: 4, fontWeight: 'bold'}}>
+                        <Typography className='dark-color border-b border-[#c7cdd6] container' align='center' variant='h4' sx={{pt: 2, pb: 3, mb: 4, fontWeight: 'bold'}}>
                             Donator Information
                         </Typography>
                     </Box>
-                    <Typography className='black-color' align='center' variant='body1' sx={{mb: 5, fontWeight: 'regular'}}>
+                    <Typography className='dark-color' align='center' variant='body1' sx={{mb: 5, fontWeight: 'regular'}}>
                             Please provide your details to continue with your donation.
                         </Typography>
                     

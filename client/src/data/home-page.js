@@ -35,8 +35,12 @@ export const navLinks = [
     title: "Home",
   },
   {
-    id: "donate",
-    title: "Donate",
+    id: "our-impact",
+    title: "Our Impact",
+  },
+  {
+    id: "events",
+    title: "Events",
   },
   {
     id: "about-us",
@@ -45,6 +49,11 @@ export const navLinks = [
   {
     id: "chapters",
     title: "Chapters",
+    dropdown: true,
+  },
+  {
+    id: "donate",
+    title: "Donate",
   },
 ];
 
@@ -184,6 +193,7 @@ export const founders = [
     content: {
       content1: "Justin Kim is an undergraduate student at Colby College studying neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. At C4C, Justin is particularly interested in the mentorship aspect of music education, eager to give back the same inspiring guidance that he once received from his mentors.",
     },
+    lastOfficer: true,
   },
 ];
 

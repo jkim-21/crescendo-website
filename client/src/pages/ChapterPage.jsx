@@ -43,7 +43,7 @@ const chapterPage = () => {
                     <h2 className='gold-color text-[2.5rem] font-bold text-center mb-5'>Get Involved</h2>
                     <div className='flex w-full gap-[1rem] mb-10'>
                         {chapterData.involvements.map((involvement, index) => (
-                            <Involvements key={involvement.id} {...involvement} boxColor = {index % 2 === 0 ? 'background-navy-color' : 'background-gold-color'} />
+                            <Involvements key={involvement.id} {...involvement} boxColor = {index % 2 === 0 ? 'bg-navy-color' : 'bg-gold-color'} />
                         ))}
                     </div>
 

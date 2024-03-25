@@ -5,7 +5,7 @@ const styles = {
   chaptersWidth: "max-w-[1100px]",
 
   heading2: "font-bold xs:text-[3rem] text-[2.5rem] xs:leading-[76.8px] leading-[66.8px] w-full",
-  paragraphBlack: "font-normal black-color text-[18px] leading-[30.8px]",
+  paragraphBlack: "font-normal dark-color text-[18px] leading-[30.8px]",
   paragraphWhite: "font-normal text-white text-[18px] leading-[30.8px]",
   paragraphGray: "font-normal text-gray-200 text-[18px] leading-[30.8px]",
   paragraphDarkGray: "text-[#586069] font-normal text-[18px] leading-[30.8px]",

@@ -1,9 +1,9 @@
 import React from 'react'
 import {styles} from '../style'
 
-const Founders = ({ content, name, title, img }) => {
+const Founders = ({ content, name, title, img, lastOfficer }) => {
   return (
-    <div className='md:mt-0 mt-6 flex justify-between ml-10 mb-16 items-center'>
+    <div className= {`md:mt-0 mt-6 flex justify-between ml-10 items-center ${lastOfficer ? '' : 'mb-16'}`}>
       <div className='basis-[35%]'>
         <img src={img} alt={name} className='object-contain w-[323px]'/>
       </div>     

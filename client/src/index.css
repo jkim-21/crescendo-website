@@ -30,7 +30,7 @@
 }
 
 body {
-  font-family: "IBM Plex Sans", "Poppins", sans-serif
+  font-family: "IBM Plex Sans", "Poppins", sans-serif;
 }
 
 * {
@@ -111,10 +111,6 @@ body {
   );
 }
 
-.bg-discount-gradient {
-  background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
-}
-
 .box-shadow {
   box-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
 }
@@ -190,7 +186,7 @@ body {
   color: #cfa524;
 }
 
-.black-color {
+.dark-color {
   color: #222832;
 }
 
@@ -198,15 +194,25 @@ body {
   color: white;
 }
 
-.background-gold-color {
+.bg-gold-color {
   background-color: #cfa524;
 }
-.background-navy-color {
+.bg-navy-color {
   background-color: #002e5d;
+}
+
+.bg-black-gradient {
+  background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
 }
 
 .background-beige-color {
   background-color: rgba(243, 246, 236, 255);
+}
+/* Navbar Component */
+.dropdown::after {
+  content: '';
+  display: block;
+  height: 1rem;
 }
 
 /* Contact Component */

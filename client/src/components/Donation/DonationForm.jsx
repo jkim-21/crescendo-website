@@ -166,13 +166,10 @@ const DonationForm = () => {
 
     // Closing Remarks 
 
-
-
-
     return (
-        <section id = 'donate' className= 'pt-16'>
+        <section id = 'donate' className= 'py-24'>
             <h1 className={`${styles.heading2} text-center pb-20 ss:text-[4.5rem] donation-color`}>Get Involved</h1>
-            <div className='flex gap-8 mb-6'>
+            <div className='flex gap-8'>
                 <img src={donationPic} className='[flex-basis:45%] rounded-[2%] w-full object-cover max-h-[35rem]'/>    
                 <Card className = "[flex-basis:55%] flex-grow" sx={{bgcolor: '#fafafa', position: 'relative', borderRadius: "2%", minHeight: '35rem'}}>
                     <AnimatePresence
@@ -245,7 +242,7 @@ const DonationForm = () => {
                         animate="visible"
                         exit="exit"
                         className='w-full h-full absolute'>
-                            <Typography variant="h6" textAlign={'center'} className='black-color pt-[25%]'>Your generosity goes a long way!</Typography>
+                            <Typography variant="h6" textAlign={'center'} className='dark-color pt-[25%]'>Your generosity goes a long way!</Typography>
                         </motion.div>}
                     </AnimatePresence>
                 </Card>

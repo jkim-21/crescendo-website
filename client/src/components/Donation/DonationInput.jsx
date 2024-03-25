@@ -67,7 +67,7 @@ const DonationInput = ({ amount, donationType, setDonationType, handleAmountChan
         exit="exit"
         className='w-full h-full absolute'>
             <CardContent className='w-full h-full flex flex-col'>
-                <Typography className='black-color border-b border-[#c7cdd6] flex-shrink-0' align='center' variant='h4' sx={{pt: 2, pb: 3, mb: 4, fontWeight: 'bold'}}>
+                <Typography className='dark-color border-b border-[#c7cdd6] flex-shrink-0' align='center' variant='h4' sx={{pt: 2, pb: 3, mb: 4, fontWeight: 'bold'}}>
                     Donate Now
                 </Typography>
                 <div className='text-center mb-4 flex-shrink-0'>

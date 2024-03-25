@@ -5,7 +5,7 @@ import { YoutubeVideo } from "."
 
 const Stats = () => {
   return (
-    <section id = 'our-work' className={`${styles.paddingY}`}>
+    <section id = 'our-impact' className='py-24'>
       <h1 className={`${styles.heading2} text-center ss:text-[4.5rem] mb-10`}>
         Our Impact
       </h1>
@@ -17,7 +17,7 @@ const Stats = () => {
               {stat.value}
             </h4>
             <img src={stat.img} alt={stat.id} className='w-[7rem] mb-5'/>
-            <p className='font-normal text-center xs:text-[20px] text-[15px] xs:leading-[26px] leading-[21px] black-color uppercase'>
+            <p className='font-normal text-center xs:text-[20px] text-[15px] xs:leading-[26px] leading-[21px] dark-color uppercase'>
               {stat.title}
             </p>
           </div>
@@ -25,7 +25,7 @@ const Stats = () => {
       </div>
       <div className='flex justify-center'>
         <div className='w-[66.67%]'>
-          <p className={`${styles.paragraphDarkGray} text-[14px] font-semibold`}>LEARN ABOUT THE ORGANIZATION</p>
+          <p className={`${styles.paragraphDarkGray} text-[14px] font-semibold`}>LEARN MORE ABOUT THE ORGANIZATION</p>
           <h4 className='font-semibold text-[48px] mb-[1rem]'>Welcome to C4C: Our Origin Story</h4>
           <p className={`${styles.paragraphBlack} mb-[2rem]`}>Hear from some of our officers to learn why we are so passionate about what we do.</p>
           <div className='flex justify-center'>

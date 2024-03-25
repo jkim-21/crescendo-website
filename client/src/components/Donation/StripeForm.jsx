@@ -36,7 +36,7 @@ const StripeForm = ({ client_secret, amount, handlePaymentClear, handleConfirmPa
                     <Button onClick={handlePaymentClear} sx={{position: 'absolute', top:16, left: 0, padding: 0, minWidth:0, ...donationStyle.cancelButtonStyle}}>
                         <ChevronLeftIcon fontSize='large'/>
                     </Button>
-                    <Typography variant="h5" mb={3} className="black-color border-b border-[#c7cdd6] container" align='center' sx={{pt: 2, pb: 3, mb: 4}}>Thank you for your support!</Typography>
+                    <Typography variant="h5" mb={3} className="dark-color border-b border-[#c7cdd6] container" align='center' sx={{pt: 2, pb: 3, mb: 4}}>Thank you for your support!</Typography>
                 </Box>
                 <div className='flex-grow'>
                     <PaymentElement/>
