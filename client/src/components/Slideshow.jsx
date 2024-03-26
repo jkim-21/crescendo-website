@@ -18,7 +18,7 @@ const Slideshow = () => {
         <Slider {...settings} className="container">
             {slideshows.map((slideImage, index) => (
                 <div key={index} className='img-body'>
-                    <img src = {slideImage.picture} alt = {""}/>
+                    <img src = {slideImage.picture} alt = {""} className='rounded h-full'/>
                 </div>
             ))} 
         </Slider>

@@ -69,8 +69,8 @@ const DonationForm = () => {
             x: infoAnimationType === 'submit' ? "-100vh" : infoAnimationType === 'cancel' ? "100vh" : 0,
             opacity: 0,
             transition: infoAnimationType === 'formSubmit' ? {duration: 0.5} : 0,
-        }
-    }
+        },
+    };
 
     //  Donation Amount
 
@@ -167,7 +167,7 @@ const DonationForm = () => {
     // Closing Remarks 
 
     return (
-        <section id = 'donate' className= 'py-24'>
+        <section id = 'donate' className= 'py-28'>
             <h1 className={`${styles.heading2} text-center pb-20 ss:text-[4.5rem] donation-color`}>Get Involved</h1>
             <div className='flex gap-8'>
                 <img src={donationPic} className='[flex-basis:45%] rounded-[2%] w-full object-cover max-h-[35rem]'/>    

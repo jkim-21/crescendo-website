@@ -6,7 +6,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section className={`flex flex-1 md:flex-row flex-col items-center justify-between ${styles.paddingY}`}>
+    <section className={`flex flex-1 md:flex-row flex-col items-center justify-between py-24`}>
       <div className={`[flex-basis:50%] ${styles.flexStart} flex-col`}>
         <div className='flex flex-row items-center py-[6px] px-4 bg-black-gradient rounded-[10px] mb-2'>
           <img

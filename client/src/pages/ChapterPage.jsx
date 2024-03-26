@@ -5,6 +5,7 @@ import { Involvements, Officers, Contacts, Navbar} from '../components'
 import {styles} from "../style"
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const chapters = {
     colby, harvard, northwestern, stevenson, ucsb, uiuc
@@ -18,12 +19,27 @@ const chapterPage = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    const pageTransition = {
+        hidden: {
+            opacity: 0,
+        },
+        visible: {
+            scale: 1,
+            opacity: 1,
+        },
+        exit: {
+            scale: 0.8,
+            opacity: 0,
+        },
+    };
+
     return (
-        <div>
+    <AnimatePresence>
+        <motion.div key={chapterData.id} variants={pageTransition} initial='hidden' animate='visible' exit='exit'>
             <div style={{backgroundImage: `url(${chapterData.background})`}}
             className='w-full overflow-hidden bg-center bg-cover'>
                 <div className={`${styles.flexCenter}`}>
-                    <div className={`${styles.boxWidth} sm:px-16 px-6`}>
+                    <div className={`${styles.boxWidth} sm:px-16 px-6 chapter-navbar`}>
                         <Navbar pageStyles='[filter:drop-shadow(2px_2px_0px_rgb(0_0_0_/_0.9))]'/>
                     </div>
                 </div>
@@ -55,9 +71,9 @@ const chapterPage = () => {
                     </div>
                 </div>
             </div>
-            <Contacts />
-        </div>
-        
+            <Contacts/>
+        </motion.div>
+    </AnimatePresence>
     )
 }
 

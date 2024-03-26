@@ -51,7 +51,7 @@ const App = () => {
           </div>
         </div>
         
-        <div className={`px-14 ${styles.flexStart} bg-black-gradient`}>
+        <div className={`px-14 ${styles.flexStart} bg-dark`}>
           <div className={`${styles.boxWidth}`}>
             <Footer/>     
           </div>

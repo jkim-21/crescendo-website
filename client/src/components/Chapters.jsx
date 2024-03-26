@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Chapters = () => {
   return (
-    <section id="chapters" className='py-24'>
+    <section id="chapters" className='py-28'>
       <h1 className={`${styles.heading2} dark-color text-center mb-20 ss:text-[4.5rem]`}>Chapters</h1>
       <div className='w-full grid grid-cols-[repeat(3,_1fr)] gap-x-24 gap-y-20'>
         {chapters.map((chapter) => (

@@ -5,7 +5,7 @@ import { YoutubeVideo } from "."
 
 const Stats = () => {
   return (
-    <section id = 'our-impact' className='py-24'>
+    <section id = 'our-impact' className='py-28'>
       <h1 className={`${styles.heading2} text-center ss:text-[4.5rem] mb-10`}>
         Our Impact
       </h1>

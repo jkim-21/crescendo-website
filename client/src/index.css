@@ -31,6 +31,7 @@
 
 body {
   font-family: "IBM Plex Sans", "Poppins", sans-serif;
+  /* overscroll-behavior-y: none; */
 }
 
 * {
@@ -85,7 +86,7 @@ body {
   );
 }
 
-.bg-black-gradient {
+.bg-black-gradient-1 {
   background: linear-gradient(
     144.39deg,
     #ffffff -278.56%,
@@ -205,14 +206,12 @@ body {
   background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
 }
 
+.bg-dark {
+  background: #0a162f;
+}
+
 .background-beige-color {
   background-color: rgba(243, 246, 236, 255);
-}
-/* Navbar Component */
-.dropdown::after {
-  content: '';
-  display: block;
-  height: 1rem;
 }
 
 /* Contact Component */
@@ -221,20 +220,59 @@ body {
   color: rgb(252,248,232)
 }
 
+/* Navbar Component */
+@keyframes popover {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+.dropdown {
+  animation: popover 0.2s ease-in-out;
+  border: 1px solid black;
+}
+
+.dropdown::before, .dropdown::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  border-style: solid;
+}
+
+.dropdown::after {
+  top: -10px;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent rgb(203 213 225) transparent;
+}
+
+.dropdown::before {
+  top: -11px;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #000 transparent;
+}
+
+.chapter-navbar nav {
+  background: none;
+  box-shadow: none;
+}
+
 /* Slideshow Componet */
+.img-body {
+  height: 425px;
+}
+
 .img-body img {
   margin: 0 auto;
   object-fit: cover;
-}
-
-.img-body {
-  width: 100%;
-  height: 400px;
-  display: inline-block;
+  min-width: 100%;
 }
 
 .container {
-  width: 100%;
+  min-width: 100%;
 }
 
 /* Donation Component */
