@@ -11,10 +11,11 @@ import Officers from './Officers'
 import Contacts from "./Contacts"
 import Slideshow from "./Slideshow"
 import DonationForm from "./Donation/DonationForm"
-import {QueryProvider} from "./Donation/QueryProvider"
+import QueryProvider from "./Donation/QueryProvider"
 import DonationInput from "./Donation/DonationInput"
 import Feedback from "./Feedback"
 import YoutubeVideo from "./YoutubeVideo"
+import AnimationLayout from "./AnimationLayout"
 
 export {
     AboutUs,
@@ -33,5 +34,6 @@ export {
     DonationInput,
     Testimonials,
     Feedback,
-    YoutubeVideo
+    YoutubeVideo,
+    AnimationLayout,
 }

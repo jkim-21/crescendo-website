@@ -1,11 +1,10 @@
 import React from 'react'
 import { chapterBackground } from '../assets'
 import {colby, harvard, northwestern, stevenson, ucsb, uiuc} from '../data/chapter-details'
-import { Involvements, Officers, Contacts, Navbar} from '../components'
+import { Involvements, Officers, Contacts, Navbar, AnimationLayout} from '../components'
 import {styles} from "../style"
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const chapters = {
     colby, harvard, northwestern, stevenson, ucsb, uiuc
@@ -24,18 +23,17 @@ const chapterPage = () => {
             opacity: 0,
         },
         visible: {
-            scale: 1,
             opacity: 1,
+            transition: { duration: 0.3 }
         },
         exit: {
-            scale: 0.8,
             opacity: 0,
+            transition: { duration: 0.3 }
         },
     };
 
     return (
-    <AnimatePresence>
-        <motion.div key={chapterData.id} variants={pageTransition} initial='hidden' animate='visible' exit='exit'>
+        <AnimationLayout>
             <div style={{backgroundImage: `url(${chapterData.background})`}}
             className='w-full overflow-hidden bg-center bg-cover'>
                 <div className={`${styles.flexCenter}`}>
@@ -72,8 +70,7 @@ const chapterPage = () => {
                 </div>
             </div>
             <Contacts/>
-        </motion.div>
-    </AnimatePresence>
+        </AnimationLayout>
     )
 }
 

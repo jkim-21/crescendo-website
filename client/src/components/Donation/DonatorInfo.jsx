@@ -40,6 +40,7 @@ const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailCh
                         sx={{
                             borderBottomLeftRadius: 0, 
                             borderBottomRightRadius: 0,
+                            backgroundColor: "#fafafa",
                             ...donationStyle.outlinedInputStyle
                         }}
                     />
@@ -53,6 +54,7 @@ const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailCh
                         sx={{
                             borderTopLeftRadius: 0,
                             borderTopRightRadius: 0,
+                            backgroundColor: "#fafafa",
                             mb: 3,
                             ...donationStyle.outlinedInputStyle
                         }}
@@ -67,6 +69,7 @@ const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailCh
                         required
                         sx={{
                             flexGrow: 1,
+                            backgroundColor: "#fafafa",
                             ...donationStyle.outlinedInputStyle
                         }}/>
                     </div>

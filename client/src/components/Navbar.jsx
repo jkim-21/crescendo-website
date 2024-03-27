@@ -19,6 +19,10 @@ const Navbar = ({pageStyles}) => {
     setActiveDropdownId(null);
   }
 
+  if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
   return (
     <nav className='w-full flex py-3 justify-between items-center z-50 px-14 sm:px-20 bg-dark sticky shadow-md top-0'>
       <HashLink to={`/#home`}>
@@ -33,7 +37,10 @@ const Navbar = ({pageStyles}) => {
           onMouseLeave={hideDropdown}
           className={`font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white`}>
             <div className={`pb-3 ${pageStyles}`}>
-              <HashLink to={`/#${nav.id}`}>
+              <HashLink 
+              to={`/#${nav.id}`}
+              scroll={(el) => setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30)}>
+                
                 {nav.title}
               </HashLink>
               {nav.dropdown && <ExpandMoreIcon/>}

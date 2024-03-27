@@ -31,6 +31,7 @@
 
 body {
   font-family: "IBM Plex Sans", "Poppins", sans-serif;
+  background: #002d5d;
   /* overscroll-behavior-y: none; */
 }
 
@@ -143,28 +144,6 @@ body {
   }
 }
 
-.feature-card:hover {
-  background: var(--black-gradient);
-  box-shadow: var(--card-shadow);
-}
-
-.feedback-container .feedback-card:last-child {
-  margin-right: 0px;
-}
-
-.feedback-card {
-  background: linear-gradient(to right, #ffffff, #289dc4);
-  border: 10px solid rgb(41, 41, 41);
-}
-
-.feedback-card img {
-  border: 3px solid black; /* Black border around images within the feedback box */
-}
-
-.feedback-card:hover {
-  background: rgb(168, 168, 168);
-}
-
 .blue__gradient {
   background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
   filter: blur(100px);
@@ -210,7 +189,7 @@ body {
   background: #0a162f;
 }
 
-.background-beige-color {
+.bg-beige-color {
   background-color: rgba(243, 246, 236, 255);
 }
 
@@ -273,6 +252,26 @@ body {
 
 .container {
   min-width: 100%;
+}
+
+/* Events Component */
+.feedback-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border: 0.5px solid lightgray;
+} 
+
+.feedback-container {
+  margin-right: 0px;
+}
+
+.feedback-card img {
+  border: 3px solid black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feedback-card:hover {
+  box-shadow: 0 16px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(-5px);
 }
 
 /* Donation Component */

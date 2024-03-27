@@ -168,12 +168,12 @@ const DonationForm = () => {
 
     return (
         <section id = 'donate' className= 'py-28'>
-            <h1 className={`${styles.heading2} text-center pb-20 ss:text-[4.5rem] donation-color`}>Get Involved</h1>
+            <h1 className={`${styles.heading2} text-center pb-20 ss:text-[4.5rem] white-color`}>Get Involved</h1>
             <div className='flex gap-8'>
                 <img src={donationPic} className='[flex-basis:45%] rounded-[2%] w-full object-cover max-h-[35rem]'/>    
-                <Card className = "[flex-basis:55%] flex-grow" sx={{bgcolor: '#fafafa', position: 'relative', borderRadius: "2%", minHeight: '35rem'}}>
+                <Card className = "[flex-basis:55%] flex-grow" sx={{bgcolor: '#e8ecfc', position: 'relative', borderRadius: "2%", minHeight: '35rem'}}>
                     <AnimatePresence
-                    initial={false}
+                    initial='hidden'
                     mode='wait'
                     onExitComplete={() => null}
                     >
@@ -191,7 +191,7 @@ const DonationForm = () => {
                     </AnimatePresence>
                     
                     <AnimatePresence
-                    initial={false}
+                    initial='hidden'
                     mode='wait'
                     onExitComplete={() => null}
                     >
@@ -214,7 +214,7 @@ const DonationForm = () => {
                     </AnimatePresence>
 
                     <AnimatePresence
-                    initial={false}
+                    initial='hidden'
                     mode='wait'
                     onExitComplete={() => null}
                     >
@@ -232,7 +232,7 @@ const DonationForm = () => {
                         </Elements>}
                     </AnimatePresence>
                     <AnimatePresence
-                    initial={false}
+                    initial='hidden'
                     mode='wait'
                     onExitComplete={() => null}>
                         {closingOpen && 

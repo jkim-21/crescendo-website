@@ -141,7 +141,7 @@ const DonationInput = ({ amount, donationType, setDonationType, handleAmountChan
                         endAdornment={<InputAdornment position = "end">USD</InputAdornment>}
                         fullWidth
                         required
-                        sx={{fontWeight: 500, ...donationStyle.outlinedInputStyle}}
+                        sx={{fontWeight: 500, ...donationStyle.outlinedInputStyle, backgroundColor: "#fafafa" }}
                     />
                 </div>
                 <Button 
