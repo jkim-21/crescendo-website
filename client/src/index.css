@@ -200,6 +200,27 @@ body {
 }
 
 /* Navbar Component */
+.navlink {
+  transition: background-color 0.2s ease;
+  border-radius: 5px;
+}
+
+.navlink:hover, .nav-link:focus {
+  background-color: black;
+}
+
+.chapterLink {
+  transition: background-color 0.3s ease;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.25rem;
+  width: 100%;
+  display: block;
+}
+
+.chapterLink:hover, .chapterLink:focus {
+  background-color: #e8ecfc;
+}
+
 @keyframes popover {
   0% {
     opacity: 0;
@@ -210,6 +231,7 @@ body {
     transform: translateY(0px);
   }
 }
+
 .dropdown {
   animation: popover 0.2s ease-in-out;
   border: 1px solid black;
@@ -258,7 +280,7 @@ body {
 .feedback-card {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   border: 0.5px solid lightgray;
-} 
+}
 
 .feedback-container {
   margin-right: 0px;
@@ -272,6 +294,22 @@ body {
 .feedback-card:hover {
   box-shadow: 0 16px 20px rgba(0, 0, 0, 0.5);
   transform: translateY(-5px);
+}
+
+/* News Component */
+.news-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.news-card a {
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid black;
+  transform: translateY(-5px);
+  transition: background-color 0.3s ease;
+}
+
+.news-card a:hover {
+  background-color: #CCCFDA;
 }
 
 /* Donation Component */

@@ -28,26 +28,25 @@ const Navbar = ({pageStyles}) => {
       <HashLink to={`/#home`}>
         <img src={logo} alt='Crescendo for a Cause logo' className={`w-[auto] h-[75px] ${pageStyles}`} />
       </HashLink>
-      <ul className={`list-none sm:flex hidden justify-end flex-1 items-center mt-3`}>
+      <ul className={`list-none sm:flex hidden justify-end flex-1 items-center`}>
         {navLinks.map((nav, i) => (
           <li 
           key={nav.id}
           id={`nav-item-${nav.id}`} // Assigning a unique ID based on nav.id
           onMouseEnter={() => showDropdown(nav)}
           onMouseLeave={hideDropdown}
-          className={`font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-white`}>
-            <div className={`pb-3 ${pageStyles}`}>
+          className={`font-normal cursor-pointer text-[16px] ${i === navLinks.length - 1 ? 'mr-0' : 'mr-5'} min-w-[max-content] text-white px-3 py-1 ${!nav.dropdown && 'navlink'} ${nav.dropdown && 'mt-3'}`}>
+            <div className={`${pageStyles} ${nav.dropdown && 'pb-3'}`}>
               <HashLink 
               to={`/#${nav.id}`}
               scroll={(el) => setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30)}>
-                
                 {nav.title}
               </HashLink>
               {nav.dropdown && <ExpandMoreIcon/>}
             </div>
-            <div className={`${activeDropdownId === nav.id ? 'block' : 'hidden'} absolute bg-slate-300 dark-color rounded space-y-2 p-4 flex flex-wrap cursor-default dropdown shadow-2xl border-[1px] border-[solid] border-[black] mr-2`}>
+            <div className={`${activeDropdownId === nav.id ? 'block' : 'hidden'} absolute bg-slate-300 dark-color rounded p-4  cursor-default dropdown shadow-2xl border-[1px] border-[solid] border-[black] mr-10`}>
               {chapters.map((chapter) => (
-                    <Link key={chapter.id} to={`/${chapter.link}`}>{chapter.name}</Link>
+                    <Link className='chapterLink' key={chapter.id} to={`/${chapter.link}`}>{chapter.name}</Link>
                     ))}
             </div>
           </li>

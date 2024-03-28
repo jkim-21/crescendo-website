@@ -14,6 +14,20 @@ import instrument from "./instrument.png";
 import performance from "./performance.png";
 import orgIntroduction from "./orgIntroduction.mp4"
 
+import donationPic from "./donation-pic.png"
+
+import finance from "./Finance.png";
+import wim from "./wim.png";
+import merion from "./Merion.png";
+import trulee from "./Trulee.png";
+import musubi from "./musubi.png";
+import heritage from "./Heritage.png";
+import colby2 from "./colby2.png";
+
+import chicagoTribune from "./chicago-tribune.png";
+import dailyHerald from "./daily-herald.png";
+import cwJam from "./cw-jam.png";
+
 import allenBeckwith from "./allen-beckwith.png";
 import kiranMohan from "./kiran-mohan.png";
 import jonathanRaymond from "./jonathan-raymond.png";
@@ -42,16 +56,6 @@ import chapterBackground from "./chapter-background.png";
 import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
 
-import donationPic from "./donation-pic.png"
-
-import finance from "./Finance.png";
-import wim from "./wim.png";
-import merion from "./Merion.png";
-import trulee from "./Trulee.png";
-import musubi from "./musubi.png";
-import heritage from "./Heritage.png";
-import colby2 from "./colby2.png"
-
 export {
   menu,
   close,
@@ -68,6 +72,20 @@ export {
   instrument,
   performance,
   orgIntroduction,
+
+  donationPic,
+
+  finance,
+  wim,
+  merion, 
+  trulee,
+  musubi, 
+  heritage,
+  colby2,
+
+  chicagoTribune,
+  dailyHerald,
+  cwJam,
 
   allenBeckwith,
   kiranMohan,
@@ -95,16 +113,5 @@ export {
   lucasGazianis,
   marcCourtenmanche,
   rosieWang,
-  gwynethGraham,
-
-  finance,
-  wim,
-  merion, 
-  trulee,
-  musubi, 
-  heritage,
-  colby2,
-
-  donationPic
-
+  gwynethGraham
 };

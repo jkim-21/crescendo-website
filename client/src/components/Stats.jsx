@@ -12,7 +12,6 @@ const Stats = () => {
       <div className={`${styles.flexCenter} flex sm:mb-20`}>
         {stats.map((stat) => (
           <div key={stat.id} className={`flex flex-col justify-center items-center mt-10 ${!stat.firstStat ? 'pl-[3rem]' : ''} ${!stat.lastStat ? 'border-r border-[#b2b2b2] pr-[3rem]' : ''}`}>
-            
             <h4 className='font-semibold xs:text-[40px] text-[30px] xs:leading-[53px] leading-[43px] text-gradient-dark mb-5 text-center'>
               {stat.value}
             </h4>

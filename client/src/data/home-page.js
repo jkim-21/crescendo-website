@@ -4,6 +4,10 @@ import {
   slideshowPic3,
   slideshowPic4,
 
+  connection,
+  instrument,
+  performance,
+
   finance,
   wim,
   musubi, 
@@ -12,9 +16,9 @@ import {
   merion,
   colby2,
 
-  connection,
-  instrument,
-  performance,
+  chicagoTribune,
+  dailyHerald,
+  cwJam,
 
   kiranMohan,
   jonathanRaymond,
@@ -110,7 +114,7 @@ export const stats = [
   },
 ];
 
-export const feedback = [
+export const events = [
   {
     id: "feedback-1",
     picture: finance,
@@ -164,6 +168,31 @@ export const feedback = [
   },
 ];
 
+export const news = [
+  {
+    id: "ChicagoTribune-News",
+    picture: chicagoTribune,
+    title: "Chicago Tribune",
+    description: "C4C students ‘spread the joy of music’ through videos sent to elderly at facilities on lockdown due to the coronavirus.",
+    link: "https://www.chicagotribune.com/2020/03/30/stevenson-students-spread-the-joy-of-music-through-videos-sent-to-elderly-at-facilities-on-lockdown-due-to-the-coronavirus/"
+  },
+  {
+    id: "DailyHerald-News",
+    picture: dailyHerald,
+    title: "Daily Herald",
+    description: "Crescendo for a Cause collects instruments, music stands and lesson books to be donated to programs that provide free music educational services to underserved children of inner-city Chicago.",
+    link: "https://www.dailyherald.com/entlife/20190903/stevenson-seniors-create-crescendo-for-a-cause-for-community-service/"
+  },
+  {
+    id: "CW-News",
+    picture: cwJam,
+    title: "The CW The Jam",
+    description: "There's something about music that just motivates the soul. It's a universal language, a way to express, and has healing powers. C4C is using their love for music as a way to give back.",
+    link: "https://www.wciu.com/videos/thejam/real-chicagoans-crescendo-for-a-cause",
+    watch: true
+  },
+]
+
 export const founders = [
   {
     id: "kiran-founder",
@@ -171,7 +200,7 @@ export const founders = [
     name: "Kiran Mohan",
     title: "Board Executive",
     content: {
-      content1: "Kiran Mohan serves as Co-Founder and President of Crescendo for a Cause. He is a Senior undergraduate student at Harvard University, pursuing a Bachelor of Arts in History of Science with a secondary in Global Health & Health Policy. Kiran is particularly interested in how music can affect the brain and has conducted research at Northwestern University and Harvard University.",
+      content1: "Kiran Mohan serves as Co-Founder and President of Crescendo for a Cause. He is a senior undergraduate student at Harvard University, pursuing a Bachelor of Arts in History of Science with a secondary in Global Health & Health Policy. Kiran is particularly interested in how music can affect the brain and has conducted research at Northwestern University and Harvard University.",
       content2: "Kiran has played a variety of instruments, including the piano, oboe, English horn and alto saxophone. In addition to pursuing performance opportunities on campus, he has taken several courses at Harvard on how music can shape culture. Kiran has also completed music therapy courses from the Berklee College of Music that have inspired Crescendo for a Cause’s approach to conducting in-person and virtual therapeutic music performances. Some of Kiran’s favorite composers include Maurice Ravel and Johannes Brahms. His favorite musical memory has been organizing Crescendo for a Cause assisted living facility concerts and seeing the impact music has on the residents.",
     },
   },
@@ -181,7 +210,7 @@ export const founders = [
     name: "Jonathan Raymond",
     title: "Board Executive",
     content: {
-      content1: "Jonathan Raymond co-founded and serves on the executive board for Crescendo for a Cause. He is a Senior undergraduate student at the University of Illinois Urbana-Champaign, pursuing a Bachelor of Science in Chemistry. When Jonathan isn’t at the bench in various research groups at school, he loves to time to play in jazz bands around campus and compose music.",
+      content1: "Jonathan Raymond co-founded and serves on the executive board for Crescendo for a Cause. He is a senior undergraduate student at the University of Illinois Urbana-Champaign, pursuing a Bachelor of Science in Chemistry. When Jonathan isn’t at the bench in various research groups at school, he loves to time to play in jazz bands around campus and compose music.",
       content2: "Jonathan has studied the piano since age four and the trumpet since age ten. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. The work of Clifford Brown is a notable inspiration for Jonathan. His favorite musical memories were during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble.",
     },
   },
@@ -191,7 +220,7 @@ export const founders = [
     name: "Justin Kim",
     title: "Board Executive",
     content: {
-      content1: "Justin Kim is an undergraduate student at Colby College studying neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. At C4C, Justin is particularly interested in the mentorship aspect of music education, eager to give back the same inspiring guidance that he once received from his mentors.",
+      content1: "Justin Kim is a senior undergraduate student at Colby College studying neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. At C4C, Justin is particularly interested in the mentorship aspect of music education, eager to give back the same inspiring guidance that he once received from his mentors.",
     },
     lastOfficer: true,
   },

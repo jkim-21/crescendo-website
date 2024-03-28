@@ -16,6 +16,7 @@ import DonationInput from "./Donation/DonationInput"
 import Feedback from "./Feedback"
 import YoutubeVideo from "./YoutubeVideo"
 import AnimationLayout from "./AnimationLayout"
+import News from "./News"
 
 export {
     AboutUs,
@@ -36,4 +37,5 @@ export {
     Feedback,
     YoutubeVideo,
     AnimationLayout,
+    News
 }
