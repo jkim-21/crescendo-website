@@ -2,9 +2,15 @@ import React from 'react';
 
 const Feedback = ({ picture, name, title, img }) => {
   return (
-    <div className='flex justify-between flex-col px-8 py-6 rounded-[5px] max-w-[370px] 
+    <div
+      className='flex justify-between flex-col px-8 py-6 rounded-[5px] max-w-[370px] 
          lg:w-[30%] md:w-[45%] sm:w-[70%] w-full 
-         mx-4 my-4 lg:mx-6 md:mx-5 sm:mx-4 feedback-card bg-[#e8ecfc]'>
+         mx-4 my-4 lg:mx-6 md:mx-5 sm:mx-4 feedback-card bg-[#e8ecfc]'
+      onClick={handleClick}
+      role="button"
+      tabIndex="0"
+      onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+    >
       <div className='w-full m-auto'>
         <img
           src={picture}

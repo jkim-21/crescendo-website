@@ -56,6 +56,10 @@ import chapterBackground from "./chapter-background.png";
 import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
 
+import middlebury from "./middlebury.png";
+import jonathankim from "./jonathankim.png";
+
+
 export {
   menu,
   close,
@@ -109,9 +113,11 @@ export {
   ucsbBackground,
   uiucBackground,
   stevensonBackground,
+  middlebury,
 
   lucasGazianis,
   marcCourtenmanche,
   rosieWang,
-  gwynethGraham
+  gwynethGraham,
+  jonathankim,
 };

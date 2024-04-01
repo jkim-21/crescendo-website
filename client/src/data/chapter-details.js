@@ -16,7 +16,10 @@ import {
 
     stevensonBackground,
     rosieWang,
-    gwynethGraham
+    gwynethGraham,
+
+    jonathankim,
+
 
 } from "../assets";
 
@@ -317,6 +320,46 @@ export const stevenson = {
             title: "Co-President",
             img: gwynethGraham,
             content: "Gwyneth Graham serves as Co-President of the Adlai E. Stevenson High School Chapter of Crescendo for a Cause. She is a third-year student at Adlai E. Stevenson High School. She enjoys performing at local nursing homes in the Buffalo Grove and Wheeling areas and supporting the local Buffalo Grove Symphonic Band as a clarinetist. She also plays keyboard for the Jazz Ensemble at SHS. Gwyneth has played the clarinet since 5th grade, and volunteers teaching clarinet lessons to younger students. She is also an accomplished pianist, having won state level piano competitions for the past 10 years.",
+        },
+    ],
+}
+
+export const Tech = {
+    id: "tech-chapter",
+    background: stevensonBackground,
+    header: "Technology Development Chapter",
+    aboutInformation: "This group within the organization works on providing technology solutions to solve problems in music education inequity.",
+    emailAddress: "admin@crescendoforacause.com",
+    involvements: [
+        {
+            id: "Tech-interest",
+            header: "Fill Out Our Form",
+            restOfHeader: "to receive the latest email updates from our club"
+        },
+        {
+            id: "Tech-recordings",
+            header: "Send Us Recordings",
+            restOfHeader: "if you want to be featured in our next virtual performance"
+        },
+        {
+            id: "Tech-mentor",
+            header: "Be a Mentor",
+            restOfHeader: "for high school musicians in low-income areas"
+        },
+        {
+            id: "Tech-spread",
+            header: "Spread the Word",
+            restOfHeader: "about us to anyone who might be interested!"
+        },
+    ],
+    officers: [
+        {
+        id: "jonathan-kim",
+        name: "Jonathan Kim",
+        title: "Executive",
+        img: jonathankim,
+        content: 
+            "Jonathan is currently in a gap year attending Middlebury University, he serves as the lead exectue for the technology development team here at C4C"
         },
     ],
 }

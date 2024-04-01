@@ -30,6 +30,9 @@ import {
   ucsb,
   uiuc,
   stevenson,
+  middlebury,
+
+
 
 } from "../assets";
 
@@ -121,6 +124,7 @@ export const events = [
     name: "Finance Equity Presentation",
     title: "C4C Colby",
     img: colby2,
+    instagramUrl: "https://www.instagram.com/colbyideas/",
     
   },
   {
@@ -129,6 +133,7 @@ export const events = [
     name: "Trulee Concert",
     title: "C4C Northwestern",
     img: northwestern,
+    instagramUrl: "https://www.instagram.com/northwestern.c4c/",
     
   },
   {
@@ -137,6 +142,7 @@ export const events = [
     name: "Women in Music Presentation",
     title: "C4C Colby",
     img: colby2,
+    instagramUrl: "https://www.instagram.com/colbyideas/",
    
   },
 
@@ -146,6 +152,7 @@ export const events = [
     name: "Spam Musubi Fundraiser",
     title: "C4C UCSB",
     img: ucsb,
+    instagramUrl: "https://www.instagram.com/crescendo.ucsb/",
    
   },
 
@@ -155,7 +162,7 @@ export const events = [
     name: "Heritage Concert",
     title: "C4C UCSB",
     img: ucsb,
-   
+    instragramUrl: "https://www.instagram.com/crescendo.ucsb/",
   },
 
   {
@@ -164,7 +171,7 @@ export const events = [
     name: "Merion Concert",
     title: "C4C Northwestern",
     img: northwestern,
-   
+    instagramUrl: "https://www.instagram.com/northwestern.c4c/",
   },
 ];
 
@@ -264,6 +271,12 @@ export const chapters = [
     img: stevenson,
     name: "Stevenson High School",
     link: "./chapters/stevenson"
+  },
+  {
+    id: "chapter-7",
+    img: middlebury,
+    name: "Technology Development",
+    link: "./chapters/Tech"
   },
 ];
 
