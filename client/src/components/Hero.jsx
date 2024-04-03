@@ -1,41 +1,47 @@
 import {styles} from '../style'
-import { discount } from '../assets';
 import { Slideshow } from '.';
 import React from "react";
 
 
 const Hero = () => {
   return (
-    <section className={`flex flex-1 md:flex-row flex-col items-center justify-between pt-10 pb-24`}>
-      <div className={`[flex-basis:50%] ${styles.flexStart} flex-col`}>
-        <div className='flex flex-row items-center py-[6px] px-4 bg-black-gradient rounded-[10px] mb-2'>
-          <img
-            src={discount}
-            alt='discount'
-            className='w-[32px] h-[32px]'
-          />
-          <p className={`${styles.paragraphWhite} ml-2`}>
-            <span className='text-white'>100%</span> of proceeds go to Students in Need
-          </p>
+    <section className={`${styles.paddingY} flex flex-col items-center justify-between 
+                        md:flex-row lg:gap-[5rem] lg:justify-start`}>
+      <div className={`${styles.flexStart} flex-col max-w-full items-center mb-[3rem]
+                      sm:mb-0 sm:items-start md:[flex-basis:55%] lg:[flex-basis:50%]`}>
+        
+        <div className={`block ${styles.heading1} mb-[1.5rem] text-white text-center
+                        sm:hidden sm:text-left md:block lg:mb-[2.5rem]`}>
+          <h1>Music</h1>  
+          <h1 className='text-gradient'>Motivates</h1> 
+          <h1>Meaning.</h1>
         </div>
-        <div className='flex flex-row justify-between items-center w-full'>
-          <h1 className='flex-1 font-bold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]'>
-            Music <br className='sm:block hidden'/> {" "}
-            <span className='text-gradient font-bold'>Motivates</span> {" "}
-          </h1>
+
+        <div className='hidden items-center justify-between  max-w-full mb-[3rem]
+                        sm:flex md:hidden'>
+          <div className={`${styles.heading2} [flex-basis:40%] text-white font-bold ml-[2rem]`}>
+            <h1>Music</h1>  
+            <h1 className='text-gradient'>Motivates</h1> 
+            <h1>Meaning.</h1>
+          </div>
+          <div className='[flex-basis:45%] pr-[1rem]
+                          md:hidden'>
+            <Slideshow/>
+          </div>
+
         </div>
-        <h1 className='font-bold ss:text-[68px] text-[52px] text-white ss:leading-[100px] leading-[75px] w-full'>
-          Meaning.
-        </h1>
-        <p className={`${styles.paragraphWhite} max-w-[600px] mt-5`}>
+
+        <p className={`${styles.paragraph} white-color max-w-[37.5rem] text-center
+                      sm:text-start`}>
         We are Crescendo for a Cause, a registered 501(c)(3) non-profit and Presidential Volunteer Service Award certifying organization. Our mission is to improve music education in underserved areas and to utilize music performance as a vehicle for advocacy and community service.
         </p>
         <div className='relative'>
-          <div className="absolute z-[1] w-[350px] h-[32rem] rounded-full white__gradient left-[5rem] bottom-0" />
+          <div className="hidden absolute z-[1] w-[350px] h-[32rem] rounded-full white__gradient left-[5rem] bottom-0
+                          md:block"/>
         </div>
-        
       </div>
-      <div className='[flex-basis:45%] md:my-0'>
+      <div className='block w-full px-[2rem]
+                      sm:hidden md:block md:[flex-basis:45%] md:pr-[1rem]'>
         <Slideshow/>
       </div>
 

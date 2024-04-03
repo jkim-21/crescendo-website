@@ -65,67 +65,97 @@ const DonationInput = ({ amount, donationType, setDonationType, handleAmountChan
         initial="hidden"
         animate="visible"
         exit="exit"
-        className='w-full h-full absolute'>
-            <CardContent className='w-full h-full flex flex-col'>
-                <Typography className='dark-color border-b border-[#c7cdd6] flex-shrink-0' align='center' variant='h4' sx={{pt: 2, pb: 3, mb: 4, fontWeight: 'bold'}}>
+        className='absolute w-full h-full'>
+            <CardContent
+            sx={{px:'5%'}}
+            className='flex flex-col h-full'>
+            
+                <Typography 
+                align='center' 
+                variant='h4' 
+                sx={{pt: 2, pb: 3, mb: 4, fontWeight: '600'}}
+                className='flex-shrink-0 dark-color border-b border-[#c7cdd6]'>
                     Donate Now
                 </Typography>
                 <div className='text-center mb-4 flex-shrink-0'>
                     <ToggleButtonGroup 
-                        size="large" 
-                        color="primary"
-                        exclusive
-                        onChange = {handleDonationType}
-                        value = {donationType}
-                        >
-                        <div>
-                            <StyledToggleButton sx={{px: 5, mr: 3}} value='oneTime'>
-                                Give Once
-                            </StyledToggleButton>
-                            
-                            <StyledToggleButton sx={{px: 5}} value='monthly'>
-                                <FavoriteIcon sx={{color: "#ff447c", pr:'5px'}}/>
-                                Monthly
-                            </StyledToggleButton>
-                        </div>
+                    size="large" 
+                    color="primary"
+                    exclusive
+                    onChange = {handleDonationType}
+                    value = {donationType}
+                    className='flex items-start'
+                    >
+                        <StyledToggleButton 
+                        value='oneTime'
+                        sx={{px: 4, height: 50}}
+                        className={`${donationType === 'oneTime' ? 'z-50' : 'z-0'}`}>
+                            Give Once
+                        </StyledToggleButton>
+                        
+                        <StyledToggleButton 
+                        value='monthly'
+                        sx={{px: 3, height:50}}
+                        className={`${donationType === 'monthly' ? 'z-50' : 'z-0'}`}>
+                            <div>
+                            <FavoriteIcon sx={{color: "#ff447c", pr:'5px'}}/>
+                            Monthly
+                            </div>
+                        </StyledToggleButton>
                     </ToggleButtonGroup>
                 </div>
                 
-                <ToggleButtonGroup size="large" color="primary"
+                <ToggleButtonGroup 
+                size="large" 
+                color="primary"
                 onChange = {handleDonationAmount}
                 value = {donationAmount}
                 exclusive
                 fullWidth
-                sx={{mb: 4, flexShrink: 0}}
+                sx={{flexShrink: 0, mb: 4}}
                 >
-                    <Grid container spacing={1}>
+                    <Grid container 
+                    spacing={1}
+                    justifyContent='center'>
                         <Grid item xs={4}>
-                            <StyledToggleButton value='10'>
+                            <StyledToggleButton 
+                            value='10'
+                            sx={{height:50}}>
                                 $10
                             </StyledToggleButton>
                         </Grid>
                         <Grid item xs={4}>
-                            <StyledToggleButton value='20'>
+                            <StyledToggleButton 
+                            value='20'
+                            sx={{height:50}}>
                                 $20
                             </StyledToggleButton>
                         </Grid>
                         <Grid item xs={4}>
-                            <StyledToggleButton value='30'>
+                            <StyledToggleButton 
+                            value='30'
+                            sx={{height:50}}>
                                 $30
                             </StyledToggleButton>
                         </Grid>
                         <Grid item xs={4}>
-                            <StyledToggleButton value='50'>
+                            <StyledToggleButton 
+                            value='50'
+                            sx={{height:50}}>
                                 $50
                             </StyledToggleButton>
                         </Grid>
                         <Grid item xs={4}>
-                            <StyledToggleButton value='100'>
+                            <StyledToggleButton 
+                            value='100'
+                            sx={{height:50}}>
                                 $100
                             </StyledToggleButton>
                         </Grid>
                         <Grid item xs={4}>
-                            <StyledToggleButton value='250'>
+                            <StyledToggleButton 
+                            value='250'
+                            sx={{height:50}}>
                                 $250
                             </StyledToggleButton>
                         </Grid>
@@ -155,7 +185,12 @@ const DonationInput = ({ amount, donationType, setDonationType, handleAmountChan
                 sx={{flexShrink: 0, minHeight: 0, ...donationStyle.buttonStyle}}>
                     {isLoading ? <CircularProgress/> : 'Donate'}
                 </Button>
-                {amountError && <Alert severity = "error" sx={{backgroundColor: "#FFD6D7"}}>Invalid Donation Amount</Alert>}
+                {amountError && 
+                <Alert 
+                severity = "error" 
+                sx={{backgroundColor: "#FFD6D7"}}>
+                    Invalid Donation Amount
+                </Alert>}
             </CardContent>
         </motion.div>
     )

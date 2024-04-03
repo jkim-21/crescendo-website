@@ -1,25 +1,27 @@
 import 'react-slideshow-image/dist/styles.css'
 
 const styles = {
-  boxWidth: "xl:max-w-[1280px] w-full",
-  chaptersWidth: "max-w-[1100px]",
+  boxWidth: "w-[90%] xl:max-w-[1280px] ",
 
-  heading2: "font-bold xs:text-[3rem] text-[2.5rem] xs:leading-[76.8px] leading-[66.8px] w-full",
-  paragraphBlack: "font-normal dark-color text-[18px] leading-[30.8px]",
-  paragraphWhite: "font-normal text-white text-[18px] leading-[30.8px]",
-  paragraphGray: "font-normal text-gray-200 text-[18px] leading-[30.8px]",
-  paragraphDarkGray: "text-[#586069] font-normal text-[18px] leading-[30.8px]",
+  heading1: "font-bold text-[2.5rem] md:leading-[4.5rem] md:text-[3.25rem] lg:text-[3.75rem] lg:leading-[5rem]",
+  heading2: "font-bold text-[2.5rem] lg:text-[3rem]",
+
+  heading3: "font-bold text-[1.5rem] lg:text-[2rem]",
+  heading4: "font-medium text-[1.25rem] lg:text-[1.5rem]",
+
+  paragraph: "font-normal text-[1rem] leading-[1.5rem] lg:leading-[1.875rem]",
+  subparagraph: "font-normal text-[0.875rem] leading-[1.25rem] lg:leading-[1.5rem] lg:text-[1rem] ",
 
   flexCenter: "flex justify-center items-center",
   flexStart: "flex justify-center items-start",
 
-  paddingX: "sm:px-16 px-6",
-  paddingY: "sm:py-16 py-6",
-  paddingB: "sm:pb-16 pb-6",
-  padding: "sm:px-16 px-6 sm:py-12 py-4",
+  paddingX: "px-[4rem]",
+  paddingY: "pt-[2rem] pb-[4rem] md:pt-[4rem] md:pb-[6rem]",
+  paddingB: "pb-[4rem]",
+  padding: "px-[4rem] py-[4rem]",
 
-  marginX: "sm:mx-16 mx-6",
-  marginY: "sm:my-16 my-6",
+  marginX: "lg:mx-[4rem] mx-[1.5rem]",
+  marginY: "lg:my-[4rem] my-[1.5rem]",
 }
 
 const layout = {

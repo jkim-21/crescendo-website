@@ -56,7 +56,7 @@ export const colby = {
                 id: "colby-officer-01",
                 name: "Justin Kim",
                 title: "President",
-                img: justinKim,
+                headshot: justinKim,
                 content: [
                     "Justin Kim is a sophomore at Colby majoring in Biochemistry and is on the premed track. He grew up playing the piano and picked up the saxophone during his musical journey. Though he's been a part of many different ensembles, his favorite is playing in a concert band. He is currently a saxophonist in the Colby Wind Ensemble and a solo pianist at Colby. In his spare time, Justin loves to play soccer, paint, and listen to music!"
                 ],
@@ -65,17 +65,13 @@ export const colby = {
                 id: "colby-officer-02",
                 name: "Naji Yerokun",
                 title: "Vice President",
-                img: false,
-                content: [
-                ],
+                headshot: false,
             },
             {
                 id: "colby-officer-03",
                 name: "Dong Lee",
                 title: "Mentorship Director",
-                img: false,
-                content: [
-                ],
+                headshot: false,
             },
             
         ],
@@ -114,19 +110,19 @@ export const colby = {
                 id: "Kiran-Mohan",
                 name: "Kiran Mohan",
                 title: "President",
-                img: kiranMohan,
+                headshot: kiranMohan,
             },
             {
                 id: "Lucas-Gazianis",
                 name: "Lucas Gazianis",
                 title: "Chief Financial Officer",
-                img: lucasGazianis,
+                headshot: lucasGazianis,
             },
             {
                 id: "Marc-Courtemanche",
                 name: "Marc Courtemanche",
                 title: "Chief Operating Officer",
-                img: marcCourtenmanche,
+                headshot: marcCourtenmanche,
             },
         ],
     }
@@ -164,19 +160,19 @@ export const northwestern = {
                 id: "northwestern-officer-01",
                 name: "Officer 1",
                 title: "Position 1",
-                img: false,
+                headshot: false,
             },
             {
                 id: "northwestern-officer-02",
                 name: "Officer 2",
                 title: "Position 2",
-                img: false,
+                headshot: false,
             },
             {
                 id: "northwestern-officer-03",
                 name: "Officer 3",
                 title: "Position3",
-                img: false,
+                headshot: false,
             },
         ],
     }
@@ -272,7 +268,7 @@ export const uiuc = {
             id: "jonathan-raymond",
             name: "Jonathan Raymond",
             title: "President",
-            img: jonathanRaymond,
+            headshot: jonathanRaymond,
         },
     ],
 }
@@ -310,7 +306,7 @@ export const stevenson = {
         id: "rosie-wang",
         name: "Rosie Wang",
         title: "Co-President",
-        img: rosieWang,
+        headshot: rosieWang,
         content: 
             "Rosie Wang serves as Co-President of the Adlai E. Stevenson High School Chapter of Crescendo for a Cause. She is a third-year student at Adlai E. Stevenson High School. In addition to her role at Crescendo for a Cause, Rosie directs a volunteering program at the Friendship Village Senior Center where she organizes weekly music performances. She is also the Co-Founder of COVID Music Mentors, an organization that provides free online music mentorship to young talented instrumentalists across the U.S."
         },
@@ -318,7 +314,7 @@ export const stevenson = {
             id: "gwyneth-graham",
             name: "Gwyneth Graham",
             title: "Co-President",
-            img: gwynethGraham,
+            headshot: gwynethGraham,
             content: "Gwyneth Graham serves as Co-President of the Adlai E. Stevenson High School Chapter of Crescendo for a Cause. She is a third-year student at Adlai E. Stevenson High School. She enjoys performing at local nursing homes in the Buffalo Grove and Wheeling areas and supporting the local Buffalo Grove Symphonic Band as a clarinetist. She also plays keyboard for the Jazz Ensemble at SHS. Gwyneth has played the clarinet since 5th grade, and volunteers teaching clarinet lessons to younger students. She is also an accomplished pianist, having won state level piano competitions for the past 10 years.",
         },
     ],

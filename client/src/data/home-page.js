@@ -1,19 +1,19 @@
 import { 
-  slideshowPic1,
-  slideshowPic2,
-  slideshowPic3,
-  slideshowPic4,
+  instrumentDonation,
+  nursingPerformance,
+  donationRecipient,
+  c4cDonation,
 
   connection,
   instrument,
   performance,
 
-  finance,
-  wim,
-  musubi, 
-  heritage,
-  trulee, 
-  merion,
+  financeEvent,
+  wimEvent,
+  merionEvent, 
+  truleeEvent,
+  musubiEvent, 
+  heritageEvent,
   colby2,
 
   chicagoTribune,
@@ -66,38 +66,31 @@ export const navLinks = [
 
 export const slideshows = [
   {
-    id: "slideshow-1",
-    picture: slideshowPic1,
-    name: "Gathering",
-    title: "C4C Organization",
-    
-  },
-  {
-    id: "slideshow-2",
-    picture: slideshowPic2,
-    name: "Gathering",
-    title: "C4C Colby",
-    
-  },
-  {
-    id: "slideshow-3",
-    picture: slideshowPic3, 
+    id: "instrument-donation-slide",
+    picture: instrumentDonation,
     name: "Instrument Drive",
-    title: "C4C Nation",
-    
   },
   {
-    id: "slideshow-4",
-    picture: slideshowPic4, 
-    name: "Benefit Concert",
-    title: "C4C UCSB",
+    id: "nursing-performance-slide",
+    picture: nursingPerformance,
+    name: "Nursing Concert",    
+  },
+  {
+    id: "donation-recipient-slide",
+    picture: donationRecipient, 
+    name: "Donation Recipient",    
+  },
+  {
+    id: "instrument-funding-slide",
+    picture: c4cDonation, 
+    name: "C4C Donation",
   },
 ];
 
 export const stats = [
   {
     id: "stats-1",
-    title: "K-12 Students in our Coast-to-Coast programs",
+    title: "K-12 Students in our coast-to-coast programs",
     value: "200+",
     img: connection,
     firstStat: true,
@@ -119,58 +112,58 @@ export const stats = [
 
 export const events = [
   {
-    id: "feedback-1",
-    picture: finance,
+    id: "finance-equity-event",
+    picture: financeEvent,
     name: "Finance Equity Presentation",
     title: "C4C Colby",
-    img: colby2,
+    schoolLogo: colby2,
     instagramUrl: "https://www.instagram.com/colbyideas/",
     
   },
   {
-    id: "feedback-2",
-    picture: trulee, 
+    id: "trulee-event",
+    picture: truleeEvent, 
     name: "Trulee Concert",
     title: "C4C Northwestern",
-    img: northwestern,
+    schoolLogo: northwestern,
     instagramUrl: "https://www.instagram.com/northwestern.c4c/",
     
   },
   {
-    id: "feedback-3",
-    picture: wim,
+    id: "wic-presentation-event",
+    picture: wimEvent,
     name: "Women in Music Presentation",
     title: "C4C Colby",
-    img: colby2,
+    schoolLogo: colby2,
     instagramUrl: "https://www.instagram.com/colbyideas/",
    
   },
 
   {
-    id: "feedback-4",
-    picture: musubi, 
+    id: "spam-fundraiser-event",
+    picture: musubiEvent, 
     name: "Spam Musubi Fundraiser",
     title: "C4C UCSB",
-    img: ucsb,
+    schoolLogo: ucsb,
     instagramUrl: "https://www.instagram.com/crescendo.ucsb/",
    
   },
 
   {
-    id: "feedback-5",
-    picture: heritage,
+    id: "heritage-event",
+    picture: heritageEvent,
     name: "Heritage Concert",
     title: "C4C UCSB",
-    img: ucsb,
+    schoolLogo: ucsb,
     instragramUrl: "https://www.instagram.com/crescendo.ucsb/",
   },
 
   {
-    id: "feedback-6",
-    picture: merion, 
+    id: "merion-event",
+    picture: merionEvent, 
     name: "Merion Concert",
     title: "C4C Northwestern",
-    img: northwestern,
+    schoolLogo: northwestern,
     instagramUrl: "https://www.instagram.com/northwestern.c4c/",
   },
 ];
@@ -236,113 +229,40 @@ export const founders = [
 
 export const chapters = [
   {
-    id: "chapter-1",
-    img: colby,
+    id: "colby-chapter",
+    picture: colby,
     name: "Colby College",
     link: "./chapters/colby"
 
   },
   {
-    id: "chapter-2",
-    img: harvard,
+    id: "harvard-chapter",
+    picture: harvard,
     name: "Harvard University",
     link: "./chapters/harvard"
   },
   {
-    id: "chapter-3",
-    img: northwestern,
+    id: "northwestern-chapter",
+    picture: northwestern,
     name: "Northwestern University",
     link: "./chapters/northwestern"
   },
   {
-    id: "chapter-4",
-    img: ucsb,
+    id: "ucsb-chapter",
+    picture: ucsb,
     name: "University of California, Santa Barbara",
     link: "./chapters/ucsb"
   },
   {
-    id: "chapter-5",
-    img: uiuc,
+    id: "uiuc-chapter",
+    picture: uiuc,
     name: "University of Illinois Urbana-Champaign",
     link: "./chapters/uiuc"
   },
   {
-    id: "chapter-6",
-    img: stevenson,
+    id: "stevenson-chapter",
+    picture: stevenson,
     name: "Stevenson High School",
     link: "./chapters/stevenson"
-  },
-  {
-    id: "chapter-7",
-    img: middlebury,
-    name: "Technology Development",
-    link: "./chapters/Tech"
-  },
-];
-
-
-export const footerLinks = [
-  {
-    title: "Useful Links",
-    links: [
-      {
-        name: "Content",
-        link: "https://www.hoobank.com/content/",
-      },
-      {
-        name: "How it Works",
-        link: "https://www.hoobank.com/how-it-works/",
-      },
-      {
-        name: "Create",
-        link: "https://www.hoobank.com/create/",
-      },
-      {
-        name: "Explore",
-        link: "https://www.hoobank.com/explore/",
-      },
-      {
-        name: "Terms & Services",
-        link: "https://www.hoobank.com/terms-and-services/",
-      },
-    ],
-  },
-  {
-    title: "Community",
-    links: [
-      {
-        name: "Help Center",
-        link: "https://www.hoobank.com/help-center/",
-      },
-      {
-        name: "Partners",
-        link: "https://www.hoobank.com/partners/",
-      },
-      {
-        name: "Suggestions",
-        link: "https://www.hoobank.com/suggestions/",
-      },
-      {
-        name: "Blog",
-        link: "https://www.hoobank.com/blog/",
-      },
-      {
-        name: "Newsletters",
-        link: "https://www.hoobank.com/newsletters/",
-      },
-    ],
-  },
-  {
-    title: "Partner",
-    links: [
-      {
-        name: "Our Partner",
-        link: "https://www.hoobank.com/our-partner/",
-      },
-      {
-        name: "Become a Partner",
-        link: "https://www.hoobank.com/become-a-partner/",
-      },
-    ],
   },
 ];

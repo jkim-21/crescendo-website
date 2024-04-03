@@ -4,10 +4,10 @@ import discount from "./Discount.svg";
 
 import logo from "./logo.png"
 
-import slideshowPic1 from "./slideshow-pic-1.png"
-import slideshowPic2 from "./slideshow-pic-2.png";
-import slideshowPic3 from "./slideshow-pic-3.png";
-import slideshowPic4 from "./slideshow-pic-4.png";
+import instrumentDonation from "./instrument-donation.png"
+import nursingPerformance from "./nursing-performance.png";
+import donationRecipient from "./donation-recipient.png";
+import c4cDonation from "./c4c-donation.png";
 
 import connection from "./connection.png";
 import instrument from "./instrument.png";
@@ -16,12 +16,12 @@ import orgIntroduction from "./orgIntroduction.mp4"
 
 import donationPic from "./donation-pic.png"
 
-import finance from "./Finance.png";
-import wim from "./wim.png";
-import merion from "./Merion.png";
-import trulee from "./Trulee.png";
-import musubi from "./musubi.png";
-import heritage from "./Heritage.png";
+import financeEvent from "./finance-event.png";
+import wimEvent from "./wim-event.png";
+import merionEvent from "./merion-event.png";
+import truleeEvent from "./trulee-event.png";
+import musubiEvent from "./musubi-event.png";
+import heritageEvent from "./heritage-event.png";
 import colby2 from "./colby2.png";
 
 import chicagoTribune from "./chicago-tribune.png";
@@ -67,10 +67,10 @@ export {
 
   logo,
   
-  slideshowPic1,
-  slideshowPic2,
-  slideshowPic3,
-  slideshowPic4,
+  instrumentDonation,
+  nursingPerformance,
+  donationRecipient,
+  c4cDonation,
 
   connection,
   instrument,
@@ -79,12 +79,12 @@ export {
 
   donationPic,
 
-  finance,
-  wim,
-  merion, 
-  trulee,
-  musubi, 
-  heritage,
+  financeEvent,
+  wimEvent,
+  merionEvent, 
+  truleeEvent,
+  musubiEvent, 
+  heritageEvent,
   colby2,
 
   chicagoTribune,
