@@ -69,7 +69,6 @@ import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
 
 import middlebury from "./middlebury.png";
-import jonathankim from "./jonathankim.png";
 
 import yerokun from "./Yerokun.png";
 import valdez from "./Valdez.png";
