@@ -31,7 +31,8 @@ import cwJam from "./cw-jam.png";
 import allenBeckwith from "./allen-beckwith.png";
 import kiranMohan from "./kiran-mohan.png";
 import jonathanRaymond from "./jonathan-raymond.png";
-import justinKim from "./justin-kim.png";
+import justinKimExecutive from "./justin-kim-executive.png";
+
 
 import colby from "./colby.png";
 import harvard from "./harvard.png";
@@ -41,23 +42,31 @@ import uiuc from "./uiuc.png";
 import stevenson from "./stevenson.png";
 
 import colbyBackground from "./colby-background.png";
-import harvardBackground from "./harvard-background.png";
-import northwesternBackground from "./northwestern-background.png";
-import ucsbBackground from "./ucsb-background.png";
-import uiucBackground from "./uiuc-background.png";
-import stevensonBackground from "./stevenson-background.png";
+import justinKim from "./justin-kim.png";
 
+
+import harvardBackground from "./harvard-background.png";
 import lucasGazianis from "./lucas-gazianis.png";
 import marcCourtenmanche from "./marc-courtemanche.png";
+
+import northwesternBackground from "./northwestern-background.png";
+
+import ucsbBackground from "./ucsb-background.png";
+import erickFuerte from "./erick-fuerte.png";
+import joshChan from "./josh-chan.png";
+import karisLee from "./karis-lee.png";
+import annaXian from "./anna-xian.png";
+import juliaOng from "./julia-ong.png";
+
+import uiucBackground from "./uiuc-background.png";
+
+import stevensonBackground from "./stevenson-background.png";
 import rosieWang from "./rosie-wang.png";
 import gwynethGraham from "./gwyneth-graham.png";
 
 import chapterBackground from "./chapter-background.png";
 import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
-
-import middlebury from "./middlebury.png";
-import jonathankim from "./jonathankim.png";
 
 
 export {
@@ -94,7 +103,7 @@ export {
   allenBeckwith,
   kiranMohan,
   jonathanRaymond,
-  justinKim,
+  justinKimExecutive,
   
   colby,
   harvard,
@@ -108,16 +117,25 @@ export {
   placeholder,
 
   colbyBackground,
-  harvardBackground,
-  northwesternBackground,
-  ucsbBackground,
-  uiucBackground,
-  stevensonBackground,
-  middlebury,
+  justinKim,
 
+  harvardBackground,
   lucasGazianis,
   marcCourtenmanche,
+
+  northwesternBackground,
+
+  ucsbBackground,
+  erickFuerte,
+  joshChan,
+  karisLee,
+  annaXian,
+  juliaOng,
+  
+  uiucBackground,
+
+  stevensonBackground,
   rosieWang,
   gwynethGraham,
-  jonathankim,
+  
 };

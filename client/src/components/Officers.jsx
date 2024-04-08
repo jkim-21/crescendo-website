@@ -10,11 +10,11 @@ const Officers = ({name, title, headshot}) => {
                 <img 
                 src={headshot} 
                 className='w-full object-cover mb-[0.25rem] flex-grow 
-                          md:[aspect-ratio:1/1.48]'/>}
+                          md:[aspect-ratio:1/1.3]'/>}
             {!headshot && 
                 <img src={placeholder} 
                 className='w-full mb-[0.25rem] flex-grow 
-                          md:[aspect-ratio:1/1.48]'/>}
+                          md:[aspect-ratio:1/1.3]'/>}
             
             <h4 className='gold-color text-[2rem] font-medium flex-grow-0'>{name}</h4>
             <h5 className='text-[1.3rem] white-color flex-grow-0'>{title}</h5>

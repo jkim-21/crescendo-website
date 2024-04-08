@@ -1,13 +1,13 @@
 import React from 'react'
 import { chapterBackground } from '../assets'
-import {colby, harvard, northwestern, stevenson, ucsb, uiuc, Tech} from '../data/chapter-details'
+import {colby, harvard, northwestern, stevenson, ucsb, uiuc} from '../data/chapter-details'
 import { Involvements, Officers, Contacts, Navbar, AnimationLayout} from '../components'
 import {styles} from "../style"
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const chapters = {
-    colby, harvard, northwestern, stevenson, ucsb, uiuc, Tech
+    colby, harvard, northwestern, stevenson, ucsb, uiuc
 }
 
 const chapterPage = () => {
@@ -51,18 +51,24 @@ const chapterPage = () => {
             style={{backgroundImage: `url(${chapterBackground})`}} 
             className={`${styles.flexCenter} ${styles.paddingY}`}>
                 <div className={`${styles.boxWidth} max-w-[95%]`}>
-                    <p className={`${styles.paragraph} white-color mb-5`}>
-                        {chapterData.aboutInformation}
-                    </p>
+                    <div className='m-auto rounded 
+                                    lgs:max-w-[85%]'>
+                        {chapterData.aboutInformation.map((aboutSection, index) => (
+                            <p
+                            key={index}
+                            className={`${styles.paragraph} text-gray-200 mb-5`}>
+                            {aboutSection}
+                            </p>
+                        ))}
+                        {chapterData.aboutInformation2 && 
+                            <p className={`${styles.paragraph} white-color mb-5`}>
+                                {chapterData.aboutInformation2}
+                            </p>}
 
-                    {chapterData.aboutInformation2 && 
-                        <p className={`${styles.paragraph} white-color mb-5`}>
-                            {chapterData.aboutInformation2}
-                        </p>}
-
-                    <p className={`${styles.paragraph} white-color mb-10`}>
-                        You can contact us at {chapterData.emailAddress}
-                    </p>
+                        <p className={`${styles.paragraph} white-color mb-10`}>
+                            You can contact us at {chapterData.emailAddress}
+                        </p>
+                    </div>  
 
                     <h2 className={`${styles.heading2} gold-color text-center mb-[1.25rem]`}>Get Involved</h2>
                     <div className={`${styles.flexCenter} flex-wrap gap-[1rem] w-full mb-[2.5rem]

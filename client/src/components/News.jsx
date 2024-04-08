@@ -18,7 +18,8 @@ const News = ({ picture, title, description, link, watch}) => {
             <p className={`${styles.subparagraph} bg-white px-5 py-8 flex-grow`}>{description}</p>
             <a 
             href={link} 
-            target="_blank" 
+            target='_blank'
+            rel='noopener noreferrer'
             className='black-color py-4 font-semibold text-center bg-[#e8ecfc] w-[11rem] m-auto mb-6'>
                 {watch ? 'Watch' : "Read More"}
             </a>

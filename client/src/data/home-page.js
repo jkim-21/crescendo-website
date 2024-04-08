@@ -22,7 +22,7 @@ import {
 
   kiranMohan,
   jonathanRaymond,
-  justinKim,
+  justinKimExecutive,
   
   colby,
   harvard,
@@ -30,9 +30,6 @@ import {
   ucsb,
   uiuc,
   stevenson,
-  middlebury,
-
-
 
 } from "../assets";
 
@@ -91,14 +88,14 @@ export const stats = [
   {
     id: "stats-1",
     title: "K-12 Students in our coast-to-coast programs",
-    value: "200+",
+    value: "500+",
     img: connection,
     firstStat: true,
   },
   {
     id: "stats-2",
     title: "of instruments donated to under-priviledged communities",
-    value: "$35,000+",
+    value: "$50,000+",
     img: instrument,
   },
   {
@@ -193,34 +190,32 @@ export const news = [
   },
 ]
 
-export const founders = [
+export const executiveBoard = [
   {
-    id: "kiran-founder",
+    id: "kiran-executive",
     img: kiranMohan,
     name: "Kiran Mohan",
     title: "Board Executive",
     content: {
-      content1: "Kiran Mohan serves as Co-Founder and President of Crescendo for a Cause. He is a senior undergraduate student at Harvard University, pursuing a Bachelor of Arts in History of Science with a secondary in Global Health & Health Policy. Kiran is particularly interested in how music can affect the brain and has conducted research at Northwestern University and Harvard University.",
-      content2: "Kiran has played a variety of instruments, including the piano, oboe, English horn and alto saxophone. In addition to pursuing performance opportunities on campus, he has taken several courses at Harvard on how music can shape culture. Kiran has also completed music therapy courses from the Berklee College of Music that have inspired Crescendo for a Cause’s approach to conducting in-person and virtual therapeutic music performances. Some of Kiran’s favorite composers include Maurice Ravel and Johannes Brahms. His favorite musical memory has been organizing Crescendo for a Cause assisted living facility concerts and seeing the impact music has on the residents.",
+      content1: "Kiran Mohan serves as the Co-President and Chief Operating Officer for Crescendo for a Cause. He is a senior undergraduate student at Harvard University, pursuing a Bachelor of Arts in History of Science with a secondary in Global Health & Health Policy. Kiran is particularly interested in how music can affect the brain and has conducted research at Northwestern University and Harvard University. Kiran has played a variety of instruments, including the piano, oboe, English horn and alto saxophone. In addition to pursuing performance opportunities on campus, he has taken several courses at Harvard on how music can shape culture. Kiran has also completed music therapy courses from the Berklee College of Music that have inspired Crescendo for a Cause’s approach to conducting in-person and virtual therapeutic music performances. Some of Kiran’s favorite composers include Maurice Ravel and Johannes Brahms. His favorite musical memory has been organizing Crescendo for a Cause assisted living facility concerts and seeing the impact music has on the residents.",
     },
   },
   {
-    id: "jonathan-founder",
+    id: "jonathan-executive",
     img: jonathanRaymond,
     name: "Jonathan Raymond",
     title: "Board Executive",
     content: {
-      content1: "Jonathan Raymond co-founded and serves on the executive board for Crescendo for a Cause. He is a senior undergraduate student at the University of Illinois Urbana-Champaign, pursuing a Bachelor of Science in Chemistry. When Jonathan isn’t at the bench in various research groups at school, he loves to time to play in jazz bands around campus and compose music.",
-      content2: "Jonathan has studied the piano since age four and the trumpet since age ten. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. The work of Clifford Brown is a notable inspiration for Jonathan. His favorite musical memories were during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble.",
+      content1: "Jonathan Raymond serves as the Co-President and Chief Information Officer for Crescendo for a Cause. He is a senior undergraduate student at the University of Illinois Urbana-Champaign, pursuing a Bachelor of Science in Chemistry. When Jonathan isn’t at the bench in various research groups at school, he loves to time to play in jazz bands around campus and compose music. Jonathan has studied the piano since age four and the trumpet since age ten. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. The work of Clifford Brown is a notable inspiration for Jonathan. His favorite musical memories were during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble.",
     },
   },
   {
-    id: "justin-founder",
-    img: justinKim,
+    id: "justin-executive",
+    img: justinKimExecutive,
     name: "Justin Kim",
     title: "Board Executive",
     content: {
-      content1: "Justin Kim is a senior undergraduate student at Colby College studying neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. At C4C, Justin is particularly interested in the mentorship aspect of music education, eager to give back the same inspiring guidance that he once received from his mentors.",
+      content1: "Justin Kim serves as the Co-President and Chief Growth Officer at Crescendo for a Cause. He is a senior undergraduate student at Colby College studying neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. Justin is particularly interested in addressing the disparities in music education by working closely with local communities. Growing up as a low-income immigrant, he understands how difficult it can be to access music. Now, he is excited to provide the same inspiration he’s received throughout his musical journey to spread the joy of music.",
     },
     lastOfficer: true,
   },

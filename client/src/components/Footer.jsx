@@ -13,7 +13,11 @@ const Footer = () => {
         <div className='flex flex-row mt-6
                         md:mt-0'>      
           {socialMedias.map((social, index) => (
-            <a key={social.id} href={social.link} target="_blank" rel="noreferrer noopener">
+            <a 
+            key={social.id} 
+            href={social.link} 
+            target='_blank' 
+            rel='noreferrer noopener'>
               <FontAwesomeIcon className={`text-white w-[21px] h-[21px] object-contain cursor-pointer ${index !== social.length - 1 ? 'mr-6' : 'mr-0'}`} size="2x" icon={social.smIcon}/>
             </a>
           ))}

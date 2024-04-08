@@ -1,5 +1,5 @@
 import React from 'react'
-import {founders} from '../data/home-page'
+import {executiveBoard} from '../data/home-page'
 import {styles} from '../style'
 import Founders from './Founders'
 
@@ -13,7 +13,7 @@ const AboutUs = () => {
                     lg:mb-[4rem]`}>
         About Us
       </h1>
-      {founders.map((founder) => (
+      {executiveBoard.map((founder) => (
         <div key={founder.id}>
           <Founders {...founder}/>
         </div>
