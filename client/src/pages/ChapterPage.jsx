@@ -1,13 +1,13 @@
 import React from 'react'
 import { chapterBackground } from '../assets'
-import {colby, harvard, northwestern, stevenson, ucsb, uiuc, Tech} from '../data/chapter-details'
+import {colby, harvard, northwestern, stevenson, ucsb, uiuc} from '../data/chapter-details'
 import { Involvements, Officers, Contacts, Navbar, AnimationLayout} from '../components'
 import {styles} from "../style"
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const chapters = {
-    colby, harvard, northwestern, stevenson, ucsb, uiuc, Tech
+    colby, harvard, northwestern, stevenson, ucsb, uiuc
 }
 
 const chapterPage = () => {
@@ -50,8 +50,15 @@ const chapterPage = () => {
             <div style={{backgroundImage: `url(${chapterBackground})`}} className={`${styles.flexCenter} py-10`}>
 
                 <div className={`${styles.chaptersWidth}`}>
-                    <p className={`${styles.paragraphWhite} mb-5`}>{chapterData.aboutInformation}</p>
-                    {chapterData.aboutInformation2 && <p className={`${styles.paragraphWhite} mb-5`}>{chapterData.aboutInformation2}</p>}
+                <div className={`${styles.paragraphWhite} mb-5`}>
+    {chapterData.aboutInformation.split('\n').map((item, index, array) => (
+        <React.Fragment key={index}>
+            {item}
+            {/* Add <br /> if it's not the last item */}
+            {index < array.length - 1 && <br />}
+        </React.Fragment>
+    ))}
+</div>                    {chapterData.aboutInformation2 && <p className={`${styles.paragraphWhite} mb-5`}>{chapterData.aboutInformation2}</p>}
                     <p className={`${styles.paragraphWhite} mb-10`}>You can contact us at {chapterData.emailAddress}</p>
 
                     <h2 className='gold-color text-[2.5rem] font-bold text-center mb-5'>Get Involved</h2>

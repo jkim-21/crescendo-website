@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Feedback = ({ picture, name, title, img }) => {
+const Feedback = ({ picture, name, title, img, instagramUrl }) => {
+  const handleClick = () => {
+    window.open(instagramUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div
       className='flex justify-between flex-col px-8 py-6 rounded-[5px] max-w-[370px] 

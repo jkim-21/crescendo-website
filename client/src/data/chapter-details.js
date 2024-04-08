@@ -19,6 +19,22 @@ import {
     gwynethGraham,
 
     jonathankim,
+    yerokun,
+    valdez,
+    katiehe,
+    ceriani,
+    xian,
+    jonathanchen,
+    gloriawang,
+    karis,
+    joshchan,
+    ericfuerte,
+    allypark,
+    juliaong,
+    jasonli,
+    annaxian,
+    mindylam,
+    annaolson,
 
 
 } from "../assets";
@@ -27,7 +43,8 @@ export const colby = {
         id: "colby-chapter",
         background: colbyBackground,
         header: "Colby College",
-        aboutInformation: "In collaboration with IDEAs in Music, Crescendo for a Cause: Colby Undergraduate Chapter is an organization at Colby College that is focused on supporting Inclusion, Diversity, Equity, and Accessibility in Music across the state of Maine and beyond. We aim to increase access to musical opportunities at Colby College, the surrounding community, and beyond.",
+        aboutInformation:"In collaboration with IDEAs in Music, Crescendo for a Cause: Colby Undergraduate Chapter is an organization at Colby College that is focused on supporting Inclusion, Diversity, Equity, and Accessibility in Music across the state of Maine and beyond. We aim to increase access to musical opportunities at Colby College, the surrounding community, and beyond.",
+        aboutInformation2:"Some of our activities include a music mentorship program at Waterville Schools (on-on-one and helping out with group rehearsals), one-on-one piano mentorship lessons at Colby on weekends, monthly meetings to discuss topics around accessibility to music, and performances at local venues in the community",
         emailAddress: "crescendo.colby@gmail.com",
         involvements: [
             {
@@ -65,7 +82,7 @@ export const colby = {
                 id: "colby-officer-02",
                 name: "Naji Yerokun",
                 title: "Vice President",
-                img: false,
+                img: yerokun,
                 content: [
                 ],
             },
@@ -135,7 +152,7 @@ export const northwestern = {
         id: "northwestern-chapter",
         background: northwesternBackground,
         header: "Northwestern",
-        aboutInformation: "Founded by ..., Crescendo for a Cause: Northwestern Undergraduate Chapter is ...",
+        aboutInformation: "Some of our activities include sharing music with the elderly through performances at Evanston retirement homes within the Northwestern locale. We will soon to be piloting virtual music mentorship program with an Evanston elementary school",
         emailAddress: "crescendo.northwestern@gmail.com",
         involvements: [
             {
@@ -161,22 +178,40 @@ export const northwestern = {
         ],
         officers: [
             {
-                id: "northwestern-officer-01",
-                name: "Officer 1",
-                title: "Position 1",
-                img: false,
+                id: "alex-valdes",
+                name: "Alex Valdes",
+                title: "Co-President",
+                img: valdez,
             },
             {
-                id: "northwestern-officer-02",
-                name: "Officer 2",
-                title: "Position 2",
-                img: false,
+                id: "katie-he",
+                name: "Katie He",
+                title: "Co-President",
+                img: katiehe,
             },
             {
-                id: "northwestern-officer-03",
-                name: "Officer 3",
-                title: "Position3",
-                img: false,
+                id: "jonathan-chen",
+                name: "Jonathan Chen",
+                title: "Performance Head",
+                img: jonathanchen,
+            },
+            {
+                id: "nicole-ceriani",
+                name: "Nicole Ceriani",
+                title: "Co-PR Head",
+                img: ceriani,
+            },
+            {
+                id: "kevin-xian",
+                name: "Kevin Xian",
+                title: "Co-PR Head",
+                img: xian,
+            },
+            {
+                id: "gloria-wang",
+                name: "Gloria Wang",
+                title: "Treasurer",
+                img: gloriawang,
             },
         ],
     }
@@ -186,7 +221,7 @@ export const ucsb = {
     background: ucsbBackground,
     header: "UC Santa Barbara",
     aboutInformation: "Founded by Sam Wang and Kenneth Yang (both Class of '24) in September 2020, Crescendo for a Cause UCSB is an official registered campus organization with over 20 members, the largest and most active chapter within our organization. We host general meetings about once every month where we go over club updates and have some fun (both music and non-music related)!",
-    aboutInformation2: "In December 2020, we released our first virtual performance. We also run a pan pal program that connects club members with underprivileged high school students in the greater Santa Barbara community.",
+    aboutInformation2: "In collaboration with the Goleta Union School District Expanded Learning Programs, we have developed a mentorship program where UCSB students can teach one-on-one music lessons to local elementary students in Goleta, California. Our mentorship program has provided lessons to students in elementary schools without formal music classes.\n\nEvery quarter, we host 1-2 concerts at local senior homes in the Santa Barbara community.\n\nWe hold fundraisers to raise money for instruments and music supplies that are used in our mentorship program. Some of our past fundraisers include Krispy Kreme Fundraiser, Bake Sales, and a Spam Musubi Fundraiser.",
     emailAddress: "crescendo.ucsb@gmail.com",
     involvements: [
         {
@@ -215,26 +250,55 @@ export const ucsb = {
             id: "karis-lee",
             name: "Karis Lee",
             title: "President",
+            img: karis,
         },
         {
             id: "josh-chan",
             name: "Josh Chan",
             title: "Director of Marketing",
+            img: joshchan,
         },
         {
             id: "erick-fuerte",
             name: "Erick Fuerte",
             title: "Director of Mentorship",
+            img: ericfuerte,
         },
         {
             id: "anna-xian",
             name: "Anna Xian",
             title: "Director of Fundraising",
+            img: annaxian,
         },
         {
             id: "julia-ong",
             name: "Julia Ong",
-            title: "Director of Member Engagement",
+            title: "Director of Member Engagement, Treasurer",
+            img: juliaong,
+        },
+        {
+            id: "anna-olson",
+            name: "Anna Olson",
+            title: "Director of Fundraising",
+            img: annaolson,
+        },
+        {
+            id: "ally-park",
+            name: "Ally Park",
+            title: "Mentorship Coordinator",
+            img: allypark,
+        },
+        {
+            id: "jason-li",
+            name: "Jason Li",
+            title: "Mentorship Coordinator",
+            img: jasonli,
+        },
+        {
+            id: "mindy-lam",
+            name: "Mindy Lam",
+            title: "Member Engagement Coordinator",
+            img: mindylam,
         },
         
     ]
@@ -242,8 +306,8 @@ export const ucsb = {
 export const uiuc = {
     id: "uiuc-chapter",
     background: uiucBackground,
-    header: "University of Illinois UC",
-    aboutInformation: "Founded by ..., Crescendo for a Cause: Northwestern Undergraduate Chapter is ...",
+    header: "University of Illinois, Urbana-Champaign",
+    aboutInformation: "Founded by Jonathan Raymond in 2020, this chapter mainly serves to deliver technology solutions to C4C and to provide support to groups with similar missions on campus.",
     emailAddress: "crescendo.uiuc@gmail.com",
     involvements: [
         {
@@ -320,46 +384,6 @@ export const stevenson = {
             title: "Co-President",
             img: gwynethGraham,
             content: "Gwyneth Graham serves as Co-President of the Adlai E. Stevenson High School Chapter of Crescendo for a Cause. She is a third-year student at Adlai E. Stevenson High School. She enjoys performing at local nursing homes in the Buffalo Grove and Wheeling areas and supporting the local Buffalo Grove Symphonic Band as a clarinetist. She also plays keyboard for the Jazz Ensemble at SHS. Gwyneth has played the clarinet since 5th grade, and volunteers teaching clarinet lessons to younger students. She is also an accomplished pianist, having won state level piano competitions for the past 10 years.",
-        },
-    ],
-}
-
-export const Tech = {
-    id: "tech-chapter",
-    background: stevensonBackground,
-    header: "Technology Development Chapter",
-    aboutInformation: "This group within the organization works on providing technology solutions to solve problems in music education inequity.",
-    emailAddress: "admin@crescendoforacause.com",
-    involvements: [
-        {
-            id: "Tech-interest",
-            header: "Fill Out Our Form",
-            restOfHeader: "to receive the latest email updates from our club"
-        },
-        {
-            id: "Tech-recordings",
-            header: "Send Us Recordings",
-            restOfHeader: "if you want to be featured in our next virtual performance"
-        },
-        {
-            id: "Tech-mentor",
-            header: "Be a Mentor",
-            restOfHeader: "for high school musicians in low-income areas"
-        },
-        {
-            id: "Tech-spread",
-            header: "Spread the Word",
-            restOfHeader: "about us to anyone who might be interested!"
-        },
-    ],
-    officers: [
-        {
-        id: "jonathan-kim",
-        name: "Jonathan Kim",
-        title: "Executive",
-        img: jonathankim,
-        content: 
-            "Jonathan is currently in a gap year attending Middlebury University, he serves as the lead exectue for the technology development team here at C4C"
         },
     ],
 }
