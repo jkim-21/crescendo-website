@@ -206,7 +206,7 @@ export const executiveBoard = [
     name: "Jonathan Raymond",
     title: "Board Executive",
     content: {
-      content1: "Jonathan Raymond serves as the Co-President and Chief Information Officer for Crescendo for a Cause. He is a senior undergraduate student at the University of Illinois Urbana-Champaign, pursuing a Bachelor of Science in Chemistry. When Jonathan isn’t at the bench in various research groups at school, he loves to time to play in jazz bands around campus and compose music. Jonathan has studied the piano since age four and the trumpet since age ten. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. The work of Clifford Brown is a notable inspiration for Jonathan. His favorite musical memories were during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble.",
+      content1: "Jonathan Raymond is a senior undergraduate student at the University of Illinois Urbana-Champaign, pursuing a Bachelor of Science in Chemistry. He has played piano since the age of four and picked up trumpet at ten. When Jonathan isn’t at the bench doing research, he loves to take time to play in jazz bands around campus and compose music.",
     },
   },
   {
@@ -259,5 +259,73 @@ export const chapters = [
     picture: stevenson,
     name: "Stevenson High School",
     link: "./chapters/stevenson"
+  },
+  
+];
+
+
+export const footerLinks = [
+  {
+    title: "Useful Links",
+    links: [
+      {
+        name: "Content",
+        link: "https://www.hoobank.com/content/",
+      },
+      {
+        name: "How it Works",
+        link: "https://www.hoobank.com/how-it-works/",
+      },
+      {
+        name: "Create",
+        link: "https://www.hoobank.com/create/",
+      },
+      {
+        name: "Explore",
+        link: "https://www.hoobank.com/explore/",
+      },
+      {
+        name: "Terms & Services",
+        link: "https://www.hoobank.com/terms-and-services/",
+      },
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      {
+        name: "Help Center",
+        link: "https://www.hoobank.com/help-center/",
+      },
+      {
+        name: "Partners",
+        link: "https://www.hoobank.com/partners/",
+      },
+      {
+        name: "Suggestions",
+        link: "https://www.hoobank.com/suggestions/",
+      },
+      {
+        name: "Blog",
+        link: "https://www.hoobank.com/blog/",
+      },
+      {
+        name: "Newsletters",
+        link: "https://www.hoobank.com/newsletters/",
+      },
+    ],
+  },
+  {
+    title: "Partner",
+    links: [
+      {
+        name: "Our Partner",
+        link: "https://www.hoobank.com/our-partner/",
+      },
+      {
+        name: "Become a Partner",
+        link: "https://www.hoobank.com/become-a-partner/",
+      },
+    ],
   },
 ];

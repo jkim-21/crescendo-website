@@ -68,8 +68,48 @@ import chapterBackground from "./chapter-background.png";
 import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
 
+import middlebury from "./middlebury.png";
+import jonathankim from "./jonathankim.png";
+
+import yerokun from "./Yerokun.png";
+import valdez from "./Valdez.png";
+import katiehe from "./KatieHe.png";
+import ceriani from "./Ceriani.png";
+import xian from "./Xian.png";
+import jonathanchen from "./JonathanChen.png";
+import gloriawang from "./GloriaWang.png";
+import karis from "./Karis.png";
+import joshchan from "./JoshChan.png";
+import ericfuerte from "./EricFuerte.png";
+import allypark from "./AllyPark.png";
+import juliaong from "./JuliaOng.png";
+import jasonli from "./JasonLi.png";
+import annaxian from "./AnnaXian.png";
+import mindylam from "./mindylam.png";
+import annaolson from "./AnnaOlson.png";
+
+
+
 
 export {
+
+  yerokun,
+  valdez,
+  katiehe,
+  ceriani,
+  xian,
+  jonathanchen,
+  gloriawang,
+  karis,
+  joshchan,
+  ericfuerte,
+  allypark,
+  juliaong,
+  jasonli,
+  annaxian,
+  mindylam,
+  annaolson,
+
   menu,
   close,
   discount,

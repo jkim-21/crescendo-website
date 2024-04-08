@@ -23,6 +23,24 @@ import {
     rosieWang,
     gwynethGraham,
 
+    jonathankim,
+    yerokun,
+    valdez,
+    katiehe,
+    ceriani,
+    xian,
+    jonathanchen,
+    gloriawang,
+    karis,
+    joshchan,
+    ericfuerte,
+    allypark,
+    juliaong,
+    jasonli,
+    annaxian,
+    mindylam,
+    annaolson,
+
 
 } from "../assets";
 
@@ -30,9 +48,8 @@ export const colby = {
         id: "colby-chapter",
         background: colbyBackground,
         header: "Colby College",
-        aboutInformation: [
-            "In collaboration with IDEAs in Music, Crescendo for a Cause: Colby Undergraduate Chapter is an organization at Colby College that is focused on supporting Inclusion, Diversity, Equity, and Accessibility in Music across the state of Maine and beyond. We aim to increase access to musical opportunities at Colby College, the surrounding community, and beyond."
-        ],
+        aboutInformation:"In collaboration with IDEAs in Music, Crescendo for a Cause: Colby Undergraduate Chapter is an organization at Colby College that is focused on supporting Inclusion, Diversity, Equity, and Accessibility in Music across the state of Maine and beyond. We aim to increase access to musical opportunities at Colby College, the surrounding community, and beyond.",
+        aboutInformation2:"Some of our activities include a music mentorship program at Waterville Schools (on-on-one and helping out with group rehearsals), one-on-one piano mentorship lessons at Colby on weekends, monthly meetings to discuss topics around accessibility to music, and performances at local venues in the community",
         emailAddress: "crescendo.colby@gmail.com",
         involvements: [
             {
@@ -70,7 +87,9 @@ export const colby = {
                 id: "colby-officer-02",
                 name: "Naji Yerokun",
                 title: "Vice President",
-                headshot: false,
+                img: false,
+                content: [
+                ],
             },
             {
                 id: "colby-officer-03",
@@ -138,10 +157,8 @@ export const northwestern = {
         id: "northwestern-chapter",
         background: northwesternBackground,
         header: "Northwestern",
-        aboutInformation: [
-            "We are a community that loves music, and for many of us, music has shaped many of our worldviews and perspectives. It is a huge part of who we are, and it frames our growth. Unfortunately, music has a lot of barriers, especially financial. We want to reach over these barriers to give more opportunities for Chicago children to also experience the connection to music that we have. We have various roles for interested students, including mentors, performers, and members of the fundraising comittee. While being a mentor or a performer does require some music knowledge — and any music knowledge is quite enough, we are not planning auditions of any sort — anyone that expresses interest is welcome within our fundraising committee."
-        ],
-        emailAddress: "northwestern.c4c@gmail.com",
+        aboutInformation: "Founded by ..., Crescendo for a Cause: Northwestern Undergraduate Chapter is ...",
+        emailAddress: "crescendo.northwestern@gmail.com",
         involvements: [
             {
                 id: "northwestern-interest",
@@ -173,19 +190,19 @@ export const northwestern = {
                 id: "northwestern-officer-01",
                 name: "Officer 1",
                 title: "Position 1",
-                headshot: false,
+                img: false,
             },
             {
                 id: "northwestern-officer-02",
                 name: "Officer 2",
                 title: "Position 2",
-                headshot: false,
+                img: false,
             },
             {
                 id: "northwestern-officer-03",
                 name: "Officer 3",
                 title: "Position3",
-                headshot: false,
+                img: false,
             },
         ],
     }
@@ -194,10 +211,8 @@ export const ucsb = {
     id: "ucsb-chapter",
     background: ucsbBackground,
     header: "UC Santa Barbara",
-    aboutInformation: [
-        "Founded by Sam Wang and Kenneth Yang (both Class of '24) in September 2020, Crescendo for a Cause UCSB is the largest and most active chapter within our organization, open to students of all musical backgrounds and experiences. At our core, we are looking for students who have a passion for music as well as a heart to serve their local community. Our general meetings, socials, and fundraisers are welcome to both musicians and non-musicians alike. However, most of our performance-based outreach opportunities, such as our senior home concerts and mentorship program, require some experience in singing or playing an instrument. Students who perform in our senior home concerts, for example, are welcome to perform a song or piece of any genre or difficulty, so long as their performances are well prepared and suitable for their musical abilities.",
-        "Students interested in participating in our mentorship program with the Goleta Union School District are expected to have a high level of instrumental proficiency and musicianship. To participate in the mentorship program, students must undergo an application process as well as a brief interview and performance screening with at least two officers on the mentorship board. In our screening process, we look at our candidates’ playing abilities, musical education background as well as prior experience working with children."
-    ],
+    aboutInformation: "Founded by Sam Wang and Kenneth Yang (both Class of '24) in September 2020, Crescendo for a Cause UCSB is an official registered campus organization with over 20 members, the largest and most active chapter within our organization. We host general meetings about once every month where we go over club updates and have some fun (both music and non-music related)!",
+    aboutInformation2: "In December 2020, we released our first virtual performance. We also run a pan pal program that connects club members with underprivileged high school students in the greater Santa Barbara community.",
     emailAddress: "crescendo.ucsb@gmail.com",
     involvements: [
         {
@@ -231,31 +246,26 @@ export const ucsb = {
             id: "karis-lee",
             name: "Karis Lee",
             title: "President",
-            headshot: karisLee,
         },
         {
             id: "josh-chan",
             name: "Josh Chan",
             title: "Director of Marketing",
-            headshot: joshChan
         },
         {
             id: "erick-fuerte",
             name: "Erick Fuerte",
             title: "Director of Mentorship",
-            headshot: erickFuerte,
         },
         {
             id: "anna-xian",
             name: "Anna Xian",
             title: "Director of Fundraising",
-            headshot: annaXian,
         },
         {
             id: "julia-ong",
             name: "Julia Ong",
             title: "Director of Member Engagement",
-            headshot: juliaOng,
         },
         
     ]
@@ -264,9 +274,7 @@ export const uiuc = {
     id: "uiuc-chapter",
     background: uiucBackground,
     header: "University of Illinois UC",
-    aboutInformation: [
-        "Founded by ..., Crescendo for a Cause: Northwestern Undergraduate Chapter is ..."
-    ],
+    aboutInformation: "Founded by ..., Crescendo for a Cause: Northwestern Undergraduate Chapter is ...",
     emailAddress: "crescendo.uiuc@gmail.com",
     involvements: [
         {
@@ -349,3 +357,42 @@ export const stevenson = {
     ],
 }
 
+export const Tech = {
+    id: "tech-chapter",
+    background: stevensonBackground,
+    header: "Technology Development Chapter",
+    aboutInformation: "This group within the organization works on providing technology solutions to solve problems in music education inequity.",
+    emailAddress: "admin@crescendoforacause.com",
+    involvements: [
+        {
+            id: "Tech-interest",
+            header: "Fill Out Our Form",
+            restOfHeader: "to receive the latest email updates from our club"
+        },
+        {
+            id: "Tech-recordings",
+            header: "Send Us Recordings",
+            restOfHeader: "if you want to be featured in our next virtual performance"
+        },
+        {
+            id: "Tech-mentor",
+            header: "Be a Mentor",
+            restOfHeader: "for high school musicians in low-income areas"
+        },
+        {
+            id: "Tech-spread",
+            header: "Spread the Word",
+            restOfHeader: "about us to anyone who might be interested!"
+        },
+    ],
+    officers: [
+        {
+        id: "jonathan-kim",
+        name: "Jonathan Kim",
+        title: "Executive",
+        img: jonathankim,
+        content: 
+            "Jonathan is currently in a gap year attending Middlebury University, he serves as the lead exectue for the technology development team here at C4C"
+        },
+    ],
+}
