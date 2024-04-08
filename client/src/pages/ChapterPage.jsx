@@ -60,11 +60,6 @@ const chapterPage = () => {
                             {aboutSection}
                             </p>
                         ))}
-                        {chapterData.aboutInformation2 && 
-                            <p className={`${styles.paragraph} white-color mb-5`}>
-                                {chapterData.aboutInformation2}
-                            </p>}
-
                         <p className={`${styles.paragraph} white-color mb-10`}>
                             You can contact us at {chapterData.emailAddress}
                         </p>
