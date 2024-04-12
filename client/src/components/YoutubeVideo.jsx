@@ -3,13 +3,16 @@ import { orgIntroduction } from '../assets';
 
 const YoutubeVideo = () => {
     return (
-        <div>
-            <video
-            controls
-            controlsList='nodownload'
-            >
-                <source src={orgIntroduction} type='video/mp4'/>
-            </video>
+        <div className='w-full'>
+            <iframe 
+            width = '100%'
+            height = '100%'
+            src="https://www.youtube.com/embed/GCVOK_cSyPo?si=9fnsgwe6_cGEoWMr" 
+            title="C4C Youtube Introduction" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerPolicy="strict-origin-when-cross-origin" 
+            allowFullScreen
+            className='[aspect-ratio:1.7/1]'></iframe>
         </div>
     );
 };

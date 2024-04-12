@@ -54,7 +54,7 @@ const Navbar = ({pageStyles}) => {
                 </HashLink>
                 {nav.dropdown && <ExpandMoreIcon/>}
               </div>
-              <div className={`${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation absolute dropdown-background dark-color rounded py-[1rem] px-[0.5rem] cursor-default  shadow-2xl  
+              <div className={`${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation dropdown-background dropdown absolute dark-color rounded py-[1rem] px-[0.5rem] cursor-default  shadow-2xl  
                               lg:px-[1rem]`}>
                 {chapters.map((chapter) => (
                       <Link 

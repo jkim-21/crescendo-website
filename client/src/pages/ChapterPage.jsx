@@ -61,7 +61,7 @@ const chapterPage = () => {
                             </p>
                         ))}
                         <p className={`${styles.paragraph} white-color mb-10`}>
-                            You can contact us at {chapterData.emailAddress}
+                            {chapterData.emailAddress && `You can contact us at ${chapterData.emailAddress}`}
                         </p>
                     </div>  
 

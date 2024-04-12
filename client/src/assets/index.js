@@ -31,8 +31,7 @@ import cwJam from "./cw-jam.png";
 import allenBeckwith from "./allen-beckwith.png";
 import kiranMohan from "./kiran-mohan.png";
 import jonathanRaymond from "./jonathan-raymond.png";
-import justinKimExecutive from "./justin-kim-executive.png";
-
+import justinKim from "./justin-kim.png";
 
 import colby from "./colby.png";
 import harvard from "./harvard.png";
@@ -42,7 +41,8 @@ import uiuc from "./uiuc.png";
 import stevenson from "./stevenson.png";
 
 import colbyBackground from "./colby-background.png";
-import justinKim from "./justin-kim.png";
+import najiYerokun from "./naji-yerokun.png";
+import dongLee from "./dong-lee.png";
 
 
 import harvardBackground from "./harvard-background.png";
@@ -50,6 +50,12 @@ import lucasGazianis from "./lucas-gazianis.png";
 import marcCourtenmanche from "./marc-courtemanche.png";
 
 import northwesternBackground from "./northwestern-background.png";
+import alexValdes from "./alex-valdes.png";
+import katieHe from "./katie-he.png";
+import nicoleCeriani from "./nicole-ceriani.png";
+import jonathanChen from "./jonathan-chen.png";
+import gloriaWang from "./gloria-wang.png";
+import kevinXian from "./kevin-xian.png";
 
 import ucsbBackground from "./ucsb-background.png";
 import erickFuerte from "./erick-fuerte.png";
@@ -70,45 +76,8 @@ import placeholder from "./placeholder.png";
 
 import middlebury from "./middlebury.png";
 
-import yerokun from "./Yerokun.png";
-import valdez from "./Valdez.png";
-import katiehe from "./KatieHe.png";
-import ceriani from "./Ceriani.png";
-import xian from "./Xian.png";
-import jonathanchen from "./JonathanChen.png";
-import gloriawang from "./GloriaWang.png";
-import karis from "./Karis.png";
-import joshchan from "./JoshChan.png";
-import ericfuerte from "./EricFuerte.png";
-import allypark from "./AllyPark.png";
-import juliaong from "./JuliaOng.png";
-import jasonli from "./JasonLi.png";
-import annaxian from "./AnnaXian.png";
-import mindylam from "./mindylam.png";
-import annaolson from "./AnnaOlson.png";
-
-
-
 
 export {
-
-  yerokun,
-  valdez,
-  katiehe,
-  ceriani,
-  xian,
-  jonathanchen,
-  gloriawang,
-  karis,
-  joshchan,
-  ericfuerte,
-  allypark,
-  juliaong,
-  jasonli,
-  annaxian,
-  mindylam,
-  annaolson,
-
   menu,
   close,
   discount,
@@ -142,7 +111,7 @@ export {
   allenBeckwith,
   kiranMohan,
   jonathanRaymond,
-  justinKimExecutive,
+  justinKim,
   
   colby,
   harvard,
@@ -156,13 +125,20 @@ export {
   placeholder,
 
   colbyBackground,
-  justinKim,
+  najiYerokun,
+  dongLee,
 
   harvardBackground,
   lucasGazianis,
   marcCourtenmanche,
 
   northwesternBackground,
+  alexValdes,
+  katieHe,
+  nicoleCeriani,
+  jonathanChen,
+  gloriaWang,
+  kevinXian,
 
   ucsbBackground,
   erickFuerte,

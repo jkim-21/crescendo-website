@@ -1,6 +1,8 @@
 import {
     colbyBackground,
     justinKim,
+    najiYerokun,
+    dongLee,
 
     harvardBackground,
     kiranMohan,
@@ -8,6 +10,13 @@ import {
     marcCourtenmanche,
 
     northwesternBackground,
+    alexValdes,
+    katieHe,
+    nicoleCeriani,
+    jonathanChen,
+    gloriaWang,
+    kevinXian,
+
 
     ucsbBackground,
     erickFuerte,
@@ -23,24 +32,6 @@ import {
     rosieWang,
     gwynethGraham,
 
-    yerokun,
-    valdez,
-    katiehe,
-    ceriani,
-    xian,
-    jonathanchen,
-    gloriawang,
-    karis,
-    joshchan,
-    ericfuerte,
-    allypark,
-    juliaong,
-    jasonli,
-    annaxian,
-    mindylam,
-    annaolson,
-
-
 } from "../assets";
 
 export const colby = {
@@ -48,28 +39,32 @@ export const colby = {
         background: colbyBackground,
         header: "Colby College",
         aboutInformation:["In collaboration with IDEAs in Music, Crescendo for a Cause: Colby Undergraduate Chapter is an organization at Colby College that is focused on supporting Inclusion, Diversity, Equity, and Accessibility in Music across the state of Maine and beyond. We aim to increase access to musical opportunities at Colby College, the surrounding community, and beyond.",
-        "Some of our activities include a music mentorship program at Waterville Schools (on-on-one and helping out with group rehearsals), one-on-one piano mentorship lessons at Colby on weekends, monthly meetings to discuss topics around accessibility to music, and performances at local venues in the community"],
-        emailAddress: "crescendo.colby@gmail.com",
+        "Some of our activities include a music mentorship program at Waterville Schools (on-on-one and helping out with group rehearsals), one-on-one piano mentorship lessons at Colby on weekends, monthly meetings to discuss topics around accessibility to music, and performances at local venues in the community."
+        ],
         involvements: [
             {
                 id: "colby-interest",
-                header: "Fill Out Our Form",
-                restOfHeader: "to receive the latest email updates from our club"
+                header: "Fill out our membership",
+                restOfHeader: "registration form to receive the latest email updates from our club",
+                link: "https://forms.gle/TykYDqLKRXxhPz4y5",
             },
             {
                 id: "colby-recordings",
-                header: "Send Us Recordings",
-                restOfHeader: "if you want to be featured in our next virtual performance"
+                header: "Sign up to mentor",
+                restOfHeader: "5th grade students in piano through our Google Form",
+                link: "https://docs.google.com/forms/d/e/1FAIpQLSccv-gvbm7vzDtX_JGYpTsDR5EH8KuyEIthYWQyG5cArYXjOA/viewform"
             },
             {
                 id: "colby-mentor",
-                header: "Be a Mentor",
-                restOfHeader: "for high school musicians in low-income areas"
+                header: "Teach 1 on 1 lessons",
+                restOfHeader: "to students in the Music Hall School",
+                link:"https://docs.google.com/forms/d/e/1FAIpQLSeGGdYL6a1tEA5ZJR8vO7ht2j_J97cXV_xWQYw6g3-9sYSd8w/viewform",
             },
             {
                 id: "colby-spread",
                 header: "Spread the Word",
-                restOfHeader: "about us to anyone who might be interested!"
+                restOfHeader: "about us to anyone who might be interested!",
+                link: "https://www.instagram.com/colbyideas/"
             },
         ],
         officers: [
@@ -86,7 +81,7 @@ export const colby = {
                 id: "colby-officer-02",
                 name: "Naji Yerokun",
                 title: "Vice President",
-                img: yerokun,
+                headshot: najiYerokun,
                 content: [
                 ],
             },
@@ -94,7 +89,7 @@ export const colby = {
                 id: "colby-officer-03",
                 name: "Dong Lee",
                 title: "Mentorship Director",
-                headshot: false,
+                headshot: dongLee,
             },
             
         ],
@@ -107,7 +102,6 @@ export const colby = {
         aboutInformation: [
             "Founded by Kiran Mohan, Lucas Gazianis, and Marc Courtemanche (Class of '24) in August 2021, Crescendo for a Cause: Harvard Undergraduate Chapter is an official registered campus organization with members from Harvard College with diverse musical backgrounds and experiences."]
             ,
-        emailAddress: "crescendo.harvard@gmail.com",
         involvements: [
             {
                 id: "harvard-interest",
@@ -157,9 +151,9 @@ export const northwestern = {
         background: northwesternBackground,
         header: "Northwestern",
         aboutInformation: [
-            "We are a community that loves music, and for many of us, music has shaped many of our worldviews and perspectives. It is a huge part of who we are, and it frames our growth. Unfortunately, music has a lot of barriers, especially financial. We want to reach over these barriers to give more opportunities for Chicago children to also experience the connection to music that we have. We have various roles for interested students, including mentors, performers, and members of the fundraising comittee. Some of our activities include sharing music with the elderly through performances at Evanston retirement homes within the Northwestern locale. We will soon to be piloting virtual music mentorship program with an Evanston elementary school. While being a mentor or a performer does require some music knowledge — and any music knowledge is quite enough, we are not planning auditions of any sort — anyone that expresses interest is welcome within our fundraising committee."
+            "We are a community that loves music, and for many of us, music has shaped many of our worldviews and perspectives. It is a huge part of who we are, and it frames our growth. Unfortunately, music has a lot of barriers, especially financial. We want to reach over these barriers to give more opportunities for Chicago children to also experience the connection to music that we have. We have various roles for interested students, including mentors, performers, and members of the fundraising comittee.", 
+            "Some of our activities include sharing music with the elderly through performances at Evanston retirement homes within the Northwestern locale. We will soon to be piloting virtual music mentorship program with an Evanston elementary school. While being a mentor or a performer does require some music knowledge — and any music knowledge is quite enough, we are not planning auditions of any sort — anyone that expresses interest is welcome within our fundraising committee."
         ],
-        emailAddress: "northwestern.c4c@gmail.com",
         involvements: [
             {
                 id: "northwestern-interest",
@@ -191,37 +185,37 @@ export const northwestern = {
                 id: "alex-valdes",
                 name: "Alex Valdes",
                 title: "Co-President",
-                headshot: valdez,
+                headshot: alexValdes,
             },
             {
                 id: "katie-he",
                 name: "Katie He",
                 title: "Co-President",
-                headshot: katiehe,
+                headshot: katieHe,
             },
             {
                 id: "jonathan-chen",
                 name: "Jonathan Chen",
                 title: "Performance Head",
-                headshot: jonathanchen,
+                headshot: jonathanChen,
             },
             {
                 id: "nicole-ceriani",
                 name: "Nicole Ceriani",
                 title: "Co-PR Head",
-                headshot: ceriani,
+                headshot: nicoleCeriani,
             },
             {
                 id: "kevin-xian",
                 name: "Kevin Xian",
                 title: "Co-PR Head",
-                headshot: xian,
+                headshot: kevinXian,
             },
             {
                 id: "gloria-wang",
                 name: "Gloria Wang",
                 title: "Treasurer",
-                headshot: gloriawang,
+                headshot: gloriaWang,
             },
         ],
     }
@@ -300,7 +294,6 @@ export const uiuc = {
     background: uiucBackground,
     header: "University of Illinois, Urbana-Champaign",
     aboutInformation: ["Founded by Jonathan Raymond in 2020, this chapter mainly serves to deliver technology solutions to C4C and to provide support to groups with similar missions on campus."],
-    emailAddress: "crescendo.uiuc@gmail.com",
     involvements: [
         {
             id: "uiuc-interest",
@@ -340,7 +333,6 @@ export const stevenson = {
     aboutInformation: [
         "Kiran Mohan and Allen Beckwith founded Crescendo for a Cause: Stevenson High School Chapter in 2018 with the desire to do more than perform music. They want to share it. We aim to improve music education in underserved areas and utilize music performance as a vehicle for advocacy and community service."
     ],
-    emailAddress: "crescendo.stevenson@gmail.com",
     involvements: [
         {
             id: "stevenson-interest",
