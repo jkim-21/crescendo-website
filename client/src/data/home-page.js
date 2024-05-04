@@ -249,12 +249,6 @@ export const chapters = [
     link: "./chapters/ucsb"
   },
   {
-    id: "uiuc-chapter",
-    picture: uiuc,
-    name: "University of Illinois Urbana-Champaign",
-    link: "./chapters/uiuc"
-  },
-  {
     id: "stevenson-chapter",
     picture: stevenson,
     name: "Stevenson High School",

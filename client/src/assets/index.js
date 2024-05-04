@@ -75,7 +75,7 @@ import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
 
 import middlebury from "./middlebury.png";
-
+import shslogo from "./Shslogo.png";
 
 export {
   menu,
@@ -152,5 +152,7 @@ export {
   stevensonBackground,
   rosieWang,
   gwynethGraham,
+
+  shslogo,
   
 };

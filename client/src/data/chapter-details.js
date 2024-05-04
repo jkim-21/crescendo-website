@@ -31,6 +31,7 @@ import {
     stevensonBackground,
     rosieWang,
     gwynethGraham,
+    shslogo,
 
 } from "../assets";
 
@@ -102,21 +103,18 @@ export const colby = {
         aboutInformation: [
             "Founded by Kiran Mohan, Lucas Gazianis, and Marc Courtemanche (Class of '24) in August 2021, Crescendo for a Cause: Harvard Undergraduate Chapter is an official registered campus organization with members from Harvard College with diverse musical backgrounds and experiences."]
             ,
+        emailAddress: "harvard@crescendoforacause.com",
         involvements: [
             {
                 id: "harvard-interest",
-                header: "Fill Out Our Form",
-                restOfHeader: "to receive the latest email updates from our club"
-            },
-            {
-                id: "harvard-recordings",
-                header: "Send Us Recordings",
-                restOfHeader: "if you want to be featured in our next virtual performance"
+                header: "Join our Club",
+                restOfHeader: "To learn more information please contact the above email!"
             },
             {
                 id: "harvard-mentor",
-                header: "Be a Mentor",
-                restOfHeader: "for high school musicians in low-income areas"
+                header: "Mentorship Interest Form",
+                restOfHeader: "Fill out if you are interested in serving local underpriviledged schools",
+                link: "https://docs.google.com/forms/d/e/1FAIpQLSfIABWTLPP26s5wE183NnBM8GYFyV_R_9dnV2T_yLBZ-9ewDg/viewform?usp=sf_link"
             },
             {
                 id: "harvard-spread",
@@ -331,23 +329,19 @@ export const stevenson = {
     background: stevensonBackground,
     header: "Adlai E. Stevenson High School",
     aboutInformation: [
-        "Kiran Mohan and Allen Beckwith founded Crescendo for a Cause: Stevenson High School Chapter in 2018 with the desire to do more than perform music. They want to share it. We aim to improve music education in underserved areas and utilize music performance as a vehicle for advocacy and community service."
+        "Kiran Mohan and Allen Beckwith founded Crescendo for a Cause: Stevenson High School Chapter in 2018 with the desire to do more than perform music. Currently this chapter engages is doing yearly instrument drives and helping recruit talented individuals from Stevenson to join crescendo for a cause once they spread around the country for college. Currently we are running and active instrument drive with all proceeds going to the West Point School of Music in Chicago. We are accepting new/used instruments, music stands, and other function musical equipment."
     ],
+    emailAddress: "kmohan26@students.d125.org and araymond25@students.d125.org",
     involvements: [
         {
-            id: "stevenson-interest",
-            header: "Fill Out Our Form",
-            restOfHeader: "to receive the latest email updates from our club"
+            id: "stevenson-donation",
+            header: "Join the Instrument Drive",
+            restOfHeader: "If you are interested in contributing to our instrment drive please email the contact information above. If you are not a currently a stevenson student, please email admin@crescendoforacause.com."
         },
         {
-            id: "stevenson-recordings",
-            header: "Send Us Recordings",
-            restOfHeader: "if you want to be featured in our next virtual performance"
-        },
-        {
-            id: "stevenson-mentor",
-            header: "Be a Mentor",
-            restOfHeader: "for high school musicians in low-income areas"
+            id: "chapter-interest",
+            header: "Interested In C4C During College?",
+            restOfHeader: "Fill out our interest form to start building your own chapter or be put in touch with the local chapter wherever you are."
         },
         {
             id: "stevenson-spread",
@@ -357,18 +351,18 @@ export const stevenson = {
     ],
     officers: [
         {
-        id: "rosie-wang",
-        name: "Rosie Wang",
+        id: "kriti-mohan",
+        name: "Kriti Mohan",
         title: "Co-President",
-        headshot: rosieWang,
+        headshot: shslogo,
         content: 
             "Rosie Wang serves as Co-President of the Adlai E. Stevenson High School Chapter of Crescendo for a Cause. She is a third-year student at Adlai E. Stevenson High School. In addition to her role at Crescendo for a Cause, Rosie directs a volunteering program at the Friendship Village Senior Center where she organizes weekly music performances. She is also the Co-Founder of COVID Music Mentors, an organization that provides free online music mentorship to young talented instrumentalists across the U.S."
         },
         {
-            id: "gwyneth-graham",
-            name: "Gwyneth Graham",
+            id: "amelia-raymond",
+            name: "Amelia Raymond",
             title: "Co-President",
-            headshot: gwynethGraham,
+            headshot: shslogo,
             content: "Gwyneth Graham serves as Co-President of the Adlai E. Stevenson High School Chapter of Crescendo for a Cause. She is a third-year student at Adlai E. Stevenson High School. She enjoys performing at local nursing homes in the Buffalo Grove and Wheeling areas and supporting the local Buffalo Grove Symphonic Band as a clarinetist. She also plays keyboard for the Jazz Ensemble at SHS. Gwyneth has played the clarinet since 5th grade, and volunteers teaching clarinet lessons to younger students. She is also an accomplished pianist, having won state level piano competitions for the past 10 years.",
         },
     ],
