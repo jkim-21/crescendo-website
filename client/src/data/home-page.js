@@ -30,6 +30,7 @@ import {
   ucsb,
   uiuc,
   stevenson,
+  shslogo,
 
 } from "../assets";
 

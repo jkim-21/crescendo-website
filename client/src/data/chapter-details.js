@@ -336,7 +336,8 @@ export const stevenson = {
         {
             id: "stevenson-donation",
             header: "Join the Instrument Drive",
-            restOfHeader: "If you are interested in contributing to our instrment drive please email the contact information above. If you are not a currently a stevenson student, please email admin@crescendoforacause.com."
+            restOfHeader: "If you are interested in contributing to our instrment drive please fill out this form.",
+            link: "https://docs.google.com/forms/d/e/1FAIpQLScoV79ezxOwUe8lgssuW_JemgzjY4Gi6l6mxcl0Reh7hTbGiQ/viewform",
         },
         {
             id: "chapter-interest",
