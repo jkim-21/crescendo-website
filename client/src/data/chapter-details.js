@@ -342,7 +342,8 @@ export const stevenson = {
         {
             id: "chapter-interest",
             header: "Interested In C4C During College?",
-            restOfHeader: "Fill out our interest form to start building your own chapter or be put in touch with the local chapter wherever you are."
+            restOfHeader: "Fill out our interest form to start building your own chapter or be put in touch with the local chapter wherever you are.",
+            link: "https://docs.google.com/forms/d/e/1FAIpQLSfUUKG-zZiLqXfs-9pd4y7HakikSJKxxNPvC2QZdW7c6yIn7Q/viewform?usp=sf_link",
         },
         {
             id: "stevenson-spread",
