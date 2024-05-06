@@ -16,20 +16,14 @@ const Navbar = ({pageStyles}) => {
     }
   }
 
-  const hideDropdown = (nav) => {
+  const hideDropdown = () => {
     setActiveDropdownId(null);
   }
-
-
-
-  // Mobile Devices 
-  useEffect(() => {
-
-  })
 
   if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
+
   return (
     <nav className='sticky top-0 z-50 flex justify-between items-center bg-dark shadow-md py-[0.75rem]'>
       <div className={`${styles.boxWidth} flex justify-between m-auto`}>

@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query';
-import createPaymentIntent from '../api/payment/createPaymentIntent';
+import createPaymentIntent from '../paymentIntegration/createPaymentIntent';
 
 const useCreatePaymentIntent = (amount, firstName, lastName, donorEmail) => {
     const mutation = useMutation(() => createPaymentIntent(amount, firstName, lastName, donorEmail));

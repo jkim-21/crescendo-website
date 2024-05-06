@@ -1,6 +1,6 @@
 const createPaymentIntent = async (amount, firstName, lastName, email) => {
     
-    const response = await fetch('/api/create-payment-intent', {
+    const response = await fetch('/api/payment-intents', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

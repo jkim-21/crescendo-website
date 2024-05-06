@@ -1,5 +1,5 @@
 const createSubscription = async (amount, firstName, lastName, email) => {
-    const response = await fetch('/api/create-subscription', {
+    const response = await fetch('/api/subscriptions', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

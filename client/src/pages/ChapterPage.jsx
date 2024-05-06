@@ -63,7 +63,7 @@ const chapterPage = () => {
                         <p className={`${styles.paragraph} white-color mb-10`}>
                             {chapterData.emailAddress && `You can contact us at ${chapterData.emailAddress}`}
                         </p>
-                    </div>  
+                    </div>
 
                     <h2 className={`${styles.heading2} gold-color text-center mb-[1.25rem]`}>Get Involved</h2>
                     <div className={`${styles.flexCenter} flex-wrap gap-[1rem] w-full mb-[2.5rem]

@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query';
-import capturePayment from '../api/payment/capturePayment';
+import capturePayment from '../paymentIntegration/capturePayment';
 
 const useCapturePayment = (elements, stripe, amount) => {
     const mutation = useMutation(() => capturePayment(elements, stripe, amount));

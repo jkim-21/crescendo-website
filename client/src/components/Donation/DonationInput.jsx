@@ -5,32 +5,7 @@ import { motion } from "framer-motion";
 import * as React from 'react';
 import {donationStyle} from '../../style'
 
-const DonationInput = ({ amount, donationType, setDonationType, handleAmountChange, handleInputSubmit, amountError, isLoading, slideAnimation}) => {
-    const [donationAmount, setDonationAmount] = React.useState('10');
-
-    const handleDonationType = (event, newDonationType) => {
-        if (newDonationType !== null) {
-            setDonationType(newDonationType);
-        }
-    };
-
-    const handleDonationAmount = (event, newDonationAmount) => {
-        if (newDonationAmount !== null) {
-            setDonationAmount(newDonationAmount);
-            handleAmountChange(event);
-        }
-    };
-
-    React.useEffect(() => {
-        const numericAmount = Number(amount);
-        const validAmounts = [10, 20, 30, 50, 100, 250];
-        if (validAmounts.includes(numericAmount)) {
-            setDonationAmount(String(numericAmount));
-        }
-        else {
-            setDonationAmount('');
-        }
-    }, [amount]);
+const DonationInput = ({ amount, donationType, handleDonationType, handleAmountChange, handleInputSubmit, amountError, isLoading, slideAnimation}) => {
 
     const StyledToggleButton = styled(ToggleButton)(() => ({  
         "&&": {
@@ -108,8 +83,8 @@ const DonationInput = ({ amount, donationType, setDonationType, handleAmountChan
                 <ToggleButtonGroup 
                 size="large" 
                 color="primary"
-                onChange = {handleDonationAmount}
-                value = {donationAmount}
+                onChange = {handleAmountChange}
+                value = {amount}
                 exclusive
                 fullWidth
                 sx={{flexShrink: 0, mb: 4}}

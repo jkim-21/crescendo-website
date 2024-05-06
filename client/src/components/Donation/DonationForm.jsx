@@ -78,8 +78,15 @@ const DonationForm = () => {
         setAmount(e.target.value);
     }
 
+    const handleDonationType = (event, newDonationType) => {
+        if (newDonationType !== null) {
+            setDonationType(newDonationType);
+        }
+    };
+
+
     const handleInputSubmit = async () => {
-        if (!isNaN(amount) && amount > 0) {
+        if (!isNaN(amount) && amount > 0 && /^\d+$/.test(amount)) {
             setAmountError(false);
             await setInfoAnimationType("submit");
             closeDonationInput();
@@ -118,11 +125,12 @@ const DonationForm = () => {
         }
         else {
             subscriptionMutate(amount, firstName, lastName, donorEmail);
+            console.log(subscriptionData)
         }
     };
 
     useEffect(() => {
-        donationType === 'oneTime' ? setPaymentIntent(paymentData) : setPaymentIntent(subscriptionData)
+        donationType === 'oneTime' ? setPaymentIntent(paymentData) : setPaymentIntent(subscriptionData);
     }, [paymentData, subscriptionData]);
 
     useEffect(() => {
@@ -210,6 +218,7 @@ const DonationForm = () => {
                         amount={amount}
                         handleAmountChange={handleAmountChange}
                         handleInputSubmit={handleInputSubmit}
+                        handleDonationType={handleDonationType}
                         amountError={amountError}
                         isLoading={donationType === 'oneTime' ? paymentIsLoading : subscriptionIsLoading}
                         donationType={donationType}

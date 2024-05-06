@@ -3,7 +3,7 @@ import Order from '../models/order.js';
 
 const createStripeRoutes = (stripe) => {
     const router = express.Router();
-    router.post('/api/create-payment-intent', async (req, res) => {
+    router.post('/api/payment-intents', async (req, res) => {
         const { amount, firstName, lastName, email } = req.body;
         try {
             const customer = await stripe.customers.create({
@@ -18,16 +18,18 @@ const createStripeRoutes = (stripe) => {
                 customer: customer.id,
                 receipt_email: email,
             });
-            res.send({
-                paymentIntent
-            });
+
+            await createOrder(customer, paymentIntent);
+            res.send({ paymentIntent });
+
+
         } catch (error) {
             console.log(error);
             res.status(500).json({ error: error.message });
         }
     })
 
-    router.post('/api/create-subscription', async (req, res) => {
+    router.post('/api/subscriptions', async (req, res) => {
         const { firstName, lastName, email, amount } = req.body;
         try {
             const customer = await stripe.customers.create({
@@ -55,21 +57,22 @@ const createStripeRoutes = (stripe) => {
                 payment_settings: { save_default_payment_method: 'on_subscription' },
                 expand: ['latest_invoice.payment_intent'],
               });
-              res.send({
-                paymentIntent: subscription.latest_invoice.payment_intent
-              });
+
+            await createOrder(customer, subscription.latest_invoice.payment_intent);
+            res.send({ paymentIntent: subscription.latest_invoice.payment_intent });
+
             } catch (error) {
                 return res.status(400).send({ error: { message: error.message } });
             }
         })
 
     // Create order
-    const createOrder = async(customer, data) => {
+    const createOrder = async(customer, paymentIntent) => {
         const newOrder = new Order({
             donatorId: customer.id,
-            paymentIntentId: data.id,
-            totalAmount: customer.metadata.totalAmount,
-            paymentStatus: data.status,
+            paymentIntentId: paymentIntent.id,
+            totalAmount: paymentIntent.amount,
+            paymentStatus: paymentIntent.status,
             name: customer.name,
             email: customer.email
 
@@ -85,11 +88,9 @@ const createStripeRoutes = (stripe) => {
     //stripe webhook
 
     // This is your Stripe CLI webhook secret for testing your endpoint locally.
-    let endpointSecret;
-    
-    // endpointSecret = "whsec_2521548d233af83647fef7db53659b1aa6289c0a00d6aa9374ea127f867db450";
+    let endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
 
-    router.post('/api/stripe/webhook', express.raw({type: 'application/json'}), (req, res) => {
+    router.post('/stripe/webhook', express.raw({type: 'application/json'}), (req, res) => {
         const sig = req.headers['stripe-signature'];
 
         let data;
