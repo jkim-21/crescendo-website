@@ -28,7 +28,6 @@ import {
   harvard,
   northwestern,
   ucsb,
-  uiuc,
   stevenson,
   shslogo,
 

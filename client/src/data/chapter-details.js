@@ -25,12 +25,9 @@ import {
     annaXian,
     juliaOng,
 
-    uiucBackground,
     jonathanRaymond,
 
     stevensonBackground,
-    rosieWang,
-    gwynethGraham,
     shslogo,
 
 } from "../assets";
@@ -287,42 +284,6 @@ export const ucsb = {
         },
     ]
 }
-export const uiuc = {
-    id: "uiuc-chapter",
-    background: uiucBackground,
-    header: "University of Illinois, Urbana-Champaign",
-    aboutInformation: ["Founded by Jonathan Raymond in 2020, this chapter mainly serves to deliver technology solutions to C4C and to provide support to groups with similar missions on campus."],
-    involvements: [
-        {
-            id: "uiuc-interest",
-            header: "Fill Out Our Form",
-            restOfHeader: "to receive the latest email updates from our club"
-        },
-        {
-            id: "uiuc-recordings",
-            header: "Send Us Recordings",
-            restOfHeader: "if you want to be featured in our next virtual performance"
-        },
-        {
-            id: "uiuc-mentor",
-            header: "Be a Mentor",
-            restOfHeader: "for high school musicians in low-income areas"
-        },
-        {
-            id: "uiuc-spread",
-            header: "Spread the Word",
-            restOfHeader: "about us to anyone who might be interested!"
-        },
-    ],
-    officers: [
-        {
-            id: "jonathan-raymond",
-            name: "Jonathan Raymond",
-            title: "President",
-            headshot: jonathanRaymond,
-        },
-    ],
-}
 
 export const stevenson = {
     id: "stevenson-chapter",
@@ -357,15 +318,12 @@ export const stevenson = {
         name: "Kriti Mohan",
         title: "Co-President",
         headshot: shslogo,
-        content: 
-            "Rosie Wang serves as Co-President of the Adlai E. Stevenson High School Chapter of Crescendo for a Cause. She is a third-year student at Adlai E. Stevenson High School. In addition to her role at Crescendo for a Cause, Rosie directs a volunteering program at the Friendship Village Senior Center where she organizes weekly music performances. She is also the Co-Founder of COVID Music Mentors, an organization that provides free online music mentorship to young talented instrumentalists across the U.S."
         },
         {
             id: "amelia-raymond",
             name: "Amelia Raymond",
             title: "Co-President",
             headshot: shslogo,
-            content: "Gwyneth Graham serves as Co-President of the Adlai E. Stevenson High School Chapter of Crescendo for a Cause. She is a third-year student at Adlai E. Stevenson High School. She enjoys performing at local nursing homes in the Buffalo Grove and Wheeling areas and supporting the local Buffalo Grove Symphonic Band as a clarinetist. She also plays keyboard for the Jazz Ensemble at SHS. Gwyneth has played the clarinet since 5th grade, and volunteers teaching clarinet lessons to younger students. She is also an accomplished pianist, having won state level piano competitions for the past 10 years.",
         },
     ],
 }

@@ -37,7 +37,6 @@ import colby from "./colby.png";
 import harvard from "./harvard.png";
 import northwestern from "./northwestern.png";
 import ucsb from "./ucsb.png";
-import uiuc from "./uiuc.png";
 import stevenson from "./stevenson.png";
 
 import colbyBackground from "./colby-background.png";
@@ -64,18 +63,14 @@ import karisLee from "./karis-lee.png";
 import annaXian from "./anna-xian.png";
 import juliaOng from "./julia-ong.png";
 
-import uiucBackground from "./uiuc-background.png";
-
 import stevensonBackground from "./stevenson-background.png";
-import rosieWang from "./rosie-wang.png";
-import gwynethGraham from "./gwyneth-graham.png";
 
 import chapterBackground from "./chapter-background.png";
 import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
 
 import middlebury from "./middlebury.png";
-import shslogo from "./Shslogo.png";
+import shslogo from "./shs-placeholder.png";
 
 export {
   menu,
@@ -117,7 +112,6 @@ export {
   harvard,
   northwestern,
   ucsb,
-  uiuc,
   stevenson,
 
   chapterBackground,
@@ -146,13 +140,8 @@ export {
   karisLee,
   annaXian,
   juliaOng,
-  
-  uiucBackground,
 
   stevensonBackground,
-  rosieWang,
-  gwynethGraham,
-
   shslogo,
   
 };
