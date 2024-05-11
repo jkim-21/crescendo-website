@@ -4,10 +4,6 @@
         "server": "cd ./server && npm run devStart",
         "client": "cd ./client && npm run dev"
     },
-    "devDependencies": {
-        "concurrently": "^8.2.2",
-        "nodemon": "^3.0.3"
-    },
     "dependencies": {
         "@emotion/react": "^11.11.4",
         "@emotion/styled": "^11.11.0",
@@ -18,6 +14,8 @@
         "popmotion": "^11.0.5",
         "react-awesome-slider": "^4.1.0",
         "react-player": "^2.15.1",
-        "react-spring": "^9.7.3"
+        "react-spring": "^9.7.3",
+        "concurrently": "^8.2.2",
+        "nodemon": "^3.0.3"
     }
 }
