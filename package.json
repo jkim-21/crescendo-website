@@ -1,7 +1,7 @@
 {
     "scripts": {
         "postinstall": "npm run build",
-        "build": "cd ./client && npm install && npm run build && cd ./server && npm install",
+        "build": "npm run build && cd ./server && npm install",
         "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
         "server": "cd ./server && npm run devStart",
         "client": "cd ./client && npm run dev"
