@@ -1,5 +1,7 @@
 {
     "scripts": {
+        "postinstall": "npm run build",
+        "build": "cd ./client && npm install && npm run build && cd ./server && npm install",
         "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
         "server": "cd ./server && npm run devStart",
         "client": "cd ./client && npm run dev"
@@ -10,6 +12,7 @@
         "@mui/joy": "^5.0.0-beta.30",
         "all": "^0.0.0",
         "concurrently": "^8.2.2",
+        "express": "^4.19.2",
         "framer-motion": "^11.0.15",
         "mongoose": "^8.2.1",
         "nodemon": "^3.0.3",
