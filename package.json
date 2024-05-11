@@ -1,10 +1,10 @@
 {
     "scripts": {
         "postinstall": "npm run build",
-        "build": "cd ./server && npm install",
-        "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-        "server": "cd ./server && npm run devStart",
-        "client": "cd ./client && npm run dev"
+        "build": "cd client && npm run build",
+        "start": "node server/server.js",
+        "server": "cd ./server && npm start",
+        "client": "cd ./client && vite build"
     },
     "dependencies": {
         "@emotion/react": "^11.11.4",
