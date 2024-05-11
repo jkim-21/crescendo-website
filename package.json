@@ -1,10 +1,10 @@
 {
     "scripts": {
-        "postinstall": "npm run build",
-        "build": "cd client && npm run build",
-        "start": "node server/server.js",
-        "server": "cd ./server && npm start",
-        "client": "cd ./client && vite build"
+        "install:client": "cd client && npm install",
+        "build:client": "cd client && npm run build",
+        "install:server": "cd server && npm install",
+        "postinstall": "npm run install:client && npm run install:server && npm run build:client",
+        "start": "node server/server.js"
     },
     "dependencies": {
         "@emotion/react": "^11.11.4",
