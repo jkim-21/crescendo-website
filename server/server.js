@@ -15,8 +15,9 @@ const stripeRoutes = createStripeRoutes(stripe);
 app.use(cors());
 
 const corsOptions = {
-    origin: 'https://rad-dasik-2ad96a.netlify.app/',
-    optionsSuccessStatus: 200
+    origin: 'https://main--rad-dasik-2ad96a.netlify.app',
+    optionsSuccessStatus: 200,
+    credentials: true
 }
 
 

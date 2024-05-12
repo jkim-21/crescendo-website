@@ -3,7 +3,7 @@ import Order from '../models/order.js';
 
 const createStripeRoutes = (stripe) => {
     const router = express.Router();
-    router.post('/api/payment-intents', async (req, res) => {
+    router.post('api/payment-intents', async (req, res) => {
         const { amount, firstName, lastName, email } = req.body;
         try {
             const customer = await stripe.customers.create({
