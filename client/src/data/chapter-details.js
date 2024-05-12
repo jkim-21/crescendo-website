@@ -316,10 +316,10 @@ export const stevenson = {
     ],
     officers: [
         {
-        id: "kriti-mohan",
-        name: "Kriti Mohan",
-        title: "Co-President",
-        headshot: kriti,
+            id: "kriti-mohan",
+            name: "Kriti Mohan",
+            title: "Co-President",
+            headshot: kriti,
         },
         {
             id: "amelia-raymond",
