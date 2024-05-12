@@ -12,6 +12,7 @@ const app = express();
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 const stripeRoutes = createStripeRoutes(stripe);
 
+app.use(cors());
 
 const corsOptions = {
     origin: 'https://rad-dasik-2ad96a.netlify.app/',
@@ -32,7 +33,7 @@ async function connect() {
 
 connect();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(json());
 app.use(stripeRoutes);
 
