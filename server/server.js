@@ -16,8 +16,8 @@ const corsOptions = {
     origin: 'https://rad-dasik-2ad96a.netlify.app',
     optionsSuccessStatus: 200,
     credentials: true,
-    methods: 'POST, GET, PUT',
-    allowedHeaders: 'Content-Type'
+    methods: ['POST, GET, PUT'],
+    allowedHeaders: ['Content-Type']
 }
 
 
