@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 import express, {json} from 'express';
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import createStripeRoutes from './routes/stripe.js';
 import mongoose from 'mongoose';
