@@ -29,6 +29,8 @@ import {
 
     stevensonBackground,
     shslogo,
+    amelia,
+    kriti,
 
 } from "../assets";
 
@@ -317,13 +319,13 @@ export const stevenson = {
         id: "kriti-mohan",
         name: "Kriti Mohan",
         title: "Co-President",
-        headshot: shslogo,
+        headshot: kriti,
         },
         {
             id: "amelia-raymond",
             name: "Amelia Raymond",
             title: "Co-President",
-            headshot: shslogo,
+            headshot: amelia,
         },
     ],
 }
