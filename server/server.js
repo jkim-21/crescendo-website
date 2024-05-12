@@ -32,7 +32,7 @@ async function connect() {
 
 connect();
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(json());
 app.use(stripeRoutes);
 
