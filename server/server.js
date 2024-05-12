@@ -12,6 +12,13 @@ const app = express();
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 const stripeRoutes = createStripeRoutes(stripe);
 
+
+const corsOptions = {
+    origin: 'https://rad-dasik-2ad96a.netlify.app/',
+    optionsSuccessStatus: 200
+}
+
+
 const uri = `mongodb+srv://jjkjon21:${process.env.DATABASE_PASSWORD}@crescendowebsite.ssxyrz4.mongodb.net/?retryWrites=true&w=majority&appName=CrescendoWebsite`
 
 async function connect() {
