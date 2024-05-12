@@ -1,6 +1,6 @@
 const createPaymentIntent = async (amount, firstName, lastName, email) => {
 
-    const baseURL = 'https://desolate-castle-41311-50ab8256d227.herokuapp.com/'
+    const baseURL = 'https://desolate-castle-41311-50ab8256d227.herokuapp.com'
     
     const response = await fetch(`${baseURL}/api/payment-intents`, {
         method: 'POST',
