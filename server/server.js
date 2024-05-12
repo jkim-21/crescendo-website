@@ -12,8 +12,6 @@ const app = express();
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 const stripeRoutes = createStripeRoutes(stripe);
 
-app.use(cors());
-
 const corsOptions = {
     origin: 'https://main--rad-dasik-2ad96a.netlify.app',
     optionsSuccessStatus: 200,
