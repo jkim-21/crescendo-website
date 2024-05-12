@@ -15,7 +15,9 @@ const stripeRoutes = createStripeRoutes(stripe);
 const corsOptions = {
     origin: 'https://rad-dasik-2ad96a.netlify.app',
     optionsSuccessStatus: 200,
-    credentials: true
+    credentials: true,
+    methods: 'POST, GET, PUT',
+    allowedHeaders: 'Content-Type'
 }
 
 
@@ -32,7 +34,7 @@ async function connect() {
 
 connect();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(json());
 app.use(stripeRoutes);
 
