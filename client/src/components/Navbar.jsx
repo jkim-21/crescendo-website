@@ -67,7 +67,7 @@ const Navbar = ({pageStyles}) => {
           <img
             src={toggle ? close : menu}
             alt='menu'
-            className={`${pageStyles} w-[2rem] [aspect-ratio:1/1] object-contain z-50`}
+            className={`${pageStyles} w-[2rem] [aspect-ratio:1/1] object-contain z-40`}
             onClick={() => setToggle((previous) => !previous)}
           />
           {toggle && 
