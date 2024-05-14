@@ -71,6 +71,7 @@ import placeholder from "./placeholder.png";
 
 import middlebury from "./middlebury.png";
 import shslogo from "./shs-placeholder.png";
+
 import ameliaRaymond from "./amelia-raymond.png";
 import kritiMohan from "./kriti-mohan.png";
 
