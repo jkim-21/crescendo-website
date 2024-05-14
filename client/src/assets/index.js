@@ -71,8 +71,9 @@ import placeholder from "./placeholder.png";
 
 import middlebury from "./middlebury.png";
 import shslogo from "./shs-placeholder.png";
-import amelia from "./amelia.png";
-import kriti from "./kriti.png";
+
+import ameliaRaymond from "./amelia-raymond.png";
+import kritiMohan from "./kriti-mohan.png";
 
 export {
   menu,
@@ -145,8 +146,7 @@ export {
 
   stevensonBackground,
   shslogo,
-  amelia,
-  kriti,
-
+  ameliaRaymond,
+  kritiMohan
   
 };

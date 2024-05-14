@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 import express, {json} from 'express';
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import createStripeRoutes from './routes/stripe.js';
 import mongoose from 'mongoose';
@@ -15,7 +15,9 @@ const stripeRoutes = createStripeRoutes(stripe);
 const corsOptions = {
     origin: 'https://rad-dasik-2ad96a.netlify.app',
     optionsSuccessStatus: 200,
-    credentials: true
+    credentials: true,
+    methods: ['POST, GET, PUT'],
+    allowedHeaders: ['Content-Type']
 }
 
 

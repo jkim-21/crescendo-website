@@ -64,14 +64,14 @@ const DonationInput = ({ amount, donationType, handleDonationType, handleAmountC
                         <StyledToggleButton 
                         value='oneTime'
                         sx={{px: 4, height: 50}}
-                        className={`${donationType === 'oneTime' ? 'z-50' : 'z-0'}`}>
+                        className={`${donationType === 'oneTime' ? 'z-40' : 'z-0'}`}>
                             Give Once
                         </StyledToggleButton>
                         
                         <StyledToggleButton 
                         value='monthly'
                         sx={{px: 3, height:50}}
-                        className={`${donationType === 'monthly' ? 'z-50' : 'z-0'}`}>
+                        className={`${donationType === 'monthly' ? 'z-40' : 'z-0'}`}>
                             <div>
                             <FavoriteIcon sx={{color: "#ff447c", pr:'5px'}}/>
                             Monthly
