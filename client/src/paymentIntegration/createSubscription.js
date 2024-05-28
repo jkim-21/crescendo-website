@@ -1,6 +1,6 @@
 const createSubscription = async (amount, firstName, lastName, email) => {
 
-    baseURL = import.meta.env.DONATION_BASE_URL || ''
+    baseURL = import.meta.env.VITE_DONATION_BASE_URL || ''
 
     const response = await fetch(`${baseURL}/api/subscriptions`, {
         method: 'POST',
