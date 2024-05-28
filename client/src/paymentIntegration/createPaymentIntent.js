@@ -1,6 +1,6 @@
 const createPaymentIntent = async (amount, firstName, lastName, email) => {
 
-    const baseURL = import.meta.env.DONATION_BASE_URL || ''
+    const baseURL = import.meta.env.VITE_DONATION_BASE_URL || ''
     
     const response = await fetch(`${baseURL}/api/payment-intents`, {
         method: 'POST',
