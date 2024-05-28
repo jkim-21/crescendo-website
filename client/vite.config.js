@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   server: {
     proxy: {
@@ -10,6 +9,9 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+  },
+  define: {
+    'process.env.SOME_KEY': JSON.stringify(env.SOME_KEY)
   },
   plugins: [react()],
 })
