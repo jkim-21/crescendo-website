@@ -13,10 +13,10 @@ const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 const stripeRoutes = createStripeRoutes(stripe);
 
 const corsOptions = {
-    origin: 'https://rad-dasik-2ad96a.netlify.app',
+    origin: 'https://crescendoforacause.com',
     optionsSuccessStatus: 200,
     credentials: true,
-    methods: ['POST, GET, PUT'],
+    methods: ['POST', 'GET', 'PUT'],
     allowedHeaders: ['Content-Type']
 }
 
