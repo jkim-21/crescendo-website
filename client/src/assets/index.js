@@ -81,7 +81,7 @@ export {
   discount,
 
   logo,
-  
+
   instrumentDonation,
   nursingPerformance,
   donationRecipient,
@@ -96,9 +96,9 @@ export {
 
   financeEvent,
   wimEvent,
-  merionEvent, 
+  merionEvent,
   truleeEvent,
-  musubiEvent, 
+  musubiEvent,
   heritageEvent,
   colby2,
 
@@ -110,7 +110,7 @@ export {
   kiranMohan,
   jonathanRaymond,
   justinKim,
-  
+
   colby,
   harvard,
   northwestern,
@@ -148,5 +148,5 @@ export {
   shslogo,
   ameliaRaymond,
   kritiMohan
-  
+
 };

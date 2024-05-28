@@ -208,14 +208,14 @@ const DonationForm = () => {
                 sx={{bgcolor: '#e8ecfc', position: 'relative', borderRadius: "2%"}}
                 className='grow h-[33rem] relative
                           sm:h-full sm:[flex-basis:50%] lg:[flex-basis:40%]'>
-                    <div className='absolute inset-0 bg-black bg-opacity-75 flex justify-center items-center z-40'>
+                    {/* <div className='absolute inset-0 bg-black bg-opacity-75 flex justify-center items-center z-40'>
                         <Typography
                         variant='h6'
                         color='error'
                         className='text-center'>
                             The Donation Form is Currently Under Maintenance.
                         </Typography>
-                    </div>
+                    </div> */}
                     <AnimatePresence
                     initial='hidden'
                     mode='wait' 

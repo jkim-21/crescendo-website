@@ -86,7 +86,6 @@ const createStripeRoutes = (stripe) => {
     };
 
     //stripe webhook
-
     // This is your Stripe CLI webhook secret for testing your endpoint locally.
     let endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
 
