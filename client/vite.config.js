@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env.SOME_KEY': JSON.stringify(env.SOME_KEY)
+    'process.env.SOME_KEY': JSON.stringify(process.env.SOME_KEY)
   },
   plugins: [react()],
 })
