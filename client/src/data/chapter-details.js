@@ -292,7 +292,7 @@ export const stevenson = {
     background: stevensonBackground,
     header: "Adlai E. Stevenson High School",
     aboutInformation: [
-        "Kiran Mohan and Allen Beckwith founded Crescendo for a Cause: Stevenson High School Chapter in 2018 with the desire to do more than perform music. Currently this chapter engages is doing yearly instrument drives and helping recruit talented individuals from Stevenson to join crescendo for a cause once they spread around the country for college. Currently we are running and active instrument drive with all proceeds going to the West Point School of Music in Chicago. We are accepting new/used instruments, music stands, and other function musical equipment."
+        "Kiran Mohan and Allen Beckwith founded Crescendo for a Cause: Stevenson High School Chapter in 2018 with the desire to do more than perform music. Currently this chapter engages is doing yearly instrument drives and helping recruit talented individuals from Stevenson to join Crescendo For a Cause once they spread around the country for college. Currently we are running and active instrument drive with all proceeds going to the West Point School of Music in Chicago. We are accepting new/used instruments, music stands, and other function musical equipment."
     ],
     emailAddress: "kmohan26@students.d125.org and araymond25@students.d125.org",
     involvements: [
