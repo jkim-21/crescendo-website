@@ -64,7 +64,7 @@ import juliaOng from "./julia-ong.jpg";
 
 import stevensonBackground from "./stevenson-background.png";
 
-import chapterBackground from "./chapter-background.png";
+import chapterBackground from "./chapter-background.jpg";
 import involvementLogo from "./get-involved-link.png";
 import placeholder from "./placeholder.png";
 

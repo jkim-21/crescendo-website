@@ -1,10 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { chapterBackground } from '../assets'
 import {colby, harvard, northwestern, stevenson, ucsb} from '../data/chapter-details'
 import { Involvements, Officers, Contacts, Navbar, AnimationLayout} from '../components'
 import {styles} from "../style"
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const chapters = {
     colby, harvard, northwestern, stevenson, ucsb
