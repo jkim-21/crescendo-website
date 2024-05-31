@@ -1,5 +1,4 @@
 import React from 'react';
-import { orgIntroduction } from '../assets';
 
 const YoutubeVideo = () => {
     return (

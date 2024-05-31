@@ -12,7 +12,6 @@ import c4cDonation from "./c4c-donation.png";
 import connection from "./connection.png";
 import instrument from "./instrument.png";
 import performance from "./performance.png";
-import orgIntroduction from "./orgIntroduction.mp4"
 
 import donationPic from "./donation-pic.png"
 
@@ -20,7 +19,7 @@ import financeEvent from "./finance-event.png";
 import wimEvent from "./wim-event.png";
 import merionEvent from "./merion-event.png";
 import truleeEvent from "./trulee-event.png";
-import musubiEvent from "./musubi-event.png";
+import musubiEvent from "./musubi-event.jpg";
 import heritageEvent from "./heritage-event.png";
 import colby2 from "./colby2.png";
 
@@ -29,9 +28,9 @@ import dailyHerald from "./daily-herald.png";
 import cwJam from "./cw-jam.png";
 
 import allenBeckwith from "./allen-beckwith.png";
-import kiranMohan from "./kiran-mohan.png";
-import jonathanRaymond from "./jonathan-raymond.png";
-import justinKim from "./justin-kim.png";
+import kiranMohan from "./kiran-mohan.jpg";
+import jonathanRaymond from "./jonathan-raymond.jpg";
+import justinKim from "./justin-kim.jpg";
 
 import colby from "./colby.png";
 import harvard from "./harvard.png";
@@ -39,16 +38,16 @@ import northwestern from "./northwestern.png";
 import ucsb from "./ucsb.png";
 import stevenson from "./stevenson.png";
 
-import colbyBackground from "./colby-background.png";
+import colbyBackground from "./colby-background.jpg";
 import najiYerokun from "./naji-yerokun.png";
 import dongLee from "./dong-lee.png";
 
 
-import harvardBackground from "./harvard-background.png";
+import harvardBackground from "./harvard-background.jpg";
 import lucasGazianis from "./lucas-gazianis.png";
 import marcCourtenmanche from "./marc-courtemanche.png";
 
-import northwesternBackground from "./northwestern-background.png";
+import northwesternBackground from "./northwestern-background.jpg";
 import alexValdes from "./alex-valdes.png";
 import katieHe from "./katie-he.png";
 import nicoleCeriani from "./nicole-ceriani.png";
@@ -56,12 +55,12 @@ import jonathanChen from "./jonathan-chen.png";
 import gloriaWang from "./gloria-wang.png";
 import kevinXian from "./kevin-xian.png";
 
-import ucsbBackground from "./ucsb-background.png";
+import ucsbBackground from "./ucsb-background.jpg";
 import erickFuerte from "./erick-fuerte.png";
-import joshChan from "./josh-chan.png";
+import joshChan from "./josh-chan.jpg";
 import karisLee from "./karis-lee.png";
 import annaXian from "./anna-xian.png";
-import juliaOng from "./julia-ong.png";
+import juliaOng from "./julia-ong.jpg";
 
 import stevensonBackground from "./stevenson-background.png";
 
@@ -90,7 +89,6 @@ export {
   connection,
   instrument,
   performance,
-  orgIntroduction,
 
   donationPic,
 
