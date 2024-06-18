@@ -30,6 +30,12 @@ import {
   ucsb,
   stevenson,
   shslogo,
+  ucsbcon1,
+  ucsbcon2,
+  nwcon1,
+  colbycon1,
+  nwcon2,
+  nwcon3,
 
 } from "../assets";
 
@@ -109,59 +115,59 @@ export const stats = [
 
 export const events = [
   {
-    id: "finance-equity-event",
-    picture: financeEvent,
-    name: "Finance Equity Presentation",
-    title: "C4C Colby",
-    schoolLogo: colby2,
-    instagramUrl: "https://www.instagram.com/colbyideas/",
+    id: "merion-event",
+    picture: nwcon2, 
+    name: "Pearl of Evanston Concert",
+    title: "C4C Northwestern - June 5th, 2024",
+    schoolLogo: northwestern,
+    instagramUrl: "https://www.instagram.com/p/C72Ycjvv2Ta/?img_index=1",
+  },
+  {
+    id: "heritage-ucsb",
+    picture: ucsbcon1,
+    name: "Heritage House Concert",
+    title: "C4C UCSB - June 2nd, 2024",
+    schoolLogo: ucsb,
+    instagramUrl: "https://www.instagram.com/p/C7vIn28BoNl/?img_index=1",
     
   },
   {
-    id: "trulee-event",
-    picture: truleeEvent, 
-    name: "Trulee Concert",
-    title: "C4C Northwestern",
+    id: "pearl-event",
+    picture: nwcon1, 
+    name: "Merion Concert",
+    title: "C4C Northwestern - May 27th, 2024",
     schoolLogo: northwestern,
-    instagramUrl: "https://www.instagram.com/northwestern.c4c/",
+    instagramUrl: "https://www.instagram.com/p/C7fQtd_vSHG/",
     
   },
   {
     id: "wic-presentation-event",
-    picture: wimEvent,
-    name: "Women in Music Presentation",
-    title: "C4C Colby",
+    picture: colbycon1,
+    name: "Colby Student and Mentor Concert",
+    title: "C4C Colby - May 10th, 2024",
     schoolLogo: colby2,
     instagramUrl: "https://www.instagram.com/colbyideas/",
    
   },
 
   {
-    id: "spam-fundraiser-event",
-    picture: musubiEvent, 
-    name: "Spam Musubi Fundraiser",
-    title: "C4C UCSB",
+    id: "blenders-fundraiser-event",
+    picture: ucsbcon2, 
+    name: "Blenders Fundraiser Event",
+    title: "C4C UCSB - May 7th, 2024",
     schoolLogo: ucsb,
-    instagramUrl: "https://www.instagram.com/crescendo.ucsb/",
+    instagramUrl: "https://www.instagram.com/p/C6rv5OmhHiD/",
    
   },
 
   {
-    id: "heritage-event",
-    picture: heritageEvent,
-    name: "Heritage Concert",
-    title: "C4C UCSB",
-    schoolLogo: ucsb,
-    instragramUrl: "https://www.instagram.com/crescendo.ucsb/",
-  },
-
-  {
-    id: "merion-event",
-    picture: merionEvent, 
-    name: "Merion Concert",
-    title: "C4C Northwestern",
+    id: "pearl-event-2",
+    picture: nwcon3, 
+    name: "Pearl of Evanston Concert",
+    title: "C4C Northwestern - May 5th, 2024",
     schoolLogo: northwestern,
-    instagramUrl: "https://www.instagram.com/northwestern.c4c/",
+    instagramUrl: "https://www.instagram.com/p/C7fQtd_vSHG/",
+    
   },
 ];
 

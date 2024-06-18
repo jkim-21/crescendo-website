@@ -74,6 +74,14 @@ import shslogo from "./shs-placeholder.png";
 import ameliaRaymond from "./amelia-raymond.png";
 import kritiMohan from "./kriti-mohan.png";
 
+import nwcon1 from "./nwcon1.png";
+import nwcon2 from "./nwcon2.png";
+import nwcon3 from "./nwcon3.png";
+import ucsbcon1 from "./ucsbcon1.png";
+import ucsbcon2 from "./ucsbcon2.png";
+import colbycon1 from "./colbycon1.png";
+
+
 export {
   menu,
   close,
@@ -145,6 +153,15 @@ export {
   stevensonBackground,
   shslogo,
   ameliaRaymond,
-  kritiMohan
+  kritiMohan,
+
+  nwcon1,
+  nwcon2,
+  nwcon3,
+  ucsbcon1,
+  ucsbcon2,
+  colbycon1,
+
+
 
 };
