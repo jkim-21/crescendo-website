@@ -44,27 +44,33 @@ export const colby = {
         involvements: [
             {
                 id: "colby-interest",
-                header: "Fill out our membership",
-                restOfHeader: "registration form to receive the latest email updates from our club",
+                header: "General Membership Form",
+                restOfHeader: "Sign up here to become a general member and receive the latest email updates from our club",
                 link: "https://forms.gle/TykYDqLKRXxhPz4y5",
             },
             {
                 id: "colby-recordings",
-                header: "Sign up to mentor",
-                restOfHeader: "5th grade students in piano through our Google Form",
+                header: "Sign up to be a Piano Mentor",
+                restOfHeader: "Use this form if you are interested in guiding local 5th grade students in learning piano",
                 link: "https://docs.google.com/forms/d/e/1FAIpQLSccv-gvbm7vzDtX_JGYpTsDR5EH8KuyEIthYWQyG5cArYXjOA/viewform"
             },
             {
                 id: "colby-mentor",
-                header: "Teach 1 on 1 lessons",
-                restOfHeader: "to students in the Music Hall School",
+                header: "Sign up to teach 1-on-1 lessons",
+                restOfHeader: "Fill out this form if you are interested in mentoring students in local grade schools in the Music Hall School",
                 link:"https://docs.google.com/forms/d/e/1FAIpQLSeGGdYL6a1tEA5ZJR8vO7ht2j_J97cXV_xWQYw6g3-9sYSd8w/viewform",
             },
             {
                 id: "colby-spread",
-                header: "Spread the Word",
-                restOfHeader: "about us to anyone who might be interested!",
+                header: "Check out our Social Media",
+                restOfHeader: "Share our posts with anyone who might be interested!",
                 link: "https://www.instagram.com/colbyideas/"
+            },
+            {
+                id: "colby-donation",
+                header: "Donate an Instrument",
+                restOfHeader: "Click here if you are interested in donating an instrument for students in our program to use",
+                link: "https://forms.gle/oWjALcFauCnkYzL69",
             },
         ],
         officers: [
@@ -106,19 +112,27 @@ export const colby = {
         involvements: [
             {
                 id: "harvard-interest",
-                header: "Join our Club",
-                restOfHeader: "To learn more information please contact the above email!"
+                header: "General Membership Form",
+                restOfHeader: "Sign up here to become a general member and receive the latest email updates from our club",
+                link: "https://forms.gle/WqaAvU7K47e9X6aj9"
             },
             {
                 id: "harvard-mentor",
-                header: "Mentorship Interest Form",
-                restOfHeader: "Fill out if you are interested in serving local underpriviledged schools",
+                header: "Sign up to Mentor",
+                restOfHeader: "Fill out if you are interested in serving local underpriviledged students by providing free music education",
                 link: "https://docs.google.com/forms/d/e/1FAIpQLSfIABWTLPP26s5wE183NnBM8GYFyV_R_9dnV2T_yLBZ-9ewDg/viewform?usp=sf_link"
             },
             {
                 id: "harvard-spread",
-                header: "Spread the Word",
-                restOfHeader: "about us to anyone who might be interested!"
+                header: "Check out our Social Media",
+                restOfHeader: "Share our posts with anyone who might be interested!",
+                link: "https://www.instagram.com/crescendo_for_a_cause/"
+            },
+            {
+                id: "harvard-donation",
+                header: "Donate an Instrument",
+                restOfHeader: "Click here if you are interested in donating an instrument for students in our program to use",
+                link: "https://forms.gle/xHjiuWY9BZYvFxZv8",
             },
         ],
         officers: [
@@ -154,27 +168,33 @@ export const northwestern = {
         involvements: [
             {
                 id: "northwestern-interest",
-                header: "Fill Out Our Form",
-                restOfHeader: "to receive the latest email updates from our club",
+                header: "General Membership Form",
+                restOfHeader: "Sign up here to become a general member and receive the latest email updates from our club",
                 link: "https://forms.gle/MxDaxsRKXnsL4tb69"
             },
             {
+                id: "northwestern-mentor",
+                header: "Sign up to Mentor",
+                restOfHeader: "Fill out if you are interested in serving local underpriviledged students by providing free music education",
+                link: "https://forms.gle/Y7joKG81QdhZ5zS16"
+            },
+            {
                 id: "northwestern-sign-up",
-                header: "Sign Up",
-                restOfHeader: "to our next concert series if you want to perform!",
+                header: "Sign Up as a Perfomer",
+                restOfHeader: "Click here if you would like an opportunity to support our club and perform live music!",
                 link: "https://linktr.ee/northwestern.c4c"
             },
             {
-                id: "northwestern-introduciton",
-                header: "Learn More",
-                restOfHeader: "about who we are and what we do",
-                link:"https://docs.google.com/presentation/d/1khqzUmi6ckG_lECyA5Y9O1xr6oFzRQtyWePiFBWf0nM/edit?usp=sharing"
+                id: "northwestern-spread",
+                header: "Check out our Social Media",
+                restOfHeader: "Share our posts with anyone who might be interested!",
+                link:"https://www.instagram.com/northwestern.c4c"
             },
             {
-                id: "northwestern-spread",
-                header: "Spread the Word",
-                restOfHeader: "about us to anyone who might be interested!",
-                link:"https://www.instagram.com/northwestern.c4c"
+                id: "northwestern-donation",
+                header: "Donate an Instrument",
+                restOfHeader: "Click here if you are interested in donating an instrument for students in our program to use",
+                link: "https://forms.gle/LiaBze8o9b7ChdWe8",
             },
         ],
         officers: [
@@ -229,28 +249,34 @@ export const ucsb = {
     involvements: [
         {
             id: "ucsb-interest",
-            header: "Join us on Shoreline",
-            restOfHeader: "to receive the latest email updates from our club",
+            header: "General Membership Form",
+            restOfHeader: "Sign up here to become a general member and receive the latest email updates from our club",
             link: "https://shoreline.ucsb.edu/crescendo/club_signup",
 
         },
         {
             id: "ucsb-mentor",
-            header: "Be a Mentor",
-            restOfHeader: "for high school musicians in low-income areas",
+            header: "Sign up to Mentor",
+            restOfHeader: "Fill out if you are interested in serving local underpriviledged students by providing free music education",
             link: "https://forms.gle/QE7Uz5rxyNHmZbWe7"
         },
         {
             id: "ucsb-resources",
-            header: "Explore our Resources",
-            restOfHeader: "through our various links on LinkTree",
+            header: "Take a look at our LinkTree",
+            restOfHeader: "Click here to take a look at more information and opportunities at UCSB!",
             link:"https://linktr.ee/crescendo.ucsb"
         },
         {
             id: "ucsb-spread",
-            header: "Spread the Word",
-            restOfHeader: "about us to anyone who might be interested!",
+            header: "Check out our Social Media",
+            restOfHeader: "Share our posts with anyone who might be interested!",
             link:"https://www.instagram.com/crescendo.ucsb/"
+        },
+        {
+            id: "ucsb-donation",
+            header: "Donate an Instrument",
+            restOfHeader: "Click here if you are interested in donating an instrument for students in our program to use",
+            link: "https://forms.gle/zHDr6Tu1u3pvyGZY9",
         },
     ],
     officers: [
@@ -283,7 +309,9 @@ export const ucsb = {
             name: "Julia Ong",
             title: "Director of Member Engagement",
             headshot: juliaOng,
+            
         },
+        
     ]
 }
 
@@ -296,6 +324,12 @@ export const stevenson = {
     ],
     emailAddress: "kmohan26@students.d125.org and araymond25@students.d125.org",
     involvements: [
+        {
+            id: "stevenson-general",
+            header: "General Membership Form",
+            restOfHeader: "Sign up here to become a general member and receive the latest email updates from our club.",
+            link: "https://forms.gle/pSg62MpGLYbMJTPA6",
+        },
         {
             id: "stevenson-donation",
             header: "Join the Instrument Drive",
@@ -310,8 +344,9 @@ export const stevenson = {
         },
         {
             id: "stevenson-spread",
-            header: "Spread the Word",
-            restOfHeader: "about us to anyone who might be interested!"
+            header: "Check out our Social Media",
+            restOfHeader: "Share our posts with anyone who might be interested!",
+            link: "https://www.instagram.com/crescendo_for_a_cause/"
         },
     ],
     officers: [
