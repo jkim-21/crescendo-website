@@ -17,6 +17,9 @@ import Events from "./Events"
 import YoutubeVideo from "./YoutubeVideo"
 import AnimationLayout from "./AnimationLayout"
 import News from "./News"
+import MentorMenteeMatching from "./MentorMenteeMatching"
+import Login from "./Login"
+
 
 export {
     AboutUs,
@@ -37,5 +40,7 @@ export {
     Events,
     YoutubeVideo,
     AnimationLayout,
-    News
+    News,
+    MentorMenteeMatching,
+    Login,
 }

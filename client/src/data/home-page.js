@@ -62,6 +62,11 @@ export const navLinks = [
     dropdown: true,
   },
   {
+    id: "tools",
+    title: "Tools",
+    dropdown: true,
+  },
+  {
     id: "donate",
     title: "Donate",
   },
@@ -212,7 +217,7 @@ export const executiveBoard = [
     name: "Jonathan Raymond",
     title: "Board Executive, Co-Founder",
     content: {
-      content1: "Jonathan Raymond is a senior undergraduate student at the University of Illinois Urbana-Champaign, pursuing a Bachelor of Science in Chemistry. He has played piano since the age of four and picked up trumpet at ten. When Jonathan isn’t at the bench doing research, he loves to take time to play in jazz bands around campus and compose music. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. Jonathan's favorite musical memories are during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble.",
+      content1: "Jonathan Raymond is a recent graduate if the University of Illinois Urbana-Champaign, with a Bachelor of Science in Chemistry. He has played piano since the age of four and picked up trumpet at ten. When Jonathan isn’t at the bench doing research, he loves to take time to play in jazz bands around campus and compose music. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. Jonathan's favorite musical memories are during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble. Jonathan will shortly be joining the lab of Diana Bianchi as an IRTA Postbac at the National Institutes of Health.",
     },
   },
   {
@@ -228,40 +233,45 @@ export const executiveBoard = [
 ];
 
 
+// home-page.js
 export const chapters = [
   {
     id: "colby-chapter",
     picture: colby,
     name: "Colby College",
-    link: "./chapters/colby"
-
+    link: "/chapters/colby"
   },
   {
     id: "harvard-chapter",
     picture: harvard,
     name: "Harvard University",
-    link: "./chapters/harvard"
+    link: "/chapters/harvard"
   },
   {
     id: "northwestern-chapter",
     picture: northwestern,
     name: "Northwestern University",
-    link: "./chapters/northwestern"
+    link: "/chapters/northwestern"
   },
   {
     id: "ucsb-chapter",
     picture: ucsb,
     name: "University of California, Santa Barbara",
-    link: "./chapters/ucsb"
+    link: "/chapters/ucsb"
   },
   {
     id: "stevenson-chapter",
     picture: stevenson,
     name: "Stevenson High School",
-    link: "./chapters/stevenson"
+    link: "/chapters/stevenson"
   },
-  
 ];
+
+
+export const tools = [
+  {id: "matching", name: "Mentor-Mentee Matching", link: '/mentor-mentee-matching'},
+];
+
 
 
 export const footerLinks = [
