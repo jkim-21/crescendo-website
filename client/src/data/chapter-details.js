@@ -31,6 +31,7 @@ import {
     shslogo,
     ameliaRaymond,
     kritiMohan,
+    kaiyabrooks
 
 } from "../assets";
 
@@ -137,22 +138,10 @@ export const colby = {
         ],
         officers: [
             {
-                id: "Kiran-Mohan",
-                name: "Kiran Mohan",
+                id: "Kaiya-Brooks",
+                name: "Kaiya Brooks",
                 title: "President",
-                headshot: kiranMohan,
-            },
-            {
-                id: "Lucas-Gazianis",
-                name: "Lucas Gazianis",
-                title: "Chief Financial Officer",
-                headshot: lucasGazianis,
-            },
-            {
-                id: "Marc-Courtemanche",
-                name: "Marc Courtemanche",
-                title: "Chief Operating Officer",
-                headshot: marcCourtenmanche,
+                headshot: kaiyabrooks,
             },
         ],
     }

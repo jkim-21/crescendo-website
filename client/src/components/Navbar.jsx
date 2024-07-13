@@ -1,4 +1,3 @@
-// navbar.jsx
 import React, { useState } from 'react';
 import { close, menu, logo } from '../assets';
 import { navLinks, chapters, tools } from '../data/home-page.js';
@@ -34,7 +33,7 @@ const Navbar = ({ pageStyles }) => {
 
   return (
     <nav className='sticky top-0 z-50 flex justify-between items-center bg-dark shadow-md py-[0.75rem]'>
-      <div className={`${styles.boxWidth} flex justify-between m-auto`}>
+      <div className={`${styles.boxWidth} flex justify-between m-auto navbar`}>
         <HashLink to={`/#home`}>
           <img src={logo} alt='Crescendo for a Cause logo' className={`${pageStyles} w-[auto] h-[4.75rem]`} />
         </HashLink>
@@ -45,7 +44,7 @@ const Navbar = ({ pageStyles }) => {
               id={`nav-item-${nav.id}`}
               onMouseEnter={() => showDropdown(nav)}
               onMouseLeave={hideDropdown}
-              className={`${i === navLinks.length - 1 ? 'mr-0' : 'mr-1 lg:mr-5'} ${!nav.dropdown && 'navlink'} ${nav.dropdown && 'mt-3'} font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
+              className={`navbar-item ${nav.dropdown ? 'dropdown-item' : 'navlink'} font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
               <div className={`${pageStyles} ${nav.dropdown && 'pb-3'}`}>
                 <HashLink
                   to={`/#${nav.id}`}
@@ -72,7 +71,7 @@ const Navbar = ({ pageStyles }) => {
               )}
             </li>
           ))}
-          <li className='font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1'>
+          <li className='navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1'>
             {user ? (
               <button onClick={logout}>Logout</button>
             ) : (

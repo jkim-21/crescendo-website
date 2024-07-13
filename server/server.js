@@ -11,13 +11,13 @@ import OpenAI from 'openai';
 
 dotenv.config();
 
-const port = process.env.PORT || 3000; // Keep the original port
+const port = process.env.PORT || 3000;
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 const stripeRoutes = createStripeRoutes(stripe);
 
 const corsOptions = {
-  origin: ['https://crescendoforacause.com', 'http://localhost:5173'], // Add your local development URL here
+  origin: ['https://crescendoforacause.com', 'http://localhost:5173'],
   optionsSuccessStatus: 200,
   credentials: true,
   methods: ['POST', 'GET', 'PUT'],
@@ -29,7 +29,7 @@ const uri = `mongodb+srv://jjkjon21:${process.env.DATABASE_PASSWORD}@crescendowe
 async function connect() {
   try {
     await mongoose.connect(uri);
-    console.log("Connected to MongoDB");
+    console.log('Connected to MongoDB');
   } catch (error) {
     console.log(error);
   }
@@ -55,18 +55,45 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const sheet = workbook.Sheets[sheetName];
     const data = xlsx.utils.sheet_to_json(sheet);
 
-    const prompt = `Generate Ideal Mentor-Mentee Pairing for every single mentee (DO NOT SKIP A MENTEE, JUST MAKE A NOTE THAT THE PAIRING IS LESS THAN IDEAL AND WE CAN WORK WITH IT), in the form of a concise list, keeping the pairing concise and listing the names of the Mentor and The mentee, instruments, locations, and ideal meeting times for each pairing in the same line, mentors can be paired with multiple students, students cannot be paired with multiple mentors. Not every mentor needs to be paired with someone but it is preferable. It is possible that there is a not a perfect intrument match, try and pair people with instruments that are close if it is needed (like french horn and trumpet, oboe and clarinet, trombone and tuba, things like that): ADDITIONALLY: When displaying, don't just copy what's in the excel file, like pairing up ")"s, just make the pairing looks pretty, DON'T BOLD OR DO ANYTHING WEIRD, JUST PLAIN SENTENCES WITH COMMAS.\n\n${JSON.stringify(data)}`;
+    const prompt = `Hi GPT! Please help me make Ideal Mentor/Mentee Pairings from this list. I would like you to think very deeply about which pairings make the most possible sense. You need to account as well as you can for if they are available Online or In-Person or No preference. You need to account for availability so that nobody is forced to attend a lesson when they are not available. You also want to pair people with the same instrument, this is very important, people must be paired with instruments similar to their own. You also need to account for how many lessons a particular mentor can give a week. Be rational in your pairings, think very deeply about whether a particular pairing would actually make sense or be reasonable for both parties involved. Please supply a rating (1-5) of how quality the pairing is, anything below 4 is unacceptable and will have to be managed further, please mark those if they arise.
+
+    Important: ONLY ASSIGN A RATING OF 5 TO PERFECT PAIRS. A perect pair has a perfect intrument, time, online/in-person, and the mentor is avialable to take them. 
+
+    Important: Any Mentees that do not have a perfect pair should be reported in boxes with TBD for the rest of the information. ONLY RETURN PAIRS OF 5, THE REST ARE TBD
+
+    Please provide your output in JSON format with the following structure:
+    [
+      {
+        "mentorName": "Mentor Name",
+        "mentorContact": "Mentor Contact",
+        "menteeName": "Mentee Name",
+        "menteeContact": "Mentee Contact",
+        "mentorInstrument": "Mentor Instrument",
+        "menteeInstrument": "Mentee Instrument",
+        "timeOfLesson": "Time of Lesson (day, time)",
+        "inPersonOrOnline": "In-Person or Online",
+        "rating": "Rating"
+      }
+    ]\n\n${JSON.stringify(data)}`;
+
     const response = await openai.chat.completions.create({
-      messages: [{ role: "system", content: prompt }],
+      messages: [{ role: "user", content: prompt }],
       model: 'gpt-4o',
     });
 
-    const pairings = response.choices[0].message.content.trim().split('\n');
+    let content = response.choices[0].message.content;
+    console.log("GPT-4 Response:", content);
 
-    fs.unlinkSync(filePath); // Remove the file after processing
+    // Clean up the response to extract only JSON part
+    const jsonStart = content.indexOf('[');
+    const jsonEnd = content.lastIndexOf(']') + 1;
+    content = content.substring(jsonStart, jsonEnd);
+    const pairings = JSON.parse(content);
+
+    fs.unlinkSync(filePath);
     res.json({ pairings });
   } catch (error) {
-    console.error(error);
+    console.error("Error processing file:", error);
     res.status(500).send('An error occurred while processing the file.');
   }
 });

@@ -3,23 +3,27 @@ import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
+import '../index.css'; // Ensure to import the CSS
 
 const MentorMenteeMatching = () => {
   const [file, setFile] = useState(null);
-  const [message, setMessage] = useState(""); 
+  const [message, setMessage] = useState("");
   const [pairings, setPairings] = useState([]);
+  const [uploading, setUploading] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
     setFile(acceptedFiles[0]);
-    setMessage(`File ${acceptedFiles[0].name} ready for upload.`);
+    setMessage("");
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
     accept: {
       'application/vnd.ms-excel': ['.xls'],
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx']
-    }
+    },
+    noClick: true, // Prevents default click behavior to open file dialog
+    noKeyboard: true // Prevents default keyboard behavior to open file dialog
   });
 
   const handleFileUpload = async () => {
@@ -27,6 +31,8 @@ const MentorMenteeMatching = () => {
       setMessage("Please select a file first!");
       return;
     }
+
+    setUploading(true);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -42,131 +48,91 @@ const MentorMenteeMatching = () => {
     } catch (error) {
       console.error(error);
       setMessage("An error occurred while uploading the file.");
+    } finally {
+      setUploading(false);
     }
   };
 
   return (
-    <div>
+    <>
       <Navbar pageStyles="" />
       <div className="mentor-mentee-matching">
-        <h1>Mentor-Mentee Matching</h1>
-        <p>Welcome to the Mentor-Mentee Matching page. Please upload your Excel file to get started.</p>
-        
-        <div {...getRootProps({ className: 'dropzone' })}>
-          <input {...getInputProps()} />
-          <div className="dropzone-content">
-            <CloudUploadIcon style={{ fontSize: '4rem', color: '#007bff' }} />
-            {isDragActive ? (
-              <p>Drop the file here...</p>
-            ) : (
-              <p>Drag & Drop to Upload File<br />OR<br /><button>Browse File</button></p>
-            )}
+        {pairings.length === 0 ? (
+          <div {...getRootProps({ className: 'dropzone' })}>
+            <input {...getInputProps()} />
+            <div className="dropzone-content text-white">
+              <CloudUploadIcon style={{ fontSize: '4rem', color: 'white' }} />
+              {isDragActive ? (
+                <p>Drop the file here...</p>
+              ) : (
+                <>
+                  {!file && !uploading && (
+                    <p>
+                      Drag & Drop a .xlsx (excel) file containing your Mentors and Mentees
+                      <br />
+                      <p><span className="or">OR</span></p>
+                      <br />
+                      <button className="text-white" onClick={open}>Click to Browse File</button>
+                    </p>
+                  )}
+                  {file && !uploading && (
+                    <>
+                      <p>{file.name}</p>
+                      <button className="upload-button" onClick={handleFileUpload}>Upload File</button>
+                      <button 
+                        className="choose-different-file-button" 
+                        onClick={() => setFile(null)}
+                        style={{ background: 'none', border: 'none', color: 'gray', marginTop: '20px' }}
+                      >
+                        Choose a Different File
+                      </button>
+                    </>
+                  )}
+                  {uploading && (
+                    <div className="uploading text-white" style={{ textAlign: 'center' }}>
+                      <p>Uploading...</p>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
-        </div>
-        
-        <button className="upload-button" onClick={handleFileUpload}>Upload File</button>
-        {message && <p>{message}</p>}
-        {pairings.length > 0 && (
+        ) : (
           <div className="pairings">
-            <h2>Generated Pairings</h2>
-            <ul>
-              {pairings.map((pair, index) => (
-                <li key={index} className="pairing-item">
-                  {pair}
-                </li>
-              ))}
-            </ul>
+            <table className="pairings-table">
+              <thead>
+                <tr>
+                  <th>Mentor Name</th>
+                  <th>Mentor Contact</th>
+                  <th>Mentee Name</th>
+                  <th>Mentee Contact</th>
+                  <th>Mentor Instrument</th>
+                  <th>Mentee Instrument</th>
+                  <th>Time of Lesson (day, time)</th>
+                  <th>In-Person or Online</th>
+                  <th>Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pairings.map((pair, index) => (
+                  <tr key={index}>
+                    <td>{pair.mentorName}</td>
+                    <td>{pair.mentorContact}</td>
+                    <td>{pair.menteeName}</td>
+                    <td>{pair.menteeContact}</td>
+                    <td>{pair.mentorInstrument}</td>
+                    <td>{pair.menteeInstrument}</td>
+                    <td>{pair.timeOfLesson}</td>
+                    <td>{pair.inPersonOrOnline}</td>
+                    <td>{pair.rating}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
-        
-        <style jsx>{`
-          .mentor-mentee-matching {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
-          }
-          .dropzone {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 400px;
-            height: 200px;
-            border: 2px dashed #007bff;
-            border-radius: 8px;
-            background-color: #e6f7ff;
-            cursor: pointer;
-            margin-top: 2rem;
-          }
-          .dropzone-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-          }
-          .dropzone-content p {
-            margin: 0.5rem 0;
-          }
-          .dropzone-content button {
-            padding: 0.5rem 1rem;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-          }
-          .dropzone-content button:hover {
-            background-color: #0056b3;
-          }
-          .upload-button {
-            padding: 0.5rem 1rem;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 1rem;
-          }
-          .upload-button:hover {
-            background-color: #0056b3;
-          }
-          .pairings {
-            margin-top: 2rem;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-            font-size: 1rem;
-            font-family: Arial, sans-serif;
-            overflow: auto;
-            max-height: 400px;
-          }
-          .pairings h2 {
-            margin-bottom: 1rem;
-            text-align: center;
-            color: #333;
-          }
-          .pairings ul {
-            list-style-type: none;
-            padding: 0;
-          }
-          .pairing-item {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #ddd;
-          }
-          .pairing-item:last-child {
-            border-bottom: none;
-          }
-        `}</style>
       </div>
-    </div>
+    </>
   );
 };
 

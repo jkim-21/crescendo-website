@@ -73,6 +73,7 @@ import shslogo from "./shs-placeholder.png";
 
 import ameliaRaymond from "./amelia-raymond.png";
 import kritiMohan from "./kriti-mohan.png";
+import kaiyabrooks from "./kaiya-brooks.png";
 
 import nwcon1 from "./nwcon1.png";
 import nwcon2 from "./nwcon2.png";
@@ -149,6 +150,7 @@ export {
   karisLee,
   annaXian,
   juliaOng,
+  kaiyabrooks,
 
   stevensonBackground,
   shslogo,
@@ -161,7 +163,5 @@ export {
   ucsbcon1,
   ucsbcon2,
   colbycon1,
-
-
 
 };
