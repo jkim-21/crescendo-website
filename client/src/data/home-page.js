@@ -49,6 +49,10 @@ export const navLinks = [
     title: "Our Impact",
   },
   {
+    id: "donate",
+    title: "Donate",
+  },
+  {
     id: "events",
     title: "Events",
   },
@@ -65,10 +69,6 @@ export const navLinks = [
     id: "tools",
     title: "Tools",
     dropdown: true,
-  },
-  {
-    id: "donate",
-    title: "Donate",
   },
 ];
 
