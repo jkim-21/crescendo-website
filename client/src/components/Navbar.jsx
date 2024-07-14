@@ -1,16 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { close, menu, logo } from '../assets';
 import { navLinks, chapters, tools } from '../data/home-page.js';
 import { HashLink } from 'react-router-hash-link';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styles } from '../style.js';
+import { getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
 import { useAuth } from '../AuthContext';
 
 const Navbar = ({ pageStyles }) => {
   const [toggle, setToggle] = useState(false);
   const [activeDropdownId, setActiveDropdownId] = useState(null);
-  const { user, logout } = useAuth();
+  const { user, setUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+
+    const handleLogin = () => {
+      auth.signInWithRedirect(provider);
+    };
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    const protectedPages = ['/mentor-matching', '/tools'];
+    if (protectedPages.includes(window.location.pathname) && !user) {
+      handleLogin();
+    }
+  }, [navigate, setUser, user]);
 
   const showDropdown = (nav) => {
     if (nav.dropdown) {
@@ -29,6 +53,12 @@ const Navbar = ({ pageStyles }) => {
       return tools;
     }
     return [];
+  };
+
+  const handleLoginClick = () => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    auth.signInWithRedirect(provider);
   };
 
   return (
@@ -57,7 +87,7 @@ const Navbar = ({ pageStyles }) => {
               {nav.dropdown && (
                 <div className={`${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation dropdown-background dropdown absolute dark-color rounded py-[1rem] px-[0.5rem] cursor-default shadow-2xl lg:px-[1rem]`}>
                   {nav.id === 'tools' && (
-                    <p className="text-blue-800 mb-2">Tools can only be accessed by organization members</p>
+                    <p className="text-blue-800 mb-2">Note: Tools can only be accessed by organization staff</p>
                   )}
                   {getDropdownItems(nav.id).map((item) => (
                     <Link
@@ -75,7 +105,7 @@ const Navbar = ({ pageStyles }) => {
             {user ? (
               <button onClick={logout}>Logout</button>
             ) : (
-              <Link to="/login">Login</Link>
+              <button onClick={handleLoginClick}>Login</button>
             )}
           </li>
         </ul>
@@ -109,7 +139,7 @@ const Navbar = ({ pageStyles }) => {
                 {user ? (
                   <button onClick={logout}>Logout</button>
                 ) : (
-                  <Link to="/login">Login</Link>
+                  <button onClick={handleLoginClick}>Login</button>
                 )}
               </li>
             </ul>

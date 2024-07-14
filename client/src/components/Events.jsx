@@ -1,9 +1,8 @@
 import React from 'react';
 
-const Events = ({ picture, name, title, schoolLogo }) => {
+const Events = ({ picture, name, title, schoolLogo, instagramUrl }) => {
   return (
-    <div className='feedback-card flex justify-between flex-col px-5 py-4 rounded-[5px] max-w-[23.125rem] bg-[#e8ecfc] basis-[80%]
-                    sm:basis-[45%] lg:basis-[30%]'>
+    <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className='feedback-card flex justify-between flex-col px-5 py-4 rounded-[5px] max-w-[23.125rem] bg-[#e8ecfc] basis-[80%] sm:basis-[45%] lg:basis-[30%]'>
       <div className='m-auto'>
         <img
           src={picture}
@@ -22,7 +21,7 @@ const Events = ({ picture, name, title, schoolLogo }) => {
           <p className='font-normal text-[16px] leading-[24px] dark-color'>{title}</p>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 

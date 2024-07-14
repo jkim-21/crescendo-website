@@ -7,7 +7,6 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import xlsx from 'xlsx';
 import fs from 'fs';
-import OpenAI from 'openai';
 
 dotenv.config();
 
@@ -43,55 +42,88 @@ app.use(cors(corsOptions));
 app.use(json());
 app.use(stripeRoutes);
 
-app.post('/upload', upload.single('file'), async (req, res) => {
+app.post('/upload', upload.single('file'), (req, res) => {
   try {
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
-
+    console.log("File received:", req.file);
     const filePath = req.file.path;
     const workbook = xlsx.readFile(filePath);
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
     const data = xlsx.utils.sheet_to_json(sheet);
 
-    const prompt = `Hi GPT! Please help me make Ideal Mentor/Mentee Pairings from this list. I would like you to think very deeply about which pairings make the most possible sense. You need to account as well as you can for if they are available Online or In-Person or No preference. You need to account for availability so that nobody is forced to attend a lesson when they are not available. You also want to pair people with the same instrument, this is very important, people must be paired with instruments similar to their own. You also need to account for how many lessons a particular mentor can give a week. Be rational in your pairings, think very deeply about whether a particular pairing would actually make sense or be reasonable for both parties involved. Please supply a rating (1-5) of how quality the pairing is, anything below 4 is unacceptable and will have to be managed further, please mark those if they arise.
+    console.log("Parsed data:", data);
 
-    Important: ONLY ASSIGN A RATING OF 5 TO PERFECT PAIRS. A perect pair has a perfect intrument, time, online/in-person, and the mentor is avialable to take them. 
+    let mentors = data.filter(person => person["Mentor or Mentee"] === "Mentor");
+    const mentees = data.filter(person => person["Mentor or Mentee"] === "Mentee");
 
-    Important: Any Mentees that do not have a perfect pair should be reported in boxes with TBD for the rest of the information. ONLY RETURN PAIRS OF 5, THE REST ARE TBD
+    console.log("Mentors:", mentors);
+    console.log("Mentees:", mentees);
 
-    Please provide your output in JSON format with the following structure:
-    [
-      {
-        "mentorName": "Mentor Name",
-        "mentorContact": "Mentor Contact",
-        "menteeName": "Mentee Name",
-        "menteeContact": "Mentee Contact",
-        "mentorInstrument": "Mentor Instrument",
-        "menteeInstrument": "Mentee Instrument",
-        "timeOfLesson": "Time of Lesson (day, time)",
-        "inPersonOrOnline": "In-Person or Online",
-        "rating": "Rating"
+    const pairings = [];
+    const unmatchedMentees = [];
+    const unmatchedMentors = [];
+
+    const getTimeSlots = (person) => {
+      if (!person) return [];
+      return [
+        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Monday]"]?.split('; ') || [],
+        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Tuesday]"]?.split('; ') || [],
+        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Wednesday]"]?.split('; ') || [],
+        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Thursday]"]?.split('; ') || [],
+        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Friday]"]?.split('; ') || [],
+        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Saturday]"]?.split('; ') || [],
+        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Sunday]"]?.split('; ') || []
+      ];
+    };
+
+    const findMatchingMentor = (mentee) => {
+      const menteeTimeSlots = getTimeSlots(mentee);
+      return mentors.find(mentor => {
+        console.log("Comparing Mentor:", mentor["Name (First, Last)"], "With Mentee:", mentee["Name (First, Last)"]);
+        const mentorTimeSlots = getTimeSlots(mentor);
+        const commonTimeSlots = mentorTimeSlots.some(timeSlot => menteeTimeSlots.includes(timeSlot));
+        console.log("Common Time Slots:", commonTimeSlots);
+        return mentor.Instrument === mentee.Instrument &&
+               mentor["Online or In-Person"] === mentee["Online or In-Person"] &&
+               commonTimeSlots;
+      });
+    };
+
+    mentees.forEach(mentee => {
+      const mentor = findMatchingMentor(mentee);
+      if (mentor) {
+        pairings.push({
+          mentorName: mentor["Name (First, Last)"],
+          mentorContact: mentor["Phone Number or Preferred Method of Contact Info"],
+          menteeName: mentee["Name (First, Last)"],
+          menteeContact: mentee["Phone Number or Preferred Method of Contact Info"],
+          mentorInstrument: mentor.Instrument,
+          menteeInstrument: mentee.Instrument,
+          timeOfLesson: getTimeSlots(mentor).join(', '),
+          inPersonOrOnline: mentor["Online or In-Person"]
+        });
+
+        mentor["How many Lessons can you give a week? (For Mentors Only)"] -= 1;
+        if (mentor["How many Lessons can you give a week? (For Mentors Only)"] === 0) {
+          mentors = mentors.filter(m => m !== mentor);
+        }
+      } else {
+        unmatchedMentees.push(mentee["Name (First, Last)"] || null);
       }
-    ]\n\n${JSON.stringify(data)}`;
-
-    const response = await openai.chat.completions.create({
-      messages: [{ role: "user", content: prompt }],
-      model: 'gpt-4o',
     });
 
-    let content = response.choices[0].message.content;
-    console.log("GPT-4 Response:", content);
+    mentors.forEach(mentor => {
+      if (mentor["How many Lessons can you give a week? (For Mentors Only)"] > 0) {
+        unmatchedMentors.push(mentor["Name (First, Last)"] || null);
+      }
+    });
 
-    // Clean up the response to extract only JSON part
-    const jsonStart = content.indexOf('[');
-    const jsonEnd = content.lastIndexOf(']') + 1;
-    content = content.substring(jsonStart, jsonEnd);
-    const pairings = JSON.parse(content);
+    console.log("Pairings:", pairings);
+    console.log("Unmatched Mentees:", unmatchedMentees);
+    console.log("Unmatched Mentors:", unmatchedMentors);
 
     fs.unlinkSync(filePath);
-    res.json({ pairings });
+    res.json({ pairings, unmatchedMentees, unmatchedMentors });
   } catch (error) {
     console.error("Error processing file:", error);
     res.status(500).send('An error occurred while processing the file.');

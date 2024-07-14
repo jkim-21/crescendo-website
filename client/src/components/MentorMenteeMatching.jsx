@@ -9,11 +9,14 @@ const MentorMenteeMatching = () => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [pairings, setPairings] = useState([]);
+  const [unmatchedMentees, setUnmatchedMentees] = useState([]);
+  const [unmatchedMentors, setUnmatchedMentors] = useState([]);
   const [uploading, setUploading] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
     setFile(acceptedFiles[0]);
     setMessage("");
+    console.log("File dropped: ", acceptedFiles[0]);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
@@ -29,13 +32,16 @@ const MentorMenteeMatching = () => {
   const handleFileUpload = async () => {
     if (!file) {
       setMessage("Please select a file first!");
+      console.log("No file selected");
       return;
     }
 
     setUploading(true);
+    console.log("Uploading file...");
 
     const formData = new FormData();
     formData.append('file', file);
+    console.log("FormData: ", formData);
 
     try {
       const response = await axios.post('http://localhost:3000/upload', formData, {
@@ -43,10 +49,18 @@ const MentorMenteeMatching = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      setPairings(response.data.pairings);
-      setMessage("File uploaded successfully!");
+      console.log("Response: ", response.data);
+      if (response.data.pairings && response.data.unmatchedMentees && response.data.unmatchedMentors) {
+        setPairings(response.data.pairings);
+        setUnmatchedMentees(response.data.unmatchedMentees);
+        setUnmatchedMentors(response.data.unmatchedMentors);
+        setMessage("File uploaded successfully!");
+      } else {
+        setMessage("Unexpected response structure");
+        console.log("Unexpected response structure:", response.data);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error uploading file: ", error);
       setMessage("An error occurred while uploading the file.");
     } finally {
       setUploading(false);
@@ -67,13 +81,11 @@ const MentorMenteeMatching = () => {
               ) : (
                 <>
                   {!file && !uploading && (
-                    <p>
-                      Drag & Drop a .xlsx (excel) file containing your Mentors and Mentees
-                      <br />
+                    <div>
+                      <p>Drag & Drop a .xlsx (excel) file containing your Mentors and Mentees</p>
                       <p><span className="or">OR</span></p>
-                      <br />
                       <button className="text-white" onClick={open}>Click to Browse File</button>
-                    </p>
+                    </div>
                   )}
                   {file && !uploading && (
                     <>
@@ -99,38 +111,61 @@ const MentorMenteeMatching = () => {
           </div>
         ) : (
           <div className="pairings">
-            <table className="pairings-table">
-              <thead>
-                <tr>
-                  <th>Mentor Name</th>
-                  <th>Mentor Contact</th>
-                  <th>Mentee Name</th>
-                  <th>Mentee Contact</th>
-                  <th>Mentor Instrument</th>
-                  <th>Mentee Instrument</th>
-                  <th>Time of Lesson (day, time)</th>
-                  <th>In-Person or Online</th>
-                  <th>Rating</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pairings.map((pair, index) => (
-                  <tr key={index}>
-                    <td>{pair.mentorName}</td>
-                    <td>{pair.mentorContact}</td>
-                    <td>{pair.menteeName}</td>
-                    <td>{pair.menteeContact}</td>
-                    <td>{pair.mentorInstrument}</td>
-                    <td>{pair.menteeInstrument}</td>
-                    <td>{pair.timeOfLesson}</td>
-                    <td>{pair.inPersonOrOnline}</td>
-                    <td>{pair.rating}</td>
+            {pairings.length > 0 ? (
+              <table className="pairings-table">
+                <thead>
+                  <tr>
+                    <th>Mentor Name</th>
+                    <th>Mentor Contact</th>
+                    <th>Mentee Name</th>
+                    <th>Mentee Contact</th>
+                    <th>Mentor Instrument</th>
+                    <th>Mentee Instrument</th>
+                    <th>Time of Lesson (day, time)</th>
+                    <th>In-Person or Online</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {pairings.map((pair, index) => (
+                    <tr key={index}>
+                      <td>{pair.mentorName}</td>
+                      <td>{pair.mentorContact}</td>
+                      <td>{pair.menteeName}</td>
+                      <td>{pair.menteeContact}</td>
+                      <td>{pair.mentorInstrument}</td>
+                      <td>{pair.menteeInstrument}</td>
+                      <td>{pair.timeOfLesson}</td>
+                      <td>{pair.inPersonOrOnline}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p>No pairings found.</p>
+            )}
+            <h2>Unmatched Mentees</h2>
+            <ul>
+              {unmatchedMentees.length > 0 ? (
+                unmatchedMentees.map((mentee, index) => (
+                  <li key={index}>{mentee}</li>
+                ))
+              ) : (
+                <p>No unmatched mentees.</p>
+              )}
+            </ul>
+            <h2>Unmatched Mentors</h2>
+            <ul>
+              {unmatchedMentors.length > 0 ? (
+                unmatchedMentors.map((mentor, index) => (
+                  <li key={index}>{mentor}</li>
+                ))
+              ) : (
+                <p>No unmatched mentors.</p>
+              )}
+            </ul>
           </div>
         )}
+        {message && <p className="message">{message}</p>}
       </div>
     </>
   );

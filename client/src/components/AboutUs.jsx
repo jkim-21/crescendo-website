@@ -11,7 +11,7 @@ const AboutUs = () => {
               lg:lg:w-[80%]`}>
       <h1 className={`${styles.heading1} text-white text-center mb-[2rem]
                     lg:mb-[4rem]`}>
-        About Us
+        National Leadership
       </h1>
       {executiveBoard.map((founder) => (
         <div key={founder.id}>
