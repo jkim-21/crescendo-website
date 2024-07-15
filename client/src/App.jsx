@@ -8,7 +8,6 @@ import { AuthProvider } from './AuthContext';  // Adjust the import path if nece
 
 const App = () => {
   return (
-    <AuthProvider>
       <AnimationLayout>
         <div className='bg-navy-color' id='home'>
           <Navbar />
@@ -55,7 +54,6 @@ const App = () => {
           </div>
         </div>
       </AnimationLayout>
-    </AuthProvider>
   );
 }
 

@@ -1,16 +1,16 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { chapterBackground } from '../assets';
 import { colby, harvard, northwestern, stevenson, ucsb } from '../data/chapter-details';
 import { Involvements, Officers, Contacts, Navbar, AnimationLayout } from '../components';
-import {styles} from "../style";
-import { useParams } from 'react-router-dom';
+import { styles } from "../style";
+import { useParams, Link } from 'react-router-dom';
 
 const chapters = {
   colby, harvard, northwestern, stevenson, ucsb
 }
 
-const chapterPage = () => {
-  let {chapterName} = useParams();
+const ChapterPage = () => {
+  let { chapterName } = useParams();
   const chapterData = chapters[chapterName];
 
   useEffect(() => {
@@ -20,8 +20,8 @@ const chapterPage = () => {
   return (
     <AnimationLayout>
       <div 
-      style={{backgroundImage: `url(${chapterData.background})`}}
-      className='w-full bg-center bg-cover overflow-hidden'>
+        style={{ backgroundImage: `url(${chapterData.background})` }}
+        className='w-full bg-center bg-cover overflow-hidden'>
         <div className={`${styles.flexCenter}`}>
           <div className={`w-full chapter-navbar`}>
             <Navbar pageStyles='chapter-drop-shadow'/>
@@ -29,24 +29,24 @@ const chapterPage = () => {
         </div>
         <div className={`${styles.flexCenter} bg-no-repeat h-[25rem] w-full`}>
           <h1 className={`chapter-text-shadow font-medium text-[2.5rem] leading-[44.25rem] font-raleway text-white`}>
-          {chapterData.header}</h1>
+            {chapterData.header}
+          </h1>
         </div>
       </div>
       <div 
-      style={{backgroundImage: `url(${chapterBackground})`}} 
-      className={`${styles.flexCenter} ${styles.paddingY}`}>
+        style={{ backgroundImage: `url(${chapterBackground})` }} 
+        className={`${styles.flexCenter} ${styles.paddingY}`}>
         <div className={`${styles.boxWidth} max-w-[95%]`}>
-          <div className='m-auto rounded 
-                          lgs:max-w-[85%]'>
+          <div className='m-auto rounded lgs:max-w-[85%]'>
             {chapterData.aboutInformation.map((aboutSection, index) => (
-                <p
+              <p
                 key={index}
                 className={`${styles.paragraph} text-gray-200 mb-5`}>
                 {aboutSection}
-                </p>
+              </p>
             ))}
             <p className={`${styles.paragraph} white-color mb-10`}>
-                {chapterData.emailAddress && `You can contact us at ${chapterData.emailAddress}`}
+              {chapterData.emailAddress && `You can contact us at ${chapterData.emailAddress}`}
             </p>
           </div>
 
@@ -54,7 +54,11 @@ const chapterPage = () => {
           <div className={`${styles.flexCenter} flex-wrap gap-[1rem] w-full mb-[2.5rem]
                            lg:gap-[1rem] lgs:w-[85%] m-auto`}>
             {chapterData.involvements.map((involvement, index) => (
-                <Involvements key={involvement.id} {...involvement} boxColor={index % 2 === 0 ? 'bg-navy-color' : 'bg-gold-color'} />
+              <div key={involvement.id} className="w-full md:w-1/2 lg:w-1/3 p-2">
+                <Link to={involvement.link} className="block h-full">
+                  <Involvements {...involvement} boxColor={index % 2 === 0 ? 'bg-navy-color' : 'bg-gold-color'} />
+                </Link>
+              </div>
             ))}
           </div>
 
@@ -62,14 +66,14 @@ const chapterPage = () => {
           <div className={`${styles.flexCenter} gap-x-[8.5%] gap-y-[2rem] flex-wrap
                           md:gap-y-[4rem]`}>
             {chapterData.officers.map((officer) => (
-                <Officers key={officer.id} {...officer}/>
+              <Officers key={officer.id} {...officer}/>
             ))}
           </div>
         </div>
       </div>
       <Contacts/>
     </AnimationLayout>
-  )
+  );
 }
 
-export default chapterPage;
+export default ChapterPage;

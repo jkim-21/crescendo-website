@@ -1,4 +1,3 @@
-// Navbar.jsx
 import React, { useState, useEffect } from 'react';
 import { close, menu, logo } from '../assets';
 import { navLinks, chapters, tools } from '../data/home-page.js';
@@ -51,20 +50,6 @@ const Navbar = ({ pageStyles }) => {
     }
   }, [error]);
 
-  useEffect(() => {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-
-    const handleLogin = () => {
-      signInWithRedirect(auth, provider);
-    };
-
-    const protectedPages = ['/mentor-matching', '/tools'];
-    if (protectedPages.includes(window.location.pathname) && !user) {
-      handleLogin();
-    }
-  }, [navigate, user]);
-
   const showDropdown = (nav) => {
     if (nav.dropdown) {
       setActiveDropdownId(nav.id);
@@ -84,11 +69,11 @@ const Navbar = ({ pageStyles }) => {
     return [];
   };
 
-  const handleToolClick = (item) => {
+  const handleToolClick = (link) => {
     if (!user) {
       handleGoogleSignIn();
     } else {
-      navigate(item.link);
+      navigate(link);
     }
   };
 
@@ -123,7 +108,7 @@ const Navbar = ({ pageStyles }) => {
                   {getDropdownItems(nav.id).map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => handleToolClick(item)}
+                      onClick={() => nav.id === 'tools' ? handleToolClick(item.link) : navigate(item.link)}
                       className='dropdown-link'>
                       {item.name}
                     </button>
