@@ -23,6 +23,7 @@ import {
   kiranMohan,
   jonathanRaymond,
   justinKim,
+  allen,
   
   colby,
   harvard,
@@ -203,21 +204,12 @@ export const news = [
 
 export const executiveBoard = [
   {
-    id: "kiran-executive",
-    img: kiranMohan,
-    name: "Kiran Mohan",
+    id: "allen-executive",
+    img: allen,
+    name: "Allen Beckwith",
     title: "",
     content: {
-      content1: "Kiran Mohan is a senior undergraduate student at Harvard University, pursuing a Bachelor of Arts in History of Science with a secondary in Global Health & Health Policy. Kiran is particularly interested in how music can affect the brain and has conducted research at Northwestern University and Harvard University. Kiran has played a variety of instruments, including the piano, oboe, English horn and alto saxophone. In addition to pursuing performance opportunities on campus, he has taken several courses at Harvard on how music can shape culture. Kiran's favorite musical memory has been organizing Crescendo for a Cause assisted living facility concerts and seeing the impact music has on the residents.",
-    },
-  },
-  {
-    id: "jonathan-executive",
-    img: jonathanRaymond,
-    name: "Jonathan Raymond",
-    title: "",
-    content: {
-      content1: "Jonathan Raymond is a recent graduate if the University of Illinois Urbana-Champaign, with a Bachelor of Science in Chemistry. He has played piano since the age of four and picked up trumpet at ten. When Jonathan isn’t at the bench doing research, he loves to take time to play in jazz bands around campus and compose music. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. Jonathan's favorite musical memories are during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble. Jonathan will shortly be joining the lab of Diana Bianchi as an IRTA Postbac at the National Institutes of Health.",
+      content1: "Allen Beckwith is a graduate of Northwestern University, where he completed a Bachelor of Science degree in Electrical Engineering. He currently works at AT&T as a Network Engineer in Dallas, TX. Allen’s musical experience spans 18 years, having begun playing the piano at age 4 and the clarinet at age 10. Throughout college, Allen performed with the Symphonic Band of Northwestern’s Bienen School of Music. His favorite composer is Sergei Rachmaninoff, although he enjoys music ranging from the Classical and Romantic eras, along with jazz and contemporary artists. Allen’s favorite musical memories consist of his 2 years as Drum Major at Adlai E. Stevenson High School, where he gained lifelong friends and valuable leadership skills.",
     },
   },
   {
@@ -226,7 +218,25 @@ export const executiveBoard = [
     name: "Justin Kim",
     title: "",
     content: {
-      content1: "Justin Kim is a senior undergraduate student at Colby College studying neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. He is currently a saxophonist in the Colby Wind Ensemble and a solo pianist at Colby. Justin is particularly interested in addressing the disparities in music education by working closely with local communities. Growing up as a low-income immigrant, he understands how difficult it can be to access music. Now, he is excited to provide the same inspiration he’s received throughout his musical journey to spread the joy of music.",
+      content1: "Justin Kim is a graduate of Colby College, with a Bacherlor's degree in Neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. He is currently a saxophonist in the Colby Wind Ensemble and a solo pianist at Colby. Justin is particularly interested in addressing the disparities in music education by working closely with local communities. Growing up as a low-income immigrant, he understands how difficult it can be to access music. Now, he is excited to provide the same inspiration he’s received throughout his musical journey to spread the joy of music.",
+    },
+  },
+  {
+    id: "kiran-executive",
+    img: kiranMohan,
+    name: "Kiran Mohan",
+    title: "",
+    content: {
+      content1: "Kiran Mohan is a graduate of Harvard University with a Bachelor of Arts in History of Science, with a secondary in Global Health & Health Policy. Kiran is particularly interested in how music can affect the brain and has conducted research at Northwestern University and Harvard University. Kiran has played a variety of instruments, including the piano, oboe, English horn and alto saxophone. In addition to pursuing performance opportunities on campus, he has taken several courses at Harvard on how music can shape culture. Kiran's favorite musical memory has been organizing Crescendo for a Cause assisted living facility concerts and seeing the impact music has on the residents.",
+    },
+  },
+  {
+    id: "jonathan-executive",
+    img: jonathanRaymond,
+    name: "Jonathan Raymond",
+    title: "",
+    content: {
+      content1: "Jonathan Raymond is a graduate if the University of Illinois Urbana-Champaign, with a bachelor's degree in Chemistry. He has played piano since the age of four and picked up trumpet at ten. When Jonathan isn’t at the bench doing research, he loves to take time to play in jazz bands around campus and compose music. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. Jonathan's favorite musical memories are during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble. Jonathan will shortly be joining the lab of Diana Bianchi as an IRTA Postbac at the National Institutes of Health.",
     },
     lastOfficer: true,
   },
