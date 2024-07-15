@@ -1,3 +1,4 @@
+// Navbar.jsx
 import React, { useState, useEffect } from 'react';
 import { close, menu, logo } from '../assets';
 import { navLinks, chapters, tools } from '../data/home-page.js';
@@ -5,36 +6,64 @@ import { HashLink } from 'react-router-hash-link';
 import { Link, useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styles } from '../style.js';
-import { getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useAuth } from '../AuthContext';
 
 const Navbar = ({ pageStyles }) => {
   const [toggle, setToggle] = useState(false);
   const [activeDropdownId, setActiveDropdownId] = useState(null);
+  const [error, setError] = useState(null);
   const { user, setUser, logout } = useAuth();
   const navigate = useNavigate();
+
+  const handleGoogleSignIn = async () => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const email = result.user.email;
+      if (email.endsWith('@crescendoforacause.com')) {
+        setUser(result.user);
+        navigate('/'); // Redirect to home after successful login
+      } else {
+        await auth.signOut();
+        setError('You must use an @crescendoforacause.com email to access this page.');
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleLogout = async () => {
+    const auth = getAuth();
+    try {
+      await logout();
+      setUser(null);
+      navigate('/'); // Redirect to home after logout
+    } catch (error) {
+      console.error("Logout error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    if (error) {
+      alert(error); // Simple error handling, you can improve this
+    }
+  }, [error]);
 
   useEffect(() => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
     const handleLogin = () => {
-      auth.signInWithRedirect(provider);
+      signInWithRedirect(auth, provider);
     };
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    });
 
     const protectedPages = ['/mentor-matching', '/tools'];
     if (protectedPages.includes(window.location.pathname) && !user) {
       handleLogin();
     }
-  }, [navigate, setUser, user]);
+  }, [navigate, user]);
 
   const showDropdown = (nav) => {
     if (nav.dropdown) {
@@ -55,10 +84,12 @@ const Navbar = ({ pageStyles }) => {
     return [];
   };
 
-  const handleLoginClick = () => {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-    auth.signInWithRedirect(provider);
+  const handleToolClick = (item) => {
+    if (!user) {
+      handleGoogleSignIn();
+    } else {
+      navigate(item.link);
+    }
   };
 
   return (
@@ -90,12 +121,12 @@ const Navbar = ({ pageStyles }) => {
                     <p className="text-blue-800 mb-2">Note: Tools can only be accessed by organization staff</p>
                   )}
                   {getDropdownItems(nav.id).map((item) => (
-                    <Link
+                    <button
                       key={item.id}
-                      to={item.link}
+                      onClick={() => handleToolClick(item)}
                       className='dropdown-link'>
                       {item.name}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               )}
@@ -103,9 +134,9 @@ const Navbar = ({ pageStyles }) => {
           ))}
           <li className='navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1'>
             {user ? (
-              <button onClick={logout}>Logout</button>
+              <button onClick={handleLogout}>Logout</button>
             ) : (
-              <button onClick={handleLoginClick}>Login</button>
+              <button onClick={handleGoogleSignIn}>Login</button>
             )}
           </li>
         </ul>
@@ -137,9 +168,9 @@ const Navbar = ({ pageStyles }) => {
               ))}
               <li className='sidebar-link dark-color'>
                 {user ? (
-                  <button onClick={logout}>Logout</button>
+                  <button onClick={handleLogout}>Logout</button>
                 ) : (
-                  <button onClick={handleLoginClick}>Login</button>
+                  <button onClick={handleGoogleSignIn}>Login</button>
                 )}
               </li>
             </ul>

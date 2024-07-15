@@ -5,7 +5,6 @@ import App from './App';
 import './index.css';
 import ChapterPage from "./pages/ChapterPage";
 import MentorMenteeMatching from "./components/MentorMenteeMatching";
-import Login from "./components/Login";
 import { AuthProvider } from './AuthContext';
 import ProtectedRoute from './ProtectedRoute';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -23,10 +22,7 @@ const router = createBrowserRouter([
     path: "/mentor-mentee-matching",
     element: <ProtectedRoute><MentorMenteeMatching /></ProtectedRoute>,
   },
-  {
-    path: "/login",
-    element: <Login />,
-  },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

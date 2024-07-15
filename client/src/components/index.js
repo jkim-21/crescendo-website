@@ -18,7 +18,7 @@ import YoutubeVideo from "./YoutubeVideo"
 import AnimationLayout from "./AnimationLayout"
 import News from "./News"
 import MentorMenteeMatching from "./MentorMenteeMatching"
-import Login from "./Login"
+
 
 
 export {
@@ -42,5 +42,4 @@ export {
     AnimationLayout,
     News,
     MentorMenteeMatching,
-    Login,
 }
