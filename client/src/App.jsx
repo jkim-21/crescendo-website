@@ -6,12 +6,27 @@ import theme from './themes/theme';
 
 const App = () => {
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash) {
+        const id = window.location.hash.substring(1)
+        const element = document.getElementById('about-us');
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth'});
+          }, 30)
+        }
+      }
+    }
+  })
+
+
   return (
     <AnimationLayout>
         <div className='bg-navy-color' id='home'>
           <Navbar/>
           <div className={`bg-navy-color w-full overflow-hidden`}>
-            <div className={`${styles.flexStart} `} id='#home'>
+            <div className={`${styles.flexStart}`} id='#home'>
               <div className={`${styles.boxWidth}`}>
                 <Hero/> 
               </div>
