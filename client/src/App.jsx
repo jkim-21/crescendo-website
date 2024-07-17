@@ -14,7 +14,7 @@ const App = () => {
         if (element) {
           setTimeout(() => {
             element.scrollIntoView({ behavior: 'smooth'});
-          }, 30)
+          }, 200)
         }
       }
     };
