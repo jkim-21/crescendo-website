@@ -10,7 +10,7 @@ const App = () => {
     const handleHashChange = () => {
       if (window.location.hash) {
         const id = window.location.hash.substring(1)
-        const element = document.getElementById('about-us');
+        const element = document.getElementById(id);
         if (element) {
           setTimeout(() => {
             element.scrollIntoView({ behavior: 'smooth'});
