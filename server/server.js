@@ -65,33 +65,28 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
     const getTimeSlots = (person) => {
       if (!person) return [];
-      return [
-        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Monday]"]?.split('; ') || [],
-        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Tuesday]"]?.split('; ') || [],
-        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Wednesday]"]?.split('; ') || [],
-        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Thursday]"]?.split('; ') || [],
-        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Friday]"]?.split('; ') || [],
-        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Saturday]"]?.split('; ') || [],
-        ...person["When are you available for lessons (EST)? Please select times that work for you!  [Sunday]"]?.split('; ') || []
-      ];
+      const timeSlots = [];
+      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      days.forEach((day, index) => {
+        const dayColumn = String.fromCharCode('F'.charCodeAt(0) + index);
+        const times = person[`When are you available for lessons (EST)? Please select times that work for you!  [${day}]`]?.split('; ') || [];
+        times.forEach(time => {
+          timeSlots.push({ day, time });
+        });
+      });
+      return timeSlots;
     };
 
-    const findMatchingMentor = (mentee) => {
+    const findCommonTimeSlot = (mentor, mentee) => {
+      const mentorTimeSlots = getTimeSlots(mentor);
       const menteeTimeSlots = getTimeSlots(mentee);
-      return mentors.find(mentor => {
-        console.log("Comparing Mentor:", mentor["Name (First, Last)"], "With Mentee:", mentee["Name (First, Last)"]);
-        const mentorTimeSlots = getTimeSlots(mentor);
-        const commonTimeSlots = mentorTimeSlots.some(timeSlot => menteeTimeSlots.includes(timeSlot));
-        console.log("Common Time Slots:", commonTimeSlots);
-        return mentor.Instrument === mentee.Instrument &&
-               mentor["Online or In-Person"] === mentee["Online or In-Person"] &&
-               commonTimeSlots;
-      });
+      return mentorTimeSlots.find(slot => menteeTimeSlots.some(mSlot => mSlot.day === slot.day && mSlot.time === slot.time));
     };
 
     mentees.forEach(mentee => {
-      const mentor = findMatchingMentor(mentee);
+      const mentor = mentors.find(m => m.Instrument === mentee.Instrument && m["Online or In-Person"] === mentee["Online or In-Person"] && findCommonTimeSlot(m, mentee));
       if (mentor) {
+        const commonTimeSlot = findCommonTimeSlot(mentor, mentee);
         pairings.push({
           mentorName: mentor["Name (First, Last)"],
           mentorContact: mentor["Phone Number or Preferred Method of Contact Info"],
@@ -99,22 +94,21 @@ app.post('/upload', upload.single('file'), (req, res) => {
           menteeContact: mentee["Phone Number or Preferred Method of Contact Info"],
           mentorInstrument: mentor.Instrument,
           menteeInstrument: mentee.Instrument,
-          timeOfLesson: getTimeSlots(mentor).join(', '),
+          timeOfLesson: `${commonTimeSlot.day}, ${commonTimeSlot.time}`,
           inPersonOrOnline: mentor["Online or In-Person"]
         });
-
         mentor["How many Lessons can you give a week? (For Mentors Only)"] -= 1;
-        if (mentor["How many Lessons can you give a week? (For Mentors Only)"] === 0) {
+        if (mentor["How many Lessons can you give a week? (For Mentors Only)"] <= 0) {
           mentors = mentors.filter(m => m !== mentor);
         }
       } else {
-        unmatchedMentees.push(mentee["Name (First, Last)"] || null);
+        unmatchedMentees.push(mentee);
       }
     });
 
     mentors.forEach(mentor => {
       if (mentor["How many Lessons can you give a week? (For Mentors Only)"] > 0) {
-        unmatchedMentors.push(mentor["Name (First, Last)"] || null);
+        unmatchedMentors.push(mentor);
       }
     });
 
