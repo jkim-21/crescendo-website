@@ -8,14 +8,6 @@ import {
   instrument,
   performance,
 
-  financeEvent,
-  wimEvent,
-  merionEvent, 
-  truleeEvent,
-  musubiEvent, 
-  heritageEvent,
-  colby2,
-
   chicagoTribune,
   dailyHerald,
   cwJam,
@@ -31,12 +23,14 @@ import {
   ucsb,
   stevenson,
   shslogo,
+
   ucsbcon1,
   ucsbcon2,
   nwcon1,
   colbycon1,
   nwcon2,
   nwcon3,
+  colby2,
 
 } from "../assets";
 

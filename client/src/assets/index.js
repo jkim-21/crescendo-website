@@ -2,7 +2,7 @@ import menu from "./menu.svg";
 import close from "./close.svg";
 import discount from "./Discount.svg";
 
-import logo from "./logo.png"
+import logo from "./c4c_logo.png"
 
 import instrumentDonation from "./instrument-donation.png"
 import nursingPerformance from "./nursing-performance.png";

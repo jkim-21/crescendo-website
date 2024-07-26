@@ -8,7 +8,7 @@ const News = ({ picture, title, description, link, watch}) => {
             <div className='relative'>
                 <img
                 src={picture}
-                alt='Feedback'
+                alt='{title} news article'
                 className='dark-color object-contain [aspect-ratio:1.354/1]'
                 />
                 <div className='absolute bottom-0 left-0 px-5 pt-3.5 min-w-[12rem] bg-white'>

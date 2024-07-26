@@ -17,6 +17,14 @@ module.exports = {
         spectral: ["Spectral", "sans-serif"],
         raleway: ["Raleway", "sans-serif"],
       },
+      screens: {
+        'navbar-custom': '1100px', // 
+      },
+    },
+    variants: {
+      extend: {
+        display: ['navbar-custom'],
+      },
     },
     screens: {
       sm: "530px",
