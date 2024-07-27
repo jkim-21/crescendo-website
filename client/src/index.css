@@ -687,13 +687,13 @@ body {
 .pairings-table th,
 .pairings-table td {
   padding: 10px;
-  border: 1px solid #007bff;
+  border: 1px solid #2954b3;
   text-align: left;
-  border-right: 1px solid #007bff;
+  border-right: 1px solid #2954b3;
 }
 
 .pairings-table th {
-  background-color: #007bff;
+  background-color: #2954b3;
   color: white;
 }
 
@@ -760,9 +760,13 @@ body {
 .choose-different-file-button {
   padding: 0.5rem 1rem;
   background-color: #e0e0e0;
+
   color: #333;
+
   border: none;
+
   border-radius: 4px;
+
   cursor: pointer;
   margin-top: 1rem;
 }
@@ -780,4 +784,39 @@ body {
   justify-content: center;
   margin-top: 5.5rem;
   padding: 0 2rem;
+}
+
+.message {
+  color: white;
+}
+
+.table-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.download-button {
+  background-color: #2954b3; /* Blue background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 10px 20px; /* Some padding */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Make the button inline-block */
+  font-size: 16px; /* Increase font size */
+  margin: 10px 2px; /* Add some margin */
+  cursor: pointer; /* Add a pointer cursor on hover */
+  border-radius: 12px; /* Rounded corners */
+}
+
+.download-button:hover {
+  background-color: #002f5c; /* Darker blue on hover */
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Adjust as needed */
 }
