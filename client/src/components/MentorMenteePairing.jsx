@@ -4,6 +4,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
 import Navbar from './Navbar';
 import { utils, writeFile } from 'xlsx';
+import '../index.css'; // Ensure to import the CSS
 
 const MentorMenteePairing = () => {
   const [file, setFile] = useState(null);
@@ -48,7 +49,11 @@ const MentorMenteePairing = () => {
         setPairings(response.data.pairings);
         setUnmatchedMentees(response.data.unmatchedMentees);
         setUnmatchedMentors(response.data.unmatchedMentors);
-        setMessage("File uploaded successfully!");
+        if (response.data.pairings.length === 0) {
+          setMessage("There are no perfect mentor-mentee pairs, please manually review your responses.");
+        } else {
+          setMessage("");
+        }
       } else {
         setMessage("Unexpected response structure");
       }
@@ -66,7 +71,7 @@ const MentorMenteePairing = () => {
     writeFile(workbook, filename);
   };
 
-  const renderTableRows = (data, isPairing = false, type = '') => {
+  const renderTableRows = (data, isPairing = false, type = '', showSpots = true) => {
     return data.map((item, index) => (
       <tr key={index}>
         <td>{isPairing ? item.mentorName : item["Name (First, Last)"]}</td>
@@ -87,14 +92,16 @@ const MentorMenteePairing = () => {
               .join(', ')}
           </td>
         )}
-        {type === 'Mentor' && <td>{item["How many Lessons can you give a week? (For Mentors Only)"]}</td>}
+        {!isPairing && showSpots && type === 'Mentor' && <td>{item["How many Lessons can you give a week? (For Mentors Only)"]}</td>}
+        {!isPairing && showSpots && type === 'Mentee' && <td></td>}
       </tr>
     ));
   };
 
-  return (      
-      <div>
-        <Navbar/>
+  return (
+    <>
+      <Navbar pageStyles="" />
+      <div className="page-container">
         <div className="mentor-mentee-matching">
           {pairings.length === 0 ? (
             <div {...getRootProps({ className: 'dropzone' })}>
@@ -107,7 +114,7 @@ const MentorMenteePairing = () => {
                   <>
                     {!file && !uploading && (
                       <div>
-                        <p>Drag & Drop a .xlsx (excel) file containing your Mentors and Mentees</p>
+                        <p>Generate a .xslx file from your google form Mentor/Mentee responses and drop that file here!</p>
                         <p><span className="or">OR</span></p>
                         <button className="text-button-white" onClick={open}>Click to Browse File</button>
                       </div>
@@ -137,8 +144,10 @@ const MentorMenteePairing = () => {
           ) : (
             <>
               <div className="pairings">
-                <h2>Matched Mentor-Mentee Pairs</h2>
-                <button onClick={() => jsonToXLSX(pairings, 'pairings.xlsx')}>Download Matched Pairs as XLSX</button>
+                <div className="header-container">
+                  <h2 className="table-title">Matched Mentor-Mentee Pairs</h2>
+                  <button className="download-button" onClick={() => jsonToXLSX(pairings, 'pairings.xlsx')}>Download Matched Pairs as XLSX</button>
+                </div>
                 {pairings.length > 0 ? (
                   <table className="pairings-table">
                     <thead>
@@ -162,8 +171,10 @@ const MentorMenteePairing = () => {
                 )}
               </div>
               <div className="unmatched">
-                <h2>Unmatched Mentors and Mentees</h2>
-                <button onClick={() => jsonToXLSX([...unmatchedMentees, ...unmatchedMentors], 'unmatched.xlsx')}>Download Unmatched as XLSX</button>
+                <div className="header-container">
+                  <h2 className="table-title">Unmatched Mentors and Mentees</h2>
+                  <button className="download-button" onClick={() => jsonToXLSX([...unmatchedMentees, ...unmatchedMentors], 'unmatched.xlsx')}>Download Unmatched as XLSX</button>
+                </div>
                 {unmatchedMentees.length > 0 || unmatchedMentors.length > 0 ? (
                   <table className="pairings-table">
                     <thead>
@@ -178,8 +189,8 @@ const MentorMenteePairing = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {renderTableRows(unmatchedMentees, false, 'Mentee')}
-                      {renderTableRows(unmatchedMentors, false, 'Mentor')}
+                      {renderTableRows(unmatchedMentees, false, 'Mentee', true)}
+                      {renderTableRows(unmatchedMentors, false, 'Mentor', true)}
                     </tbody>
                   </table>
                 ) : (
@@ -189,10 +200,11 @@ const MentorMenteePairing = () => {
             </>
           )}
           {message && <p className="message">{message}</p>}
-          
         </div>
       </div>
+    </>
   );
 };
 
 export default MentorMenteePairing;
+
