@@ -7,7 +7,6 @@ const UnmatchedTable = ({ unmatchedMentees, unmatchedMentors }) => {
     <div className="unmatched w-full max-w-5xl bg-white p-8 rounded-lg shadow-lg mt-8">
       <div className="header-container flex justify-between items-center mb-8">
         <h2 className="table-title text-xl font-bold">Unmatched Mentors and Mentees</h2>
-        <button className="download-button p-2 bg-blue-700 text-white rounded-md hover:bg-blue-800" onClick={() => jsonToXLSX([...unmatchedMentees, ...unmatchedMentors], 'unmatched.xlsx')}>Download Unmatched as XLSX</button>
       </div>
       {unmatchedMentees.length > 0 || unmatchedMentors.length > 0 ? (
         <table className="pairings-table w-full border-collapse mt-4">
