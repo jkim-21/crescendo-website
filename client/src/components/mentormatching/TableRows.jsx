@@ -13,13 +13,15 @@ const TableRows = ({ data, isPairing, type, showSpots }) => {
       {isPairing && <td>{item.inPersonOrOnline}</td>}
       {!isPairing && <td>{type}</td>}
       {!isPairing && (
-        <td>
-          {[
-            'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
-          ].map(day => item[`When are you available for lessons (EST)? Please select times that work for you!  [${day}]`])
-            .filter(Boolean)
-            .join(', ')}
-        </td>
+        <>
+          <td>{item["When are you available for lessons (EST)? Please select times that work for you!  [Monday]"]}</td>
+          <td>{item["When are you available for lessons (EST)? Please select times that work for you!  [Tuesday]"]}</td>
+          <td>{item["When are you available for lessons (EST)? Please select times that work for you!  [Wednesday]"]}</td>
+          <td>{item["When are you available for lessons (EST)? Please select times that work for you!  [Thursday]"]}</td>
+          <td>{item["When are you available for lessons (EST)? Please select times that work for you!  [Friday]"]}</td>
+          <td>{item["When are you available for lessons (EST)? Please select times that work for you!  [Saturday]"]}</td>
+          <td>{item["When are you available for lessons (EST)? Please select times that work for you!  [Sunday]"]}</td>
+        </>
       )}
       {!isPairing && showSpots && type === 'Mentor' && <td>{item["How many Lessons can you give a week? (For Mentors Only)"]}</td>}
       {!isPairing && showSpots && type === 'Mentee' && <td></td>}
