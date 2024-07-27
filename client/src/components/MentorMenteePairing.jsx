@@ -1,10 +1,12 @@
 import React, { useState, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
 import Navbar from './Navbar';
+import { useDropzone } from 'react-dropzone';
+import FileUpload from './mentormatching/FileUpload';
+import MatchedPairsTable from './mentormatching/MatchedPairsTable';
+import UnmatchedTable from './mentormatching/UnmatchedTable';
 import { utils, writeFile } from 'xlsx';
-import '../index.css'; // Ensure to import the CSS
+import '../index.css';
 
 const MentorMenteePairing = () => {
   const [file, setFile] = useState(null);
@@ -71,135 +73,30 @@ const MentorMenteePairing = () => {
     writeFile(workbook, filename);
   };
 
-  const renderTableRows = (data, isPairing = false, type = '', showSpots = true) => {
-    return data.map((item, index) => (
-      <tr key={index}>
-        <td>{isPairing ? item.mentorName : item["Name (First, Last)"]}</td>
-        <td>{isPairing ? item.mentorContact : item["Phone Number or Preferred Method of Contact Info"]}</td>
-        <td>{isPairing ? item.menteeName : item.Instrument}</td>
-        <td>{isPairing ? item.menteeContact : item["Online or In-Person"]}</td>
-        {isPairing && <td>{item.mentorInstrument}</td>}
-        {isPairing && <td>{item.menteeInstrument}</td>}
-        {isPairing && <td>{item.timeOfLesson}</td>}
-        {isPairing && <td>{item.inPersonOrOnline}</td>}
-        {!isPairing && <td>{type}</td>}
-        {!isPairing && (
-          <td>
-            {[
-              'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
-            ].map(day => item[`When are you available for lessons (EST)? Please select times that work for you!  [${day}]`])
-              .filter(Boolean)
-              .join(', ')}
-          </td>
-        )}
-        {!isPairing && showSpots && type === 'Mentor' && <td>{item["How many Lessons can you give a week? (For Mentors Only)"]}</td>}
-        {!isPairing && showSpots && type === 'Mentee' && <td></td>}
-      </tr>
-    ));
-  };
-
   return (
     <>
       <Navbar pageStyles="" />
       <div className="page-container">
-        <div className="mentor-mentee-matching">
+        <div className="mentor-mentee-matching flex flex-col items-center justify-center bg-blue-900 mt-20 p-8">
           {pairings.length === 0 ? (
-            <div {...getRootProps({ className: 'dropzone' })}>
-              <input {...getInputProps()} />
-              <div className="dropzone-content text-white">
-                <CloudUploadIcon style={{ fontSize: '4rem', color: 'white' }} />
-                {isDragActive ? (
-                  <p>Drop the file here...</p>
-                ) : (
-                  <>
-                    {!file && !uploading && (
-                      <div>
-                        <p>Generate a .xslx file from your google form Mentor/Mentee responses and drop that file here!</p>
-                        <p><span className="or">OR</span></p>
-                        <button className="text-button-white" onClick={open}>Click to Browse File</button>
-                      </div>
-                    )}
-                    {file && !uploading && (
-                      <>
-                        <p>{file.name}</p>
-                        <button className="upload-button" onClick={handleFileUpload}>Upload File</button>
-                        <button 
-                          className="choose-different-file-button" 
-                          onClick={() => setFile(null)}
-                          style={{ background: 'none', border: 'none', color: 'gray', marginTop: '20px' }}
-                        >
-                          Choose a Different File
-                        </button>
-                      </>
-                    )}
-                    {uploading && (
-                      <div className="uploading text-white" style={{ textAlign: 'center' }}>
-                        <p>Uploading...</p>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            </div>
+            <FileUpload
+              onDrop={onDrop}
+              file={file}
+              uploading={uploading}
+              open={open}
+              getRootProps={getRootProps}
+              getInputProps={getInputProps}
+              isDragActive={isDragActive}
+              setFile={setFile}
+              handleFileUpload={handleFileUpload}
+            />
           ) : (
             <>
-              <div className="pairings">
-                <div className="header-container">
-                  <h2 className="table-title">Matched Mentor-Mentee Pairs</h2>
-                  <button className="download-button" onClick={() => jsonToXLSX(pairings, 'pairings.xlsx')}>Download Matched Pairs as XLSX</button>
-                </div>
-                {pairings.length > 0 ? (
-                  <table className="pairings-table">
-                    <thead>
-                      <tr>
-                        <th>Mentor Name</th>
-                        <th>Mentor Contact</th>
-                        <th>Mentee Name</th>
-                        <th>Mentee Contact</th>
-                        <th>Mentor Instrument</th>
-                        <th>Mentee Instrument</th>
-                        <th>Time of Lesson (day, time)</th>
-                        <th>In-Person or Online</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {renderTableRows(pairings, true)}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p>No pairings found.</p>
-                )}
-              </div>
-              <div className="unmatched">
-                <div className="header-container">
-                  <h2 className="table-title">Unmatched Mentors and Mentees</h2>
-                  <button className="download-button" onClick={() => jsonToXLSX([...unmatchedMentees, ...unmatchedMentors], 'unmatched.xlsx')}>Download Unmatched as XLSX</button>
-                </div>
-                {unmatchedMentees.length > 0 || unmatchedMentors.length > 0 ? (
-                  <table className="pairings-table">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Contact Info</th>
-                        <th>Instrument</th>
-                        <th>Preferred Lesson Mode</th>
-                        <th>Type</th>
-                        <th>Available Times</th>
-                        <th>Available Spots</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {renderTableRows(unmatchedMentees, false, 'Mentee', true)}
-                      {renderTableRows(unmatchedMentors, false, 'Mentor', true)}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p>No unmatched mentors or mentees.</p>
-                )}
-              </div>
+              <MatchedPairsTable pairings={pairings} />
+              <UnmatchedTable unmatchedMentees={unmatchedMentees} unmatchedMentors={unmatchedMentors} />
             </>
           )}
-          {message && <p className="message">{message}</p>}
+          {message && <p className="message text-white mt-4">{message}</p>}
         </div>
       </div>
     </>
@@ -207,4 +104,3 @@ const MentorMenteePairing = () => {
 };
 
 export default MentorMenteePairing;
-
