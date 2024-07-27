@@ -9,7 +9,7 @@ const chapters = {
   colby, harvard, northwestern, stevenson, ucsb
 }
 
-const chapterPage = () => {
+const ChapterPage = () => {
   let {chapterName} = useParams();
   const chapterData = chapters[chapterName];
 
@@ -28,7 +28,7 @@ const chapterPage = () => {
           </div>
         </div>
         <div className={`${styles.flexCenter} bg-no-repeat h-[25rem] w-full`}>
-          <h1 className={`chapter-text-shadow font-medium text-[2.5rem] leading-[44.25rem] font-raleway text-white`}>
+          <h1 className={`chapter-text-shadow font-medium text-[2.5rem] leading-[44.25rem] text-white`}>
           {chapterData.header}</h1>
         </div>
       </div>
@@ -72,4 +72,4 @@ const chapterPage = () => {
   )
 }
 
-export default chapterPage;
+export default ChapterPage;

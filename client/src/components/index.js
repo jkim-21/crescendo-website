@@ -17,7 +17,7 @@ import Events from "./Events"
 import YoutubeVideo from "./YoutubeVideo"
 import AnimationLayout from "./AnimationLayout"
 import News from "./News"
-import MentorMenteeMatching from "./MentorMenteeMatching"
+import MentorMenteePairing from "./MentorMenteePairing"
 
 
 
@@ -41,5 +41,5 @@ export {
     YoutubeVideo,
     AnimationLayout,
     News,
-    MentorMenteeMatching,
+    MentorMenteePairing,
 }

@@ -4,7 +4,6 @@ import { AboutUs, Chapters, Footer, Hero, Navbar, Impact, DonationForm, QueryPro
 import { styles } from './style';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './themes/theme';
-import { AuthProvider } from './AuthContext';  // Adjust the import path if necessary
 
 const App = () => {
   return (

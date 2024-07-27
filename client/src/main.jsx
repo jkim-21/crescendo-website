@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import ChapterPage from "./pages/ChapterPage";
-import MentorMenteeMatching from "./components/MentorMenteeMatching";
-import { AuthProvider } from './AuthContext';
-import ProtectedRoute from './ProtectedRoute';
+import MentorMenteeMatchingPage from "./pages/MentorMenteePage";
+import EmailOutreachPage from "./pages/EmailOutreachPage";
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './routes/ProtectedRoute';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -16,13 +17,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/chapters/:chapterName",
-    element: <ChapterPage />,
+    element: <ChapterPage/>,
   },
   {
-    path: "/mentor-mentee-matching",
-    element: <ProtectedRoute><MentorMenteeMatching /></ProtectedRoute>,
+    path: "/tools/mentor-mentee-matching-system",
+    element: <ProtectedRoute><MentorMenteeMatchingPage/></ProtectedRoute>,
   },
-
+  {
+    path: "/tools/email-outreach-system",
+    element: <ProtectedRoute><EmailOutreachPage/></ProtectedRoute>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

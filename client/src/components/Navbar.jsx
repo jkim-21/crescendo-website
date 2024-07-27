@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styles } from '../style.js';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../context/AuthContext.jsx';
 
 const Navbar = ({ pageStyles }) => {
   const [toggle, setToggle] = useState(false);
@@ -14,6 +14,39 @@ const Navbar = ({ pageStyles }) => {
   const [error, setError] = useState(null);
   const { user, setUser, logout } = useAuth();
   const navigate = useNavigate();
+
+  const showDropdown = (nav) => {
+    if (nav.dropdown) {
+      setActiveDropdownId(nav.id);
+    }
+  };
+
+  const hideDropdown = () => {
+    setActiveDropdownId(null);
+  };
+
+  const getDropdownItems = (navId) => {
+    if (navId === 'chapters') {
+      return chapters;
+    } else if (navId === 'tools') {
+      return tools;
+    }
+    return [];
+  };
+
+  const handleToolClick = (link) => {
+    if (!user) {
+      handleGoogleSignIn();
+    } else {
+      navigate(link);
+    }
+  };
+
+  useEffect(() => {
+    if (error) {
+      alert(error); // Simple error handling, you can improve this
+    }
+  }, [error]);
 
   const handleGoogleSignIn = async () => {
     const auth = getAuth();
@@ -44,39 +77,6 @@ const Navbar = ({ pageStyles }) => {
     }
   };
 
-  useEffect(() => {
-    if (error) {
-      alert(error); // Simple error handling, you can improve this
-    }
-  }, [error]);
-
-  const showDropdown = (nav) => {
-    if (nav.dropdown) {
-      setActiveDropdownId(nav.id);
-    }
-  };
-
-  const hideDropdown = () => {
-    setActiveDropdownId(null);
-  };
-
-  const getDropdownItems = (navId) => {
-    if (navId === 'chapters') {
-      return chapters;
-    } else if (navId === 'tools') {
-      return tools;
-    }
-    return [];
-  };
-
-  const handleToolClick = (link) => {
-    if (!user) {
-      handleGoogleSignIn();
-    } else {
-      navigate(link);
-    }
-  };
-
   return (
     <nav className='sticky top-0 z-50 flex justify-between items-center bg-dark shadow-md py-[0.75rem]'>
       <div className={`${styles.boxWidth} flex justify-between m-auto navbar`}>
@@ -84,40 +84,44 @@ const Navbar = ({ pageStyles }) => {
           <img src={logo} alt='Crescendo for a Cause logo' className={`${pageStyles} w-[auto] h-[4.75rem]`} />
         </HashLink>
         <ul className={`hidden justify-end items-center list-none relative navbar-custom:flex`}>
-          {navLinks.map((nav, i) => {
-            if (nav.id === 'tools' && !user) return null; // Skip rendering the tools dropdown if the user is not logged in
-            return (
-              <li
-                key={nav.id}
-                id={`nav-item-${nav.id}`}
-                onMouseEnter={() => showDropdown(nav)}
-                onMouseLeave={hideDropdown}
-                className={`navbar-item ${nav.dropdown ? 'dropdown-item' : 'navlink'} font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
-                <div className={`${pageStyles} ${nav.dropdown && 'pb-3'}`}>
-                  <HashLink
-                    to={`/#${nav.id}`}
-                    scroll={(el) => setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30)}
-                    className={`${nav.dropdown && 'pointer-events-none lg:pointer-events-auto'}`}>
-                    {nav.title}
-                  </HashLink>
-                  {nav.dropdown && <ExpandMoreIcon />}
+          {navLinks.map((nav, i) => (
+            <li
+              key={nav.id}
+              id={`nav-item-${nav.id}`}
+              onMouseEnter={() => showDropdown(nav)}
+              onMouseLeave={hideDropdown}
+              className={`navbar-item ${nav.dropdown ? 'dropdown-item' : 'navlink'} font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
+              <div className={`${pageStyles} ${nav.dropdown && 'pb-3'}`}>
+                <HashLink
+                  to={`/#${nav.id}`}
+                  scroll={(el) => setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30)}
+                  className={`${nav.dropdown && 'pointer-events-none lg:pointer-events-auto'}`}>
+                  {nav.title}
+                </HashLink>
+                {nav.dropdown && <ExpandMoreIcon />}
+              </div>
+              {nav.dropdown && (
+                <div className={`${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation dropdown-background dropdown absolute dark-color rounded py-[1rem] px-[0.5rem] cursor-default shadow-2xl 
+                                lg:px-[1rem]`}>
+                  {nav.id === 'tools' && (
+                    <p className='text-blue-800 mb-[0.5rem] text-center'>
+                      Note: Tools can only be accessed by organization staff
+                    </p>
+                  )}
+                  {getDropdownItems(nav.id).map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => nav.id === 'tools' ? handleToolClick(item.link) : navigate(item.link)}
+                      className={`${nav.id === 'tools' ? 'mb-[0.5rem]' : ''} dropdown-link`}>
+                      {item.name}
+                    </button>
+                  ))}
                 </div>
-                {nav.dropdown && (
-                  <div className={`${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation dropdown-background dropdown absolute dark-color rounded py-[1rem] px-[0.5rem] cursor-default shadow-2xl lg:px-[1rem]`}>
-                    {getDropdownItems(nav.id).map((item) => (
-                      <button
-                        key={item.id}
-                        onClick={() => nav.id === 'tools' ? handleToolClick(item.link) : navigate(item.link)}
-                        className='dropdown-link'>
-                        {item.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </li>
-            );
-          })}
-          <li className='navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1'>
+              )}
+
+            </li>
+          ))}
+          <li className={`${pageStyles} navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
             {user ? (
               <button onClick={handleLogout}>Logout</button>
             ) : (

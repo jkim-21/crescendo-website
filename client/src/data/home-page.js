@@ -271,9 +271,17 @@ export const chapters = [
   },
 ];
 
-
 export const tools = [
-  {id: "matching", name: "Mentor-Mentee Matching", link: '/mentor-mentee-matching'},
+  {
+    id: "matching", 
+    name: "Mentor-Mentee Matching System", 
+    link: '/tools/mentor-mentee-matching-system'
+  },
+  {
+    id: "email-finder",
+    name: "Email Outreach System",
+    link: '/tools/email-outreach-system'
+  }
 ];
 
 
