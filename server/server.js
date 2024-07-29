@@ -1,13 +1,13 @@
-import Stripe from 'stripe';
-import express, { json } from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import createStripeRoutes from './routes/stripe.js';
-import mongoose from 'mongoose';
-import multer from 'multer';
-import xlsx from 'xlsx';
-import fs from 'fs';
-import mysqlRoutes from './routes/mysql.js';
+import Stripe from "stripe";
+import express, { json } from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import createStripeRoutes from "./routes/stripe.js";
+import mongoose from "mongoose";
+import multer from "multer";
+import xlsx from "xlsx";
+import fs from "fs";
+import mysqlRoutes from "./routes/mysql.js";
 
 dotenv.config();
 
@@ -17,11 +17,11 @@ const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 const stripeRoutes = createStripeRoutes(stripe);
 
 const corsOptions = {
-  origin: ['https://crescendoforacause.com', 'http://localhost:5173'],
+  origin: ["https://crescendoforacause.com", "http://localhost:5173"],
   optionsSuccessStatus: 200,
   credentials: true,
-  methods: ['POST', 'GET', 'PUT'],
-  allowedHeaders: ['Content-Type'],
+  methods: ["POST", "GET", "PUT"],
+  allowedHeaders: ["Content-Type"],
 };
 
 const uri = `mongodb+srv://jjkjon21:${process.env.DATABASE_PASSWORD}@crescendowebsite.ssxyrz4.mongodb.net/?retryWrites=true&w=majority&appName=CrescendoWebsite`;
@@ -29,7 +29,7 @@ const uri = `mongodb+srv://jjkjon21:${process.env.DATABASE_PASSWORD}@crescendowe
 async function connect() {
   try {
     await mongoose.connect(uri);
-    console.log('Connected to MongoDB');
+    console.log("Connected to MongoDB");
   } catch (error) {
     console.log(error);
   }
@@ -37,14 +37,14 @@ async function connect() {
 
 connect();
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: "uploads/" });
 
 app.use(cors(corsOptions));
 app.use(json());
 app.use(stripeRoutes);
-app.use('/api', mysqlRoutes);
+app.use("/api", mysqlRoutes);
 
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post("/upload", upload.single("file"), (req, res) => {
   try {
     console.log("File received:", req.file);
     const filePath = req.file.path;
@@ -55,8 +55,12 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
     console.log("Parsed data:", data);
 
-    let mentors = data.filter(person => person["Mentor or Mentee"] === "Mentor");
-    const mentees = data.filter(person => person["Mentor or Mentee"] === "Mentee");
+    let mentors = data.filter(
+      (person) => person["Mentor or Mentee"] === "Mentor"
+    );
+    const mentees = data.filter(
+      (person) => person["Mentor or Mentee"] === "Mentee"
+    );
 
     console.log("Mentors:", mentors);
     console.log("Mentees:", mentees);
@@ -68,11 +72,22 @@ app.post('/upload', upload.single('file'), (req, res) => {
     const getTimeSlots = (person) => {
       if (!person) return [];
       const timeSlots = [];
-      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const days = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ];
       days.forEach((day, index) => {
-        const dayColumn = String.fromCharCode('F'.charCodeAt(0) + index);
-        const times = person[`When are you available for lessons (EST)? Please select times that work for you!  [${day}]`]?.split('; ') || [];
-        times.forEach(time => {
+        const dayColumn = String.fromCharCode("F".charCodeAt(0) + index);
+        const times =
+          person[
+            `When are you available for lessons (EST)? Please select times that work for you!  [${day}]`
+          ]?.split("; ") || [];
+        times.forEach((time) => {
           timeSlots.push({ day, time });
         });
       });
@@ -82,34 +97,50 @@ app.post('/upload', upload.single('file'), (req, res) => {
     const findCommonTimeSlot = (mentor, mentee) => {
       const mentorTimeSlots = getTimeSlots(mentor);
       const menteeTimeSlots = getTimeSlots(mentee);
-      return mentorTimeSlots.find(slot => menteeTimeSlots.some(mSlot => mSlot.day === slot.day && mSlot.time === slot.time));
+      return mentorTimeSlots.find((slot) =>
+        menteeTimeSlots.some(
+          (mSlot) => mSlot.day === slot.day && mSlot.time === slot.time
+        )
+      );
     };
 
-    mentees.forEach(mentee => {
-      const mentor = mentors.find(m => m.Instrument === mentee.Instrument && m["Online or In-Person"] === mentee["Online or In-Person"] && findCommonTimeSlot(m, mentee));
+    mentees.forEach((mentee) => {
+      const mentor = mentors.find(
+        (m) =>
+          m.Instrument === mentee.Instrument &&
+          m["Online or In-Person"] === mentee["Online or In-Person"] &&
+          findCommonTimeSlot(m, mentee)
+      );
       if (mentor) {
         const commonTimeSlot = findCommonTimeSlot(mentor, mentee);
         pairings.push({
           mentorName: mentor["Name (First, Last)"],
-          mentorContact: mentor["Phone Number or Preferred Method of Contact Info"],
+          mentorContact:
+            mentor["Phone Number or Preferred Method of Contact Info"],
           menteeName: mentee["Name (First, Last)"],
-          menteeContact: mentee["Phone Number or Preferred Method of Contact Info"],
+          menteeContact:
+            mentee["Phone Number or Preferred Method of Contact Info"],
           mentorInstrument: mentor.Instrument,
           menteeInstrument: mentee.Instrument,
           timeOfLesson: `${commonTimeSlot.day}, ${commonTimeSlot.time}`,
-          inPersonOrOnline: mentor["Online or In-Person"]
+          inPersonOrOnline: mentor["Online or In-Person"],
         });
         mentor["How many Lessons can you give a week? (For Mentors Only)"] -= 1;
-        if (mentor["How many Lessons can you give a week? (For Mentors Only)"] <= 0) {
-          mentors = mentors.filter(m => m !== mentor);
+        if (
+          mentor["How many Lessons can you give a week? (For Mentors Only)"] <=
+          0
+        ) {
+          mentors = mentors.filter((m) => m !== mentor);
         }
       } else {
         unmatchedMentees.push(mentee);
       }
     });
 
-    mentors.forEach(mentor => {
-      if (mentor["How many Lessons can you give a week? (For Mentors Only)"] > 0) {
+    mentors.forEach((mentor) => {
+      if (
+        mentor["How many Lessons can you give a week? (For Mentors Only)"] > 0
+      ) {
         unmatchedMentors.push(mentor);
       }
     });
@@ -122,7 +153,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
     res.json({ pairings, unmatchedMentees, unmatchedMentors });
   } catch (error) {
     console.error("Error processing file:", error);
-    res.status(500).send('An error occurred while processing the file.');
+    res.status(500).send("An error occurred while processing the file.");
   }
 });
 

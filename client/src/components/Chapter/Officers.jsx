@@ -1,11 +1,11 @@
 import React from 'react'
-import {styles} from "../style"
-import { placeholder } from '../assets'
+import {styles} from "../../style"
+import { placeholder } from '../../assets'
 
 const Officers = ({name, title, headshot}) => {
     return (
         <div className='whitespace-nowrap flex flex-col max-w-[23.125rem] w-[60%]
-                        sm:w-[60%] md:w-[30%] lg:w-[20%]'>
+                        sm:basis-[60%] md:basis-[31%] lg:basis-[22%]'>
             {headshot && 
                 <img 
                 src={headshot} 

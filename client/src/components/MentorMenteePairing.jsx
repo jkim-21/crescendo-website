@@ -2,9 +2,9 @@ import React, { useState, useCallback } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
 import { useDropzone } from 'react-dropzone';
-import FileUpload from './mentormatching/FileUpload';
-import MatchedPairsTable from './mentormatching/MatchedPairsTable';
-import UnmatchedTable from './mentormatching/UnmatchedTable';
+import FileUpload from './MentorMatching/FileUpload';
+import MatchedPairsTable from './MentorMatching/MatchedPairsTable';
+import UnmatchedTable from './MentorMatching/UnmatchedTable';
 import { utils, writeFile } from 'xlsx';
 import '../index.css';
 
@@ -76,29 +76,28 @@ const MentorMenteePairing = () => {
   return (
     <>
       <Navbar pageStyles="" />
-      <div className="page-container">
-        <div className="mentor-mentee-matching flex flex-col items-center justify-center bg-blue-900 mt-20 p-8">
-          {pairings.length === 0 ? (
-            <FileUpload
-              onDrop={onDrop}
-              file={file}
-              uploading={uploading}
-              open={open}
-              getRootProps={getRootProps}
-              getInputProps={getInputProps}
-              isDragActive={isDragActive}
-              setFile={setFile}
-              handleFileUpload={handleFileUpload}
-            />
-          ) : (
-            <>
-              <MatchedPairsTable pairings={pairings} />
-              <UnmatchedTable unmatchedMentees={unmatchedMentees} unmatchedMentors={unmatchedMentors} />
-            </>
-          )}
-          {message && <p className="message text-white mt-4">{message}</p>}
-        </div>
+      <div className="mentor-mentee-matching flex flex-col items-center justify-center bg-blue-900 mt-20 p-8">
+        {pairings.length === 0 ? (
+          <FileUpload
+            onDrop={onDrop}
+            file={file}
+            uploading={uploading}
+            open={open}
+            getRootProps={getRootProps}
+            getInputProps={getInputProps}
+            isDragActive={isDragActive}
+            setFile={setFile}
+            handleFileUpload={handleFileUpload}
+          />
+        ) : (
+          <>
+            <MatchedPairsTable pairings={pairings} />
+            <UnmatchedTable unmatchedMentees={unmatchedMentees} unmatchedMentors={unmatchedMentors} />
+          </>
+        )}
+        {message && <p className="message text-white mt-4">{message}</p>}
       </div>
+
     </>
   );
 };

@@ -1,4 +1,4 @@
-import {CardContent, Typography, OutlinedInput, Button, Box, CircularProgress, Alert, Card} from "@mui/material";
+import {CardContent, Typography, OutlinedInput, Button, Box, CircularProgress, Alert} from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useState, React } from "react";
 import { motion } from "framer-motion";

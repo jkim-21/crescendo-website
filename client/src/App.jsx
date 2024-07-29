@@ -16,7 +16,7 @@ const App = () => {
                 <Hero />
               </div>
             </div>
-            <div className={`${styles.flexStart} bg-beige-color`}>
+            <div className={`${styles.flexStart} beige-bg`}>
               <div className={`${styles.boxWidth}`}>
                 <Impact />
               </div>
@@ -30,7 +30,7 @@ const App = () => {
                 </ThemeProvider>
               </div>
             </div>
-            <div className={`${styles.flexStart} bg-beige-color`}>
+            <div className={`${styles.flexStart} beige-bg`}>
               <div className={`${styles.boxWidth}`}>
                 <Work />
               </div>
@@ -40,7 +40,7 @@ const App = () => {
                 <AboutUs />
               </div>
             </div>
-            <div className={`${styles.flexStart} bg-beige-color`}>
+            <div className={`${styles.flexStart} beige-bg`}>
               <div className={`${styles.boxWidth}`}>
                 <Chapters />
               </div>

@@ -43,7 +43,6 @@ const StripeForm = ({ client_secret, amount, handlePaymentClear, handleConfirmPa
                     </Button>
                     <Typography 
                     variant="h5" 
-                    mb={3} 
                     align='center' 
                     fontWeight='500'
                     sx={{pt: 2, pb: 3, px: 3, mb: 4}}
@@ -52,7 +51,7 @@ const StripeForm = ({ client_secret, amount, handlePaymentClear, handleConfirmPa
                     </Typography>
                 </Box>
                 <div className='flex-grow block overflow-scroll p-1 mb-5'>
-                    <PaymentElement className='text-[50rem]'/>
+                    <PaymentElement/>
                 </div>
                 <Box sx={{display: 'flex', justifyContent: 'flex-end', width: '100%', flexShrink: 0}}>
                     <div className='flex flex-col items-end'>

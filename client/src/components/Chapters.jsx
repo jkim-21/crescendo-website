@@ -8,11 +8,13 @@ const Chapters = () => {
   return (
     <section 
       id="chapters" 
-      className={`${styles.paddingY} m-auto lg:w-[75%] lgs:w-[60%]`}>
+      className={`${styles.paddingY} m-auto 
+                lg:w-[75%] lgs:w-[60%]`}>
       <h1 className={`${styles.heading1} dark-color text-center mb-[2rem] lg:mb-[4.5rem]`}>
         Chapters
       </h1>
-      <div className='grid grid-cols-2 gap-x-[3rem] gap-y-[2rem] md:grid-cols-[repeat(3,_1fr)] lg:gap-x-[3rem] lg:gap-y-[3rem]'>
+      <div className='grid grid-cols-2 gap-x-[3rem] gap-y-[2rem] grid-centered
+                      md:grid-cols-[repeat(3,_1fr)] lg:gap-x-[3rem] lg:gap-y-[3rem]'>
         {chapters.map((chapter) => (
           <Link key={chapter.id} to={chapter.link} className='block text-center'>
             <div className='mb-5'>

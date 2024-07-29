@@ -7,11 +7,11 @@ import Display from '../components/(damien testing)/Display'
 const EmailOutreachPage = () => {
     return (
         <>
-        <div className="page-container">
+        <div className>
             <Navbar/>
             <Routes>
                 <Route path="/" element={<DataFetchingComponent/>} />
-                <Route path="display/:schoolName" element={<div>Test</div>} />
+                <Route path="display/:schoolName" element={<Display/>}/>
             </Routes>
         </div>
         </>

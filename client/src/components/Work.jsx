@@ -10,11 +10,14 @@ const Work = () => {
       className={`${styles.paddingY} relative flex-col m-auto
                 lg:w-[80%]`}>
       <div className='flex flex-col justify-center items-center mb-[2rem] relative text-center
-                      lg:mb-[2.5rem]'>
-        <h2 className={`${styles.heading2} text-center mb-[0.5rem]`}>
+                      lg:mb-[2.5rem] lg:flex-row'>
+        <h2 className={`${styles.heading2} basis-[50%] mb-[0.5rem]
+                      lg:mb-0`}>
           Recent Events
         </h2>
-        <p className={`${styles.paragraph} dark-color w-full lg:mt-0`}>
+        <p className={`${styles.paragraph} basis-[50%] dark-color w-full
+                     lg:mt-0`}>
+          Here are just some of our recent activities & performances!
         </p>  
       </div>
       <div className='flex flex-wrap justify-center items-stretch gap-[2rem] mb-[4rem]'>

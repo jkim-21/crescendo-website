@@ -15,6 +15,9 @@ const Navbar = ({ pageStyles }) => {
   const { user, setUser, logout } = useAuth();
   const navigate = useNavigate();
 
+  const filteredNavLinks = user ? navLinks : navLinks.filter(nav => nav.id !== 'tools');
+
+
   const showDropdown = (nav) => {
     if (nav.dropdown) {
       setActiveDropdownId(nav.id);
@@ -78,86 +81,97 @@ const Navbar = ({ pageStyles }) => {
   };
 
   return (
-    <nav className='sticky top-0 z-50 flex justify-between items-center bg-dark shadow-md py-[0.75rem]'>
-      <div className={`${styles.boxWidth} flex justify-between m-auto navbar`}>
+    <nav className='dark-bg sticky top-0 z-50 shadow-md py-[0.75rem]'>
+      <div className={`${styles.boxWidth} flex justify-between m-auto`}>
         <HashLink to={`/#home`}>
-          <img src={logo} alt='Crescendo for a Cause logo' className={`${pageStyles} w-[auto] h-[4.75rem]`} />
+          <img 
+          src={logo} 
+          alt='Crescendo for a Cause logo' 
+          className={`${pageStyles} w-[auto] h-[4.75rem]`} />
         </HashLink>
-        <ul className={`hidden justify-end items-center list-none relative navbar-custom:flex`}>
-          {navLinks.map((nav, i) => {
-            if (nav.id === 'tools' && !user) return null; // Skip rendering the tools dropdown if the user is not logged in
-            return (
-              <li
-                key={nav.id}
-                id={`nav-item-${nav.id}`}
-                onMouseEnter={() => showDropdown(nav)}
-                onMouseLeave={hideDropdown}
-                className={`navbar-item ${nav.dropdown ? 'dropdown-item' : 'navlink'} font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
-                <div className={`${pageStyles} ${nav.dropdown && 'pb-3'}`}>
+        <ul className='hidden items-center list-none relative 
+                      navbar-custom:flex'>
+          {filteredNavLinks.map((nav, i) => (
+            <li
+              key={nav.id}
+              id={`nav-item-${nav.id}`}
+              onMouseEnter={() => showDropdown(nav)}
+              onMouseLeave={hideDropdown}
+              className={`${nav.dropdown ? 'dropdown-item' : 'nav-link'} navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
+                <div className={`${pageStyles} ${nav.dropdown ? 'pb-3' : null}`}>
+                  {nav.id === 'tools' ? (
+                    <Link
+                    to ={`/${nav.id}`}>
+                      {nav.title}
+                    </Link>
+                  ) : (
                   <HashLink
                     to={`/#${nav.id}`}
-                    scroll={(el) => setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30)}
-                    className={`${nav.dropdown && 'pointer-events-none lg:pointer-events-auto'}`}>
+                    scroll={(el) => 
+                      setTimeout(() => 
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start'}), 30)}
+                    className={`${nav.dropdown ? 'pointer-events-none lg:pointer-events-auto' : null}`}>
                     {nav.title}
                   </HashLink>
-                  {nav.dropdown && <ExpandMoreIcon />}
+                  )}
+                  {nav.dropdown ? <ExpandMoreIcon/> : null}
                 </div>
-                {nav.dropdown && (
-                  <div className={`${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation dropdown-background dropdown absolute dark-color rounded py-[1rem] px-[0.5rem] cursor-default shadow-2xl 
-                                  lg:px-[1rem]`}>
-                    {nav.id === 'tools'
-                      
-                    }
-                    {getDropdownItems(nav.id).map((item) => (
-                      <button
-                        key={item.id}
-                        onClick={() => nav.id === 'tools' ? handleToolClick(item.link) : navigate(item.link)}
-                        className={`${nav.id === 'tools' ? 'mb-[0.5rem]' : ''} dropdown-link`}>
-                        {item.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </li>
-            );
-          })}
+                {nav.dropdown ? 
+                (<div className={
+                  `${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation dropdown-background dropdown absolute dark-color rounded py-[1rem] px-[0.5rem] cursor-default shadow-2xl
+                  lg:px-[1rem]`}>
+                  {nav.id === 'tools' ? (
+                    <p className='text-blue-800 text-center mb-[0.5rem]'>
+                      Note: Tools can only be accessed by organization staff
+                    </p>
+                  ) : null}
+                  {getDropdownItems(nav.id).map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => nav.id === 'tools' ? handleToolClick(item.link) : navigate(item.link)}
+                      className={`${nav.id === 'tools' ? 'mb-[0.5rem]' : null} dropdown-link`}>
+                      {item.name}
+                    </button>
+                  ))}
+                </div>
+                ) : null}
+            </li>
+          ))}
           <li className={`${pageStyles} navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
             {user ? (
-              <button onClick={handleLogout}>Logout</button>
+              <button 
+              onClick={handleLogout}>Logout</button>
             ) : (
               <button onClick={handleGoogleSignIn}>Login</button>
             )}
           </li>
         </ul>
-        <div className='flex flex-1 justify-end items-center navbar-custom:hidden'>
+        <div className='flex flex-1 justify-end items-center 
+                        navbar-custom:hidden'>
           <img
             src={toggle ? close : menu}
             alt='menu'
             className={`${pageStyles} w-[2rem] [aspect-ratio:1/1] object-contain z-40`}
             onClick={() => setToggle((previous) => !previous)}
           />
-          {toggle &&
+          {toggle ?
             <div
               onClick={() => setToggle((previous) => !previous)}
               className='fixed inset-0 bg-black bg-opacity-50 z-1'>
-            </div>}
-          <div className={`${toggle ? 'flex' : 'hidden'} sidebar absolute top-20 right-0 min-w-[8.75rem] dropdown-background border-[black] border-[1px] shadow-2xl rounded-xl py-[1.5rem] px-[1rem] mx-[1rem]`}>
+            </div> : null}
+          <div className={`${toggle ? 'flex' : 'hidden'} sidebar absolute top-20 right-0 dropdown-background border-[black] border-[1px] shadow-2xl rounded-xl py-[1.5rem] px-[1.5rem] mx-[1rem]`}>
             <ul className='list-none flex flex-col w-full'>
-              {navLinks.map((nav, i) => {
-                if (nav.id === 'tools' && !user) return null; // Skip rendering the tools dropdown if the user is not logged in
-                return (
-                  <li
-                    key={nav.id}
-                    className={`${i === navLinks.length - 1 ? 'mb-0' : 'mb-[0.25rem]'} sidebar-link dark-color`}
-                  >
-                    <HashLink
-                      to={`/#${nav.id}`}
-                      onClick={() => setToggle((previous) => !previous)}>
-                      {nav.title}
-                    </HashLink>
-                  </li>
-                );
-              })}
+              {filteredNavLinks.map((nav, i) => (
+                <li
+                  key={nav.id}
+                  className={`${i === navLinks.length - 1 ? 'mb-0' : 'mb-[0.25rem]'} sidebar-link dark-color`}>
+                     <HashLink
+                    to={`/#${nav.id}`}
+                    onClick={() => setToggle((previous) => !previous)}>
+                        {nav.title}
+                  </HashLink>
+                </li>
+              ))}
               <li className='sidebar-link dark-color'>
                 {user ? (
                   <button onClick={handleLogout}>Logout</button>

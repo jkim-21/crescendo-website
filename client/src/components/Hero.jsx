@@ -9,7 +9,6 @@ const Hero = () => {
                         md:flex-row lg:gap-[5rem] lg:justify-start`}>
       <div className={`${styles.flexStart} flex-col max-w-full items-center mb-[3rem]
                       sm:mb-0 sm:items-start md:[flex-basis:55%] lg:[flex-basis:50%]`}>
-        
         <div className={`block ${styles.heading1} mb-[1.5rem] text-white text-center
                         sm:hidden sm:text-left md:block lg:mb-[2.5rem]`}>
           <h1>Music</h1>  
@@ -44,7 +43,6 @@ const Hero = () => {
                       sm:hidden sm:px-[0] md:block md:[flex-basis:45%] md:pr-[1rem]'>
         <Slideshow/>
       </div>
-
     </section>
   )
 }

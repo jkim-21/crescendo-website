@@ -42,8 +42,8 @@ import {
         "&:hover": {
           color: '#222832',
           backgroundColor: "#ebf1fc",
-          borderColor: '#3272e6',
           fontWeight: '500',
+          borderColor: '#3272e6',
         },
       },
       "&:hover": {
@@ -78,28 +78,24 @@ import {
               color="primary"
               exclusive
               onChange={handleDonationType}
-              value={donationType}
-              className='flex items-start'
-            >
-              <StyledToggleButton
-                value='oneTime'
-                sx={{ px: 4, height: 50 }}
-                className={`${donationType === 'oneTime' ? 'z-40' : 'z-0'}`}>
-                Give Once
-              </StyledToggleButton>
-  
+              value={donationType}>
+                <StyledToggleButton
+                  value='oneTime'
+                  sx={{ px: 4, height: 50 }}
+                  className={`${donationType === 'oneTime' ? 'z-40' : 'z-0'}`}>
+                  Give Once
+                </StyledToggleButton>
               <StyledToggleButton
                 value='monthly'
                 sx={{ px: 3, height: 50 }}
                 className={`${donationType === 'monthly' ? 'z-40' : 'z-0'}`}>
                 <div>
-                  <FavoriteIcon sx={{ color: "#ff447c", pr: '5px' }} />
+                  <FavoriteIcon sx={{color: "#ff447c", pr: '5px'}}/>
                   Monthly
                 </div>
               </StyledToggleButton>
             </ToggleButtonGroup>
           </div>
-  
           <ToggleButtonGroup
             size="large"
             color="primary"
@@ -107,7 +103,7 @@ import {
             value={amount}
             exclusive
             fullWidth
-            sx={{ flexShrink: 0, mb: 4 }}
+            sx={{flexShrink: 0, mb: 4}}
           >
             <Grid container
               spacing={1}
@@ -115,14 +111,14 @@ import {
               <Grid item xs={4}>
                 <StyledToggleButton
                   value='10'
-                  sx={{ height: 50 }}>
+                  sx={{height: 50}}>
                   $10
                 </StyledToggleButton>
               </Grid>
               <Grid item xs={4}>
                 <StyledToggleButton
                   value='20'
-                  sx={{ height: 50 }}>
+                  sx={{height: 50}}>
                   $20
                 </StyledToggleButton>
               </Grid>
@@ -161,7 +157,7 @@ import {
             <Typography
               align='center'
               variant='body1'
-              sx={{ mb: 1, color: '#555' }}>
+              sx={{ color: '#555' }}>
               Enter custom amount here
             </Typography>
             <OutlinedInput
@@ -172,7 +168,7 @@ import {
               endAdornment={<InputAdornment position="end">USD</InputAdornment>}
               fullWidth
               required
-              sx={{ fontWeight: 500, ...donationStyle.outlinedInputStyle, backgroundColor: "#fafafa" }}
+              sx={{ ...donationStyle.outlinedInputStyle, mt:1, fontWeight: 500, backgroundColor: "#fafafa" }}
             />
           </div>
           <Button

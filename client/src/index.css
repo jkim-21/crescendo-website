@@ -15,8 +15,6 @@
     #6d6d6d -78.47%,
     #11101d 91.61%
   );
-  --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
-
   --black-hover-gradient: linear-gradient(
     144.39deg,
     #ffffff 0%,
@@ -24,6 +22,17 @@
     #11101d 91.61%
   );
   --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
+  
+  --gold: #cfa524;
+  --dark-gray: #222832;
+  --white:#fafafa; 
+  --gray: #586069;
+  --navy: #002e5d;
+  --dark-blue: #0a162f;
+  --beige: rgba(243, 246, 236, 255);
+  
+  --black-gradient: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
+
 }
 
 body {
@@ -72,54 +81,6 @@ body {
   background-clip: text;
 }
 
-.bg-blue-gradient {
-  background: linear-gradient(
-    157.81deg,
-    #def9fa -43.27%,
-    #bef3f5 -21.24%,
-    #9dedf0 12.19%,
-    #7de7eb 29.82%,
-    #5ce1e6 51.94%,
-    #33bbcf 90.29%
-  );
-}
-
-.bg-black-gradient-1 {
-  background: linear-gradient(
-    144.39deg,
-    #ffffff -278.56%,
-    #6d6d6d -78.47%,
-    #11101d 91.61%
-  );
-}
-
-.bg-black-gradient-2 {
-  background: linear-gradient(
-    -168.39deg,
-    #ffffff -278.56%,
-    #6d6d6d -78.47%,
-    #11101d 91.61%
-  );
-}
-
-.bg-gray-gradient {
-  background: linear-gradient(
-    153.47deg,
-    rgba(255, 255, 255, 0) -341.94%,
-    #14101d 95.11%
-  );
-}
-
-.blue__gradient {
-  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
-  filter: blur(100px);
-}
-
-.pink__gradient {
-  background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
-  filter: blur(100px);
-}
-
 .white__gradient {
   background: rgba(255, 255, 255, 0.4);
   filter: blur(300px);
@@ -161,42 +122,42 @@ body {
 
 /* general styling */
 .gold-color {
-  color: #cfa524;
+  color: var(--gold);
 }
 
 .dark-color {
-  color: #222832;
+  color: var(--dark-gray);
 }
 
 .white-color {
-  color: white;
+  color: var(--white);
 }
 
 .gray-color {
-  color: #586069;
+  color: var(--gray);
 }
 
 .bg-gold-color {
-  background-color: #cfa524;
+  background-color: var(--gold);
 }
 .bg-navy-color {
-  background-color: #002e5d;
+  background-color: var(--navy);
 }
 
-.bg-white-color {
-  background-color: #fafafa;
+.white-bg {
+  background-color: var(--white);
 }
 
-.bg-black-gradient {
-  background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
+.dark-bg {
+  background: var(--dark-blue);
 }
 
-.bg-dark {
-  background: #0a162f;
+.beige-bg {
+  background-color: var(--beige);
 }
 
-.bg-beige-color {
-  background-color: rgba(243, 246, 236, 255);
+.black-gradient-bg {
+  background: var(--black-gradient);
 }
 
 /* Contact Component */
@@ -214,12 +175,12 @@ body {
   scroll-margin-top: 99px; /* Adjust to the height of your navbar */
 }
 
-.navlink {
+.nav-link {
   transition: background-color 0.2s ease;
   border-radius: 5px;
 }
 
-.navlink:hover,
+.nav-link:hover,
 .nav-link:focus {
   background-color: black;
 }
@@ -339,22 +300,13 @@ body {
 .feedback-card {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   border: 0.5px solid lightgray;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .feedback-card img {
   border: 3px solid black;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feedback-card .circular-image {
-  width: 60px; /* Smaller size */
-  height: 60px; /* Smaller size */
-  border-radius: 50%;
-  margin-bottom: 8px; /* Reduced margin */
-}
-.feedback-card .text-center {
-  text-align: center;
+  justify-content: center;
 }
 
 .feedback-card:hover {
@@ -384,58 +336,6 @@ body {
   overflow: hidden;
 }
 
-@keyframes swipeInLeft {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.swipe-in-left {
-  animation: swipeInLeft 0.5s ease forwards;
-}
-
-@keyframes swipeInRight {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0%);
-  }
-}
-
-.swipe-in-right {
-  animation: swipeInRight 0.5s ease forwards;
-}
-
-@keyframes swipeOutLeft {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-.swipe-out-left {
-  animation: swipeOutLeft 0.5s ease forwards;
-}
-
-@keyframes swipeOutRight {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-
-.swipe-out-right {
-  animation: swipeOutRight 0.5s ease forwards;
-}
-
 /* Chapter Pages */
 .chapter-drop-shadow {
   filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.9));
@@ -455,8 +355,7 @@ body {
 
 
 
-
-
+/* Tools Page */
 
 
 

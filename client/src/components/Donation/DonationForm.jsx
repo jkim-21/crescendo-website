@@ -185,9 +185,9 @@ const DonationForm = () => {
             </h1>
             <div className='m-auto gap-[1rem]
                             sm:w-full sm:h-[33rem] sm:flex md:gap-[2rem] lg:h-[35rem] xl:h-[42rem]'>
-                <div className='relative flex flex-col [flex-basis:40%] m-auto mb-[3rem]
-                                sm:mb-0 sm:h-full sm:w-full md:[flex-basis:50%] lg:[flex-basis:60%]'>
-                    <div className='flex flex-row items-center justify-center bg-black-gradient rounded-[10px] py-[0.375rem] px-4 mb-[0.5rem]'>
+                <div className='relative flex flex-col basis-[40%] m-auto mb-[3rem]
+                                sm:mb-0 sm:h-full sm:w-full md:basis-[50%] lg:basis-[60%]'>
+                    <div className='flex flex-row items-center justify-center black-gradient-bg rounded-[10px] py-[0.375rem] px-4 mb-[0.5rem]'>
                         <img
                             src={discount}
                             alt='stat icon'
@@ -208,20 +208,12 @@ const DonationForm = () => {
                 sx={{bgcolor: '#e8ecfc', position: 'relative', borderRadius: "2%"}}
                 className='grow h-[33rem] relative
                           sm:h-full sm:[flex-basis:50%] lg:[flex-basis:40%]'>
-                    {/* <div className='absolute inset-0 bg-black bg-opacity-75 flex justify-center items-center z-40'>
-                        <Typography
-                        variant='h6'
-                        color='error'
-                        className='text-center'>
-                            The Donation Form is Currently Under Maintenance.
-                        </Typography>
-                    </div> */}
                     <AnimatePresence
                     initial='hidden'
                     mode='wait' 
                     onExitComplete={() => null}
                     >
-                        {donationInputOpen &&
+                        {donationInputOpen ?
                         <DonationInput
                         amount={amount}
                         handleAmountChange={handleAmountChange}
@@ -231,7 +223,7 @@ const DonationForm = () => {
                         isLoading={donationType === 'oneTime' ? paymentIsLoading : subscriptionIsLoading}
                         donationType={donationType}
                         setDonationType={setDonationType}
-                        slideAnimation={slideAnimation}/>}
+                        slideAnimation={slideAnimation}/> : null}
                     </AnimatePresence>
                 
                     <AnimatePresence
@@ -239,7 +231,7 @@ const DonationForm = () => {
                     mode='wait'
                     onExitComplete={() => null}
                     >
-                        {donationInfoOpen &&
+                        {donationInfoOpen ?
                         <DonatorInfo
                         handleFirstNameChange={handleFirstNameChange}
                         handleLastNameChange={handleLastNameChange}
@@ -253,14 +245,14 @@ const DonationForm = () => {
                         handleInfoClear={handleInfoClear}
                         infoAnimationType={infoAnimationType}
                         setInfoAnimationType={setInfoAnimationType}
-                        slideAnimation={slideAnimation}/>}
+                        slideAnimation={slideAnimation}/> : null}
                     </AnimatePresence>
                     <AnimatePresence
                     initial='hidden'
                     mode='wait'
                     onExitComplete={() => null}
                     >
-                        {stripePaymentOpen &&
+                        {stripePaymentOpen ?
                         <Elements
                         stripe={stripePromise}
                         options={{clientSecret: paymentIntent?.client_secret}}>
@@ -271,13 +263,13 @@ const DonationForm = () => {
                             handleConfirmPayment={handleConfirmPayment}
                             setInfoAnimationType={setInfoAnimationType}
                             slideAnimation={slideAnimation}/>
-                        </Elements>}
+                        </Elements> : null}
                     </AnimatePresence>
                     <AnimatePresence
                     initial='hidden'
                     mode='wait'
                     onExitComplete={() => null}>
-                        {closingOpen &&
+                        {closingOpen ?
                         <motion.div
                         variants={slideAnimation}
                         initial="hidden"
@@ -290,7 +282,7 @@ const DonationForm = () => {
                             className='dark-color pt-[25%]'>
                                 Your generosity goes a long way!
                             </Typography>
-                        </motion.div>}
+                        </motion.div> : null}
                     </AnimatePresence>
                 </Card>
             </div>

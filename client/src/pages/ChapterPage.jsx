@@ -36,30 +36,32 @@ const ChapterPage = () => {
       style={{backgroundImage: `url(${chapterBackground})`}} 
       className={`${styles.flexCenter} ${styles.paddingY}`}>
         <div className={`${styles.boxWidth} max-w-[95%]`}>
+
           <div className='m-auto rounded 
                           lgs:max-w-[85%]'>
             {chapterData.aboutInformation.map((aboutSection, index) => (
                 <p
                 key={index}
                 className={`${styles.paragraph} text-gray-200 mb-5`}>
-                {aboutSection}
+                  {aboutSection}
                 </p>
             ))}
             <p className={`${styles.paragraph} white-color mb-10`}>
-                {chapterData.emailAddress && `You can contact us at ${chapterData.emailAddress}`}
+              {chapterData.emailAddress && `You can contact us at ${chapterData.emailAddress}`}
             </p>
           </div>
 
           <h2 className={`${styles.heading2} gold-color text-center mb-[1.25rem]`}>Get Involved</h2>
-          <div className={`${styles.flexCenter} flex-wrap gap-[1rem] w-full mb-[2.5rem]
-                           lg:gap-[1rem] lgs:w-[85%] m-auto`}>
+          <div className={`${styles.flexCenter} flex-wrap gap-[1rem] items-stretch w-full mb-[2.5rem] 
+                           lg:gap-[1rem] m-auto`}>
             {chapterData.involvements.map((involvement, index) => (
                 <Involvements key={involvement.id} {...involvement} boxColor={index % 2 === 0 ? 'bg-navy-color' : 'bg-gold-color'} />
             ))}
+
           </div>
 
           <h4 className={`${styles.heading2} font-semibold gold-color text-center mb-5`}>Officers</h4>
-          <div className={`${styles.flexCenter} gap-x-[8.5%] gap-y-[2rem] flex-wrap
+          <div className={`${styles.flexCenter} gap-x-[4rem] gap-y-[2rem] flex-wrap
                           md:gap-y-[4rem]`}>
             {chapterData.officers.map((officer) => (
                 <Officers key={officer.id} {...officer}/>
