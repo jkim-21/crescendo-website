@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import xlsx from 'xlsx';
 import fs from 'fs';
+import mysqlRoutes from './routes/mysql.js';
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ const upload = multer({ dest: 'uploads/' });
 app.use(cors(corsOptions));
 app.use(json());
 app.use(stripeRoutes);
+app.use('/api', mysqlRoutes);
 
 app.post('/upload', upload.single('file'), (req, res) => {
   try {
