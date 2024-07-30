@@ -29,7 +29,8 @@
   --gray: #586069;
   --navy: #002e5d;
   --dark-blue: #0a162f;
-  --beige: rgba(243, 246, 236, 255);
+  --beige: #f3f6ec;
+  --light-gray-blue: #cbd5e1;
   
   --black-gradient: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
 
@@ -37,7 +38,7 @@
 
 body {
   font-family: "IBM Plex Sans", "Poppins", sans-serif;
-  background: #002d5d;
+  background: black;
   scroll-behavior: auto;
 }
 
@@ -121,26 +122,26 @@ body {
 /************ Custom Styling ***************/
 
 /* general styling */
-.gold-color {
+.gold-text {
   color: var(--gold);
 }
 
-.dark-color {
+.dark-text {
   color: var(--dark-gray);
 }
 
-.white-color {
+.white-text {
   color: var(--white);
 }
 
-.gray-color {
+.gray-text {
   color: var(--gray);
 }
 
-.bg-gold-color {
+.gold-bg {
   background-color: var(--gold);
 }
-.bg-navy-color {
+.navy-bg{
   background-color: var(--navy);
 }
 
@@ -149,7 +150,7 @@ body {
 }
 
 .dark-bg {
-  background: var(--dark-blue);
+  background-color: var(--dark-blue);
 }
 
 .beige-bg {
@@ -356,7 +357,14 @@ body {
 
 
 /* Tools Page */
+.project-card {
+  transition: transform 0.3s;
+}
 
+.project-card:hover {
+  transform: scale(1.05);
+  background-color: var(--light-gray-blue)
+}
 
 
 
@@ -681,8 +689,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5.5rem;
-  padding: 0 2rem;
+  padding: 6rem 2rem 6rem 2rem;
 }
 
 .message {

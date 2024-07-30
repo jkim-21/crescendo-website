@@ -6,9 +6,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const Contacts = () => {
     return (
-        <div className={`${styles.boxWidth} bg-navy-color m-auto`}>
-            <div className={`contact-information pt-[2.5rem] pb-[2.5rem]`}>
-                <p className='font-medium text-[1.3rem] mb-[1.25rem] white-color'>{general.name}</p>
+        <div className='dark-bg'>
+            <div className={`${styles.boxWidth} m-auto contact-information pt-[2.5rem] pb-[2.5rem]`}>
+                <p className='font-medium text-[1.3rem] mb-[1.25rem] white-text'>{general.name}</p>
                 <p>{general.phoneNumber}</p>
                 <p className='mb-[1.25rem]'>{general.email}</p>
                 <p className='mb-[1.25rem]'>{general.location}</p>

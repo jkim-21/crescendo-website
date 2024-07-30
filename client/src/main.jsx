@@ -5,7 +5,7 @@ import App from './App';
 import './index.css';
 import ChapterPage from "./pages/ChapterPage";
 import MentorMenteeMatchingPage from "./pages/MentorMenteePage";
-import EmailOutreachPage from "./pages/EmailOutreachPage";
+import EmailFinderPage from "./pages/EmailFinderPage";
 import ToolsPage from './pages/ToolsPage'
 import AuthProvider from './context/AuthContext';
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -29,8 +29,8 @@ const router = createBrowserRouter([
     element: <ProtectedRoute><MentorMenteeMatchingPage/></ProtectedRoute>,
   },
   {
-    path: "/tools/email-outreach-system/*",
-    element: <ProtectedRoute><EmailOutreachPage/></ProtectedRoute>,
+    path: "/tools/email-finder-system/*",
+    element: <ProtectedRoute><EmailFinderPage/></ProtectedRoute>,
   },
 ]);
 

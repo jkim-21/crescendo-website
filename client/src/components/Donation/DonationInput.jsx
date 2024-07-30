@@ -69,7 +69,7 @@ import {
             align='center'
             variant='h4'
             sx={{ pt: 2, pb: 3, mb: 4, fontWeight: '600' }}
-            className='flex-shrink-0 dark-color border-b border-[#c7cdd6]'>
+            className='flex-shrink-0 dark-text border-b border-[#c7cdd6]'>
             Donate Now
           </Typography>
           <div className='text-center mb-4 flex-shrink-0'>

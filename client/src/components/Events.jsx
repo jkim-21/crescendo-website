@@ -12,21 +12,21 @@ const Events = ({ picture, name, title, schoolLogo, instagramUrl }) => {
         <img
           src={picture}
           alt='Events'
-          className='object-cover dark-color rounded-lg w-full [aspect-ratio:1/0.65] '
+          className='object-cover dark-text rounded-lg w-full [aspect-ratio:1/0.65] '
         />     
       </div>
       <div className='flex flex-col items-center mb-[0.5rem]'>
         <img
           src={schoolLogo}
           alt={name}
-          className='w-[3rem] h-[3rem] rounded-full dark-color mb-[0.5rem]
+          className='w-[3rem] h-[3rem] rounded-full dark-text mb-[0.5rem]
                     lg:w-[55px] lg:h-[55px]'
         />
         <div className='text-center'>
-          <h4 className='font-semibold text-[18px] leading-[110%] dark-color mb-[0.25rem]'>
+          <h4 className='font-semibold text-[18px] leading-[110%] dark-text mb-[0.25rem]'>
             {name}
           </h4>
-          <p className='font-normal text-[16px] leading-[24px] dark-color'>
+          <p className='font-normal text-[16px] leading-[24px] dark-text'>
             {title}
           </p>
         </div>

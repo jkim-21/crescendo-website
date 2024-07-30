@@ -85,7 +85,7 @@ function DataFetchingComponent() {
                   <td key={idx} className="border border-gray-400 p-2">
                     {key === 'SCH_NAME' ? (
                       <button
-                        onClick={() => navigate(`/tools/email-outreach-system/display/${encodeURIComponent(value)}`)}
+                        onClick={() => navigate(`/tools/email-finder-system/display/${encodeURIComponent(value)}`)}
                         className="text-blue-500 hover:font-underline"
                       >
                         {value}

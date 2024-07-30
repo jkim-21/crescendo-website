@@ -1,9 +1,13 @@
-import { MentorMenteePairing} from "../components";
+import { MentorMenteePairing, AnimationLayout} from "../components";
 import React from 'react';
 
 const MentorMenteeMatchingPage = () => {
     return (
-        <MentorMenteePairing></MentorMenteePairing>
+        <AnimationLayout>
+            <div className='navy-bg'>
+            <MentorMenteePairing />
+            </div>
+        </AnimationLayout>
     )
 }
 

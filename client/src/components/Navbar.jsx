@@ -45,12 +45,6 @@ const Navbar = ({ pageStyles }) => {
     }
   };
 
-  useEffect(() => {
-    if (error) {
-      alert(error); // Simple error handling, you can improve this
-    }
-  }, [error]);
-
   const handleGoogleSignIn = async () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
@@ -79,6 +73,13 @@ const Navbar = ({ pageStyles }) => {
       console.error("Logout error: ", error);
     }
   };
+
+
+  useEffect(() => {
+    if (error) {
+      alert(error); // Simple error handling, you can improve this
+    }
+  }, [error]);
 
   return (
     <nav className='dark-bg sticky top-0 z-50 shadow-md py-[0.75rem]'>
@@ -109,7 +110,7 @@ const Navbar = ({ pageStyles }) => {
                     to={`/#${nav.id}`}
                     scroll={(el) => 
                       setTimeout(() => 
-                        el.scrollIntoView({ behavior: 'smooth', block: 'start'}), 30)}
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start'}), 60)}
                     className={`${nav.dropdown ? 'pointer-events-none lg:pointer-events-auto' : null}`}>
                     {nav.title}
                   </HashLink>
@@ -118,7 +119,7 @@ const Navbar = ({ pageStyles }) => {
                 </div>
                 {nav.dropdown ? 
                 (<div className={
-                  `${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation dropdown-background dropdown absolute dark-color rounded py-[1rem] px-[0.5rem] cursor-default shadow-2xl
+                  `${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation dropdown-background dropdown absolute dark-text rounded py-[1rem] px-[0.5rem] cursor-default shadow-2xl
                   lg:px-[1rem]`}>
                   {nav.id === 'tools' ? (
                     <p className='text-blue-800 text-center mb-[0.5rem]'>
@@ -164,7 +165,7 @@ const Navbar = ({ pageStyles }) => {
               {filteredNavLinks.map((nav, i) => (
                 <li
                   key={nav.id}
-                  className={`${i === navLinks.length - 1 ? 'mb-0' : 'mb-[0.25rem]'} sidebar-link dark-color`}>
+                  className={`${i === navLinks.length - 1 ? 'mb-0' : 'mb-[0.25rem]'} sidebar-link dark-text`}>
                      <HashLink
                     to={`/#${nav.id}`}
                     onClick={() => setToggle((previous) => !previous)}>
@@ -172,7 +173,7 @@ const Navbar = ({ pageStyles }) => {
                   </HashLink>
                 </li>
               ))}
-              <li className='sidebar-link dark-color'>
+              <li className='sidebar-link dark-text'>
                 {user ? (
                   <button onClick={handleLogout}>Logout</button>
                 ) : (

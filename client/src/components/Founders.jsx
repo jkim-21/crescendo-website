@@ -15,7 +15,7 @@ const Founders = ({ content, name, title, img, lastOfficer }) => {
       </div>     
       <div className='basis-[55%]
                       md:basis[65%] lgs:basis-[70%]'>
-        <h2 className={`${styles.heading3} gold-color font-medium`}>{name}</h2>
+        <h2 className={`${styles.heading3} gold-text font-medium`}>{name}</h2>
         <h5 className='text-white text-[1.25rem] px-0 mb-[0.5rem]
                       lg:text-[1.5rem]'>{title}</h5>
         <p className={`${styles.subparagraph} text-gray-200`}>{content.content1}</p>

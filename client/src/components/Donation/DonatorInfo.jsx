@@ -30,7 +30,7 @@ const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailCh
                         align='center' 
                         variant='h5' 
                         sx={{pt: 2, pb: 3, mb: 4, px: 3, fontWeight: '600'}}
-                        className='dark-color border-b border-[#c7cdd6] container'>
+                        className='dark-text border-b border-[#c7cdd6] container'>
                             Donator Information
                         </Typography>
                     </Box>
@@ -38,7 +38,7 @@ const DonatorInfo = ({handleFirstNameChange, handleLastNameChange, handleEmailCh
                     align='center' 
                     variant='body1' 
                     sx={{mb: 5, fontWeight: 'regular'}}
-                    className='dark-color'>
+                    className='dark-text'>
                         Please provide your details to continue with your donation.
                     </Typography>
                     <OutlinedInput

@@ -15,7 +15,7 @@ const Work = () => {
                       lg:mb-0`}>
           Recent Events
         </h2>
-        <p className={`${styles.paragraph} basis-[50%] dark-color w-full
+        <p className={`${styles.paragraph} basis-[50%] dark-text w-full
                      lg:mt-0`}>
           Here are just some of our recent activities & performances!
         </p>  

@@ -179,7 +179,7 @@ const DonationForm = () => {
         id = 'donate' 
         className={`${styles.paddingY} m-auto
                     lg:max-w-[80%] xl:max-w-[90%]`}>
-            <h1 className={`${styles.heading1} text-center white-color mb-[2rem] 
+            <h1 className={`${styles.heading1} text-center white-text mb-[2rem] 
                             md:mb-[4.5rem]`}>
             Get Involved
             </h1>
@@ -194,7 +194,7 @@ const DonationForm = () => {
                             className='hidden 
                                         md:[display:initial]'
                         />
-                        <p className={`${styles.paragraph} white-color ml-[0.5rem] text-center
+                        <p className={`${styles.paragraph} white-text ml-[0.5rem] text-center
                                       md:text-start`}>
                             100% of Proceeds Go to Students in Need
                         </p>
@@ -279,7 +279,7 @@ const DonationForm = () => {
                             <Typography
                             variant="h6"
                             textAlign={'center'}
-                            className='dark-color pt-[25%]'>
+                            className='dark-text pt-[25%]'>
                                 Your generosity goes a long way!
                             </Typography>
                         </motion.div> : null}

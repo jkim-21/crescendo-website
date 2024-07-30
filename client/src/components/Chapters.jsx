@@ -10,7 +10,7 @@ const Chapters = () => {
       id="chapters" 
       className={`${styles.paddingY} m-auto 
                 lg:w-[75%] lgs:w-[60%]`}>
-      <h1 className={`${styles.heading1} dark-color text-center mb-[2rem] lg:mb-[4.5rem]`}>
+      <h1 className={`${styles.heading1} dark-text text-center mb-[2rem] lg:mb-[4.5rem]`}>
         Chapters
       </h1>
       <div className='grid grid-cols-2 gap-x-[3rem] gap-y-[2rem] grid-centered
@@ -24,7 +24,7 @@ const Chapters = () => {
                 className='w-full object-contain rounded-[50%] [aspect-ratio:1/1]'
               />
             </div>
-            <h4 className={`${styles.heading4} font-medium dark-color w-fit m-auto`}>
+            <h4 className={`${styles.heading4} font-medium dark-text w-fit m-auto`}>
               {chapter.name}
             </h4>
           </Link>

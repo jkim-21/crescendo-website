@@ -75,8 +75,8 @@ const MentorMenteePairing = () => {
 
   return (
     <>
-      <Navbar pageStyles="" />
-      <div className="mentor-mentee-matching flex flex-col items-center justify-center bg-blue-900 mt-20 p-8">
+      <Navbar/>
+      <div className="mentor-mentee-matching flex flex-col items-center justify-center bg-blue-900">
         {pairings.length === 0 ? (
           <FileUpload
             onDrop={onDrop}

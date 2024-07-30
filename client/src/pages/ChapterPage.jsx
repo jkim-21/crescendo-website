@@ -46,21 +46,21 @@ const ChapterPage = () => {
                   {aboutSection}
                 </p>
             ))}
-            <p className={`${styles.paragraph} white-color mb-10`}>
+            <p className={`${styles.paragraph} white-text mb-10`}>
               {chapterData.emailAddress && `You can contact us at ${chapterData.emailAddress}`}
             </p>
           </div>
 
-          <h2 className={`${styles.heading2} gold-color text-center mb-[1.25rem]`}>Get Involved</h2>
+          <h2 className={`${styles.heading2} gold-text text-center mb-[1.25rem]`}>Get Involved</h2>
           <div className={`${styles.flexCenter} flex-wrap gap-[1rem] items-stretch w-full mb-[2.5rem] 
                            lg:gap-[1rem] m-auto`}>
             {chapterData.involvements.map((involvement, index) => (
-                <Involvements key={involvement.id} {...involvement} boxColor={index % 2 === 0 ? 'bg-navy-color' : 'bg-gold-color'} />
+                <Involvements key={involvement.id} {...involvement} boxColor={index % 2 === 0 ? 'navy-bg' : 'gold-bg'} />
             ))}
 
           </div>
 
-          <h4 className={`${styles.heading2} font-semibold gold-color text-center mb-5`}>Officers</h4>
+          <h4 className={`${styles.heading2} font-semibold gold-text text-center mb-5`}>Officers</h4>
           <div className={`${styles.flexCenter} gap-x-[4rem] gap-y-[2rem] flex-wrap
                           md:gap-y-[4rem]`}>
             {chapterData.officers.map((officer) => (

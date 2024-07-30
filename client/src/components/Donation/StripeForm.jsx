@@ -46,7 +46,7 @@ const StripeForm = ({ client_secret, amount, handlePaymentClear, handleConfirmPa
                     align='center' 
                     fontWeight='500'
                     sx={{pt: 2, pb: 3, px: 3, mb: 4}}
-                    className={`dark-color border-b border-[#c7cdd6] w-full`} >
+                    className={`dark-text border-b border-[#c7cdd6] w-full`} >
                         Thank you for your support!
                     </Typography>
                 </Box>

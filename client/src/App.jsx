@@ -8,49 +8,46 @@ import theme from './themes/theme';
 const App = () => {
   return (
       <AnimationLayout>
-        <div className='bg-navy-color' id='home'>
+        <div 
+        className='navy-bg'
+        id='home'>
           <Navbar />
-          <div className={`bg-navy-color w-full overflow-hidden`}>
-            <div className={`${styles.flexStart}`} id='#home'>
-              <div className={`${styles.boxWidth}`}>
-                <Hero />
-              </div>
-            </div>
-            <div className={`${styles.flexStart} beige-bg`}>
-              <div className={`${styles.boxWidth}`}>
-                <Impact />
-              </div>
-            </div>
-            <div className={`${styles.flexStart} bg-navy-color`}>
-              <div className={`${styles.boxWidth}`}>
-                <ThemeProvider theme={theme}>
-                  <QueryProvider>
-                    <DonationForm />
-                  </QueryProvider>
-                </ThemeProvider>
-              </div>
-            </div>
-            <div className={`${styles.flexStart} beige-bg`}>
-              <div className={`${styles.boxWidth}`}>
-                <Work />
-              </div>
-            </div>
-            <div className={`${styles.flexStart} bg-navy-color`}>
-              <div className={`${styles.boxWidth}`}>
-                <AboutUs />
-              </div>
-            </div>
-            <div className={`${styles.flexStart} beige-bg`}>
-              <div className={`${styles.boxWidth}`}>
-                <Chapters />
-              </div>
-            </div>
-            <div className={`${styles.flexStart} bg-dark`}>
-              <div className={`${styles.boxWidth}`}>
-                <Footer />
-              </div>
+          <div 
+          className='navy-bg w-full overflow-hidden'>
+            <div className={`${styles.boxWidth}  m-auto`}>
+              <Hero />
             </div>
           </div>
+          <div className='beige-bg'>
+            <div className={`${styles.boxWidth} m-auto`}>
+              <Impact />
+            </div>
+          </div>
+          <div className='navy-bg'>
+            <div className={`${styles.boxWidth} m-auto`}>
+              <ThemeProvider theme={theme}>
+                <QueryProvider>
+                  <DonationForm />
+                </QueryProvider>
+              </ThemeProvider>
+            </div>
+          </div>
+          <div className='beige-bg'>
+            <div className={`${styles.boxWidth} m-auto`}>
+              <Work />
+            </div>
+          </div>
+          <div className='navy-bg'>
+            <div className={`${styles.boxWidth} m-auto`}>
+              <AboutUs />
+            </div>
+          </div>
+          <div className='beige-bg'>
+            <div className={`${styles.boxWidth} m-auto`}>
+              <Chapters />
+            </div>
+          </div>
+            <Footer />  
         </div>
       </AnimationLayout>
   );
