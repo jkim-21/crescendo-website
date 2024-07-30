@@ -27,9 +27,9 @@ router.get("/data", async (req, res) => {
 
     res.json(data);
   } catch (err) {
-    console.error("Error fetching data:", err);
+    console.error("error fetching data:", err);
     res.status(500).json({
-      error: "Error whilst executing query",
+      error: "error doing thr query",
     });
   }
 });
@@ -52,6 +52,28 @@ router.get("/school-emails/:schoolName", async (req, res) => {
     console.error("Error fetching SCRAPED_EMAILS from the db:", err);
     res.status(500).json({
       error: "Error querying db",
+    });
+  }
+});
+
+router.get("/school-data/:schoolName", async (req, res) => {
+  const { schoolName } = req.params;
+
+  try {
+    const [data] = await db.query(
+      "SELECT SCH_NAME, LCITY, STATENAME, LSTREET1 FROM scraped_school_emails WHERE SCH_NAME = ?",
+      [schoolName]
+    );
+
+    if (data.length > 0) {
+      res.json(data[0]);
+    } else {
+      res.status(404).json({ error: "School not found" });
+    }
+  } catch (err) {
+    console.error("error fetching data from db:", err);
+    res.status(500).json({
+      error: "error querying db",
     });
   }
 });
