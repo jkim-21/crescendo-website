@@ -1,26 +1,25 @@
 const createPaymentIntent = async (amount, firstName, lastName, email) => {
+  const baseURL = import.meta.env.VITE_DONATION_BASE_URL || "";
 
-    const baseURL = import.meta.env.VITE_DONATION_BASE_URL || ''
-    
-    const response = await fetch(`${baseURL}/api/payment-intents`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            amount: amount,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-        }),
-    });
+  const response = await fetch(`${baseURL}/api/payment-intents`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      amount: amount,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+    }),
+  });
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch payment intent client secret');
-    }
-    const data = await response.json();
+  if (!response.ok) {
+    throw new Error("Failed to fetch payment intent client secret");
+  }
+  const data = await response.json();
 
-    return data.paymentIntent;
+  return data.paymentIntent;
 };
 
-export default createPaymentIntent
+export default createPaymentIntent;

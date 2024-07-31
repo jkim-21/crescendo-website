@@ -17,7 +17,9 @@ import Events from "./Events";
 import YoutubeVideo from "./YoutubeVideo";
 import AnimationLayout from "./AnimationLayout";
 import News from "./News";
-import MentorMenteePairing from "./MentorMenteePairing";
+import MentorMenteePairing from "./MentorMenteeMatching/MentorMenteePairing";
+import SearchTable from "./EmailFinder/SearchTable";
+import SchoolDetails from "./EmailFinder/SchoolDetails";
 
 export {
   AboutUs,
@@ -40,4 +42,6 @@ export {
   AnimationLayout,
   News,
   MentorMenteePairing,
+  SearchTable,
+  SchoolDetails,
 };

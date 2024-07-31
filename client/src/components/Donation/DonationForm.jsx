@@ -177,11 +177,13 @@ const DonationForm = () => {
     return (
         <section 
         id = 'donate' 
-        className={`${styles.paddingY} m-auto
-                    lg:max-w-[80%] xl:max-w-[90%]`}>
-            <h1 className={`${styles.heading1} text-center white-text mb-[2rem] 
-                            md:mb-[4.5rem]`}>
-            Get Involved
+        className={
+            `${styles.paddingY} m-auto
+            lg:max-w-[80%] xl:max-w-[90%]`}>
+            <h1 className={
+                `${styles.heading1} text-center white-text mb-[2rem] 
+                md:mb-[4.5rem]`}>
+                    Get Involved
             </h1>
             <div className='m-auto gap-[1rem]
                             sm:w-full sm:h-[33rem] sm:flex md:gap-[2rem] lg:h-[35rem] xl:h-[42rem]'>
@@ -192,10 +194,10 @@ const DonationForm = () => {
                             src={discount}
                             alt='stat icon'
                             className='hidden 
-                                        md:[display:initial]'
-                        />
-                        <p className={`${styles.paragraph} white-text ml-[0.5rem] text-center
-                                      md:text-start`}>
+                                        md:[display:initial]'/>
+                        <p className={
+                            `${styles.paragraph} white-text ml-[0.5rem] text-center
+                             md:text-start`}>
                             100% of Proceeds Go to Students in Need
                         </p>
                     </div>
@@ -205,82 +207,81 @@ const DonationForm = () => {
                     className='grow object-cover rounded-[2%]'/>
                 </div>
                 <Card
-                sx={{bgcolor: '#e8ecfc', position: 'relative', borderRadius: "2%"}}
-                className='grow h-[33rem] relative
-                          sm:h-full sm:[flex-basis:50%] lg:[flex-basis:40%]'>
+                    sx={{bgcolor: '#e8ecfc', position: 'relative', borderRadius: "2%"}}
+                    className='grow h-[33rem] relative
+                              sm:h-full sm:[flex-basis:50%] lg:[flex-basis:40%]'>
                     <AnimatePresence
-                    initial='hidden'
-                    mode='wait' 
-                    onExitComplete={() => null}
-                    >
-                        {donationInputOpen ?
-                        <DonationInput
-                        amount={amount}
-                        handleAmountChange={handleAmountChange}
-                        handleInputSubmit={handleInputSubmit}
-                        handleDonationType={handleDonationType}
-                        amountError={amountError}
-                        isLoading={donationType === 'oneTime' ? paymentIsLoading : subscriptionIsLoading}
-                        donationType={donationType}
-                        setDonationType={setDonationType}
-                        slideAnimation={slideAnimation}/> : null}
+                        initial='hidden'
+                        mode='wait' 
+                        onExitComplete={() => null}>
+                            {donationInputOpen ?
+                            <DonationInput
+                                amount={amount}
+                                handleAmountChange={handleAmountChange}
+                                handleInputSubmit={handleInputSubmit}
+                                handleDonationType={handleDonationType}
+                                amountError={amountError}
+                                isLoading={donationType === 'oneTime' ? paymentIsLoading : subscriptionIsLoading}
+                                donationType={donationType}
+                                setDonationType={setDonationType}
+                                slideAnimation={slideAnimation}
+                            /> : null}
                     </AnimatePresence>
                 
                     <AnimatePresence
                     initial='hidden'
                     mode='wait'
-                    onExitComplete={() => null}
-                    >
+                    onExitComplete={() => null}>
                         {donationInfoOpen ?
                         <DonatorInfo
-                        handleFirstNameChange={handleFirstNameChange}
-                        handleLastNameChange={handleLastNameChange}
-                        handleEmailChange={handleEmailChange}
-                        handleDonatorInfoSubmit={handleDonatorInfoSubmit}
-                        firstName={firstName}
-                        lastName={lastName}
-                        email={donorEmail}
-                        isLoading={donationType === 'oneTime' ? paymentIsLoading : subscriptionIsLoading}
-                        error={donationType === 'oneTime' ? paymentError : subscriptionError}
-                        handleInfoClear={handleInfoClear}
-                        infoAnimationType={infoAnimationType}
-                        setInfoAnimationType={setInfoAnimationType}
-                        slideAnimation={slideAnimation}/> : null}
-                    </AnimatePresence>
-                    <AnimatePresence
-                    initial='hidden'
-                    mode='wait'
-                    onExitComplete={() => null}
-                    >
-                        {stripePaymentOpen ?
-                        <Elements
-                        stripe={stripePromise}
-                        options={{clientSecret: paymentIntent?.client_secret}}>
-                            <StripeForm
-                            client_secret={paymentIntent?.client_secret}
-                            amount={paymentIntent?.amount}
-                            handlePaymentClear={handlePaymentClear}
-                            handleConfirmPayment={handleConfirmPayment}
+                            handleFirstNameChange={handleFirstNameChange}
+                            handleLastNameChange={handleLastNameChange}
+                            handleEmailChange={handleEmailChange}
+                            handleDonatorInfoSubmit={handleDonatorInfoSubmit}
+                            firstName={firstName}
+                            lastName={lastName}
+                            email={donorEmail}
+                            isLoading={donationType === 'oneTime' ? paymentIsLoading : subscriptionIsLoading}
+                            error={donationType === 'oneTime' ? paymentError : subscriptionError}
+                            handleInfoClear={handleInfoClear}
+                            infoAnimationType={infoAnimationType}
                             setInfoAnimationType={setInfoAnimationType}
-                            slideAnimation={slideAnimation}/>
-                        </Elements> : null}
+                            slideAnimation={slideAnimation}
+                        /> : null}
                     </AnimatePresence>
                     <AnimatePresence
                     initial='hidden'
                     mode='wait'
                     onExitComplete={() => null}>
-                        {closingOpen ?
-                        <motion.div
-                        variants={slideAnimation}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
-                        className='w-full h-full absolute'>
+                        {stripePaymentOpen ?
+                        <Elements
+                            stripe={stripePromise}
+                            options={{clientSecret: paymentIntent?.client_secret}}>
+                                <StripeForm
+                                    client_secret={paymentIntent?.client_secret}
+                                    amount={paymentIntent?.amount}
+                                    handlePaymentClear={handlePaymentClear}
+                                    handleConfirmPayment={handleConfirmPayment}
+                                    setInfoAnimationType={setInfoAnimationType}
+                                    slideAnimation={slideAnimation}/>
+                        </Elements> : null}
+                    </AnimatePresence>
+                    <AnimatePresence
+                        initial='hidden'
+                        mode='wait'
+                        onExitComplete={() => null}>
+                            {closingOpen ?
+                            <motion.div
+                                variants={slideAnimation}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                className='w-full h-full absolute'>
                             <Typography
-                            variant="h6"
-                            textAlign={'center'}
-                            className='dark-text pt-[25%]'>
-                                Your generosity goes a long way!
+                                variant="h6"
+                                textAlign={'center'}
+                                className='dark-text pt-[25%]'>
+                                    Your generosity goes a long way!
                             </Typography>
                         </motion.div> : null}
                     </AnimatePresence>
@@ -289,4 +290,5 @@ const DonationForm = () => {
         </section>
     )
 }
-export default DonationForm
+
+export default DonationForm;

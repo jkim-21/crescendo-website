@@ -4,10 +4,18 @@ import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useAuth();
-  if (!user) {
-    return <Navigate to="/tools/mentor-mentee-matching-system" />;
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <div></div>
   }
+
+  else if (!user) {
+    return (
+      <Navigate to ='/' replace={true}/>
+    )
+  }
+
   return children;
 };
 

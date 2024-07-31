@@ -48,6 +48,7 @@ const Navbar = ({ pageStyles }) => {
   const handleGoogleSignIn = async () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
+
     try {
       const result = await signInWithPopup(auth, provider);
       const email = result.user.email;
@@ -58,7 +59,9 @@ const Navbar = ({ pageStyles }) => {
         await auth.signOut();
         setError('You must use an @crescendoforacause.com email to access this page.');
       }
-    } catch (error) {
+    } 
+    
+    catch (error) {
       setError(error.message);
     }
   };
@@ -68,8 +71,9 @@ const Navbar = ({ pageStyles }) => {
     try {
       await logout();
       setUser(null);
-      navigate('/'); // Redirect to home after logout
-    } catch (error) {
+      navigate('/');
+    } 
+    catch (error) {
       console.error("Logout error: ", error);
     }
   };
@@ -90,7 +94,7 @@ const Navbar = ({ pageStyles }) => {
           alt='Crescendo for a Cause logo' 
           className={`${pageStyles} w-[auto] h-[4.75rem]`} />
         </HashLink>
-        <ul className='hidden items-center list-none relative 
+        <ul className='hidden items-center list-none relative
                       navbar-custom:flex'>
           {filteredNavLinks.map((nav, i) => (
             <li
@@ -119,7 +123,7 @@ const Navbar = ({ pageStyles }) => {
                 </div>
                 {nav.dropdown ? 
                 (<div className={
-                  `${activeDropdownId === nav.id ? 'block' : 'hidden'} dropdown-animation dropdown-background dropdown absolute dark-text rounded py-[1rem] px-[0.5rem] cursor-default shadow-2xl
+                  `${activeDropdownId === nav.id ? 'block' : 'hidden'} ${nav.id === 'chapters' ? 'max-w-[12.5rem]': null} dropdown-animation dropdown-background absolute dark-text rounded cursor-default py-[1rem] px-[0.5rem]
                   lg:px-[1rem]`}>
                   {nav.id === 'tools' ? (
                     <p className='text-blue-800 text-center mb-[0.5rem]'>

@@ -1,12 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 import { useDropzone } from 'react-dropzone';
-import FileUpload from './MentorMatching/FileUpload';
-import MatchedPairsTable from './MentorMatching/MatchedPairsTable';
-import UnmatchedTable from './MentorMatching/UnmatchedTable';
+import FileUpload from './FileUpload';
+import MatchedPairsTable from './MatchedPairsTable';
+import UnmatchedTable from './UnmatchedTable';
 import { utils, writeFile } from 'xlsx';
-import '../index.css';
 
 const MentorMenteePairing = () => {
   const [file, setFile] = useState(null);
@@ -42,16 +41,22 @@ const MentorMenteePairing = () => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:3000/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      const response = await fetch('http://localhost:3000/upload', {
+        method: 'POST',
+        body: formData
       });
-      if (response.data.pairings && response.data.unmatchedMentees && response.data.unmatchedMentors) {
-        setPairings(response.data.pairings);
-        setUnmatchedMentees(response.data.unmatchedMentees);
-        setUnmatchedMentors(response.data.unmatchedMentors);
-        if (response.data.pairings.length === 0) {
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+
+      if (data.pairings && data.unmatchedMentees && data.unmatchedMentors) {
+        setPairings(data.pairings);
+        setUnmatchedMentees(data.unmatchedMentees);
+        setUnmatchedMentors(data.unmatchedMentors);
+        if (data.pairings.length === 0) {
           setMessage("There are no perfect mentor-mentee pairs, please manually review your responses.");
         } else {
           setMessage("");
