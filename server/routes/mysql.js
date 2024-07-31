@@ -21,7 +21,7 @@ router.get("/data", async (req, res) => {
     const streetParam = street ? `%${street}%` : "%";
 
     const [data] = await db.query(
-      "SELECT SCH_NAME, LCITY, LSTREET1 FROM scraped_school_emails WHERE SCRAPED_EMAILS IS NOT NULL AND LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ?",
+      "SELECT SCH_NAME, LCITY, LSTREET1 FROM school_emails_website WHERE SCRAPED_EMAILS IS NOT NULL AND LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ?",
       [cityParam, stateParam, streetParam]
     );
 
@@ -39,7 +39,7 @@ router.get("/school-emails/:schoolName", async (req, res) => {
 
   try {
     const [data] = await db.query(
-      "SELECT SCRAPED_EMAILS FROM scraped_school_emails WHERE SCH_NAME = ?",
+      "SELECT SCRAPED_EMAILS FROM school_emails_website WHERE SCH_NAME = ?",
       [schoolName]
     );
 
@@ -61,7 +61,7 @@ router.get("/school-data/:schoolName", async (req, res) => {
 
   try {
     const [data] = await db.query(
-      "SELECT SCH_NAME, LCITY, STATENAME, LSTREET1 FROM scraped_school_emails WHERE SCH_NAME = ?",
+      "SELECT SCH_NAME, LCITY, STATENAME, LSTREET1 FROM school_emails_website WHERE SCH_NAME = ?",
       [schoolName]
     );
 
@@ -74,6 +74,45 @@ router.get("/school-data/:schoolName", async (req, res) => {
     console.error("error fetching data from db:", err);
     res.status(500).json({
       error: "error querying db",
+    });
+  }
+});
+
+router.post("/report-school/:schoolName", async (req, res) => {
+  const { schoolName } = req.params;
+  const { reason } = req.body;
+
+  if (!reason) {
+    return res.status(400).json({ error: "Reason for reporting is required" });
+  }
+
+  try {
+    // First, get the current reports (if any)
+    const [currentReports] = await db.query(
+      "SELECT REPORT FROM scraped_school_emails WHERE SCH_NAME = ?",
+      [schoolName]
+    );
+
+    let updatedReports = reason;
+    if (currentReports.length > 0 && currentReports[0].reports) {
+      updatedReports = currentReports[0].reports + '; ' + reason;
+    }
+
+    // THis shoulkd update the reports
+    const [result] = await db.query(
+      "UPDATE scraped_school_emails SET REPORT = ? WHERE SCH_NAME = ?",
+      [updatedReports, schoolName]
+    );
+
+    if (result.affectedRows > 0) {
+      res.json({ message: "School reported successfully" });
+    } else {
+      res.status(404).json({ error: "School not found" });
+    }
+  } catch (err) {
+    console.error("Error reporting school:", err);
+    res.status(500).json({
+      error: "Error updating database",
     });
   }
 });

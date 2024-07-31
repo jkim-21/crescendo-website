@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 function Display() {
   const [schoolData, setSchoolData] = useState(null);
   const [emails, setEmails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [reportReason, setReportReason] = useState('');
   const { schoolName } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,8 +39,34 @@ function Display() {
     fetchData();
   }, [schoolName]);
 
+  const handleReport = async () => {
+    if (!reportReason) {
+      alert('Please select a reason for reporting');
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/report-school/${encodeURIComponent(schoolName)}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ reason: reportReason }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to report school');
+      }
+      const data = await response.json();
+      alert(data.message);
+      setReportReason('');
+    } catch (err) {
+      console.error('Error reporting school:', err);
+      alert('Failed to report school');
+    }
+  };
+
   const handleBack = () => {
-    navigate('/tools/email-outreach-system');
+    navigate(`/tools/email-finder-system${location.search}`);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -59,8 +86,23 @@ function Display() {
         >
           Save
         </button>
+        <select
+          value={reportReason}
+          onChange={(e) => setReportReason(e.target.value)}
+          className="ml-4 px-4 py-2 bg-white border border-gray-300 rounded text-sm"
+        >
+          <option value="">Select reason for reporting</option>
+          <option value="Incorrect information">Incorrect information</option>
+          <option value="Outdated information">Outdated information</option>
+          <option value="Duplicate entry">SOme OthEr WaCkY ReeZOn!</option>
+          <option value="Other">...</option>
+        </select>
         <button 
-          className="ml-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-sm"
+          onClick={handleReport}
+          disabled={!reportReason}
+          className={`ml-4 px-4 py-2 text-white rounded text-sm ${
+            reportReason ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-400 cursor-not-allowed'
+          }`}
         >
           Report
         </button>
@@ -75,7 +117,6 @@ function Display() {
               <p><strong>City:</strong> {schoolData.LCITY}</p>
               <p><strong>State:</strong> {schoolData.STATENAME}</p>
               <p><strong>Street:</strong> {schoolData.LSTREET1}</p>
-              {/* Add more fields as needed */}
             </div>
           )}
         </div>
@@ -103,7 +144,7 @@ function Display() {
                   </tr>
                 ))}
               </tbody>
-              
+
             </table>
           </div>
         </div>

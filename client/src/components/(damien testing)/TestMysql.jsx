@@ -128,19 +128,23 @@ function DataFetchingComponent() {
 
         <input
           type="text"
-          placeholder="State (not state code)"
-          value={locationState}
-          onChange={(e) => setLocationState(e.target.value)}
-          className="p-2 border border-gray-400 rounded"
-        />
-
-        <input
-          type="text"
-          placeholder="Street"
+          placeholder='Street'
           value={street}
           onChange={(e) => setStreet(e.target.value)}
           className="p-2 border border-gray-400 rounded"
         />
+
+        <select
+          value={locationState}
+          onChange={(e) => setLocationState(e.target.value)}
+          className="p-2 border border-gray-400 rounded"
+        >
+          <option value={""}>Select State</option>
+          <option value="mai">Maine</option>
+<option value="mass">Massachusetts</option>
+<option value="ill">Illinois</option>
+        </select>
+
 
 
       </div>
