@@ -35,8 +35,6 @@ async function connect() {
 
 connect();
 
-const upload = multer({ dest: "uploads/" });
-
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(stripeRoutes);

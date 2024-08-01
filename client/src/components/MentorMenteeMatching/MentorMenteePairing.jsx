@@ -7,6 +7,7 @@ import MatchedPairsTable from './MatchedPairsTable';
 import UnmatchedTable from './UnmatchedTable';
 import { utils, writeFile } from 'xlsx';
 
+
 const MentorMenteePairing = () => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
@@ -41,7 +42,7 @@ const MentorMenteePairing = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:3000/upload', {
+      const response = await fetch('/upload', {
         method: 'POST',
         body: formData
       });
