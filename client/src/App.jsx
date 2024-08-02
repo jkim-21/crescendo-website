@@ -4,6 +4,29 @@ import {styles} from './style'
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './themes/theme';
 
+
+useEffect(() => {
+  const handleHashChange = () => {
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1)
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth'});
+        }, 200)
+      }
+    }
+  };
+
+  window.addEventListener('hashchange', handleHashChange);
+  handleHashChange();
+
+  return () => {
+    window.removeEventListener('hashchange', handleHashChange);
+  };
+}, []);
+
+
 const App = () => {
   return (
       <AnimationLayout>
