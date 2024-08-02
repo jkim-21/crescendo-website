@@ -3,12 +3,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import ChapterPage from "./pages/ChapterPage";
-import MentorMenteeMatchingPage from "./pages/MentorMenteePage";
-import EmailFinderPage from "./pages/EmailFinderPage";
-import ToolsPage from "./pages/ToolsPage";
+import {ChapterPage} from "./pages";
+import {MentorMenteePage} from "./pages";
+import {EmailFinderPage} from "./pages";
+import {ToolsDashboardPage} from "./pages";
 import AuthProvider from "./context/AuthContext";
-import SchoolDetailsPage from "./pages/SchoolDetailsPage";
+import {SchoolDetailsPage} from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import {
   createBrowserRouter,
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     path: "/tools",
     element: (
       <ProtectedRoute>
-        <ToolsPage />
+        <ToolsDashboardPage />
       </ProtectedRoute>
     ),
   },
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     path: "/tools/mentor-mentee-matching-system",
     element: (
       <ProtectedRoute>
-        <MentorMenteeMatchingPage />
+        <MentorMenteePage />
       </ProtectedRoute>
     ),
   },

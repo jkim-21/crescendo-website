@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import HelpModal from './HelpModal';
-import helpImage from '../MentorMenteeMatching/instructions.png'; // Update the path to your image
+import {instructions} from '../../../assets'; // Update the path to your image
 
 const FileUpload = ({ onDrop, file, uploading, open, getRootProps, getInputProps, isDragActive, setFile, handleFileUpload }) => {
   const [showModal, setShowModal] = useState(false);
@@ -47,7 +47,7 @@ const FileUpload = ({ onDrop, file, uploading, open, getRootProps, getInputProps
           </>
         )}
       </div>
-      <HelpModal showModal={showModal} setShowModal={setShowModal} imageUrl={helpImage} />
+      <HelpModal showModal={showModal} setShowModal={setShowModal} imageUrl={instructions} />
     </div>
   );
 };

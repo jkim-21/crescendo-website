@@ -24,3 +24,26 @@ export const projectDescriptions = [
     link: "mentor-mentee-matching-system",
   },
 ];
+
+export const toolLinks = [
+  {
+    id: "home",
+    name: "Home",
+    pageLink: "/tools",
+  },
+  {
+    id: "email-finder",
+    name: "Email Finder",
+    pageLink: "/tools/email-finder-system",
+  },
+  {
+    id: "mentor-mentee",
+    name: "Mentor Mentee Matcher",
+    pageLink: "/tools/mentor-mentee-matching-system",
+  },
+  {
+    id: "saved-information",
+    name: "Saved Information",
+    pageLink: "/tools/saved-information",
+  },
+];

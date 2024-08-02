@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
-import Navbar from '../Navbar';
+import Navbar from '../../Navbar';
 import { useDropzone } from 'react-dropzone';
 import FileUpload from './FileUpload';
 import MatchedPairsTable from './MatchedPairsTable';

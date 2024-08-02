@@ -31,6 +31,7 @@
   --dark-blue: #0a162f;
   --beige: #f3f6ec;
   --light-gray-blue: #cbd5e1;
+  --light-blue: #f6f8fe;
   
   --black-gradient: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
 
@@ -155,6 +156,10 @@ body {
 
 .beige-bg {
   background-color: var(--beige);
+}
+
+.light-blue-bg {
+  background-color: var(--light-blue);
 }
 
 .black-gradient-bg {
@@ -355,8 +360,9 @@ body {
 }
 
 
+/******************************* Tools *********************************/
 
-/* Tools Page */
+/* General Tools Page */
 .project-card {
   transition: transform 0.3s;
 }
@@ -367,15 +373,10 @@ body {
 }
 
 
+/* Sidebar */
+.tool-links {
 
-
-
-
-
-
-
-
-
+}
 
 
 

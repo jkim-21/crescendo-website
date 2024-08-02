@@ -2,7 +2,7 @@ import menu from "./menu.svg";
 import close from "./close.svg";
 import discount from "./Discount.svg";
 
-import logo from "./c4c_logo.png";
+import logo from "./c4c-logo.png";
 
 import instrumentDonation from "./instrument-donation.png";
 import nursingPerformance from "./nursing-performance.png";
@@ -75,9 +75,13 @@ import ucsbcon2 from "./ucsbcon2.png";
 import colbycon1 from "./colbycon1.png";
 
 import projectImagePlaceholder from "./project-image-placeholder.png";
-import instructions from "./instructions.png"
+import instructions from "./instructions.png";
+import toolsLogo from "./c4c-tools-logo.png";
+import logoTitle from "./logo-title.png";
+import toolsLogo2 from "./tools-logo2.png";
 
 export {
+  toolsLogo2,
   alexValdes,
   allen,
   ameliaRaymond,
@@ -138,6 +142,7 @@ export {
   ucsbcon1,
   ucsbcon2,
   projectImagePlaceholder,
+  toolsLogo,
+  logoTitle,
   instructions,
-  
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {Navbar, AnimationLayout, SearchTable, Footer} from '../components';
+import {Navbar, AnimationLayout, SearchTable, Footer, Sidebar} from '../components';
 import {styles} from '../style'
 
 
@@ -48,75 +48,75 @@ const EmailFinderPage = () => {
 
     //goes back a page in the same way handlenextpage goes forward a page
     const handlePreviousPage = () => {
-    if (currentPage > 1) {
-        setCurrentPage(currentPage - 1);
-    }
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
     };
     
 
     return (
     <AnimationLayout>
-    <Navbar/>
-    <div className='beige-bg'>
-        <div className={`${styles.boxWidth} flex flex-col items-center bg-white p-6 rounded shadow-lg m-auto pt-[2rem] pb-[2rem] mx-auto min-h-[85.5vh]`}>
-            <div className="mb-4 flex space-x-4">
-                <button 
-                    className="p-2 border-2 border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white transition"
-                    onClick={fetchData}>
-                        Fetch Data
-                </button>
-                <input
-                    type="text"
-                    placeholder="City"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    className="p-2 border border-gray-400 rounded"/>
-                <input
-                    type="text"
-                    placeholder="State (not state code)"
-                    value={locationState}
-                    onChange={(e) => setLocationState(e.target.value)}
-                    className="p-2 border border-gray-400 rounded"/>
-                <input
-                    type="text"
-                    placeholder="Street"
-                    value={street}
-                    onChange={(e) => setStreet(e.target.value)}
-                    className="p-2 border border-gray-400 rounded"/>
-            </div>
-
-            {loading ? <p> Loading... </p> : null}
-            
-            {error ? <p className="text-red-500 border border-black bg-red-300"> Error: {error} </p> : null}
-
-            <div className="w-full">
-                <SearchTable
-                    itemsPerPage={itemsPerPage}
-                    currentPage={currentPage}
-                    data = {data} />
-                    
-                <div className="flex justify-between mt-4">
+        <div className='flex'>
+            <Sidebar
+            structure='light-blue-bg basis-[18%]'/>
+            <div className={`basis-[82%] flex flex-col items-center bg-white shadow-lg m-auto pt-[5rem] pb-[2rem] px-[3rem] mx-auto min-h-[100vh]`}>
+                <div className="mb-4 flex space-x-4">
                     <button 
+                        className="p-2 border-2 border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white transition"
+                        onClick={fetchData}>
+                            Fetch Data
+                    </button>
+                    <input
+                        type="text"
+                        placeholder="City"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        className="p-2 border border-gray-400 rounded"/>
+                    <input
+                        type="text"
+                        placeholder="State (not state code)"
+                        value={locationState}
+                        onChange={(e) => setLocationState(e.target.value)}
+                        className="p-2 border border-gray-400 rounded"/>
+                    <input
+                        type="text"
+                        placeholder="Street"
+                        value={street}
+                        onChange={(e) => setStreet(e.target.value)}
+                        className="p-2 border border-gray-400 rounded"/>
+                </div>
+
+                {loading ? <p> Loading... </p> : null}
+                
+                {error ? <p className="text-red-500 border border-black bg-red-300"> Error: {error} </p> : null}
+
+                <div className="w-full">
+                    <SearchTable
+                        itemsPerPage={itemsPerPage}
+                        currentPage={currentPage}
+                        data = {data} />
+                        
+                    <div className="flex justify-between mt-4">
+                        <button 
+                            className="p-2 border border-gray-400 rounded disabled:opacity-50"
+                            onClick={handlePreviousPage}
+                            disabled={currentPage === 1}>
+                        Previous
+                        </button>
+
+                        <span className="p-2">Page {currentPage} of {Math.ceil(data.length / itemsPerPage)}</span>
+
+                        <button 
                         className="p-2 border border-gray-400 rounded disabled:opacity-50"
-                        onClick={handlePreviousPage}
-                        disabled={currentPage === 1}>
-                    Previous
-                    </button>
-
-                    <span className="p-2">Page {currentPage} of {Math.ceil(data.length / itemsPerPage)}</span>
-
-                    <button 
-                    className="p-2 border border-gray-400 rounded disabled:opacity-50"
-                    onClick={handleNextPage}
-                    disabled={currentPage >= Math.ceil(data.length / itemsPerPage)}
-                    >
-                    Next
-                    </button>
+                        onClick={handleNextPage}
+                        disabled={currentPage >= Math.ceil(data.length / itemsPerPage)}
+                        >
+                        Next
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
+        </div>  
     <Footer/>
     </AnimationLayout>
     )}; 

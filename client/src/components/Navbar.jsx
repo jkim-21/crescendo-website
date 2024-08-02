@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { close, menu, logo } from '../assets';
 import { navLinks, chapters, tools } from '../data/home-page.js';
 import { HashLink } from 'react-router-hash-link';
 import { Link, useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { styles } from '../style.js';
+
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useAuth } from '../context/AuthContext.jsx';
+
+import { styles } from '../style.js';
+import { close, menu } from '../assets';
+import {logos} from '../data/global'
 
 const Navbar = ({ pageStyles }) => {
   const [toggle, setToggle] = useState(false);
@@ -90,7 +93,7 @@ const Navbar = ({ pageStyles }) => {
       <div className={`${styles.boxWidth} flex justify-between m-auto`}>
         <HashLink to={`/#home`}>
           <img 
-          src={logo} 
+          src={logos.navbarLogo} 
           alt='Crescendo for a Cause logo' 
           className={`${pageStyles} w-[auto] h-[4.75rem]`} />
         </HashLink>
