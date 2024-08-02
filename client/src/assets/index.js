@@ -75,6 +75,7 @@ import ucsbcon2 from "./ucsbcon2.png";
 import colbycon1 from "./colbycon1.png";
 
 import projectImagePlaceholder from "./project-image-placeholder.png";
+import instructions from "./instructions.png"
 
 export {
   alexValdes,
@@ -137,4 +138,6 @@ export {
   ucsbcon1,
   ucsbcon2,
   projectImagePlaceholder,
+  instructions,
+  
 };
