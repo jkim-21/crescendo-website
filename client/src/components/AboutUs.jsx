@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {executiveBoard} from '../data/home-page'
 import {styles} from '../style'
 import Founders from './Founders'
