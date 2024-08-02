@@ -53,11 +53,6 @@ export const navLinks = [
     title: "Chapters",
     dropdown: true,
   },
-  {
-    id: "tools",
-    title: "Tools",
-    dropdown: true,
-  },
 ];
 
 export const tools = [
