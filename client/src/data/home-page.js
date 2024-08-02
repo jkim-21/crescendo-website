@@ -53,14 +53,19 @@ export const navLinks = [
     title: "Chapters",
     dropdown: true,
   },
+  {
+    id: "tools",
+    title: "Tools",
+    dropdown: true,
+  },
 ];
 
 export const tools = [
-  {
-    id: "email-finder",
-    name: "Email Finder System",
-    link: "/tools/email-finder-system",
-  },
+  // {
+  //   id: "email-finder",
+  //   name: "Email Finder System",
+  //   link: "/tools/email-finder-system",
+  // },
   {
     id: "match-maker",
     name: "Mentor-Mentee Matching System",

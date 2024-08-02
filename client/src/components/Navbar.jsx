@@ -109,7 +109,7 @@ const Navbar = ({ pageStyles }) => {
                 <div className={`${pageStyles} ${nav.dropdown ? 'pb-3' : null}`}>
                   {nav.id === 'tools' ? (
                     <Link
-                    to ={`/${nav.id}`}>
+                    to ={``}>
                       {nav.title}
                     </Link>
                   ) : (
@@ -145,7 +145,14 @@ const Navbar = ({ pageStyles }) => {
                 ) : null}
             </li>
           ))}
-
+          <li className={`${pageStyles} navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
+            {user ? (
+              <button 
+              onClick={handleLogout}>Logout</button>
+            ) : (
+              <button onClick={handleGoogleSignIn}>Login</button>
+            )}
+          </li>
         </ul>
         <div className='flex flex-1 justify-end items-center 
                         navbar-custom:hidden'>
@@ -173,6 +180,13 @@ const Navbar = ({ pageStyles }) => {
                   </HashLink>
                 </li>
               ))}
+              <li className='sidebar-link dark-text'>
+                {user ? (
+                  <button onClick={handleLogout}>Logout</button>
+                ) : (
+                  <button onClick={handleGoogleSignIn}>Login</button>
+                )}
+              </li>
             </ul>
           </div>
         </div>
