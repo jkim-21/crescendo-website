@@ -1,15 +1,15 @@
 // firebaseConfig.jsx
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "crescendo-website-5cb88.firebaseapp.com",
-  projectId: "crescendo-website-5cb88",
-  storageBucket: "crescendo-website-5cb88.appspot.com",
-  messagingSenderId: "49917734198",
-  appId: "1:49917734198:web:48c3598fe3d909496a5797",
-  measurementId: "G-N6YBPJDFX3",
+  authDomain: "crescendo-for-a.firebaseapp.com",
+  projectId: "crescendo-for-a",
+  storageBucket: "crescendo-for-a.appspot.com",
+  messagingSenderId: "219899885944",
+  appId: "1:219899885944:web:a1aa19d2311b0571f9f08d",
+  measurementId: "G-7WMMJ758F9",
 };
 
 const app = initializeApp(firebaseConfig);

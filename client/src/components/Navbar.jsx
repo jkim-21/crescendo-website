@@ -4,7 +4,7 @@ import { HashLink } from 'react-router-hash-link';
 import { Link, useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js';
 import { useAuth } from '../context/AuthContext.jsx';
 
 import { styles } from '../style.js';
