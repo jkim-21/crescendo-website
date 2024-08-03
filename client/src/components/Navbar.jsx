@@ -3,8 +3,8 @@ import { navLinks, chapters, tools } from '../data/home-page.js';
 import { HashLink } from 'react-router-hash-link';
 import { Link, useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from './firebaseConfig';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useAuth } from '../context/AuthContext.jsx';
 
 import { styles } from '../style.js';
@@ -49,7 +49,6 @@ const Navbar = ({ pageStyles }) => {
   };
 
   const handleGoogleSignIn = async () => {
-    const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
     try {
@@ -70,7 +69,6 @@ const Navbar = ({ pageStyles }) => {
   };
 
   const handleLogout = async () => {
-    const auth = getAuth();
     try {
       await logout();
       setUser(null);
