@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import Navbar from '../../Navbar';
-import { useDropzone } from 'react-dropzone';
+import { useDropzone } from '/react-dropzone';
 import FileUpload from './FileUpload';
 import MatchedPairsTable from './MatchedPairsTable';
 import UnmatchedTable from './UnmatchedTable';
-import { utils, writeFile } from 'xlsx';
+import { utils, writeFile } from '/xlsx';
 
 
 const MentorMenteePairing = () => {
