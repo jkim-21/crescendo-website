@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "crescendo-for-a.firebaseapp.com",
-  projectId: "crescendo-for-a",
-  storageBucket: "crescendo-for-a.appspot.com",
-  messagingSenderId: "219899885944",
-  appId: "1:219899885944:web:a1aa19d2311b0571f9f08d",
-  measurementId: "G-7WMMJ758F9",
+  authDomain: "crescendo-for-a-cause.firebaseapp.com",
+  projectId: "crescendo-for-a-cause",
+  storageBucket: "crescendo-for-a-cause.appspot.com",
+  messagingSenderId: "935831846124",
+  appId: "1:935831846124:web:04107dee3690e6be2939c9",
+  measurementId: "G-XWR3LV2H8E",
 };
 
 const app = initializeApp(firebaseConfig);
