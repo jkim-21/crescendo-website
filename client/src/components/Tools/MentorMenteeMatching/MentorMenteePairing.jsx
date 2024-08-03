@@ -14,6 +14,7 @@ const MentorMenteePairing = () => {
   const [unmatchedMentees, setUnmatchedMentees] = useState([]);
   const [unmatchedMentors, setUnmatchedMentors] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const baseURL = import.meta.env.VITE_DONATION_BASE_URL || ''
 
   const onDrop = useCallback((acceptedFiles) => {
     setFile(acceptedFiles[0]);
@@ -41,7 +42,7 @@ const MentorMenteePairing = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('/upload', {
+      const response = await fetch(`${baseURL}/upload`, {
         method: 'POST',
         body: formData
       });
