@@ -26,7 +26,7 @@ export default defineConfig({
   //     external: ["firebase/app", "firebase/auth", "react-dropzone", "xlsx"],
   //   },
   // },
-  // optimizeDeps: {
-  //   include: ["firebase/app", "firebase/auth"],
-  // },
+  optimizeDeps: {
+    include: ["firebase/app", "firebase/auth"],
+  },
 });
