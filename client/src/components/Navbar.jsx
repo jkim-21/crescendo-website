@@ -3,7 +3,7 @@ import { navLinks, chapters, tools } from '../data/home-page.js';
 import { HashLink } from 'react-router-hash-link';
 import { Link, useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { auth } from './firebaseConfig';
+import { auth } from '../config/firebaseConfig';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useAuth } from '../context/AuthContext.jsx';
 
