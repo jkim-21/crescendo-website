@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import HelpModal from './HelpModal';
 import {instructions} from '../../../assets'; // Update the path to your image

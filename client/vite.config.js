@@ -21,12 +21,12 @@ export default defineConfig({
     "process.env.SOME_KEY": JSON.stringify(process.env.SOME_KEY),
   },
   plugins: [react()],
-  build: {
-    rollupOptions: {
-      external: ["firebase/app", "firebase/auth", "react-dropzone", "xlsx"],
-    },
-  },
-  optimizeDeps: {
-    include: ["firebase/app", "firebase/auth"],
-  },
+  // build: {
+  //   rollupOptions: {
+  //     external: ["firebase/app", "firebase/auth", "react-dropzone", "xlsx"],
+  //   },
+  // },
+  // optimizeDeps: {
+  //   include: ["firebase/app", "firebase/auth"],
+  // },
 });
