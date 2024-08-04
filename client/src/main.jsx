@@ -6,15 +6,15 @@ import "./index.css";
 import {ChapterPage} from "./pages";
 import {MentorMenteePage} from "./pages";
 import {EmailFinderPage} from "./pages";
+import SavedSchoolsPage from "./pages/SavedSchoolsPage";
 import {ToolsDashboardPage} from "./pages";
+import SchoolRadiusPage from "./pages/SchoolRadiusPage";
 import AuthProvider from "./context/AuthContext";
 import {SchoolDetailsPage} from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import {
   createBrowserRouter,
   RouterProvider,
-  Routes,
-  Route,
 } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -43,16 +43,37 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/tools/email-finder-system/*",
+    path: "/tools/email-finder-system",
     element: (
       <ProtectedRoute>
-        <Routes>
-          <Route path="/" element={<EmailFinderPage />} />
-          <Route path="display/:schoolName" element={<SchoolDetailsPage />} />
-        </Routes>
+        <EmailFinderPage />
       </ProtectedRoute>
     ),
   },
+  {
+    path: "/school/:schoolName",
+    element: (
+      <ProtectedRoute>
+        <SchoolDetailsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/saved-schools",
+    element: (
+      <ProtectedRoute>
+        <SavedSchoolsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/school-finder",
+    element: (
+      <ProtectedRoute>
+        <SchoolRadiusPage />
+      </ProtectedRoute>
+    )
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
