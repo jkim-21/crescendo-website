@@ -1,20 +1,23 @@
 import React, {useEffect} from 'react';
-import { Navbar, AnimationLayout, Footer } from '../components';
+import {Footer, Sidebar } from '../components';
 import {styles} from '../style';
 import '../index.css';
 import SouthIcon from '@mui/icons-material/South';
 import { projectDescriptions } from '../data/tools-pages.js';
 import {useNavigate} from 'react-router-dom';
+import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
+
 
 const ToolsPage = () => {
 
     const navigate = useNavigate()
+    useBodyBackgroundColor('#f6f8fe');
 
     return (
-        <AnimationLayout>
-        <Navbar/>
-        <div className='beige-bg'>
-            <div className={`${styles.boxWidth} m-auto black-text`}>
+        <div className='flex'>
+            <Sidebar
+                structure='light-blue-bg basis-[18%] z-[1]'/>
+            <div className={`${styles.boxWidth} m-auto black-text basis-[82%] z-[50] border-l-2`}>
                 <div className='w-[80%] m-auto pt-[2rem] pb-[2rem]
                             md:pt-[4rem] md:pb-[4rem]'>
                     <div className='flex justify-between items-center mb-[5rem]'>
@@ -56,10 +59,9 @@ const ToolsPage = () => {
                         ))}
                     </div>
                 </div>
+                <Footer/>
             </div>
-            <Footer/>
         </div>
-        </AnimationLayout>
     )
 }
 

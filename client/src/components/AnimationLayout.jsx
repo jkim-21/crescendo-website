@@ -6,15 +6,15 @@ const AnimationLayout = ({children}) => {
     const pageTransition = {
         hidden: {
             opacity: 0,
-            transition: { duration: 0 } 
+            transition: { duration: 0.3, ease: "easeOut" }
         },
         visible: {
             opacity: 1,
-            transition: { duration: 1 }
+            transition: { duration: 0.5, ease: "easeOut" }
         },
         exit: {
             opacity: 0,
-            transition: { duration: 0 } 
+            transition: { duration: 0.3, ease: "easeIn" }
         },
     }
 
@@ -30,7 +30,8 @@ const AnimationLayout = ({children}) => {
         variants={pageTransition} 
         initial='hidden' 
         animate='visible' 
-        exit='exit'>
+        exit='exit'
+        >
             {children}
         </motion.div>
     </AnimatePresence>

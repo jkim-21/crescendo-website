@@ -61,11 +61,11 @@ export const navLinks = [
 ];
 
 export const tools = [
-  // {
-  //   id: "email-finder",
-  //   name: "Email Finder System",
-  //   link: "/tools/email-finder-system",
-  // },
+  {
+    id: "email-finder",
+    name: "Email Finder System",
+    link: "/tools/email-finder-system",
+  },
   {
     id: "match-maker",
     name: "Mentor-Mentee Matching System",

@@ -12,6 +12,7 @@ import SchoolRadiusPage from "./pages/SchoolRadiusPage";
 import AuthProvider from "./context/AuthContext";
 import {SchoolDetailsPage} from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import {AnimationLayout} from "./components"
 import {
   createBrowserRouter,
   RouterProvider,
@@ -24,13 +25,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/chapters/:chapterName",
-    element: <ChapterPage />,
+    element: (
+      <AnimationLayout>
+        <ChapterPage />
+      </AnimationLayout>
+    ),
   },
   {
     path: "/tools",
     element: (
       <ProtectedRoute>
-        <ToolsDashboardPage />
+        <AnimationLayout>
+          <ToolsDashboardPage />
+        </AnimationLayout>
       </ProtectedRoute>
     ),
   },
@@ -38,7 +45,9 @@ const router = createBrowserRouter([
     path: "/tools/mentor-mentee-matching-system",
     element: (
       <ProtectedRoute>
-        <MentorMenteePage />
+        <AnimationLayout>
+          <MentorMenteePage />
+        </AnimationLayout>
       </ProtectedRoute>
     ),
   },
@@ -46,7 +55,9 @@ const router = createBrowserRouter([
     path: "/tools/email-finder-system",
     element: (
       <ProtectedRoute>
-        <EmailFinderPage />
+        <AnimationLayout>
+          <EmailFinderPage />
+        </AnimationLayout>
       </ProtectedRoute>
     ),
   },
@@ -54,7 +65,9 @@ const router = createBrowserRouter([
     path: "/school/:schoolName",
     element: (
       <ProtectedRoute>
-        <SchoolDetailsPage />
+        <AnimationLayout>
+          <SchoolDetailsPage />
+        </AnimationLayout>
       </ProtectedRoute>
     ),
   },
@@ -62,7 +75,9 @@ const router = createBrowserRouter([
     path: "/saved-schools",
     element: (
       <ProtectedRoute>
-        <SavedSchoolsPage />
+        <AnimationLayout>
+          <SavedSchoolsPage />
+        </AnimationLayout>
       </ProtectedRoute>
     ),
   },
@@ -70,7 +85,9 @@ const router = createBrowserRouter([
     path: "/school-finder",
     element: (
       <ProtectedRoute>
-        <SchoolRadiusPage />
+        <AnimationLayout>
+          <SchoolRadiusPage />
+        </AnimationLayout>
       </ProtectedRoute>
     )
   }

@@ -26,20 +26,24 @@
   --gold: #cfa524;
   --dark-gray: #222832;
   --white:#fafafa; 
+  --light-gray: #9ca3af;
   --gray: #586069;
+  --beige: #f3f6ec;
+  --light-blue: #f6f8fe;
+  --light-gray-blue: #cbd5e1;
+  --sea-blue: #006fff;
   --navy: #002e5d;
   --dark-blue: #0a162f;
-  --beige: #f3f6ec;
-  --light-gray-blue: #cbd5e1;
-  --light-blue: #f6f8fe;
-  
-  --black-gradient: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
+  --dark-red: #8b0000;
+  --soft-red: #fca5a5;
 
+
+  --black-gradient: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
 }
 
 body {
   font-family: "IBM Plex Sans", "Poppins", sans-serif;
-  background: black;
+  background: var(--dark-blue);
   scroll-behavior: auto;
 }
 
@@ -139,6 +143,14 @@ body {
   color: var(--gray);
 }
 
+.sea-blue-text {
+  color: var(--sea-blue)
+}
+
+.red-text {
+  color: var(--dark-red)
+}
+
 .gold-bg {
   background-color: var(--gold);
 }
@@ -162,8 +174,28 @@ body {
   background-color: var(--light-blue);
 }
 
+.sea-blue-bg {
+  background-color: var(--sea-blue)
+}
+
 .black-gradient-bg {
   background: var(--black-gradient);
+}
+
+.soft-red-bg {
+  background: var(--soft-red);
+}
+
+.dark-border {
+  border-color: var(--dark-blue)
+}
+
+.sea-blue-border {
+  border-color: var(--sea-blue)
+}
+
+.light-blue-border {
+  border-color: var(--light-gray)
 }
 
 /* Contact Component */
@@ -374,13 +406,26 @@ body {
 
 
 /* Sidebar */
-.tool-links {
 
+.tool-links {
+  transition: background-color 0.3s;
+}
+
+.tool-links:hover:not(.active-link) {
+  background-color: var(--light-gray-blue);
+}
+
+.active-link {
+  color: white;
+  background-color: var(--sea-blue);
 }
 
 
-
-
+/* Email Finder Page */
+.search-button:hover {
+  background-color: var(--sea-blue);
+  color: var(--white);
+}
 
 
 

@@ -107,7 +107,7 @@ const Navbar = ({ pageStyles }) => {
                 <div className={`${pageStyles} ${nav.dropdown ? 'pb-3' : null}`}>
                   {nav.id === 'tools' ? (
                     <Link
-                    to ={``}>
+                    to={`/${nav.id}`}>
                       {nav.title}
                     </Link>
                   ) : (

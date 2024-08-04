@@ -46,4 +46,38 @@ export const toolLinks = [
     name: "Saved Information",
     pageLink: "/tools/saved-information",
   },
+
+  // MAKE SURE TO KEEP THIS OBJECT ELEMENT LAST AT ALL TIMES
+  {
+    id: "logout",
+    name: "Logout",
+    pageLink: "/",
+  },
+];
+
+export const tableInputs = [
+  {
+    id: "city-input",
+    type: "text",
+    placeholder: "City",
+    value: "city",
+    setValue: "setCity",
+    className: "light-gray-border p-2 border rounded",
+  },
+  {
+    id: "state-input",
+    type: "text",
+    placeholder: "State",
+    value: "locationState",
+    setValue: "setLocationState",
+    className: "light-gray-border p-2 border rounded",
+  },
+  {
+    id: "city-input",
+    type: "text",
+    placeholder: "Street",
+    value: "street",
+    setValue: "setStreet",
+    className: "light-gray-border p-2 border rounded",
+  },
 ];

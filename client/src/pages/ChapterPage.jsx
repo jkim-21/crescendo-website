@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import { chapterBackground } from '../assets';
 import { colby, harvard, northwestern, stevenson, ucsb } from '../data/chapter-details';
-import { Involvements, Officers, Contacts, Navbar, AnimationLayout } from '../components';
+import { Involvements, Officers, Contacts, Navbar } from '../components';
 import {styles} from "../style";
 import { useParams } from 'react-router-dom';
+
 
 const chapters = {
   colby, harvard, northwestern, stevenson, ucsb
@@ -18,7 +19,7 @@ const ChapterPage = () => {
   }, []);
 
   return (
-    <AnimationLayout>
+    <>
       <div 
       style={{backgroundImage: `url(${chapterData.background})`}}
       className='w-full bg-center bg-cover overflow-hidden'>
@@ -70,7 +71,7 @@ const ChapterPage = () => {
         </div>
       </div>
       <Contacts/>
-    </AnimationLayout>
+    </>
   )
 }
 
