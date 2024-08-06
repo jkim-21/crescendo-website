@@ -218,7 +218,7 @@ export const executiveBoard = [
     title: "",
     content: {
       content1:
-        "Justin Kim is a graduate of Colby College, with a Bacherlor's degree in Neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. He is currently a saxophonist in the Colby Wind Ensemble and a solo pianist at Colby. Justin is particularly interested in addressing the disparities in music education by working closely with local communities. Growing up as a low-income immigrant, he understands how difficult it can be to access music. Now, he is excited to provide the same inspiration he’s received throughout his musical journey to spread the joy of music.",
+        "Justin Kim is a graduate of Colby College, with a Bacherlor's degree in Neuroscience. He plays classical piano and jazz saxophone, and loves to play in ensembles. He was a saxophonist in the Colby Wind Ensemble and a solo pianist at Colby. Justin is particularly interested in addressing the disparities in music education by working closely with local communities. Growing up as a low-income immigrant, he understands how difficult it can be to access music. Now, he is excited to provide the same inspiration he’s received throughout his musical journey to spread the joy of music.",
     },
   },
   {
