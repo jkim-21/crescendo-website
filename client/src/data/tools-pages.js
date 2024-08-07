@@ -44,7 +44,12 @@ export const toolLinks = [
   {
     id: "saved-information",
     name: "Saved Information",
-    pageLink: "/tools/saved-information",
+    pageLink: "/saved-schools",
+  },
+  {
+    id: "school-finder",
+    name: "Radius Lookup",
+    pageLink: "/school-finder"
   },
 
   // MAKE SURE TO KEEP THIS OBJECT ELEMENT LAST AT ALL TIMES

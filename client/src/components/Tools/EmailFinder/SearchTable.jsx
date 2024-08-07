@@ -24,7 +24,7 @@ const SearchTable = ({data}) => {
             const value = cell.getValue();
             return (
               <button
-              onClick={() => navigate(`/tools/email-finder-system/display/${encodeURIComponent(value)}`)}
+              onClick={() => navigate(`/school/${encodeURIComponent(value)}`)}
                         className="text-blue-500 hover:font-underline">
                 {cell.getValue()}
               </button>

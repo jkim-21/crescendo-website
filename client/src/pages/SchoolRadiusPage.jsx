@@ -1,16 +1,65 @@
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { SearchTable, Footer, Sidebar } from '../components';
+import { styles } from '../style';
 import { useNavigate } from 'react-router-dom';
+import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
 
 const SchoolRadiusPage = () => {
     const [longitude, setLongitude] = useState("");
     const [latitude, setLatitude] = useState("");
-    const [radius, setRadius] = useState("10");
+    const [radius, setRadius] = useState("10"); //miles
+    const [address, setAddress] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [schools, setSchools] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    useBodyBackgroundColor('#f6f8fe');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    const handleAddressLookup = async () => {
+        setError("");
+        setLoading(true);
+        const encodedAddress = encodeURIComponent(address);
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodedAddress}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.length > 0) {
+                setLatitude(data[0].lat);
+                setLongitude(data[0].lon);
+            } else {
+                setError("Couldn't find coordinates for this address.");
+            }
+        } catch (err) {
+            setError("Error looking up address: " + err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleGetCurrentLocation = () => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLatitude(position.coords.latitude.toString());
+                    setLongitude(position.coords.longitude.toString());
+                    setError("");
+                },
+                (err) => {
+                    setError("Error getting location: " + err.message);
+                }
+            );
+        } else {
+            setError("Geolocation is not supported by your browser");
+        }
+    };
 
     const handleClick = async () => {
         if (Math.abs(parseFloat(latitude)) > 90 || Math.abs(parseFloat(longitude)) > 180) {
@@ -53,99 +102,76 @@ const SchoolRadiusPage = () => {
     const currentData = schools.slice(startIdx, endIdx);
 
     return (
-        <div className="min-h-[100vh] bg-white p-5">
-            <div className="flex gap-10 mb-5">
-                <input
-                    type="text"
-                    className="border-black border rounded-md p-2"
-                    placeholder="Longitude"
-                    value={longitude}
-                    onChange={(e) => setLongitude(e.target.value)}
-                />
-                <input
-                    type="text"
-                    className="border-black border rounded-md p-2"
-                    placeholder="Latitude"
-                    value={latitude}
-                    onChange={(e) => setLatitude(e.target.value)}
-                />
-                <input
-                    type="text"
-                    className="border-black border rounded-md p-2"
-                    placeholder="Radius"
-                    value={radius}
-                    onChange={(e) => setRadius(e.target.value)}
-                />
-                <button
-                    className="bg-blue-500 text-white p-2 rounded"
-                    onClick={handleClick}>
-                    Find Schools
-                </button>
-            </div>
-            
-            {error && <div className="border border-red-500 bg-red-100 p-2 mb-5">{error}</div>}
-            {loading && <div className="mb-5">Loading...</div>}
-            
-            {schools.length > 0 ? (
-                <div>
-                    <div className="overflow-y-auto overflow-x-auto">
-                        <table className="w-full border-collapse border border-gray-400">
-                            <thead>
-                                <tr>
-                                    {Object.keys(currentData[0]).map((key) => (
-                                        <th key={key} className="border border-gray-400 p-2 text-left bg-gray-100">
-                                            {key}
-                                        </th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {currentData.map((item, index) => (
-                                    <tr key={index}>
-                                        {Object.entries(item).map(([key, value], idx) => (
-                                            <td key={idx} className="border border-gray-400 p-2">
-                                                {key === 'SCH_NAME' ? (
-                                                    <button
-                                                        onClick={() => navigate(`/school/${encodeURIComponent(value)}`)}
-                                                        className="text-blue-500 hover:underline"
-                                                    >
-                                                        {value}
-                                                    </button>
-                                                ) : (
-                                                    value
-                                                )}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+        <div className='flex'>
+            <Sidebar structure='light-blue-bg basis-[18%] z-[1]' />
+            <div className={`${styles.boxWidth} m-auto basis-[82%] z-50 border-l-2`}>
+                <div className={`flex flex-col items-center m-auto pt-[5rem] pb-[2rem] px-[3rem] mx-auto min-h-[100vh]`}>
+                    <div className="mb-[2rem] flex flex-col gap-[1rem]">
+                        <div className="flex gap-[1rem]">
+                            <input
+                                type="text"
+                                className="p-2 border border-[#9ca3af] rounded flex-grow"
+                                placeholder="Enter an address"
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                            />
+                            <button
+                                className="p-2 border-2 border-green-500 text-green-500 rounded hover:bg-green-500 hover:text-white transition"
+                                onClick={handleAddressLookup}>
+                                Lookup Address
+                            </button>
+                        </div>
+                        <div className="flex gap-[1rem]">
+                            <input
+                                type="text"
+                                className="p-2 border border-[#9ca3af] rounded"
+                                placeholder="Longitude"
+                                value={longitude}
+                                onChange={(e) => setLongitude(e.target.value)}
+                            />
+                            <input
+                                type="text"
+                                className="p-2 border border-[#9ca3af] rounded"
+                                placeholder="Latitude"
+                                value={latitude}
+                                onChange={(e) => setLatitude(e.target.value)}
+                            />
+                            <input
+                                type="text"
+                                className="p-2 border border-[#9ca3af] rounded"
+                                placeholder="Radius (miles)"
+                                value={radius}
+                                onChange={(e) => setRadius(e.target.value)}
+                            />
+                            <button
+                                className="search-button bg-white sea-blue-border sea-blue-text p-2 border-2 rounded transition"
+                                onClick={handleClick}>
+                                Find Schools
+                            </button>
+                            <button
+                                className="border-2 border-green-500 text-green-500 p-2 rounded hover:bg-green-500 transition hover:text-white"
+                                onClick={handleGetCurrentLocation}>
+                                Use Current Location
+                            </button>
+                        </div>
                     </div>
-                    <div className="flex justify-between mt-4">
-                        <button
-                            className="p-2 border border-gray-400 rounded disabled:opacity-50"
-                            onClick={handlePreviousPage}
-                            disabled={currentPage === 1}
-                        >
-                            Previous
-                        </button>
-                        <span className="p-2">
-                            Page {currentPage} of {Math.ceil(schools.length / itemsPerPage)}
-                        </span>
-                        <button
-                            className="p-2 border border-gray-400 rounded disabled:opacity-50"
-                            onClick={handleNextPage}
-                            disabled={currentPage >= Math.ceil(schools.length / itemsPerPage)}
-                        >
-                            Next
-                        </button>
+
+                    {loading ?
+                        <p className='mb-[2rem]'>
+                            Loading...
+                        </p> : null}
+
+                    {error ?
+                        <p className="red-text soft-red-bg border dark-border rounded py-[0.25rem] px-[1rem] mb-[2rem]">
+                            Error: {error}
+                        </p> : null}
+
+                    <div className="w-full">
+                        <SearchTable data={schools} />
                     </div>
                 </div>
-            ) : (
-                <p className='text-center my-[3rem]'>
-                    No data available
-                </p>
-            )}
+                <Footer />
+            </div>
         </div>
     );
 };

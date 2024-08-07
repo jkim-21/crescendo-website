@@ -9,19 +9,25 @@ const db = mysql.createPool({
   host: "127.0.0.1",
   user: "root",
   password: process.env.DB_PASSWORD,
-  database: "C4C_ASOS",
+  database: "USER_INFO",
   connectionLimit: 10,
 });
 
-const userdb = mysql.createPool({
-  host: "127.0.0.1",
-  user: "root",
-  password: process.env.DB_PASSWORD,
-  database: "USER_INFO",
-  connectionLimit: 10
-});
-
 router.get("/coords", async (req, res) => {
+
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;//earth
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const distance = R * c;//kilmeters
+    return distance;
+  }
+
   const { latitude = "", longitude = "", radius = "10" } = req.query;
   
   try {
@@ -33,17 +39,33 @@ router.get("/coords", async (req, res) => {
       return res.status(400).json({ error: "Invalid parameters" });
     }
 
-    const latMin = lat - rad;
-    const latMax = lat + rad;
-    const lonMin = lon - rad;
-    const lonMax = lon + rad;
+    const radiusKm = rad * 1.60934;
+    
+    const latDegrees = radiusKm / 111.32;
+    const lonDegrees = radiusKm / (111.32 * Math.cos(lat * Math.PI / 180));
+
+    const latMin = lat - latDegrees;
+    const latMax = lat + latDegrees;
+    const lonMin = lon - lonDegrees;
+    const lonMax = lon + lonDegrees;
 
     const [data] = await db.query(
-      "SELECT SCH_NAME, LCITY, LSTREET1, LAT, LON FROM school_emails_website WHERE SCRAPED_EMAILS IS NOT NULL AND LAT BETWEEN ? AND ? AND LON BETWEEN ? AND ?",
+      `SELECT SCH_NAME, LCITY, LSTREET1, LAT, LON
+      FROM school_emails_website
+      WHERE SCRAPED_EMAILS IS NOT NULL
+      AND LAT BETWEEN ? AND ?
+      AND LON BETWEEN ? AND ?`,
       [latMin, latMax, lonMin, lonMax]
     );
 
-    res.json(data);
+    const filteredData = data.map(school => ({
+        ...school,
+        distance: calculateDistance(lat, lon, school.LAT, school.LON)
+      }))
+      .filter(school => school.distance <= radiusKm)
+      .sort((a, b) => a.distance - b.distance);
+
+    res.json(filteredData);
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({
@@ -209,7 +231,7 @@ router.post("/check-saved-school", async (req, res) => {
   const { email, schoolIndex } = req.body;
 
   try {
-    const [user] = await userdb.query(
+    const [user] = await db.query(
       "SELECT SAVED_SCHOOLS FROM users WHERE EMAIL = ?",
       [email]
     );
@@ -238,7 +260,7 @@ router.post("/save-school", async (req, res) => {
   try {
     let connection;
     try {
-      connection = await userdb.getConnection();
+      connection = await db.getConnection();
       await connection.beginTransaction();
 
       const [users] = await connection.query(
@@ -290,7 +312,7 @@ router.get("/saved-schools", async (req, res) => {
   const { email } = req.query;
 
   try {
-    const [user] = await userdb.query(
+    const [user] = await db.query(
       "SELECT SAVED_SCHOOLS FROM users WHERE EMAIL = ?",
       [email]
     );
