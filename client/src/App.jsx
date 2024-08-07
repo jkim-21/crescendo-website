@@ -2,7 +2,7 @@ import {React, useEffect} from 'react'
 import {AboutUs, Chapters, Footer, Hero, Navbar, Impact, DonationForm, QueryProvider, Work, AnimationLayout} from './components'
 import {styles} from './style'
 import { ThemeProvider } from '@mui/material/styles';
-import theme from './themes/theme';
+import {theme} from './themes/theme';
 
 const App = () => {
 

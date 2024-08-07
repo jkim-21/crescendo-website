@@ -44,21 +44,37 @@ export const toolLinks = [
   {
     id: "saved-information",
     name: "Saved Information",
-    pageLink: "/saved-schools",
+    pageLink: "/tools/saved-information",
   },
   {
     id: "school-finder",
     name: "Radius Lookup",
-    pageLink: "/school-finder"
-  },
-
-  // MAKE SURE TO KEEP THIS OBJECT ELEMENT LAST AT ALL TIMES
-  {
-    id: "logout",
-    name: "Logout",
-    pageLink: "/",
+    pageLink: "/school-finder",
   },
 ];
+
+export const dynamicToolLinks = (schoolName, urlPathname) => {
+  const dynamicLink = [
+    {
+      id: "email-finder",
+      name: "Email Finder",
+      pageLink: "/tools/email-finder-system",
+      dropdownParent: true,
+    },
+    {
+      id: "school-information",
+      name: `${schoolName} Information`,
+      pageLink: `/tools/email-finder-system/school/${urlPathname}`,
+      dropdown: true,
+    },
+  ];
+  const insertIndex = toolLinks.findIndex((link) => link.id === "email-finder");
+  return [
+    ...toolLinks.slice(0, insertIndex),
+    ...dynamicLink,
+    ...toolLinks.slice(insertIndex + 1),
+  ];
+};
 
 export const tableInputs = [
   {
@@ -84,5 +100,56 @@ export const tableInputs = [
     value: "street",
     setValue: "setStreet",
     className: "light-gray-border p-2 border rounded",
+  },
+];
+
+export const states = [
+  {
+    id: "illinois",
+    value: "Illinois",
+    label: "Illinois",
+  },
+  {
+    id: "maine",
+    value: "Maine",
+    label: "Maine",
+  },
+  {
+    id: "massachusetts",
+    value: "Massachusetts",
+    label: "Massachusetts",
+  },
+];
+
+export const miles = [
+  {
+    id: "N/A-mile",
+    value: "N/A",
+    label: "N/A",
+  },
+  {
+    id: "1-mile",
+    value: 1,
+    label: "1",
+  },
+  {
+    id: "5-miles",
+    value: 5,
+    label: "5",
+  },
+  {
+    id: "10-miles",
+    value: 10,
+    label: "10",
+  },
+  {
+    id: "10-miles",
+    value: 20,
+    label: "20",
+  },
+  {
+    id: "10-miles",
+    value: 30,
+    label: "30",
   },
 ];

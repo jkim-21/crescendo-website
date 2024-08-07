@@ -1,7 +1,11 @@
 import { MentorMenteePairing} from "../components";
-import React from 'react';
+import React, {useEffect} from 'react';
 
 const MentorMenteeMatchingPage = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
     return (
         <div className='navy-bg'>
             <MentorMenteePairing />

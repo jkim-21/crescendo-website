@@ -7,10 +7,10 @@ const FileUpload = ({ onDrop, file, uploading, open, getRootProps, getInputProps
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div {...getRootProps({ className: 'dropzone flex flex-col items-center justify-center w-full h-96 border-8 border-blue-700 rounded-2xl bg-blue-100 cursor-pointer' })}>
+    <div {...getRootProps({ className: 'soft-pastel-bg dropzone flex flex-col items-center justify-center w-full h-96 rounded-2xl cursor-pointer light-blue-border border-[1px]' })}>
       <input {...getInputProps()} />
-      <div className="dropzone-content text-white flex flex-col items-center text-center">
-        <CloudUploadIcon className="text-8xl text-white" />
+      <div className="dark-text dropzone-content flex flex-col items-center text-center">
+        <CloudUploadIcon className="text-8xl" />
         {isDragActive ? (
           <p>Drop the file here...</p>
         ) : (
@@ -19,8 +19,8 @@ const FileUpload = ({ onDrop, file, uploading, open, getRootProps, getInputProps
               <div>
                 <p>Generate a .xslx file from your google form Mentor/Mentee responses and drop that file here!</p>
                 <p><span className="or opacity-50">OR</span></p>
-                <button className="text-button-white mt-4" onClick={open}>Click to Browse File</button>
-                <div className="mt-2 text-xs text-white cursor-pointer opacity-75 hover:opacity-100" onClick={() => setShowModal(true)}>
+                <button className="dark-text mt-4" onClick={open}>Click to Browse File</button>
+                <div className="mt-2 text-xs cursor-pointer opacity-75 hover:opacity-100" onClick={() => setShowModal(true)}>
                   Need help?
                 </div>
               </div>
@@ -28,7 +28,7 @@ const FileUpload = ({ onDrop, file, uploading, open, getRootProps, getInputProps
             {file && !uploading && (
               <>
                 <p>{file.name}</p>
-                <button className="upload-button mt-4 p-2 bg-blue-700 text-white rounded-md hover:bg-blue-800" onClick={handleFileUpload}>Upload File</button>
+                <button className="upload-button mt-4 p-2 rounded-md " onClick={handleFileUpload}>Upload File</button>
                 <button 
                   className="choose-different-file-button mt-4 text-gray-600"
                   onClick={() => setFile(null)}
@@ -39,7 +39,7 @@ const FileUpload = ({ onDrop, file, uploading, open, getRootProps, getInputProps
               </>
             )}
             {uploading && (
-              <div className="uploading text-white text-center p-4 bg-white rounded-lg animate-pulse">
+              <div className="uploading text-center p-4 dark-bg rounded-lg animate-pulse">
                 <p>Uploading...</p>
               </div>
             )}

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Navbar, AnimationLayout, Footer, Sidebar } from '../components';
+import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
 
 const SavedSchoolsPage = () => {
     const [savedSchools, setSavedSchools] = useState([]);
@@ -10,6 +11,7 @@ const SavedSchoolsPage = () => {
     const [error, setError] = useState(null);
     const { user } = useAuth();
     const navigate = useNavigate();
+    useBodyBackgroundColor('#f6f8fe')
 
     useEffect(() => {
         const fetchSavedSchools = async () => {

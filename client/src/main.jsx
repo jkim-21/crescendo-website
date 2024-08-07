@@ -3,16 +3,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import {ChapterPage} from "./pages";
-import {MentorMenteePage} from "./pages";
-import {EmailFinderPage} from "./pages";
-import SavedSchoolsPage from "./pages/SavedSchoolsPage";
-import {ToolsDashboardPage} from "./pages";
-import SchoolRadiusPage from "./pages/SchoolRadiusPage";
 import AuthProvider from "./context/AuthContext";
-import {SchoolDetailsPage} from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import {AnimationLayout} from "./components"
+import { ThemeProvider } from "@mui/material/styles";
+import {theme, tableTheme} from "./themes/theme"
+import {
+  ChapterPage, 
+  ToolsDashboardPage, 
+  MentorMenteePage, 
+  EmailFinderPage, 
+  SchoolDetailsPage, 
+  SavedInformationPage,
+  SchoolRadiusPage
+} from "./pages";
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -56,13 +61,15 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <AnimationLayout>
-          <EmailFinderPage />
+          <ThemeProvider theme={tableTheme}>
+            <EmailFinderPage />
+          </ThemeProvider>
         </AnimationLayout>
       </ProtectedRoute>
     ),
   },
   {
-    path: "/school/:schoolName",
+    path: "/tools/email-finder-system/school/:schoolName",
     element: (
       <ProtectedRoute>
         <AnimationLayout>
@@ -72,11 +79,11 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/saved-schools",
+    path: "/tools/saved-information",
     element: (
       <ProtectedRoute>
         <AnimationLayout>
-          <SavedSchoolsPage />
+          <SavedInformationPage />
         </AnimationLayout>
       </ProtectedRoute>
     ),

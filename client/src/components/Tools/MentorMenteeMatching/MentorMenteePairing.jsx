@@ -1,10 +1,13 @@
-import React, { useState, useCallback } from 'react';
-import Navbar from '../../Navbar';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import FileUpload from './FileUpload';
 import MatchedPairsTable from './MatchedPairsTable';
 import UnmatchedTable from './UnmatchedTable';
+import Sidebar from '../Sidebar';
+import Footer from '../../Footer'
 import { utils, writeFile } from 'xlsx';
+import {styles} from '../../../style'
+import useBodyBackgroundColor from '../../../hooks/useBodyBackgroundColor';
 
 
 const MentorMenteePairing = () => {
@@ -15,6 +18,11 @@ const MentorMenteePairing = () => {
   const [unmatchedMentors, setUnmatchedMentors] = useState([]);
   const [uploading, setUploading] = useState(false);
   const baseURL = import.meta.env.VITE_DONATION_BASE_URL || ''
+  useBodyBackgroundColor('#f6f8fe')
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const onDrop = useCallback((acceptedFiles) => {
     setFile(acceptedFiles[0]);
@@ -80,31 +88,34 @@ const MentorMenteePairing = () => {
   };
 
   return (
-    <>
-      <Navbar/>
-      <div className="mentor-mentee-matching flex flex-col items-center justify-center bg-blue-900">
-        {pairings.length === 0 ? (
-          <FileUpload
-            onDrop={onDrop}
-            file={file}
-            uploading={uploading}
-            open={open}
-            getRootProps={getRootProps}
-            getInputProps={getInputProps}
-            isDragActive={isDragActive}
-            setFile={setFile}
-            handleFileUpload={handleFileUpload}
-          />
-        ) : (
-          <>
-            <MatchedPairsTable pairings={pairings} />
-            <UnmatchedTable unmatchedMentees={unmatchedMentees} unmatchedMentors={unmatchedMentors} />
-          </>
-        )}
-        {message && <p className="message text-white mt-4">{message}</p>}
+    <div className='flex light-blue-bg'>
+      <Sidebar
+        structure='light-blue-bg basis-[18%]'/>
+      <div className= 'basis-[82%] z-50 m-auto'>
+        <div className={`${styles.boxWidth} min-h-[100vh] flex flex-col items-center justify-center m-auto light-blue-bg bg-center px-[2rem]`}>
+          {pairings.length === 0 ? (
+            <FileUpload
+              onDrop={onDrop}
+              file={file}
+              uploading={uploading}
+              open={open}
+              getRootProps={getRootProps}
+              getInputProps={getInputProps}
+              isDragActive={isDragActive}
+              setFile={setFile}
+              handleFileUpload={handleFileUpload}
+            />
+          ) : (
+            <>
+              <MatchedPairsTable pairings={pairings} />
+              <UnmatchedTable unmatchedMentees={unmatchedMentees} unmatchedMentors={unmatchedMentors} />
+            </>
+          )}
+          {message && <p className="message text-white mt-4">{message}</p>}
+        </div>
+        <Footer/>
       </div>
-
-    </>
+    </div>
   );
 };
 

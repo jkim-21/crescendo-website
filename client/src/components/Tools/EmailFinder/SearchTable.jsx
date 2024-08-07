@@ -6,26 +6,36 @@ import {
   useMaterialReactTable,
 } from 'material-react-table';
 
-const SearchTable = ({data}) => {
+const SearchTable = ({data, setSchoolName, setSchoolUrl}) => {
+  let value = ''
   const navigate = useNavigate();
+
+  const handleSchoolClick = () => {
+    navigate(`/tools/email-finder-system/school/${encodeURIComponent(value)}`);
+    setSchoolName(value);
+    setSchoolUrl(encodeURIComponent(value));
+  }
 
   const columns = useMemo(() => {
     if (!data[0]) return [];
     const keys = Object.keys(data[0]);
-    if (keys.length < 3) {
+    if (keys.length < 4) {s
       return [];
     }
-    return ([
+  
+    return (
+      [
         {
           accessorKey: keys[0],
           header: 'School Name',
           size: 150,
           Cell: ({ cell }) => {
-            const value = cell.getValue();
+            value = cell.getValue();
             return (
               <button
-              onClick={() => navigate(`/school/${encodeURIComponent(value)}`)}
-                        className="text-blue-500 hover:font-underline">
+                onClick={handleSchoolClick}
+                className="sea-blue-text text-left hover:font-underline"
+              >
                 {cell.getValue()}
               </button>
             );
@@ -38,6 +48,11 @@ const SearchTable = ({data}) => {
         },
         {
           accessorKey: keys[2],
+          header: 'City',
+          size: 150,
+        },
+        {
+          accessorKey: keys[3],
           header: 'Street',
           size: 150,
         },
@@ -51,58 +66,28 @@ const SearchTable = ({data}) => {
       data: data,
       muiPaginationProps: {
         rowsPerPageOptions: [10, 20, 50, 100],
-        shape: 'rounded',
         variant: 'outlined',
       },
       muiTableBodyRowProps: {
         sx: {
+
         }
       },
       muiTableBodyCellProps: {
         sx: {
-
         },
       },
       muiTableHeadCellProps: {
         sx: {
         },
-    }});
+    }
+  });
 
   return (
-    <div className="overflow-y-auto overflow-x-auto"> 
-      <MaterialReactTable table={table} className='beige-bg' />
-
-      {/* <table className="w-full border-collapse border border-gray-400">
-        <thead>
-          <tr>
-            {Object.keys(currentData[0]).map((key) => ( //data[0] is the headers of the table
-              <th key={key} className="border border-gray-400 p-2 text-left bg-gray-100">
-                {key}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {currentData.map((item, index) => (
-            <tr key={index}>
-              {Object.entries(item).map(([key, value], idx) => ( //map each item by its index to a "td" table data cell in the table
-                <td key={idx} className="border border-gray-400 p-2">
-                  {key === 'SCH_NAME' ? (
-                    <button
-                      onClick={() => navigate(`/school/${encodeURIComponent(value)}`)}
-                      className="text-blue-500 hover:underline"
-                    >
-                    {value}
-                  </button>
-                  ) : (
-                    value
-                  )}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+    <div className="school-table overflow-y-auto overflow-x-auto shadow-md rounded-[0.5rem]"> 
+      <MaterialReactTable 
+        table={table}
+        sx={{boxShadow: 1}}/>
     </div>
   )
 };

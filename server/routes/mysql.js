@@ -14,22 +14,23 @@ const db = mysql.createPool({
 });
 
 router.get("/coords", async (req, res) => {
-
   function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371;//earth
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = 
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-      Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    const distance = R * c;//kilmeters
+    const R = 6371; //earth
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; //kilmeters
     return distance;
   }
 
   const { latitude = "", longitude = "", radius = "10" } = req.query;
-  
+
   try {
     const lat = parseFloat(latitude);
     const lon = parseFloat(longitude);
@@ -40,9 +41,9 @@ router.get("/coords", async (req, res) => {
     }
 
     const radiusKm = rad * 1.60934;
-    
+
     const latDegrees = radiusKm / 111.32;
-    const lonDegrees = radiusKm / (111.32 * Math.cos(lat * Math.PI / 180));
+    const lonDegrees = radiusKm / (111.32 * Math.cos((lat * Math.PI) / 180));
 
     const latMin = lat - latDegrees;
     const latMax = lat + latDegrees;
@@ -58,11 +59,12 @@ router.get("/coords", async (req, res) => {
       [latMin, latMax, lonMin, lonMax]
     );
 
-    const filteredData = data.map(school => ({
+    const filteredData = data
+      .map((school) => ({
         ...school,
-        distance: calculateDistance(lat, lon, school.LAT, school.LON)
+        distance: calculateDistance(lat, lon, school.LAT, school.LON),
       }))
-      .filter(school => school.distance <= radiusKm)
+      .filter((school) => school.distance <= radiusKm)
       .sort((a, b) => a.distance - b.distance);
 
     res.json(filteredData);
@@ -75,22 +77,29 @@ router.get("/coords", async (req, res) => {
 });
 
 router.get("/data", async (req, res) => {
-  const { city = "", locationState = "", street = "" } = req.query;
+  const {
+    city = "",
+    locationState = "",
+    street = "",
+    zipCode = "",
+  } = req.query;
   try {
-    const cityParam = city ? `%${city}%` : "%";
-    const stateParam = locationState ? `%${locationState}%` : "%";
+    const cityParam = city ? `${city}%` : "%";
+    const stateParam = locationState ? `${locationState}%` : "%";
     const streetParam = street ? `%${street}%` : "%";
+    const zipCodeParam = zipCode ? `%${zipCode}%` : "%";
 
     const [data] = await db.query(
-      "SELECT SCH_NAME, LCITY, LSTREET1 FROM school_emails_website WHERE SCRAPED_EMAILS IS NOT NULL AND LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ?",
-      [cityParam, stateParam, streetParam]
+      "SELECT SCH_NAME, STATENAME, LCITY, LSTREET1 FROM school_emails_website WHERE SCRAPED_EMAILS IS NOT NULL AND LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ? AND LZIP LIKE ?",
+      [cityParam, stateParam, streetParam, zipCodeParam]
     );
 
     res.json(data);
   } catch (err) {
-    console.error("error fetching data:", err);
+    console.error("Error fetching data:", err);
     res.status(500).json({
-      error: "error doing thr query",
+      error:
+        "An error occurred while fetching the data. Please contact the administrator.",
     });
   }
 });
@@ -109,15 +118,16 @@ router.get("/school-data/:schoolName", async (req, res) => {
         ...data[0],
         INDEX_NUMBER: data[0].INDEX_NUMBER.toString(),
         LON: parseFloat(data[0].LON),
-        WEBSITE: data[0].WEBSITE || '',
-        SCRAPED_WEBSITE_1: data[0].SCRAPED_WEBSITE_1 || '',
-        SCRAPED_WEBSITE_2: data[0].SCRAPED_WEBSITE_2 || '',
-        SCRAPED_WEBSITE_3: data[0].SCRAPED_WEBSITE_3 || '',
-        SCRAPED_WEBSITE: data[0].SCRAPED_WEBSITE || '',
-        SCRAPED_EMAILS: typeof data[0].SCRAPED_EMAILS === 'string' 
-          ? JSON.parse(data[0].SCRAPED_EMAILS || '{}')
-          : data[0].SCRAPED_EMAILS || {},
-        REPORT: data[0].REPORT || ''
+        WEBSITE: data[0].WEBSITE || "",
+        SCRAPED_WEBSITE_1: data[0].SCRAPED_WEBSITE_1 || "",
+        SCRAPED_WEBSITE_2: data[0].SCRAPED_WEBSITE_2 || "",
+        SCRAPED_WEBSITE_3: data[0].SCRAPED_WEBSITE_3 || "",
+        SCRAPED_WEBSITE: data[0].SCRAPED_WEBSITE || "",
+        SCRAPED_EMAILS:
+          typeof data[0].SCRAPED_EMAILS === "string"
+            ? JSON.parse(data[0].SCRAPED_EMAILS || "{}")
+            : data[0].SCRAPED_EMAILS || {},
+        REPORT: data[0].REPORT || "",
       };
       res.json(schoolData);
     } else {
@@ -140,8 +150,8 @@ router.get("/school-emails/:schoolName", async (req, res) => {
     );
     if (data.length > 0) {
       let emails = data[0].SCRAPED_EMAILS;
-      
-      if (typeof emails === 'string') {
+
+      if (typeof emails === "string") {
         try {
           emails = JSON.parse(emails);
         } catch (error) {
@@ -149,25 +159,23 @@ router.get("/school-emails/:schoolName", async (req, res) => {
           emails = {};
         }
       }
-      
-      if (typeof emails !== 'object' || emails === null) {
+
+      if (typeof emails !== "object" || emails === null) {
         emails = {};
       }
-      
+
       //
 
       const sortedEmails = {};
-      
-      Object.keys(emails).forEach(link => {
 
+      Object.keys(emails).forEach((link) => {
         if (!sortedEmails[link]) {
           sortedEmails[link] = [];
         }
-        
+
         if (Array.isArray(emails[link])) {
           sortedEmails[link].push(...emails[link]);
         } else {
-          
           sortedEmails[link].push(emails[link]);
         }
       });
@@ -177,7 +185,7 @@ router.get("/school-emails/:schoolName", async (req, res) => {
       }
 
       //
-      
+
       res.json(sortedEmails);
     } else {
       res.status(404).json({ error: "School does not exist" });
@@ -204,7 +212,8 @@ router.post("/report-school/:schoolName", async (req, res) => {
       [schoolName]
     );
 
-    const previousReports = prev && prev.length > 0 && prev[0].REPORT ? prev[0].REPORT : "";
+    const previousReports =
+      prev && prev.length > 0 && prev[0].REPORT ? prev[0].REPORT : "";
     const newReport = previousReports
       ? `${previousReports}; ${reason}:${message}`
       : `${reason}:${message}`;
@@ -240,7 +249,7 @@ router.post("/check-saved-school", async (req, res) => {
       return res.json({ isSaved: false });
     }
 
-    const savedSchools = JSON.parse(user[0].SAVED_SCHOOLS || '[]');
+    const savedSchools = JSON.parse(user[0].SAVED_SCHOOLS || "[]");
     const isSaved = savedSchools.includes(schoolIndex.toString());
 
     res.json({ isSaved });
@@ -274,12 +283,12 @@ router.post("/save-school", async (req, res) => {
       if (users.length === 0) {
         const [result] = await connection.query(
           "INSERT INTO users (EMAIL, SAVED_SCHOOLS) VALUES (?, ?)",
-          [email, '[]']
+          [email, "[]"]
         );
         userId = result.insertId;
       } else {
         userId = users[0].USER_ID;
-        savedSchools = JSON.parse(users[0].SAVED_SCHOOLS || '[]');
+        savedSchools = JSON.parse(users[0].SAVED_SCHOOLS || "[]");
       }
 
       const index = savedSchools.indexOf(schoolIndex);
@@ -321,8 +330,8 @@ router.get("/saved-schools", async (req, res) => {
       return res.json([]);
     }
 
-    const savedSchools = JSON.parse(user[0].SAVED_SCHOOLS || '[]');
-    
+    const savedSchools = JSON.parse(user[0].SAVED_SCHOOLS || "[]");
+
     const [schools] = await db.query(
       "SELECT SCH_NAME, INDEX_NUMBER FROM school_emails_website WHERE INDEX_NUMBER IN (?)",
       [savedSchools]
