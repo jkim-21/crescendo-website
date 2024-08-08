@@ -7,7 +7,7 @@ const FileUpload = ({ onDrop, file, uploading, open, getRootProps, getInputProps
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div {...getRootProps({ className: 'soft-pastel-bg dropzone flex flex-col items-center justify-center w-full h-96 rounded-2xl cursor-pointer light-blue-border border-[1px]' })}>
+    <div {...getRootProps({ className: 'soft-pastel-gradient-bg dropzone flex flex-col items-center justify-center w-full h-96 rounded-2xl cursor-pointer light-blue-border border-[1px]' })}>
       <input {...getInputProps()} />
       <div className="dark-text dropzone-content flex flex-col items-center text-center">
         <CloudUploadIcon className="text-8xl" />

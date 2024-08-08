@@ -21,6 +21,7 @@ import MentorMenteePairing from "./Tools/MentorMenteeMatching/MentorMenteePairin
 import SearchTable from "./Tools/EmailFinder/SearchTable";
 import SchoolDetails from "./Tools/EmailFinder/SchoolDetails";
 import Sidebar from "./Tools/Sidebar";
+import SchoolDetailSearchTable from "./Tools/EmailFinder/SchoolDetailSearchTable";
 
 export {
   AboutUs,
@@ -46,4 +47,5 @@ export {
   SearchTable,
   SchoolDetails,
   Sidebar,
+  SchoolDetailSearchTable,
 };

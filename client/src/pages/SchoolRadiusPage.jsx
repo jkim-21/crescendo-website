@@ -51,6 +51,7 @@ const SchoolRadiusPage = () => {
                     setLatitude(position.coords.latitude.toString());
                     setLongitude(position.coords.longitude.toString());
                     setError("");
+                    console.log(position);
                 },
                 (err) => {
                     setError("Error getting location: " + err.message);
@@ -103,7 +104,7 @@ const SchoolRadiusPage = () => {
 
     return (
         <div className='flex'>
-            <Sidebar structure='light-blue-bg basis-[18%] z-[1]' />
+            <Sidebar structure='lightest-blue-bg basis-[18%] z-[1]' />
             <div className={`${styles.boxWidth} m-auto basis-[82%] z-50 border-l-2`}>
                 <div className={`flex flex-col items-center m-auto pt-[5rem] pb-[2rem] px-[3rem] mx-auto min-h-[100vh]`}>
                     <div className="mb-[2rem] flex flex-col gap-[1rem]">

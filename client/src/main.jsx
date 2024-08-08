@@ -69,7 +69,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/tools/email-finder-system/school/:schoolName",
+    path: "/tools/email-finder-system/school/:indexNumber",
     element: (
       <ProtectedRoute>
         <AnimationLayout>

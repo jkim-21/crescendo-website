@@ -7,6 +7,7 @@ import { TextField, MenuItem, Button} from '@mui/material';
 import {states, miles} from '../data/tools-pages'
 import SearchIcon from '@mui/icons-material/Search';
 
+
   
 const EmailFinderPage = () => {
     const navigate = useNavigate();
@@ -20,9 +21,6 @@ const EmailFinderPage = () => {
     const [mileRadius, setMileRadius] = useState('N/A');
     const [stateIncluded, setStateIncluded] = useState(true);
     useBodyBackgroundColor('#f6f8fe');
-
-    const [schoolName, setSchoolName] = useState('');
-    const [schoolUrl, setSchoolUrl] = useState('');
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -79,7 +77,7 @@ const EmailFinderPage = () => {
     return (
         <div className='flex'>
             <Sidebar
-                structure='light-blue-bg basis-[18%]'/>
+                structure='bg-[#f9f9fa] basis-[18%]'/>
             <div className={`${styles.boxWidth} m-auto basis-[82%] z-50`}>
                 <div className={`py-[5rem] px-[3rem] min-h-[100vh] flex flex-col items-center m-auto`}>
                     <form
@@ -132,7 +130,7 @@ const EmailFinderPage = () => {
                             label="City"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
-                            sx={{borderRadius:1, bgcolor:'white', borderRadius: 0,
+                            sx={{bgcolor:'white', borderRadius: 0,
                                 '& fieldset': {
                                     borderRadius: 0
                                 },
@@ -224,8 +222,7 @@ const EmailFinderPage = () => {
                     <div className="w-full">
                         <SearchTable
                             data = {data}
-                            schoolUrl = {schoolUrl}
-                            setSchoolUrl = {setSchoolUrl} />
+                        />
                     </div>
                 </div>
                 <Footer/>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useLocation, Link} from 'react-router-dom';
 import '../../index.css';
 import {logos} from '../../data/global';
@@ -11,8 +11,12 @@ const Sidebar = ({structure, schoolName, schoolUrl}) => {
     // Sidebar piece
     const location = useLocation();
     const isActive = (path) => location.pathname === path;
+    const [linksToRender, setLinksToRender] = useState(toolLinks);
 
-    const linksToRender = schoolName ? dynamicToolLinks(schoolName, schoolUrl) : toolLinks;
+    useEffect(() => {
+        const links = schoolName ? dynamicToolLinks(schoolName, schoolUrl) : toolLinks;
+        setLinksToRender(links);
+    }, [])
 
     // Logout
     const { logout } = useAuth();
@@ -43,12 +47,12 @@ const Sidebar = ({structure, schoolName, schoolUrl}) => {
                         alt="C4C Title"/>
                     </div>
                 </Link>
-                <nav className='flex flex-col flex-grow items-stretch gap-[0.75rem] ml-[1.25rem] mr-[2.25rem] w-[15%]'>
+                <nav className='flex flex-col flex-grow items-stretch gap-[0.75rem] ml-[1.25rem] w-[15%]'>
                     {linksToRender.map((toolLink) => (
                         <Link
                         key={toolLink.id}
                         to={toolLink.pageLink}
-                        className={`${isActive(toolLink.pageLink) ? 'active-link' : null} ${toolLink.dropdown ? 'ml-[1rem] text-[90%]' : null} tool-links rounded-[0.4rem] font-[500] p-[0.5rem]`}>
+                        className={`${isActive(toolLink.pageLink) ? 'active-link' : null} ${toolLink.dropdown ? 'ml-[1rem] text-[90%]' : null} tool-links rounded-[0.4rem] gray-text font-[500] p-[0.5rem]`}>
                             <div className='flex justify-between items-start'>
                                 {toolLink.name}
                                 {toolLink.dropdownParent && <ArrowDropDownIcon className='mr-[0.5rem]'/>}
@@ -61,7 +65,7 @@ const Sidebar = ({structure, schoolName, schoolUrl}) => {
                     <Link
                     to='/'
                     onClick={handleLogout}
-                    className='tool-links rounded-[0.4rem] font-[500] w-full px-[0.5rem] py-[0.5rem]'
+                    className='tool-links w-full px-[0.5rem] py-[0.5rem] rounded-[0.4rem] font-[500] gray-text'
                     >
                         Logout
                     </Link>

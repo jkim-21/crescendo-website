@@ -88,11 +88,11 @@ const MentorMenteePairing = () => {
   };
 
   return (
-    <div className='flex light-blue-bg'>
+    <div className='flex lightest-blue-bg'>
       <Sidebar
-        structure='light-blue-bg basis-[18%]'/>
+        structure='lightest-blue-bg basis-[18%]'/>
       <div className= 'basis-[82%] z-50 m-auto'>
-        <div className={`${styles.boxWidth} min-h-[100vh] flex flex-col items-center justify-center m-auto light-blue-bg bg-center px-[2rem]`}>
+        <div className={`${styles.boxWidth} min-h-[100vh] flex flex-col items-center justify-center m-auto lightest-blue-bg bg-center px-[2rem]`}>
           {pairings.length === 0 ? (
             <FileUpload
               onDrop={onDrop}

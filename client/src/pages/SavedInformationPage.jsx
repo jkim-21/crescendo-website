@@ -46,7 +46,7 @@ const SavedSchoolsPage = () => {
     return (
         <AnimationLayout>
             <div className='flex'>
-                <Sidebar structure='light-blue-bg basis-[18%]' />
+                <Sidebar structure='lightest-blue-bg basis-[18%]' />
                 <div className={`basis-[82%] flex flex-col items-center bg-white shadow-lg m-auto pt-[5rem] pb-[2rem] px-[3rem] mx-auto min-h-[100vh]`}>
                     <h1 className="text-2xl font-bold mb-4">Saved Schools</h1>
                     <button

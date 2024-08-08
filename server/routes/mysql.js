@@ -13,69 +13,6 @@ const db = mysql.createPool({
   connectionLimit: 10,
 });
 
-router.get("/coords", async (req, res) => {
-  function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; //earth
-    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-    const dLon = ((lon2 - lon1) * Math.PI) / 180;
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos((lat1 * Math.PI) / 180) *
-        Math.cos((lat2 * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; //kilmeters
-    return distance;
-  }
-
-  const { latitude = "", longitude = "", radius = "10" } = req.query;
-
-  try {
-    const lat = parseFloat(latitude);
-    const lon = parseFloat(longitude);
-    const rad = parseFloat(radius);
-
-    if (isNaN(lat) || isNaN(lon) || isNaN(rad)) {
-      return res.status(400).json({ error: "Invalid parameters" });
-    }
-
-    const radiusKm = rad * 1.60934;
-
-    const latDegrees = radiusKm / 111.32;
-    const lonDegrees = radiusKm / (111.32 * Math.cos((lat * Math.PI) / 180));
-
-    const latMin = lat - latDegrees;
-    const latMax = lat + latDegrees;
-    const lonMin = lon - lonDegrees;
-    const lonMax = lon + lonDegrees;
-
-    const [data] = await db.query(
-      `SELECT SCH_NAME, LCITY, LSTREET1, LAT, LON
-      FROM school_emails_website
-      WHERE SCRAPED_EMAILS IS NOT NULL
-      AND LAT BETWEEN ? AND ?
-      AND LON BETWEEN ? AND ?`,
-      [latMin, latMax, lonMin, lonMax]
-    );
-
-    const filteredData = data
-      .map((school) => ({
-        ...school,
-        distance: calculateDistance(lat, lon, school.LAT, school.LON),
-      }))
-      .filter((school) => school.distance <= radiusKm)
-      .sort((a, b) => a.distance - b.distance);
-
-    res.json(filteredData);
-  } catch (err) {
-    console.error("Error fetching data:", err);
-    res.status(500).json({
-      error: "Error querying database",
-    });
-  }
-});
-
 router.get("/data", async (req, res) => {
   const {
     city = "",
@@ -90,10 +27,9 @@ router.get("/data", async (req, res) => {
     const zipCodeParam = zipCode ? `%${zipCode}%` : "%";
 
     const [data] = await db.query(
-      "SELECT SCH_NAME, STATENAME, LCITY, LSTREET1 FROM school_emails_website WHERE SCRAPED_EMAILS IS NOT NULL AND LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ? AND LZIP LIKE ?",
+      "SELECT INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1 FROM school_emails_website WHERE SCRAPED_EMAILS IS NOT NULL AND LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ? AND LZIP LIKE ?",
       [cityParam, stateParam, streetParam, zipCodeParam]
     );
-
     res.json(data);
   } catch (err) {
     console.error("Error fetching data:", err);
@@ -104,13 +40,13 @@ router.get("/data", async (req, res) => {
   }
 });
 
-router.get("/school-data/:schoolName", async (req, res) => {
-  const { schoolName } = req.params;
+router.get("/school-data/:indexNumber", async (req, res) => {
+  const { indexNumber } = req.params;
 
   try {
     const [data] = await db.query(
-      "SELECT * FROM school_emails_website WHERE SCH_NAME = ?",
-      [schoolName]
+      "SELECT * FROM school_emails_website WHERE INDEX_NUMBER = ?",
+      [indexNumber]
     );
 
     if (data.length > 0) {
@@ -141,12 +77,12 @@ router.get("/school-data/:schoolName", async (req, res) => {
   }
 });
 
-router.get("/school-emails/:schoolName", async (req, res) => {
-  const { schoolName } = req.params;
+router.get("/school-emails/:indexNumber", async (req, res) => {
+  const { indexNumber } = req.params;
   try {
     const [data] = await db.query(
-      "SELECT SCRAPED_EMAILS FROM school_emails_website WHERE SCH_NAME = ?",
-      [schoolName]
+      "SELECT SCRAPED_EMAILS FROM school_emails_website WHERE INDEX_NUMBER = ?",
+      [indexNumber]
     );
     if (data.length > 0) {
       let emails = data[0].SCRAPED_EMAILS;
@@ -155,7 +91,6 @@ router.get("/school-emails/:schoolName", async (req, res) => {
         try {
           emails = JSON.parse(emails);
         } catch (error) {
-          console.error("Error parsing SCRAPED_EMAILS:", error);
           emails = {};
         }
       }
@@ -163,8 +98,6 @@ router.get("/school-emails/:schoolName", async (req, res) => {
       if (typeof emails !== "object" || emails === null) {
         emails = {};
       }
-
-      //
 
       const sortedEmails = {};
 
@@ -198,8 +131,8 @@ router.get("/school-emails/:schoolName", async (req, res) => {
   }
 });
 
-router.post("/report-school/:schoolName", async (req, res) => {
-  const { schoolName } = req.params;
+router.post("/report-school/:indexNumber", async (req, res) => {
+  const { indexNumber } = req.params;
   const { reason, message } = req.body;
 
   if (!reason || !message) {
@@ -208,8 +141,8 @@ router.post("/report-school/:schoolName", async (req, res) => {
 
   try {
     const [prev] = await db.query(
-      "SELECT REPORT FROM school_emails_website WHERE SCH_NAME = ?",
-      [schoolName]
+      "SELECT REPORT FROM school_emails_website WHERE INDEX_NUMBER = ?",
+      [indexNumber]
     );
 
     const previousReports =
@@ -219,8 +152,8 @@ router.post("/report-school/:schoolName", async (req, res) => {
       : `${reason}:${message}`;
 
     const [result] = await db.query(
-      "UPDATE school_emails_website SET REPORT = ? WHERE SCH_NAME = ?",
-      [newReport, schoolName]
+      "UPDATE school_emails_website SET REPORT = ? WHERE INDEX_NUMBER = ?",
+      [newReport, indexNumber]
     );
 
     if (result.affectedRows > 0) {
@@ -341,6 +274,69 @@ router.get("/saved-schools", async (req, res) => {
   } catch (err) {
     console.error("Error fetching saved schools:", err);
     res.status(500).json({ error: "Error querying database" });
+  }
+});
+
+router.get("/coords", async (req, res) => {
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; //earth
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; //kilmeters
+    return distance;
+  }
+
+  const { latitude = "", longitude = "", radius = "10" } = req.query;
+
+  try {
+    const lat = parseFloat(latitude);
+    const lon = parseFloat(longitude);
+    const rad = parseFloat(radius);
+
+    if (isNaN(lat) || isNaN(lon) || isNaN(rad)) {
+      return res.status(400).json({ error: "Invalid parameters" });
+    }
+
+    const radiusKm = rad * 1.60934;
+
+    const latDegrees = radiusKm / 111.32;
+    const lonDegrees = radiusKm / (111.32 * Math.cos((lat * Math.PI) / 180));
+
+    const latMin = lat - latDegrees;
+    const latMax = lat + latDegrees;
+    const lonMin = lon - lonDegrees;
+    const lonMax = lon + lonDegrees;
+
+    const [data] = await db.query(
+      `SELECT SCH_NAME, LCITY, LSTREET1, LAT, LON
+      FROM school_emails_website
+      WHERE SCRAPED_EMAILS IS NOT NULL
+      AND LAT BETWEEN ? AND ?
+      AND LON BETWEEN ? AND ?`,
+      [latMin, latMax, lonMin, lonMax]
+    );
+
+    const filteredData = data
+      .map((school) => ({
+        ...school,
+        distance: calculateDistance(lat, lon, school.LAT, school.LON),
+      }))
+      .filter((school) => school.distance <= radiusKm)
+      .sort((a, b) => a.distance - b.distance);
+
+    res.json(filteredData);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({
+      error: "Error querying database",
+    });
   }
 });
 

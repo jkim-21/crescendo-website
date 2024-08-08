@@ -16,10 +16,10 @@ const ToolsPage = () => {
     return (
         <div className='flex'>
             <Sidebar
-                structure='light-blue-bg basis-[18%] z-[1]'/>
-            <div className={`${styles.boxWidth} m-auto black-text basis-[82%] z-[50] border-l-2`}>
-                <div className='w-[80%] m-auto pt-[2rem] pb-[2rem]
-                            md:pt-[4rem] md:pb-[4rem]'>
+                structure='lightest-blue-bg basis-[18%] z-[1]'/>
+            <div className={`${styles.boxWidth} m-auto black-text basis-[82%] z-[50]`}>
+                <div className={`w-[80%] m-auto pt-[2rem] pb-[2rem]
+                            md:pt-[4rem] md:pb-[4rem]`}>
                     <div className='flex justify-between items-center mb-[5rem]'>
                         <h2 className = {`${styles.heading2} basis-[40%] font-[500] leading-[3.75rem]`}>
                             Hello, Crescendo for a Cause

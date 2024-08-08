@@ -153,3 +153,51 @@ export const miles = [
     label: "30",
   },
 ];
+
+export const schoolDetails = [
+  {
+    id: "school-name-detail",
+    title: "School Name:",
+    key: "SCH_NAME",
+  },
+  {
+    id: "level-detail",
+    title: "Level:",
+    key: "LEVEL",
+  },
+  {
+    id: "school-type-detail",
+    title: "School Type:",
+    key: "SCH_TYPE_TEXT",
+  },
+  {
+    id: "street-detail",
+    title: "Street:",
+    key: "LSTREET1",
+  },
+  {
+    id: "city-detail",
+    title: "City:",
+    key: "LSTREET1",
+  },
+  {
+    id: "state-detail",
+    title: "State:",
+    key: "STATENAME",
+  },
+  {
+    id: "zipcode-detail",
+    title: "Zipcode:",
+    key: "LZIP",
+  },
+  {
+    id: "latitude-detail",
+    title: "Latitude:",
+    key: "LAT",
+  },
+  {
+    id: "longitude-detail",
+    title: "Longitude:",
+    key: "LON",
+  },
+];

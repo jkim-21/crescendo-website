@@ -14,16 +14,21 @@
   --gold: #cfa524;
   --dark-gray: #222832;
   --white:#fafafa; 
-  --light-gray: #9ca3af;
   --gray: #586069;
+  --light-gray: #9ca3af;
+  --lighter-gray: #e0e0e4;
+  --lightest-gray: #f3f4f6;
   --beige: #f3f6ec;
-  --light-blue: #f6f8fe;
+  --light-blue: #bfdbfe;
+  --lightest-blue: #f6f8fe;
   --light-gray-blue: #cbd5e1;
   --sea-blue: #006fff;
   --navy: #002e5d;
   --dark-blue: #0a162f;
   --dark-red: #8b0000;
+  --red: #ef4444;
   --soft-red: #fca5a5;
+  --green: #22c55e;
 
   --transparent-white: rgba(255, 255, 255, 0.5);
 }
@@ -83,8 +88,12 @@ body {
   background-clip: text;
 }
 
-.soft-pastel-bg {
+.soft-pastel-gradient-bg {
   background: linear-gradient(to right, #CDDDFF, #EFF4FF, #EFE8FF);
+}
+
+.gray-gradient-bg {
+  background: linear-gradient(to bottom, #EDEEF4, #E7E8EE, #D9DAE0);
 }
 
 /* Colors */
@@ -104,6 +113,10 @@ body {
   color: var(--gray);
 }
 
+.lighter-gray-text {
+  color: var(--light-gray);
+}
+
 .sea-blue-text {
   color: var(--sea-blue)
 }
@@ -115,6 +128,7 @@ body {
 .gold-bg {
   background-color: var(--gold);
 }
+
 .navy-bg{
   background-color: var(--navy);
 }
@@ -135,12 +149,28 @@ body {
   background-color: var(--light-blue);
 }
 
+.lightest-blue-bg {
+  background-color: var(--lightest-blue);
+}
+
 .sea-blue-bg {
   background-color: var(--sea-blue)
 }
 
 .soft-red-bg {
   background: var(--soft-red);
+}
+
+.gray-bg {
+  background: var(--gray);
+}
+
+.green-bg {
+  background: var(--green);
+}
+
+.red-bg {
+  background-color: var(--red);
 }
 
 .dark-border {
@@ -152,7 +182,15 @@ body {
 }
 
 .light-blue-border {
+  border-color: var(--light-blue)
+}
+
+.gray-border {
   border-color: var(--light-gray)
+}
+
+.lighter-gray-border {
+  border-color: var(--lighter-gray)
 }
 
 /* Box Shadow */
@@ -161,7 +199,7 @@ body {
 }
 
 .standard-box-shadow {
-  box-shadow:0px 4px 6px rgba(0, 0, 0, 0.2)
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .three-d-box-shadow-1 {
@@ -417,6 +455,7 @@ body {
 
 .active-link {
   color: white;
+  font-weight: 500;
   background-color: var(--sea-blue);
 }
 
