@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import multer from "multer";
 import mysqlRoutes from "./routes/mysql.js";
 import excelUploadRoutes from "./routes/excelupload.js";
+import geolookupRoutes from "./routes/geolookup.js";
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.use(express.json());
 app.use(stripeRoutes);
 app.use("/api", mysqlRoutes);
 app.use("/upload", excelUploadRoutes);
+app.use("/api",geolookupRoutes);
 
 app.use((error, req, res, next) => {
   res.status(500).json({ error: error.message });

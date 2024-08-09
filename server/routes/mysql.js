@@ -117,7 +117,7 @@ router.get("/school-emails/:indexNumber", async (req, res) => {
         sortedEmails[link].sort();
       }
 
-      //
+      
 
       res.json(sortedEmails);
     } else {

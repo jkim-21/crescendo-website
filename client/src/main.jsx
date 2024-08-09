@@ -15,7 +15,6 @@ import {
   EmailFinderPage, 
   SchoolDetailsPage, 
   SavedInformationPage,
-  SchoolRadiusPage
 } from "./pages";
 
 import {
@@ -88,16 +87,6 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  {
-    path: "/school-finder",
-    element: (
-      <ProtectedRoute>
-        <AnimationLayout>
-          <SchoolRadiusPage />
-        </AnimationLayout>
-      </ProtectedRoute>
-    )
-  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
