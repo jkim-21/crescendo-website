@@ -33,6 +33,7 @@ const SchoolDetailsPage = () => {
   }, []);
 
   //Fetching page data: useeffect: fetchData
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
