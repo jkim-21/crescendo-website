@@ -1,17 +1,29 @@
 import React, {useEffect} from 'react';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import {schoolTableTheme} from '../../../themes/theme'
+import { ThemeProvider } from "@mui/material/styles";
 import {
   MaterialReactTable,
   useMaterialReactTable,
 } from 'material-react-table';
 
-const SchoolDetailSearchTable = ({data}) => {
+const SchoolDetailSearchTable = ({jsonData, minHeight}) => {
   let value = '';
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const dataArray = Object.entries(jsonData).map(([email, link]) => ({
+      Email: email,
+      OriginLink: link,
+    }));
+    setData(dataArray);
+  }, [jsonData]);
+
 
   const columns = useMemo(() => {
     if (!data[0]) return [];
     const keys = Object.keys(data[0]);
-    if (keys.length < 1) {
+    if (keys.length < 2) {
       return [];
     }
 
@@ -24,7 +36,7 @@ const SchoolDetailSearchTable = ({data}) => {
         },
         {
             accessorKey: keys[1],
-            header: 'Email Origin Link',
+            header: 'Origin Link',
             size: 150,
             Cell: ({ cell }) => {
                 value = cell.getValue();
@@ -46,12 +58,16 @@ const SchoolDetailSearchTable = ({data}) => {
       columns,
       data: data,
       muiPaginationProps: {
-        rowsPerPageOptions: [10, 20, 50, 100],
         variant: 'outlined',
+        rowsPerPageOptions: [5, 10, 20, 30],
+      },
+      muiTableContainerProps: {
+        sx: {
+          minHeight: minHeight,
+        },
       },
       muiTableBodyRowProps: {
         sx: {
-
         }
       },
       muiTableBodyCellProps: {
@@ -61,16 +77,18 @@ const SchoolDetailSearchTable = ({data}) => {
       muiTableHeadCellProps: {
         sx: {
         },
-    }
+      },
+      initialState: { pagination: {pageSize: 5} },
   });
 
   return (
-    <div className="school-table overflow-y-auto overflow-x-auto shadow-md rounded-[0.5rem]"> 
-      <MaterialReactTable 
-        table={table}
-        sx={{boxShadow: 1}}/>
-    </div>
-  )
-};
+    
+      <ThemeProvider theme={schoolTableTheme}>
+        <MaterialReactTable 
+          table={table}
+          sx={{}}
+          className='flex-grow'/>
+      </ThemeProvider>
+  )};
 
 export default SchoolDetailSearchTable;
