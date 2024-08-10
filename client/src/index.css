@@ -13,7 +13,8 @@
   
   --gold: #cfa524;
   --dark-gray: #222832;
-  --white:#fafafa; 
+  --white:#ffffff;
+  --dark-white:#fafafa; 
   --gray: #586069;
   --light-gray: #9ca3af;
   --lighter-gray: #e0e0e4;
@@ -31,6 +32,9 @@
   --green: #22c55e;
 
   --transparent-white: rgba(255, 255, 255, 0.5);
+
+
+  --black-gradient: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
 }
 
 body {
@@ -53,6 +57,7 @@ body {
 /******* General Styling **************/
 
 /* Gradients */
+
 .white__gradient {
   background: rgba(255, 255, 255, 0.4);
   filter: blur(300px);
@@ -88,6 +93,10 @@ body {
   background-clip: text;
 }
 
+.black-gradient-bg {
+  background: var(--black-gradient);
+}
+
 .soft-pastel-gradient-bg {
   background: linear-gradient(to right, #CDDDFF, #EFF4FF, #EFE8FF);
 }
@@ -107,6 +116,10 @@ body {
 
 .white-text {
   color: var(--white);
+}
+
+.dark-white-text {
+  color: var(--dark-white);
 }
 
 .gray-text {
@@ -135,6 +148,10 @@ body {
 
 .white-bg {
   background-color: var(--white);
+}
+
+.dark-white-bg {
+  background-color: var(--dark-white);
 }
 
 .dark-bg {

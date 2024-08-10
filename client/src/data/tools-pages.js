@@ -178,7 +178,7 @@ export const schoolDetails = [
   {
     id: "city-detail",
     title: "City:",
-    key: "LSTREET1",
+    key: "LCITY",
   },
   {
     id: "state-detail",
@@ -191,13 +191,13 @@ export const schoolDetails = [
     key: "LZIP",
   },
   {
-    id: "latitude-detail",
-    title: "Latitude:",
-    key: "LAT",
+    id: "phone-number-detail",
+    title: "Phone Number:",
+    key: "LON",
   },
   {
-    id: "longitude-detail",
-    title: "Longitude:",
-    key: "LON",
+    id: "general-website-detail",
+    title: "General Website:",
+    key: "SCRAPED_WEBSITE",
   },
 ];

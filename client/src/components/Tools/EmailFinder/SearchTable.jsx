@@ -19,6 +19,15 @@ const SearchTable = ({data}) => {
     if (keys.length < 4) {
       return [];
     }
+  
+    return (
+      [
+        {
+          accessorKey: keys[1],
+          header: 'School Name',
+    if (keys.length < 4) {
+      return [];
+    }
 
     return (
       [
@@ -26,6 +35,59 @@ const SearchTable = ({data}) => {
           accessorKey: keys[1],
           header: 'School Name',
           size: 150,
+          
+          Cell: ({ cell, row }) => {
+            return (
+              <button
+                onClick={() => {
+                  const indexNumber = row.original[keys[0]];
+                  handleSchoolClick(indexNumber);
+                }}
+                className="sea-blue-text text-left hover:underline"
+              >
+                {cell.getValue()}
+              </button>
+            );
+          },
+        },
+        {
+          accessorKey: keys[2],
+          header: 'State',
+          size: 150,
+        },
+        {
+          accessorKey: keys[3],
+          header: 'City',
+          size: 150,
+        },
+        {
+          accessorKey: keys[4],
+          header: 'Street',
+          size: 150,
+        },
+      ])
+    },
+    [data, navigate],
+  );
+
+    const table = useMaterialReactTable({
+      columns,
+      data: data,
+      muiPaginationProps: {
+        rowsPerPageOptions: [10, 20, 50, 100],
+        variant: 'outlined',
+      },
+      muiTableBodyRowProps: {
+        sx: {
+        }
+      },
+      muiTableBodyCellProps: {
+        sx: {
+        },
+      },
+      muiTableHeadCellProps: {
+        sx: {
+        },
 
           Cell: ({ cell, row }) => {
             return (
@@ -81,11 +143,9 @@ const SearchTable = ({data}) => {
     }
   });
   return (
-    <div className="school-table overflow-y-auto overflow-x-auto shadow-md rounded-[0.5rem]"> 
-      <MaterialReactTable 
-        table={table}
-        sx={{boxShadow: 1}}/>
-    </div>
+    <MaterialReactTable 
+      table={table}
+      sx={{}}/>
   )
 };
 export default SearchTable;
