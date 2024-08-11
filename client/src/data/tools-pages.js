@@ -152,6 +152,11 @@ export const miles = [
     value: 30,
     label: "30",
   },
+  {
+    id: "320-miles",
+    value: 30,
+    label: "320",
+  },
 ];
 
 export const schoolDetails = [

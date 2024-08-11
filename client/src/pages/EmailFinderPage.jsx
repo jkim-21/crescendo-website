@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import {SearchTable, Footer, Sidebar} from '../components';
-import {styles} from '../style'
-import {useNavigate} from 'react-router-dom'
+import { SearchTable, Footer, Sidebar } from '../components';
+import { styles } from '../style'
+import { useNavigate } from 'react-router-dom'
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
-import { TextField, MenuItem, Button} from '@mui/material';
-import {states, miles} from '../data/tools-pages'
+import { TextField, MenuItem, Button } from '@mui/material';
+import { states, miles } from '../data/tools-pages'
 import SearchIcon from '@mui/icons-material/Search';
+import CurrentLocationButton from '../components/Tools/EmailFinder/CurrentLocationButton';
+import ClearIcon from '@mui/icons-material/Clear';
+import InfoPopUp from '../components/Tools/EmailFinder/InfoPopUp';
 
-
-  
 const EmailFinderPage = () => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
@@ -26,19 +27,64 @@ const EmailFinderPage = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    const handleAddressFound = (newAddress) => {
+        try {
+            const addressParts = newAddress.split(',');
+            if (addressParts.length >= 3) {
+                const stateZip = addressParts[2].trim().split(' ');
+                if (stateZip.length >= 2) {
+                    const stateAbbreviation = stateZip[0];
+                    if (['IL', 'MA', 'ME'].includes(stateAbbreviation)) {
+                        setStreet(addressParts[0].trim());
+                        setCity(addressParts[1].trim());
+                        setZipCode(stateZip[1]);
+                        
+                        switch (stateAbbreviation) {
+                            case 'ME':
+                                setLocationState('Maine');
+                                break;
+                            case 'IL':
+                                setLocationState('Illinois');
+                                break;
+                            case 'MA':
+                                setLocationState('Massachusetts');
+                                break;
+                        }
+                    } else {
+                        throw new Error("Your state is not yet supported for this feature");
+                    }
+                } else {
+                    throw new Error("Invalid address format");
+                }
+            } else {
+                throw new Error("Invalid address format");
+            }
+        } catch (error) {
+            console.error("Current location error:", error);
+            setError(error.message);
+        }
+    };
+
     const handleLocationChange = (e) => {
         setLocationState(e.target.value)
         setStateIncluded(true)
     }
 
+    const handleClear = () => {
+        setLocationState("");
+        setZipCode("");
+        setMileRadius("N/A");
+        setStreet("");
+        setCity("");
+    }
+
     const fetchData = async (e) => {
         e.preventDefault();
-
         setLoading(true);
         setError(null);
+
         try {
-            if (!locationState && !city && !street) {
-                setStateIncluded(false)
+            if (!locationState && !city && !street && !zipCode) {
                 throw new Error('Fill out at least one filter (including state)');
             }
 
@@ -46,18 +92,30 @@ const EmailFinderPage = () => {
                 setStateIncluded(false)
                 throw new Error('You must specify a state');
             }
-            if (zipCode) {
-                for (let i = 0; i < zipCode.length; i++) {
-                    if (zipCode[i] < '0' || zipCode[i] > '9') {
-                        throw new Error('Zip code must contain only digits');
-                    }
-                }
-                if (zipCode.length !== 5) {
-                    throw new Error('Zip code must be exactly 5 integers long');
-                  }
+
+            if (zipCode && !/^\d{5}$/.test(zipCode)) {
+                throw new Error('Zip code must be exactly 5 digits long');
             }
-            
-            const response = await fetch(`/api/data?city=${city}&locationState=${locationState}&street=${street}&zipCode=${zipCode}`);
+
+            let response;
+
+            if (mileRadius !== 'N/A') {
+                if (!(zipCode && street && city && locationState)){
+                    throw new Error('All fields are required when searching by radius');
+                }
+                const address = `${street}, ${city}, ${locationState} ${zipCode}`;
+                const geocodeResponse = await fetch(`/api/geocode?address=${encodeURIComponent(address)}`);
+                const geocodeData = await geocodeResponse.json();
+
+                if (!geocodeResponse.ok) {
+                    throw new Error(geocodeData.error || 'An error occurred while geocoding');
+                }
+
+                const { lat, lng } = geocodeData;
+                response = await fetch(`/api/coords?latitude=${lat}&longitude=${lng}&radius=${mileRadius}`);
+            } else {
+                response = await fetch(`/api/data?city=${city}&locationState=${locationState}&street=${street}&zipCode=${zipCode}`);
+            }
 
             if (!response.ok) {
                 setStateIncluded(true)
@@ -65,10 +123,11 @@ const EmailFinderPage = () => {
                 throw new Error(errorData.error);
             }
 
-            const result = await response.json();
+            let result = await response.json();
+            
             setData(result);
-        }
-        catch (error) {
+        } catch (error) {
+            console.error("Full error object:", error);
             setError(error.message);
         }
         setLoading(false);
@@ -194,35 +253,37 @@ const EmailFinderPage = () => {
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <Button
-                            variant='contained'
-                            startIcon={<SearchIcon />}
-                            type='submit'
-                            sx={{ml:'3rem'}}
-                            className='lightest-box-shadow self-stretch'
-                        >
-                            Fetch Data
-                        </Button>
+                        <div className="flex gap-2 mt-4">
+                            <CurrentLocationButton onAddressFound={handleAddressFound} />
+                            <Button
+                                variant='contained'
+                                startIcon={<SearchIcon />}
+                                type='submit'
+                                className='lightest-box-shadow'
+                            >
+                                Fetch Data
+                            </Button>
+                            <Button
+                                variant='outlined'
+                                startIcon={<ClearIcon />}
+                                onClick={handleClear}
+                                className='lightest-box-shadow'
+                            >
+                                Clear
+                            </Button>
+                            <InfoPopUp/>
+                        </div>
                     </form>
-                    <button
-                        className="p-1 border-2 border-green-500 text-green-500 rounded bg-white hover:bg-green-500 hover:text-white transition mb-[2rem]"
-                        onClick={() => navigate('/school-finder')}
-                    >
-                            Search by coordinates
-                        </button>
-                    {loading ?
-                        <p className='mb-[2rem]'>
-                            Loading...
-                        </p> : null}
                     
-                    {error ?
+                    {loading && <p className='mb-[2rem]'>Loading...</p>}
+                    
+                    {error && (
                         <p className="red-text soft-red-bg border dark-border rounded py-[0.25rem] px-[1rem] mb-[3rem]">
                             Error: {error}
-                        </p> : null}
+                        </p>
+                    )}
                     <div className="w-full">
-                        <SearchTable
-                            data = {data}
-                        />
+                        <SearchTable data={data} />
                     </div>
                 </div>
                 <Footer/>

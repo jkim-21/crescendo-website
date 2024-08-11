@@ -315,7 +315,7 @@ router.get("/coords", async (req, res) => {
     const lonMax = lon + lonDegrees;
 
     const [data] = await db.query(
-      `SELECT SCH_NAME, LCITY, LSTREET1, LAT, LON
+      `SELECT INDEX_NUMBER, SCH_NAME, LCITY, LSTREET1, LAT, LON, STATENAME
       FROM school_emails_website
       WHERE SCRAPED_EMAILS IS NOT NULL
       AND LAT BETWEEN ? AND ?
@@ -329,7 +329,10 @@ router.get("/coords", async (req, res) => {
         distance: calculateDistance(lat, lon, school.LAT, school.LON),
       }))
       .filter((school) => school.distance <= radiusKm)
-      .sort((a, b) => a.distance - b.distance);
+      .sort((a, b) => a.distance - b.distance)
+      .map(({ INDEX_NUMBER, SCH_NAME, LCITY, LSTREET1, STATENAME }) => 
+        ({ INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1 })
+      );
 
     res.json(filteredData);
   } catch (err) {

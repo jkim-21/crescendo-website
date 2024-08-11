@@ -5,9 +5,9 @@ import cors from "cors";
 import createStripeRoutes from "./routes/stripe.js";
 import mongoose from "mongoose";
 import multer from "multer";
-import mysqlRoutes from "./routes/mysql.js";
-import excelUploadRoutes from "./routes/excelupload.js";
-import geolookupRoutes from "./routes/geolookup.js";
+import schoolInfoRoutes from "./routes/schoolInfo.js";
+import excelUploadRoutes from "./routes/excelUpload.js";
+import geolookupRoutes from "./routes/geoLookup.js";
 
 dotenv.config();
 
@@ -39,7 +39,7 @@ connect();
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(stripeRoutes);
-app.use("/api", mysqlRoutes);
+app.use("/api", schoolInfoRoutes);
 app.use("/upload", excelUploadRoutes);
 app.use("/api",geolookupRoutes);
 
