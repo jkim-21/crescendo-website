@@ -343,4 +343,44 @@ router.get("/coords", async (req, res) => {
   }
 });
 
+router.get("/check-user", async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const [user] = await db.query(
+      "SELECT FIRST_NAME FROM users WHERE EMAIL = ?",
+      [email]
+    );
+
+    if (user.length > 0) {
+      res.json({ exists: true, firstName: user[0].FIRST_NAME });
+    } else {
+      res.json({ exists: false });
+    }
+  } catch (err) {
+    console.error("Error checking user:", err);
+    res.status(500).json({ error: "Error querying database" });
+  }
+});
+
+router.post("/add-user", async (req, res) => {
+  const { email, firstName, lastName } = req.body;
+
+  try {
+    const [result] = await db.query(
+      "INSERT INTO users (EMAIL, FIRST_NAME, LAST_NAME, SAVED_SCHOOLS) VALUES (?, ?, ?, ?)",
+      [email, firstName, lastName, '[]']
+    );
+
+    if (result.affectedRows > 0) {
+      res.json({ success: true, firstName });
+    } else {
+      res.status(500).json({ error: "Failed to add user" });
+    }
+  } catch (err) {
+    console.error("Error adding user:", err);
+    res.status(500).json({ error: "Error updating database" });
+  }
+});
+
 export default router;

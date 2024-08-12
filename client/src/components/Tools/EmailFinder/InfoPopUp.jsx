@@ -33,6 +33,7 @@ const InfoPopUp = () => {
                     </p>
                     <p>
                         When searching by radius all other filters are required, otherwise use only the filters you need.
+                        It is advised that a full address is used when searching by radius including the street address number.
                     </p>
                 </DialogContent>
                 <DialogActions>

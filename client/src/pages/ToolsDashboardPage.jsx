@@ -6,6 +6,7 @@ import SouthIcon from '@mui/icons-material/South';
 import { projectDescriptions } from '../data/tools-pages.js';
 import {useNavigate} from 'react-router-dom';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
+import Navbar from '../components/Tools/Navbar.jsx';
 
 
 const ToolsPage = () => {
