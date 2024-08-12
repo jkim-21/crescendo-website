@@ -17,7 +17,9 @@ const Officers = ({name, title, headshot}) => {
                           md:[aspect-ratio:1/1.3]'/>}
             
             <h4 className='gold-text text-[2rem] font-medium flex-grow-0'>{name}</h4>
-            <h5 className='text-[1.3rem] white-text flex-grow-0'>{title}</h5>
+<h5 className='text-[1.3rem] white-text flex-grow-0 whitespace-normal break-words'>{title}</h5>
+
+
         </div>
     )
 }

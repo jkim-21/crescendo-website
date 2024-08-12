@@ -21,6 +21,12 @@ import {
   stevensonBackground,
   ameliaRaymond,
   kritiMohan,
+  annaxian2,
+  jasonli,
+  annmariefan,
+  miapaul,
+  johnnylin,
+  juliafranco,
 } from "../assets";
 
 export const colby = {
@@ -271,34 +277,46 @@ export const ucsb = {
   ],
   officers: [
     {
-      id: "karis-lee",
-      name: "Karis Lee",
-      title: "President",
-      headshot: karisLee,
-    },
-    {
-      id: "josh-chan",
-      name: "Josh Chan",
-      title: "Director of Marketing",
-      headshot: joshChan,
-    },
-    {
-      id: "erick-fuerte",
-      name: "Erick Fuerte",
-      title: "Director of Mentorship",
-      headshot: erickFuerte,
-    },
-    {
       id: "anna-xian",
       name: "Anna Xian",
-      title: "Director of Fundraising",
-      headshot: annaXian,
+      title: "President",
+      headshot: annaxian2,
+    },
+    {
+      id: "jason-li",
+      name: "Jason Li",
+      title: "Director of Mentorship",
+      headshot: jasonli,
+    },
+    {
+      id: "annmarie-fan",
+      name: "Annmarie Fan",
+      title: "Director of Marketing & Social Media Coordinator",
+      headshot: annmariefan,
     },
     {
       id: "julia-ong",
       name: "Julia Ong",
-      title: "Director of Member Engagement",
+      title: "Treasurer & Recuitment Coordinator",
       headshot: juliaOng,
+    },
+    {
+      id: "mia-paul",
+      name: "Mia Paul",
+      title: "Member Engagement Coordinator",
+      headshot: miapaul,
+    },
+    {
+      id: "johnny-lin",
+      name: "Johnny Lin",
+      title: "Director of Fundraising & Mentorship Coordinator",
+      headshot: johnnylin,
+    },
+    {
+      id: "julia-franco",
+      name: "Julia Franco",
+      title: "Mentorship Coordinator",
+      headshot: juliafranco,
     },
   ],
 };

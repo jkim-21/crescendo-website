@@ -57,6 +57,12 @@ import joshChan from "./josh-chan.jpg";
 import karisLee from "./karis-lee.png";
 import annaXian from "./anna-xian.png";
 import juliaOng from "./julia-ong.jpg";
+import annaxian2 from "./annaxian2.png";
+import jasonli from "./jasonli.png";
+import annmariefan from "./annmariefan.png";
+import miapaul from "./miapaul.png";
+import johnnylin from "./johnnylin.png";
+import juliafranco from "./juliafranco.png";
 
 import stevensonBackground from "./stevenson-background.png";
 
@@ -145,4 +151,10 @@ export {
   toolsLogo,
   logoTitle,
   instructions,
+  juliafranco,
+  johnnylin,
+  miapaul,
+  annaxian2,
+  jasonli,
+  annmariefan,
 };

@@ -32,7 +32,7 @@ const Hero = () => {
 
         <p className={`${styles.paragraph} white-text max-w-[37.5rem] text-center
                       sm:text-start`}>
-        We are Crescendo for a Cause, a registered 501(c)(3) non-profit and Presidential Volunteer Service Award certifying organization. Our mission is to improve music education in underserved areas and to utilize music performance as a vehicle for advocacy and community service.
+        We are Crescendo for a Cause, a registered 501(c)(3) non-profit and Presidential Volunteer Service Award certifying organization founded in 2018. Our mission is to improve music education in underserved areas and to utilize music performance as a vehicle for advocacy and community service.
         </p>
         <div className='relative'>
           <div className="hidden absolute z-[1] w-[21.875rem] h-[32rem] rounded-full white__gradient left-[5rem] bottom-0
