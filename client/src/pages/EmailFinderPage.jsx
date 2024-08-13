@@ -22,7 +22,9 @@ const EmailFinderPage = () => {
     const [zipCode, setZipCode] = useState('');
     const [mileRadius, setMileRadius] = useState('N/A');
     const [stateIncluded, setStateIncluded] = useState(true);
+    const [suggestedAddress, setSuggestedAddress] = useState(null);
     useBodyBackgroundColor('#f6f8fe');
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -30,24 +32,52 @@ const EmailFinderPage = () => {
 
     const validateAddress = async (address) => {
         try {
-          const response = await fetch('/api/validate-address', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ address }),
-          });
-          
-          if (!response.ok) {
-            throw new Error('Failed to validate address');
-          }
-          
-          return await response.json();
+            const response = await fetch('/api/validate-address', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ address }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to validate address');
+            }
+
+            const data = await response.json();
+            if (!data.valid && data.suggestedAddress) {
+                setSuggestedAddress(data.suggestedAddress);
+            } else {
+                setSuggestedAddress(null);
+            }
+            return data;
         } catch (error) {
-          console.error("Error validating address:", error);
-          throw new Error("Failed to validate address");
+            console.error("Error validating address:", error);
+            throw new Error("Failed to validate address");
         }
-      };
+    };
+
+    const handleSuggestedAddressClick = () => {
+        if (suggestedAddress) {
+            const addressParts = suggestedAddress.split(',');
+            if (addressParts.length >= 3) {
+                const stateZip = addressParts[2].trim().split(' ');
+                if (stateZip.length >= 2) {
+                    setStreet(addressParts[0].trim());
+                    console.log(street);
+                    setCity(addressParts[1].trim());
+                    setZipCode(stateZip[1]);
+                    const stateAbbreviation = stateZip[0];
+                    const stateFullName = states.find(state => state.value === stateAbbreviation)?.label;
+                    if (stateFullName) {
+                        setLocationState(stateFullName);
+                    }
+
+                    setSuggestedAddress(null);
+                }
+            }
+        }
+    };
 
     const handleAddressFound = (newAddress) => {
         try {
@@ -104,6 +134,7 @@ const EmailFinderPage = () => {
         e.preventDefault();
         setLoading(true);
         setError(null);
+        setSuggestedAddress(null);
 
         try {
             if (!locationState && !city && !street && !zipCode) {
@@ -122,26 +153,31 @@ const EmailFinderPage = () => {
             let response;
 
             if (mileRadius !== 'N/A') {
-                if (!(zipCode && street && city && locationState)){
-                  throw new Error('All fields are required when searching by radius');
+                if (!(zipCode && street && city && locationState)) {
+                    throw new Error('All fields are required when searching by radius');
                 }
                 const address = `${street}, ${city}, ${locationState} ${zipCode}`;
-                
-                const validationResult = await validateAddress(address, locationState, city, zipCode);
+
+                const validationResult = await validateAddress(address);
                 if (!validationResult.valid) {
-                  throw new Error('Address formatted incorrectly, please check for mistakes.');
+                    if (validationResult.suggestedAddress) {
+                        setSuggestedAddress(validationResult.suggestedAddress);
+                        throw new Error('Address formatted incorrectly. Click the suggested address to use it.');
+                    } else {
+                        throw new Error('Address formatted incorrectly, please check for mistakes.');
+                    }
                 }
-        
+
                 const geocodeResponse = await fetch(`/api/geocode?address=${encodeURIComponent(validationResult.formattedAddress)}`);
                 const geocodeData = await geocodeResponse.json();
-        
+
                 if (!geocodeResponse.ok) {
-                  throw new Error(geocodeData.error || 'An error occurred while geocoding');
+                    throw new Error(geocodeData.error || 'An error occurred while geocoding');
                 }
-        
+
                 const { lat, lng } = geocodeData;
                 response = await fetch(`/api/coords?latitude=${lat}&longitude=${lng}&radius=${mileRadius}`);
-              } else {
+            } else {
                 response = await fetch(`/api/data?city=${city}&locationState=${locationState}&street=${street}&zipCode=${zipCode}`);
             }
 
@@ -316,6 +352,18 @@ const EmailFinderPage = () => {
                         <p className="red-text soft-red-bg border dark-border rounded py-[0.25rem] px-[1rem] mb-[3rem]">
                             Error: {error}
                         </p>
+                    )}
+
+                    {suggestedAddress && (
+                        <div className="mb-[2rem]">
+                            <p>Suggested address:</p>
+                            <button
+                                onClick={handleSuggestedAddressClick}
+                                className="blue-text soft-blue-bg border dark-border rounded py-[0.25rem] px-[1rem]"
+                            >
+                                {suggestedAddress}
+                            </button>
+                        </div>
                     )}
                     <div className="w-full">
                         <SearchTable data={data} />

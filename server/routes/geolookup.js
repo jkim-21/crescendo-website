@@ -45,10 +45,12 @@ router.post("/validate-address", async (req, res) => {
       const stateComponent = addressComponents.find(c => c.componentType === 'administrative_area_level_1');
       const cityComponent = addressComponents.find(c => c.componentType === 'locality');
       const postalCodeComponent = addressComponents.find(c => c.componentType === 'postal_code');
+      const streetNumberComponent = addressComponents.find(c => c.componentType === 'street_number');
 
       console.log("State:", stateComponent);
       console.log("City:", cityComponent);
       console.log("Postal Code:", postalCodeComponent);
+      console.log("Street Number", streetNumberComponent);
 
       let contradictions = [];
 
@@ -63,6 +65,12 @@ router.post("/validate-address", async (req, res) => {
         contradictions.push("Postal code not confirmed");
       } else if (postalCodeComponent.componentName.text.length !== 5) {
         contradictions.push("Postal code not 5 digits");
+      }
+      if (!streetNumberComponent || streetNumberComponent.confirmationLevel !== 'CONFIRMED') {
+        contradictions.push("Street Number not confirmed");
+      }
+      if (cityComponent.replaced) {
+        contradictions.push("State questionable");
       }
 
 

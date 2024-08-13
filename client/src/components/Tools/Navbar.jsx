@@ -8,6 +8,7 @@ const Navbar = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [greeting, setGreeting] = useState('');
+    const [error, setError] = useState('');
 
     const handleShow = () => {
         setShown(!shown);
@@ -47,6 +48,9 @@ const Navbar = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (firstName.length < 1 || lastName.length < 1) {
+                throw new Error("First and last name are required");
+            }
             const response = await fetch(`/api/add-user`, {
                 method: 'POST',
                 headers: {
@@ -67,6 +71,7 @@ const Navbar = () => {
             }
         } catch (error) {
             console.error('Error adding user', error);
+            setError(error);
         }
     };
 
@@ -102,6 +107,7 @@ const Navbar = () => {
                             <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                                 Submit
                             </button>
+                            {error && <div className='bg-red-400 m-3'>{error}</div>}
                         </form>
                     </div>
                 </div>
