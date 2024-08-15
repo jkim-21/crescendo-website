@@ -10,6 +10,7 @@ import CurrentLocationButton from '../components/Tools/EmailFinder/CurrentLocati
 import ClearIcon from '@mui/icons-material/Clear';
 import InfoPopUp from '../components/Tools/EmailFinder/InfoPopUp';
 import Navbar from '../components/Tools/Navbar';
+import { useAuth } from '../context/AuthContext';
 
 const EmailFinderPage = () => {
     const navigate = useNavigate();
@@ -23,12 +24,53 @@ const EmailFinderPage = () => {
     const [mileRadius, setMileRadius] = useState('N/A');
     const [stateIncluded, setStateIncluded] = useState(true);
     const [suggestedAddress, setSuggestedAddress] = useState(null);
+    const [showRequestModal, setShowRequestModal] = useState(false);
+    const [newRequest, setNewRequest] = useState('');
+    const { user } = useAuth();
     useBodyBackgroundColor('#f6f8fe');
-
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    const handleOpenRequestModal = () => {
+        setShowRequestModal(true);
+    };
+
+    const handleCloseRequestModal = () => {
+        setShowRequestModal(false);
+        setNewRequest('');
+    };
+
+    const handleAddRequest = async () => {
+        if (!user || !user.email) {
+            setError('You must be logged in to add a request');
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/add-request', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: user.email, request: newRequest }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add request');
+            }
+
+            const data = await response.json();
+            if (data.success) {
+                setNewRequest('');
+                handleCloseRequestModal();
+            }
+        } catch (error) {
+            console.error('Error adding request:', error);
+            setError(error.message);
+        }
+    };
 
     const validateAddress = async (address) => {
         try {
@@ -45,15 +87,16 @@ const EmailFinderPage = () => {
             }
 
             const data = await response.json();
-            if (!data.valid && data.suggestedAddress) {
-                setSuggestedAddress(data.suggestedAddress);
-            } else {
-                setSuggestedAddress(null);
+            if (!data.valid) {
+                if (data.suggestedAddress) {
+                    setSuggestedAddress(data.suggestedAddress);
+                }
+                throw new Error(data.details ? data.details.join(', ') : data.error);
             }
             return data;
         } catch (error) {
             console.error("Error validating address:", error);
-            throw new Error("Failed to validate address");
+            throw error;
         }
     };
 
@@ -64,15 +107,18 @@ const EmailFinderPage = () => {
                 const stateZip = addressParts[2].trim().split(' ');
                 if (stateZip.length >= 2) {
                     setStreet(addressParts[0].trim());
-                    console.log(street);
                     setCity(addressParts[1].trim());
-                    setZipCode(stateZip[1]);
+                    
+                    const fullZip = stateZip[1];
+                    const fiveDigitZip = fullZip.substring(0, 5);
+                    setZipCode(fiveDigitZip);
+                    
                     const stateAbbreviation = stateZip[0];
                     const stateFullName = states.find(state => state.value === stateAbbreviation)?.label;
                     if (stateFullName) {
                         setLocationState(stateFullName);
                     }
-
+    
                     setSuggestedAddress(null);
                 }
             }
@@ -162,9 +208,9 @@ const EmailFinderPage = () => {
                 if (!validationResult.valid) {
                     if (validationResult.suggestedAddress) {
                         setSuggestedAddress(validationResult.suggestedAddress);
-                        throw new Error('Address formatted incorrectly. Click the suggested address to use it.');
+                        throw new Error(`Address formatted incorrectly: ${validationResult.details.join(', ')}. Click the suggested address to use it.`);
                     } else {
-                        throw new Error('Address formatted incorrectly, please check for mistakes.');
+                        throw new Error(`Address formatted incorrectly: ${validationResult.details.join(', ')}`);
                     }
                 }
 
@@ -182,13 +228,12 @@ const EmailFinderPage = () => {
             }
 
             if (!response.ok) {
-                setStateIncluded(true)
+                setStateIncluded(true);
                 const errorData = await response.json();
                 throw new Error(errorData.error);
             }
 
             let result = await response.json();
-
             setData(result);
         } catch (error) {
             console.error("Full error:", error);
@@ -204,6 +249,7 @@ const EmailFinderPage = () => {
             <div className={`${styles.boxWidth} m-auto basis-[82%] z-50`}>
                 <Navbar></Navbar>
                 <div className={`py-[5rem] px-[3rem] min-h-[100vh] flex flex-col items-center m-auto`}>
+
 
                     <form
                         onSubmit={fetchData}
@@ -325,7 +371,9 @@ const EmailFinderPage = () => {
                             ))}
                         </TextField>
                         <div className="flex gap-2 mt-4">
+
                             <CurrentLocationButton onAddressFound={handleAddressFound} />
+
                             <Button
                                 variant='contained'
                                 startIcon={<SearchIcon />}
@@ -334,6 +382,7 @@ const EmailFinderPage = () => {
                             >
                                 Fetch Data
                             </Button>
+
                             <Button
                                 variant='outlined'
                                 startIcon={<ClearIcon />}
@@ -342,6 +391,15 @@ const EmailFinderPage = () => {
                             >
                                 Clear
                             </Button>
+
+                            <Button
+                                variant='contained'
+                                onClick={handleOpenRequestModal}
+                                className='lightest-box-shadow mt-4 font-'
+                            >
+                                Request
+                            </Button>
+
                             <InfoPopUp />
                         </div>
                     </form>
@@ -365,9 +423,40 @@ const EmailFinderPage = () => {
                             </button>
                         </div>
                     )}
+
                     <div className="w-full">
                         <SearchTable data={data} />
                     </div>
+
+                    {showRequestModal && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                            <div className="bg-white p-6 rounded-lg">
+                                <h2 className="text-xl font-bold mb-4">Request</h2>
+                                <textarea
+                                    value={newRequest}
+                                    onChange={(e) => setNewRequest(e.target.value)}
+                                    className="w-full h-32 p-2 border rounded"
+                                    placeholder="Enter your request here..."
+                                />
+                                <div className="flex justify-end mt-4">
+                                    <Button
+                                        variant='outlined'
+                                        onClick={handleCloseRequestModal}
+                                        className='mr-2'
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        variant='contained'
+                                        onClick={handleAddRequest}
+                                    >
+                                        Submit Request
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                 </div>
                 <Footer />
             </div>

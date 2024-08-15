@@ -383,4 +383,58 @@ router.post("/add-user", async (req, res) => {
   }
 });
 
+router.get("/user-requests", async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const [user] = await db.query(
+      "SELECT REQUESTS FROM users WHERE EMAIL = ?",
+      [email]
+    );
+
+    if (user.length === 0) {
+      return res.json([]);
+    }
+
+    const requests = JSON.parse(user[0].REQUESTS || "[]");
+    res.json(requests);
+  } catch (err) {
+    console.error("Error fetching user requests:", err);
+    res.status(500).json({ error: "Error querying database" });
+  }
+});
+
+
+router.post("/add-request", async (req, res) => {
+  const { email, request } = req.body;
+
+  if (!request) {
+    return res.status(400).json({ error: "Request is required" });
+  }
+
+  try {
+    const [user] = await db.query(
+      "SELECT REQUESTS FROM users WHERE EMAIL = ?",
+      [email]
+    );
+
+    let requests = [];
+    if (user.length > 0) {
+      requests = JSON.parse(user[0].REQUESTS || "[]");
+    }
+
+    requests.push(request);
+
+    await db.query(
+      "UPDATE users SET REQUESTS = ? WHERE EMAIL = ?",
+      [JSON.stringify(requests), email]
+    );
+
+    res.json({ success: true, requests });
+  } catch (err) {
+    console.error("Error adding request:", err);
+    res.status(500).json({ error: "Error updating database" });
+  }
+});
+
 export default router;

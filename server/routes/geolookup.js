@@ -75,19 +75,23 @@ router.post("/validate-address", async (req, res) => {
 
 
       if (contradictions.length === 0) {
+        
+        const formattedAddress = validatedAddress.formattedAddress.replace(/(\d{5})-\d{4}/, '$1');
         console.log("Address validated successfully");
         res.json({ 
           valid: true, 
-          formattedAddress: validatedAddress.formattedAddress,
+          formattedAddress: formattedAddress,
           geocode: data.result.geocode
         });
       } else {
+        
+        const suggestedAddress = validatedAddress.formattedAddress.replace(/(\d{5})-\d{4}/, '$1');
         console.log("Address validation failed:", contradictions);
         res.json({ 
           valid: false, 
           error: 'Address has contradictions or missing components',
           details: contradictions,
-          suggestedAddress: validatedAddress.formattedAddress
+          suggestedAddress: suggestedAddress
         });
       }
     } else {
@@ -98,6 +102,7 @@ router.post("/validate-address", async (req, res) => {
     console.error("Error validating address:", err);
     res.status(500).json({
       error: "An error occurred while validating the address. Please try again later.",
+      details: [err.message],
       suggestedAddress: null
     });
   }
