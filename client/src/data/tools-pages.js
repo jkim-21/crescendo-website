@@ -46,11 +46,6 @@ export const toolLinks = [
     name: "Saved Information",
     pageLink: "/tools/saved-information",
   },
-  {
-    id: "school-finder",
-    name: "Radius Lookup",
-    pageLink: "/school-finder",
-  },
 ];
 
 export const dynamicToolLinks = (schoolName, urlPathname) => {
@@ -198,7 +193,7 @@ export const schoolDetails = [
   {
     id: "phone-number-detail",
     title: "Phone Number:",
-    key: "LON",
+    key: "PHONE",
   },
   {
     id: "general-website-detail",

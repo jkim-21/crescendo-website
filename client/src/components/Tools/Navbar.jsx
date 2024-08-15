@@ -57,12 +57,15 @@ const Navbar = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+
                     email: user.email,
                     firstName,
                     lastName
                 }),
             });
+
             const data = await response.json();
+
             if (data.success) {
                 setShowPopUp(false);
                 setGreeting(`What's good, ${data.firstName}?`);

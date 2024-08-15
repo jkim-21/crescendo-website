@@ -4,10 +4,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import AuthProvider from "./context/AuthContext";
+import PreviousUrlKeyword from './context/PrevUrlKeyword'
 import ProtectedRoute from "./routes/ProtectedRoute";
 import {AnimationLayout} from "./components"
 import { ThemeProvider } from "@mui/material/styles";
-import {theme, tableTheme} from "./themes/theme"
+import {theme, tableTheme} from "./themes/theme";
 import {
   ChapterPage, 
   ToolsDashboardPage, 
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
     path: "/chapters/:chapterName",
     element: (
       <AnimationLayout>
-        <ChapterPage />
+          <ChapterPage />
       </AnimationLayout>
     ),
   },
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <AnimationLayout>
-          <ToolsDashboardPage />
+            <ToolsDashboardPage />
         </AnimationLayout>
       </ProtectedRoute>
     ),
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <AnimationLayout>
-          <MentorMenteePage />
+            <MentorMenteePage />
         </AnimationLayout>
       </ProtectedRoute>
     ),
@@ -61,7 +62,7 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <AnimationLayout>
           <ThemeProvider theme={tableTheme}>
-            <EmailFinderPage />
+              <EmailFinderPage />
           </ThemeProvider>
         </AnimationLayout>
       </ProtectedRoute>
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <AnimationLayout>
-          <SchoolDetailsPage />
+            <SchoolDetailsPage />
         </AnimationLayout>
       </ProtectedRoute>
     ),
@@ -82,7 +83,9 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <AnimationLayout>
-          <SavedInformationPage />
+          <ThemeProvider theme={tableTheme}>
+            <SavedInformationPage />
+          </ThemeProvider>
         </AnimationLayout>
       </ProtectedRoute>
     ),
@@ -92,7 +95,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <PreviousUrlKeyword>
+        <RouterProvider router={router}/>
+      </PreviousUrlKeyword>
     </AuthProvider>
   </React.StrictMode>
 );

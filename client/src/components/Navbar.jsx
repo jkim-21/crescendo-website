@@ -14,7 +14,6 @@ import {logos} from '../data/global'
 const Navbar = ({ pageStyles }) => {
   const [toggle, setToggle] = useState(false);
   const [activeDropdownId, setActiveDropdownId] = useState(null);
-  const [error, setError] = useState(null);
   const { user, setUser, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -56,15 +55,35 @@ const Navbar = ({ pageStyles }) => {
       const email = result.user.email;
       if (email.endsWith('@crescendoforacause.com')) {
         setUser(result.user);
-        navigate('/'); // Redirect to home after successful login
-      } else {
-        await auth.signOut();
-        setError('You must use an @crescendoforacause.com email to access this page.');
+
+        const userCheck = await fetch(`/api/check-user?email=${encodeURIComponent(result.user.email)}`);
+        const userData = await userCheck.json();
+
+        if (!userData.exists) {
+          const response = await fetch(`/api/add-user`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_id: result.user.uid,
+                email: result.user.email,
+                displayName: result.user.displayName,
+            }),
+          });
+          if (!response.ok) {
+            throw new Error('Failed to store user information!')
+          }
+        }
+        navigate('/');
       }
-    } 
-    
+      else {
+        await auth.signOut();
+        console.error('You must use an @crescendoforacause.com email to access this page.');
+      }
+    }  
     catch (error) {
-      setError(error.message);
+      console.error(error.message);
     }
   };
 
@@ -78,13 +97,6 @@ const Navbar = ({ pageStyles }) => {
       console.error("Logout error: ", error);
     }
   };
-
-
-  useEffect(() => {
-    if (error) {
-      alert(error); // Simple error handling, you can improve this
-    }
-  }, [error]);
 
   return (
     <nav className='dark-bg sticky top-0 z-50 shadow-md py-[0.75rem]'>

@@ -2,17 +2,37 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Navbar, AnimationLayout, Footer, Sidebar } from '../components';
+import { Footer, Sidebar, SavedSchoolsTable } from '../components';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
+import {styles} from '../style';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { usePreviousUrlKeyword } from '../context/PrevUrlKeyword'
 
 const SavedSchoolsPage = () => {
-    const [savedSchools, setSavedSchools] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const { user } = useAuth();
     const navigate = useNavigate();
-    useBodyBackgroundColor('#f6f8fe')
+    useBodyBackgroundColor('#f6f8fe');
+    const { setPreviousUrlKeyword } = usePreviousUrlKeyword();
 
+    const [savedSchools, setSavedSchools] = useState([]);
+    const [schoolLoading, setSchoolLoading] = useState(true);
+    const [schoolError, setSchoolError] = useState(null);
+    
+    const [savedSchoolDropdown, setSavedSchoolDropdown] = useState(true);
+    const [mentorMenteeDropdown, setMentorMenteeDropdown] = useState(true);
+
+    // Handle Dropdown
+    const handleDropdown = (dropdownType) => {
+        if (dropdownType === 'school') {
+            setSavedSchoolDropdown(!savedSchoolDropdown)
+        }
+        if (dropdownType === 'mentor') {
+            setMentorMenteeDropdown(!mentorMenteeDropdown)
+        }
+    }
+
+    // Fetch School Data
     useEffect(() => {
         const fetchSavedSchools = async () => {
             if (!user || !user.email) return;
@@ -26,55 +46,64 @@ const SavedSchoolsPage = () => {
                 setSavedSchools(data);
             } catch (err) {
                 console.error('Error fetching saved schools:', err);
-                setError(err.message);
+                setSchoolError(err.message);
             } finally {
-                setLoading(false);
+                setSchoolLoading(false);
             }
         };
-
         fetchSavedSchools();
     }, [user]);
 
+    
+    // Button Actions 
     const handleSchoolClick = (schoolName) => {
-        navigate(`/school/${encodeURIComponent(schoolName)}`);
-    };
-
-    const handleBack = () => {
-        navigate(`/tools/email-finder-system${location.search}`);
+        navigate(`/tools/email-finder-system/school/${encodeURIComponent(schoolName)}`);
+        setPreviousUrlKeyword('save')
     };
 
     return (
-        <AnimationLayout>
-            <div className='flex'>
-                <Sidebar structure='lightest-blue-bg basis-[18%]' />
-                <div className={`basis-[82%] flex flex-col items-center bg-white shadow-lg m-auto pt-[5rem] pb-[2rem] px-[3rem] mx-auto min-h-[100vh]`}>
-                    <h1 className="text-2xl font-bold mb-4">Saved Schools</h1>
-                    <button
-                        onClick={handleBack}
-                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
-                    >
-                        Back to Search
-                    </button>
-                    {loading && <p>Loading...</p>}
-                    {error && <p className="text-red-500">Error: {error}</p>}
-                    {!loading && !error && (
-                        <ul className="w-full">
-                            {savedSchools.map((school) => (
-                                <li
-                                    key={school.INDEX_NUMBER}
-                                    className="p-4 border-b cursor-pointer hover:bg-gray-100"
-                                    onClick={() => handleSchoolClick(school.SCH_NAME)}
-                                >
-                                    {school.SCH_NAME} (Index: {school.INDEX_NUMBER})
-                                </li>
-                            ))}
-                        </ul>
-                    )}
+        <div className='flex'>
+            <Sidebar structure='lightest-blue-bg basis-[18%]' />
+            <div className='m-auto basis-[82%] z-[50]'>
+                <div className={`${styles.boxWidth} pt-[5rem] pb-[2rem] m-auto min-h-[100vh]`}>
+                    <div className='mb-[2rem]'>
+                        <h4
+                        onClick = {() => handleDropdown('school')}
+                        className={`py-[0.5rem] mb-[0.5rem] ${styles.heading4} font-[700] w-full rounded-[0.5rem] hover:bg-[#e0e0e4] cursor-pointer`}>
+                            {savedSchoolDropdown ? <KeyboardArrowDownIcon sx={{fontSize:'2.25rem', mb:'0.1rem'}}/> : <KeyboardArrowRightIcon sx={{fontSize:'2.25rem', mb:'0.3rem'}}/>}
+                            Saved Schools
+                        </h4>
+                        <div className='ml-[0.5rem]'>
+                            {!schoolError && !schoolLoading && savedSchoolDropdown && (
+                                <SavedSchoolsTable data = {savedSchools}/>
+                            )}
+                        </div>
+                    </div>
+                    <div>
+                        <h4
+                        onClick = {() => handleDropdown('mentor')}
+                        className={`py-[0.5rem] mb-[0.5rem] ${styles.heading4} font-[700] w-full rounded-[0.75rem] hover:bg-[#e0e0e4] cursor-pointer`}>
+                            {mentorMenteeDropdown ? <KeyboardArrowDownIcon sx={{fontSize:'2.25rem', mb:'0.1rem'}}/> : <KeyboardArrowRightIcon sx={{fontSize:'2.25rem', mb:'0.3rem'}}/>}
+                            Mentor-Mentee Tables
+                        </h4>
+                        {!schoolError && !schoolLoading && mentorMenteeDropdown && (
+                            <ul className='w-full'>
+                                {savedSchools.map((school) => (
+                                    <li
+                                        key={school.INDEX_NUMBER}
+                                        className="p-4 border-b cursor-pointer rounded-[0.5rem] hover:bg-[#f3f4f6]"
+                                        onClick={() => handleSchoolClick(school.INDEX_NUMBER)}
+                                    >
+                                        {school.SCH_NAME}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                 </div>
+                <Footer />
             </div>
-            <Footer />
-        </AnimationLayout>
-    );
-};
+        </div>
+    )};
 
 export default SavedSchoolsPage;

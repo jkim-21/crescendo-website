@@ -39,7 +39,8 @@ const tableTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          border: 1,
+          borderRadius: "0.75rem",
+          border: "1px solid #e0e0e4",
         },
       },
     },

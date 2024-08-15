@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
 import {Sidebar, SchoolDetailSearchTable, AnimationLayout, Footer} from '../components';
 import { styles } from '../style';
 import { schoolDetails } from '../data/tools-pages';
+import { usePreviousUrlKeyword } from '../context/PrevUrlKeyword'
 
 const SchoolDetailsPage = () => {
   useBodyBackgroundColor('#f6f8fe');
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const {previousUrlKeyword} = usePreviousUrlKeyword();
 
   const [schoolData, setSchoolData] = useState(null);
   const [emails, setEmails] = useState({});
@@ -31,9 +35,6 @@ const SchoolDetailsPage = () => {
   const [reportMessage, setReportMessage] = useState('');
 
   const [isSaved, setIsSaved] = useState(false);
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -51,7 +52,27 @@ const SchoolDetailsPage = () => {
     });
     const titleCasedStr = titleCasedWords.join(' ');
     return titleCasedStr;
-}
+  }
+
+
+  const formatPhoneNumber = (phoneNumber) => {
+    let closingParenthesisIndex = phoneNumber.indexOf(')');
+
+    let formattedPhoneNumber = phoneNumber.substring(0, closingParenthesisIndex + 1) + (' ') + phoneNumber.substring(closingParenthesisIndex + 1)
+
+    return formattedPhoneNumber;
+  }
+
+
+  const handleBack = () => {
+    if (previousUrlKeyword === 'school') {
+      navigate('/tools/email-finder-system');
+    }
+    else if (previousUrlKeyword === 'save') {
+      navigate('/tools/saved-information');
+    }
+    
+  };
 
   //Fetching page data: useeffect: fetchData
   
@@ -71,6 +92,8 @@ const SchoolDetailsPage = () => {
           schoolResponse.json(),
           emailsResponse.json()
         ]);
+
+        console.log(schoolData)
   
         setSchoolData(schoolData);
         setEmails(emailsData);
@@ -82,7 +105,7 @@ const SchoolDetailsPage = () => {
         setCity(schoolData.LCITY);
         setState(schoolData.STATENAME);
         setZip(schoolData.LZIP);
-        setPhoneNumber(schoolData.SCRAPED_WEBSITE);
+        setPhoneNumber(schoolData.PHONE);
         setGeneralWebsite(schoolData.SCRAPED_WEBSITE);
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -94,6 +117,30 @@ const SchoolDetailsPage = () => {
   
     fetchData();
   }, [indexNumber]);
+
+  const renderSchoolDetails = (schoolDetail) => {
+    if (schoolDetail.id === 'general-website-detail') {
+      return (
+      <a
+        href={generalWebsite}
+        className="sea-blue-text text-left hover:underline break-words"
+      >
+        {toTitleCase(generalWebsite)}
+      </a>
+      );}
+    else if (schoolDetail.id === 'phone-number-detail') {
+      return (
+      <a
+        href={`tel:${phoneNumber}`}
+        className="sea-blue-text text-left hover:underline break-words"
+      >
+        {formatPhoneNumber(phoneNumber)}
+      </a>
+    );}
+    else {
+      return toTitleCase(schoolData[schoolDetail.key])
+    }
+  };
 
   //hooks saving schools: useEffect:checksavedstatus handlesave
 
@@ -176,10 +223,6 @@ const SchoolDetailsPage = () => {
     }
   };
 
-  const handleBack = () => {
-    navigate(`/tools/email-finder-system${location.search}`);
-  };
-
   if (loading) return (<AnimationLayout><div></div></AnimationLayout>);
 
   return (
@@ -189,70 +232,65 @@ const SchoolDetailsPage = () => {
         <Sidebar
           structure='lightest-blue-bg basis-[18%]'
           schoolName={schoolName}
-          schoolUrl = {encodeURIComponent(indexNumber)}
+          schoolIndex = {encodeURIComponent(indexNumber)}
         />
-        <div className={`${styles.boxWidth} basis-[82%] m-auto z-50 min-h-[100vh]`}>
-          <div className='py-[1rem] three-d-box-shadow-1 dark-white-bg lighter-gray-border border-[1px] rounded-[0.75rem] m-[0.5rem]'>
-            <div className={`${styles.subparagraph} flex items-center gap-[1rem] px-[1rem] pb-[1rem] border-b-[1px] lighter-gray-border text-white`}>
-              <div className='flex-grow'>
+        <div className={`basis-[82%] m-auto z-50`}>
+          <div className='min-h-[98vh] m-[0.5rem] dark-white-bg three-d-box-shadow-1 lighter-gray-border border-[1px] rounded-[0.75rem]'>
+            <div className='m-auto py-[1rem]
+                            xl:max-w-[1280px]'>
+              <div className={`${styles.subparagraph} flex items-center gap-[1rem] px-[1rem] pb-[1rem] border-b-[1px] lighter-gray-border text-white`}>
+                <div className='flex-grow'>
+                  <button
+                    onClick={handleBack}
+                    className='sea-blue-bg px-4 py-2 rounded hover:bg-blue-600'
+                  >
+                    Back
+                  </button>
+                </div>
                 <button
-                  onClick={handleBack}
-                  className='sea-blue-bg px-4 py-2 rounded hover:bg-blue-600'
+                  onClick={handleSave}
+                  className={`${isSaved ? 'green-bg hover:bg-green-600' : 'sea-blue-bg hover:bg-blue-600'} px-4 py-2 rounded`}
                 >
-                  Back
+                  {isSaved ? 'Unsave' : 'Save'}
+                </button>
+                <button
+                  onClick={() => setShowReportModal(true)}
+                  className="red-bg hover:bg-red-600 px-4 py-2 rounded"
+                >
+                  Report
                 </button>
               </div>
-              <button
-                onClick={handleSave}
-                className={`${isSaved ? 'green-bg hover:bg-green-600' : 'sea-blue-bg hover:bg-blue-600'} px-4 py-2 rounded`}
-              >
-                {isSaved ? 'Unsave' : 'Save'}
-              </button>
-              <button
-                onClick={() => setShowReportModal(true)}
-                className="red-bg hover:bg-red-600 px-4 py-2 rounded"
-              >
-                Report
-              </button>
-            </div>
-            <div className='flex justify-between items-stretch px-[1rem] pt-[1rem]'>
-              <div className='basis-[67%]'>
-                <h4 className={`${styles.heading4} mb-[1rem] ml-[0.5rem]`}>
-                  {schoolName} Emails
-                </h4>
-                <div className='overflow-y-auto'>
-                  <SchoolDetailSearchTable
-                      jsonData = {emails}
-                      minHeight = '25rem'
-                  />
-                </div>
-              </div>
-              <div className="basis-[30%] flex flex-col">
-                <h4 className={`${styles.heading4} mb-[1rem] w-full ml-[0.5rem]`}>
-                  School Details
-                </h4>
-                  {schoolData && (
-                  <div className='flex flex-col justify-between  p-[1rem] flex-grow border-[1px] white-bg lighter-gray-border rounded-[0.75rem]'>
-                    {schoolDetails.map((schoolDetail, id) => (
-                      <p
-                        key={schoolDetail.id}
-                      >
-                        <strong className='font-[600]'>
-                          {schoolDetail.title}
-                        </strong> {' '}
-                        {schoolDetail.id === 'general-website-detail' ? (
-                          <a 
-                          href={generalWebsite}
-                          className="sea-blue-text text-left hover:underline">
-                            {toTitleCase(generalWebsite)}
-                          </a>
-                        ) : (
-                          toTitleCase(schoolData[schoolDetail.key])
-                        )}
-                      </p>
-                    ))}
+              <div className='flex justify-between items-stretch px-[1rem] pt-[1rem]'>
+                <div className='basis-[67%]'>
+                  <h4 className={`${styles.heading4} mb-[1rem] ml-[0.5rem]`}>
+                    {schoolName} Emails
+                  </h4>
+                  <div className='overflow-y-auto'>
+                    <SchoolDetailSearchTable
+                        jsonData = {emails}
+                        height = '25rem'
+                    />
                   </div>
-                      )}
+                </div>
+                <div className="basis-[30%] flex flex-col">
+                  <h4 className={`${styles.heading4} mb-[1rem] w-full ml-[0.5rem]`}>
+                    School Details
+                  </h4>
+                    {schoolData && (
+                    <div className='flex flex-col justify-between p-[1rem] flex-grow border-[1px] white-bg lighter-gray-border rounded-[0.75rem]'>
+                      {schoolDetails.map((schoolDetail) => (
+                        <p
+                          key={schoolDetail.id}
+                        >
+                          <strong className='font-[600]'>
+                            {schoolDetail.title}
+                          </strong> {' '}
+                          {renderSchoolDetails(schoolDetail)}
+                        </p>
+                      ))}
+                    </div>
+                    )}
+                </div>
               </div>
             </div>
           </div>

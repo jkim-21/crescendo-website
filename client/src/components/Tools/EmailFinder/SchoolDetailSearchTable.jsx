@@ -7,8 +7,7 @@ import {
   useMaterialReactTable,
 } from 'material-react-table';
 
-const SchoolDetailSearchTable = ({jsonData, minHeight}) => {
-  let value = '';
+const SchoolDetailSearchTable = ({jsonData, height}) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -30,24 +29,32 @@ const SchoolDetailSearchTable = ({jsonData, minHeight}) => {
     return (
       [
         {
-            accessorKey: keys[0],
-            header: 'Email',
-            size: 150,
+          accessorKey: keys[0],
+          header: 'Email',
+          size: 150,
+          enableClickToCopy: true,
+          Cell: ({ cell }) => {
+            return (
+              <div className="font-[400]">
+                {cell.getValue()} 
+              </div>
+            );
+          },
         },
         {
-            accessorKey: keys[1],
-            header: 'Origin Link',
-            size: 150,
-            Cell: ({ cell }) => {
-                value = cell.getValue();
-                return (
-                    <button className="sea-blue-text text-left hover:font-underline">
-                        <a href={cell.getValue()}>
-                            {cell.getValue()}
-                        </a>
-                    </button>
-                );
-            },
+          accessorKey: keys[1],
+          header: 'Origin Link',
+          size: 150,
+          Cell: ({ cell }) => {
+            const link = cell.getValue();
+            return (
+              <button className="sea-blue-text text-left hover:font-underline">
+                <a href={link}>
+                  {link}
+                </a>
+              </button>
+            );
+          },
         },
       ])
     },
@@ -63,7 +70,8 @@ const SchoolDetailSearchTable = ({jsonData, minHeight}) => {
       },
       muiTableContainerProps: {
         sx: {
-          minHeight: minHeight,
+          minHeight: height,
+          maxHeight: height
         },
       },
       muiTableBodyRowProps: {
@@ -72,13 +80,14 @@ const SchoolDetailSearchTable = ({jsonData, minHeight}) => {
       },
       muiTableBodyCellProps: {
         sx: {
+          fontWeight: 'normal'
         },
       },
       muiTableHeadCellProps: {
         sx: {
         },
       },
-      initialState: { pagination: {pageSize: 5} },
+      initialState: { pagination: {pageSize: 10} },
   });
 
   return (

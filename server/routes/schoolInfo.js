@@ -13,6 +13,46 @@ const db = mysql.createPool({
   connectionLimit: 10,
 });
 
+// Checking and Adding User Information
+
+router.get("/check-user", async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const [rows] = await db.query("SELECT * FROM users WHERE EMAIL = ?", [
+      email,
+    ]);
+
+    if (rows.length > 0) {
+      res.json({ exists: true, displayName: rows[0].DISPLAY_NAME });
+    } else {
+      res.json({ exists: false });
+    }
+  } catch (err) {
+    console.error("Error checking user: ", err);
+    res.status(500).json({ error: "Error checking user" });
+  }
+});
+
+router.post("/add-user", async (req, res) => {
+  const { user_id, email, displayName, photoUrl } = req.body;
+
+  try {
+    const [result] = await db.query(
+      "INSERT INTO users (USER_ID, EMAIL, DISPLAY_NAME, PHOTO_URL) VALUES (?, ?, ?, ?)",
+      [user_id, email, displayName, photoUrl]
+    );
+    if (result.affectedRows > 0) {
+      res.json({ success: true });
+    } else {
+      throw new Error("Failed to add user");
+    }
+  } catch (err) {
+    console.error("Error adding user:", err);
+    res.status(500).json({ error: "Error updating database" });
+  }
+});
+
 router.get("/data", async (req, res) => {
   const {
     city = "",
@@ -40,6 +80,76 @@ router.get("/data", async (req, res) => {
   }
 });
 
+router.get("/coords", async (req, res) => {
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; //earth
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; //kilmeters
+    return distance;
+  }
+
+  const { latitude = "", longitude = "", radius = "10" } = req.query;
+
+  try {
+    const lat = parseFloat(latitude);
+    const lon = parseFloat(longitude);
+    const rad = parseFloat(radius);
+
+    if (isNaN(lat) || isNaN(lon) || isNaN(rad)) {
+      return res.status(400).json({ error: "Invalid parameters" });
+    }
+
+    const radiusKm = rad * 1.60934;
+
+    const latDegrees = radiusKm / 111.32;
+    const lonDegrees = radiusKm / (111.32 * Math.cos((lat * Math.PI) / 180));
+
+    const latMin = lat - latDegrees;
+    const latMax = lat + latDegrees;
+    const lonMin = lon - lonDegrees;
+    const lonMax = lon + lonDegrees;
+
+    const [data] = await db.query(
+      `SELECT INDEX_NUMBER, SCH_NAME, LCITY, LSTREET1, LAT, LON, STATENAME
+      FROM school_emails_website
+      WHERE SCRAPED_EMAILS IS NOT NULL
+      AND LAT BETWEEN ? AND ?
+      AND LON BETWEEN ? AND ?`,
+      [latMin, latMax, lonMin, lonMax]
+    );
+
+    const filteredData = data
+      .map((school) => ({
+        ...school,
+        distance: calculateDistance(lat, lon, school.LAT, school.LON),
+      }))
+      .filter((school) => school.distance <= radiusKm)
+      .sort((a, b) => a.distance - b.distance)
+      .map(({ INDEX_NUMBER, SCH_NAME, LCITY, LSTREET1, STATENAME }) => ({
+        INDEX_NUMBER,
+        SCH_NAME,
+        STATENAME,
+        LCITY,
+        LSTREET1,
+      }));
+
+    res.json(filteredData);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({
+      error: "Error querying database",
+    });
+  }
+});
+
 router.get("/school-data/:indexNumber", async (req, res) => {
   const { indexNumber } = req.params;
 
@@ -53,8 +163,10 @@ router.get("/school-data/:indexNumber", async (req, res) => {
       const schoolData = {
         ...data[0],
         INDEX_NUMBER: data[0].INDEX_NUMBER.toString(),
+        LAT: parseFloat(data[0].LAT),
         LON: parseFloat(data[0].LON),
-        WEBSITE: data[0].WEBSITE || "",
+        PHONE: data[0].PHONE || "",
+        WEBSITE: data[0].WEBSITE || "N/A",
         SCRAPED_WEBSITE_1: data[0].SCRAPED_WEBSITE_1 || "",
         SCRAPED_WEBSITE_2: data[0].SCRAPED_WEBSITE_2 || "",
         SCRAPED_WEBSITE_3: data[0].SCRAPED_WEBSITE_3 || "",
@@ -117,8 +229,6 @@ router.get("/school-emails/:indexNumber", async (req, res) => {
         sortedEmails[link].sort();
       }
 
-      
-
       res.json(sortedEmails);
     } else {
       res.status(404).json({ error: "School does not exist" });
@@ -130,6 +240,8 @@ router.get("/school-emails/:indexNumber", async (req, res) => {
     });
   }
 });
+
+// Report Schools
 
 router.post("/report-school/:indexNumber", async (req, res) => {
   const { indexNumber } = req.params;
@@ -159,7 +271,7 @@ router.post("/report-school/:indexNumber", async (req, res) => {
     if (result.affectedRows > 0) {
       res.json({ message: "School reported successfully" });
     } else {
-      res.status(404).json({ error: "School not found" });
+      throw new Error("School not found");
     }
   } catch (err) {
     console.error("Error reporting school:", err);
@@ -168,6 +280,8 @@ router.post("/report-school/:indexNumber", async (req, res) => {
     });
   }
 });
+
+// Saving Schools and Saved Schools to Users
 
 router.post("/check-saved-school", async (req, res) => {
   const { email, schoolIndex } = req.body;
@@ -266,7 +380,7 @@ router.get("/saved-schools", async (req, res) => {
     const savedSchools = JSON.parse(user[0].SAVED_SCHOOLS || "[]");
 
     const [schools] = await db.query(
-      "SELECT SCH_NAME, INDEX_NUMBER FROM school_emails_website WHERE INDEX_NUMBER IN (?)",
+      "SELECT INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1 FROM school_emails_website WHERE INDEX_NUMBER IN (?)",
       [savedSchools]
     );
 
@@ -274,166 +388,6 @@ router.get("/saved-schools", async (req, res) => {
   } catch (err) {
     console.error("Error fetching saved schools:", err);
     res.status(500).json({ error: "Error querying database" });
-  }
-});
-
-router.get("/coords", async (req, res) => {
-  function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; //earth
-    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-    const dLon = ((lon2 - lon1) * Math.PI) / 180;
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos((lat1 * Math.PI) / 180) *
-        Math.cos((lat2 * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; //kilmeters
-    return distance;
-  }
-
-  const { latitude = "", longitude = "", radius = "10" } = req.query;
-
-  try {
-    const lat = parseFloat(latitude);
-    const lon = parseFloat(longitude);
-    const rad = parseFloat(radius);
-
-    if (isNaN(lat) || isNaN(lon) || isNaN(rad)) {
-      return res.status(400).json({ error: "Invalid parameters" });
-    }
-
-    const radiusKm = rad * 1.60934;
-
-    const latDegrees = radiusKm / 111.32;
-    const lonDegrees = radiusKm / (111.32 * Math.cos((lat * Math.PI) / 180));
-
-    const latMin = lat - latDegrees;
-    const latMax = lat + latDegrees;
-    const lonMin = lon - lonDegrees;
-    const lonMax = lon + lonDegrees;
-
-    const [data] = await db.query(
-      `SELECT INDEX_NUMBER, SCH_NAME, LCITY, LSTREET1, LAT, LON, STATENAME
-      FROM school_emails_website
-      WHERE SCRAPED_EMAILS IS NOT NULL
-      AND LAT BETWEEN ? AND ?
-      AND LON BETWEEN ? AND ?`,
-      [latMin, latMax, lonMin, lonMax]
-    );
-
-    const filteredData = data
-      .map((school) => ({
-        ...school,
-        distance: calculateDistance(lat, lon, school.LAT, school.LON),
-      }))
-      .filter((school) => school.distance <= radiusKm)
-      .sort((a, b) => a.distance - b.distance)
-      .map(({ INDEX_NUMBER, SCH_NAME, LCITY, LSTREET1, STATENAME }) => 
-        ({ INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1 })
-      );
-
-    res.json(filteredData);
-  } catch (err) {
-    console.error("Error fetching data:", err);
-    res.status(500).json({
-      error: "Error querying database",
-    });
-  }
-});
-
-router.get("/check-user", async (req, res) => {
-  const { email } = req.query;
-
-  try {
-    const [user] = await db.query(
-      "SELECT FIRST_NAME FROM users WHERE EMAIL = ?",
-      [email]
-    );
-
-    if (user.length > 0) {
-      res.json({ exists: true, firstName: user[0].FIRST_NAME });
-    } else {
-      res.json({ exists: false });
-    }
-  } catch (err) {
-    console.error("Error checking user:", err);
-    res.status(500).json({ error: "Error querying database" });
-  }
-});
-
-router.post("/add-user", async (req, res) => {
-  const { email, firstName, lastName } = req.body;
-
-  try {
-    const [result] = await db.query(
-      "INSERT INTO users (EMAIL, FIRST_NAME, LAST_NAME, SAVED_SCHOOLS) VALUES (?, ?, ?, ?)",
-      [email, firstName, lastName, '[]']
-    );
-
-    if (result.affectedRows > 0) {
-      res.json({ success: true, firstName });
-    } else {
-      res.status(500).json({ error: "Failed to add user" });
-    }
-  } catch (err) {
-    console.error("Error adding user:", err);
-    res.status(500).json({ error: "Error updating database" });
-  }
-});
-
-router.get("/user-requests", async (req, res) => {
-  const { email } = req.query;
-
-  try {
-    const [user] = await db.query(
-      "SELECT REQUESTS FROM users WHERE EMAIL = ?",
-      [email]
-    );
-
-    if (user.length === 0) {
-      return res.json([]);
-    }
-
-    const requests = JSON.parse(user[0].REQUESTS || "[]");
-    res.json(requests);
-  } catch (err) {
-    console.error("Error fetching user requests:", err);
-    res.status(500).json({ error: "Error querying database" });
-  }
-});
-
-
-router.post("/add-request", async (req, res) => {
-  const { email, request } = req.body;
-
-  if (!request) {
-    return res.status(400).json({ error: "Request is required" });
-  }
-
-  try {
-    const [user] = await db.query(
-      "SELECT REQUESTS FROM users WHERE EMAIL = ?",
-      [email]
-    );
-
-    let requests = [];
-    if (user.length > 0) {
-      requests = JSON.parse(user[0].REQUESTS || "[]");
-    }
-
-    requests.push(request);
-
-    await db.query(
-      "UPDATE users SET REQUESTS = ? WHERE EMAIL = ?",
-      [JSON.stringify(requests), email]
-    );
-
-    res.json({ success: true, requests });
-  } catch (err) {
-    console.error("Error adding request:", err);
-    res.status(500).json({ error: "Error updating database" });
   }
 });
 

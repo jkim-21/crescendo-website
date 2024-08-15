@@ -6,16 +6,18 @@ import {dynamicToolLinks, toolLinks} from '../../data/tools-pages';
 import { useAuth } from '../../context/AuthContext';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-const Sidebar = ({structure, schoolName, schoolUrl}) => {
+const Sidebar = ({structure, schoolName, schoolIndex}) => {
 
     // Sidebar piece
     const location = useLocation();
-    const isActive = (path) => location.pathname === path;
     const [linksToRender, setLinksToRender] = useState(toolLinks);
+    const [activeLink, setActiveLink] = useState(null);
+
 
     useEffect(() => {
-        const links = schoolName ? dynamicToolLinks(schoolName, schoolUrl) : toolLinks;
+        const links = schoolName ? dynamicToolLinks(schoolName, schoolIndex) : toolLinks;
         setLinksToRender(links);
+        setActiveLink(location.pathname);
     }, [])
 
     // Logout
@@ -29,6 +31,7 @@ const Sidebar = ({structure, schoolName, schoolUrl}) => {
             alert(error);
         }
     }
+
 
     return (
         <div className={`${structure} top-0 z-[0] border-r-2`}>
@@ -52,7 +55,7 @@ const Sidebar = ({structure, schoolName, schoolUrl}) => {
                         <Link
                         key={toolLink.id}
                         to={toolLink.pageLink}
-                        className={`${isActive(toolLink.pageLink) ? 'active-link' : null} ${toolLink.dropdown ? 'ml-[1rem] text-[90%]' : null} tool-links rounded-[0.4rem] gray-text font-[500] p-[0.5rem]`}>
+                        className={`${activeLink === toolLink.pageLink ? 'active-link' : null} ${toolLink.dropdown ? 'ml-[1rem] text-[90%]' : null} tool-links rounded-[0.4rem] gray-text font-[500] p-[0.5rem]`}>
                             <div className='flex justify-between items-start'>
                                 {toolLink.name}
                                 {toolLink.dropdownParent && <ArrowDropDownIcon className='mr-[0.5rem]'/>}

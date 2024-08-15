@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SearchTable, Footer, Sidebar } from '../components';
 import { styles } from '../style'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
 import { TextField, MenuItem, Button } from '@mui/material';
 import { states, miles } from '../data/tools-pages'
@@ -13,7 +13,9 @@ import Navbar from '../components/Tools/Navbar';
 import { useAuth } from '../context/AuthContext';
 
 const EmailFinderPage = () => {
+    const { user } = useAuth();
     const navigate = useNavigate();
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -26,7 +28,6 @@ const EmailFinderPage = () => {
     const [suggestedAddress, setSuggestedAddress] = useState(null);
     const [showRequestModal, setShowRequestModal] = useState(false);
     const [newRequest, setNewRequest] = useState('');
-    const { user } = useAuth();
     useBodyBackgroundColor('#f6f8fe');
 
     useEffect(() => {

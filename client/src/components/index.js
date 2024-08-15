@@ -22,6 +22,7 @@ import SearchTable from "./Tools/EmailFinder/SearchTable";
 import SchoolDetails from "./Tools/EmailFinder/SchoolDetails";
 import Sidebar from "./Tools/Sidebar";
 import SchoolDetailSearchTable from "./Tools/EmailFinder/SchoolDetailSearchTable";
+import SavedSchoolsTable from "./Tools/SavedInformation/SavedSchoolsTable";
 
 export {
   AboutUs,

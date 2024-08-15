@@ -73,27 +73,26 @@ const SearchTable = ({ data }) => {
     data,
     muiPaginationProps: {
       rowsPerPageOptions: [10, 20, 50, 100],
-      variant: 'outlined',
     },
     muiTableBodyRowProps: {
       sx: {
-
+        border:0
       }
     },
     muiTableBodyCellProps: {
       sx: {
-
+        border:0
       }
     },
     muiTableHeadCellProps: {
       sx: {
-
+        border:0
       }
     },
   });
 
   return (
-    <div className="school-table overflow-y-auto overflow-x-auto shadow-md rounded-[0.75rem]">
+    <div className='overflow-y-auto overflow-x-auto shadow-md rounded-[0.75rem]'>
       <MaterialReactTable
         table={table}/>
     </div>
