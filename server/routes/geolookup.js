@@ -8,7 +8,8 @@ dotenv.config();
 const GOOGLE_MAPS_API_KEY = process.env.VITE_GOOGLE_MAPS_API_KEY;
 
 router.post("/validate-address", async (req, res) => {
-  const { address } = req.body;
+
+  const { address, isSuggestedAddress } = req.body;
 
   if (!address) {
     return res.status(400).json({ error: 'Address is required' });
@@ -53,10 +54,9 @@ router.post("/validate-address", async (req, res) => {
       console.log("Street Number", streetNumberComponent);
 
       let contradictions = [];
-
       
       if (!stateComponent || stateComponent.confirmationLevel !== 'CONFIRMED') {
-        contradictions.push("State not confiremd");
+        contradictions.push("State not confirmed");
       }
       if (!cityComponent || cityComponent.confirmationLevel !== 'CONFIRMED') {
         contradictions.push("City not confirmed");
@@ -65,14 +65,17 @@ router.post("/validate-address", async (req, res) => {
         contradictions.push("Postal code not confirmed");
       } else if (postalCodeComponent.componentName.text.length !== 5) {
         contradictions.push("Postal code not 5 digits");
+      } else if (postalCodeComponent.replaced === true) {
+        contradictions.push("postal code could not be confirmed");
       }
       if (!streetNumberComponent || streetNumberComponent.confirmationLevel !== 'CONFIRMED') {
         contradictions.push("Street Number not confirmed");
       }
       if (cityComponent.replaced) {
-        contradictions.push("State questionable");
+        if ( !isSuggestedAddress ){
+          contradictions.push("City could not be confirmed");
+        }
       }
-
 
       if (contradictions.length === 0) {
         

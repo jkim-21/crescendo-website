@@ -96,6 +96,7 @@ router.get("/data", async (req, res) => {
 });
 
 router.get("/coords", async (req, res) => {
+
   function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371; //earth
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -107,12 +108,14 @@ router.get("/coords", async (req, res) => {
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; //kilmeters
+    const distance = R * c; //kilometers
     return distance;
   }
 
-  const { latitude = "", longitude = "", radius = "10" } = req.query;
+  const { latitude = "", longitude = "", radius = "10", uid = "" } = req.query;
 
+  console.log("what");
+  
   try {
     const lat = parseFloat(latitude);
     const lon = parseFloat(longitude);
@@ -399,6 +402,64 @@ router.get("/saved-schools", async (req, res) => {
     console.error("Error fetching saved schools:", err);
     res.status(500).json({ error: "Error querying database" });
   }
+});
+
+router.post("/add-request", async (req, res) => {
+  const { email, requestReason, requestMessage } = req.body;
+
+  if (!requestMessage) {
+    return res.status(400).json({ error: "Request message is required" });
+  }
+
+  try {
+    const [user] = await db.query(
+      "SELECT REQUESTS FROM users WHERE EMAIL = ?",
+      [email]
+    );
+
+    let requests = [];
+    if (user.length > 0) {
+      requests = JSON.parse(user[0].REQUESTS || "[]");
+    }
+
+    const newRequest = {
+      reason: requestReason || null,
+      message: requestMessage,
+    };
+
+    requests.push(newRequest);
+
+    await db.query(
+      "UPDATE users SET REQUESTS = ? WHERE EMAIL = ?",
+      [JSON.stringify(requests), email]
+    );
+
+    res.json({ success: true, requests });
+  } catch (err) {
+    console.error("Error adding request:", err);
+    res.status(500).json({ error: "Error updating database" });
+  }
+});
+
+router.get("/personal-info", async (req, res) => {
+  const { email } = req.body;
+
+  try {
+
+    const info = await db.query(
+      "SELECT * FROM users WHERE EMAIL = ?",
+      [email]
+    );
+
+    res.json(info);
+
+  } catch (error) {
+    res.status(500).json({ error: "error getting personal info" });
+    console.error("error querying personal data: ",error);
+  }
+
+
+
 });
 
 export default router;

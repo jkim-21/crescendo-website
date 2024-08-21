@@ -26,102 +26,95 @@ const EmailFinderPage = () => {
     const [mileRadius, setMileRadius] = useState('N/A');
     const [stateIncluded, setStateIncluded] = useState(true);
     const [suggestedAddress, setSuggestedAddress] = useState(null);
-    const [showRequestModal, setShowRequestModal] = useState(false);
-    const [newRequest, setNewRequest] = useState('');
     useBodyBackgroundColor('#f6f8fe');
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const handleOpenRequestModal = () => {
-        setShowRequestModal(true);
-    };
 
-    const handleCloseRequestModal = () => {
-        setShowRequestModal(false);
-        setNewRequest('');
-    };
-
-    const handleAddRequest = async () => {
-        if (!user || !user.email) {
-            setError('You must be logged in to add a request');
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/add-request', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: user.email, request: newRequest }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to add request');
-            }
-
-            const data = await response.json();
-            if (data.success) {
-                setNewRequest('');
-                handleCloseRequestModal();
-            }
-        } catch (error) {
-            console.error('Error adding request:', error);
-            setError(error.message);
-        }
-    };
-
-    const validateAddress = async (address) => {
+    async function validateAddress(address, isSuggestedAddress = false) {
         try {
             const response = await fetch('/api/validate-address', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ address }),
+                body: JSON.stringify({ address, isSuggestedAddress }),
             });
 
             if (!response.ok) {
-                throw new Error('Failed to validate address');
+                const errorData = await response.json();
+                throw new Error(`Failed to validate address: ${errorData.error}`);
             }
 
             const data = await response.json();
+
             if (!data.valid) {
-                if (data.suggestedAddress) {
-                    setSuggestedAddress(data.suggestedAddress);
+                const addressComponents = data.result?.addressComponents || [];
+                const stateComponent = addressComponents.find(c => c.componentType === 'administrative_area_level_1');
+                const cityComponent = addressComponents.find(c => c.componentType === 'locality');
+                const postalCodeComponent = addressComponents.find(c => c.componentType === 'postal_code');
+                const streetNumberComponent = addressComponents.find(c => c.componentType === 'street_number');
+
+                const allComponentsConfirmed =
+                    stateComponent?.confirmationLevel === 'CONFIRMED' &&
+                    cityComponent?.confirmationLevel === 'CONFIRMED' &&
+                    postalCodeComponent?.confirmationLevel === 'CONFIRMED' &&
+                    streetNumberComponent?.confirmationLevel === 'CONFIRMED';
+
+                if (allComponentsConfirmed) {
+                    console.log('all components confirmed');
+                    return { ...data, confirmed: true, suggestedAddress: null };
+                } else {
+                    const suggestedAddress = data.suggestedAddress;
+                    console.log('Address validation failed:', data.details);
+                    console.log('suggested address: ', suggestedAddress);
+                    return { ...data, suggestedAddress };
                 }
-                throw new Error(data.details ? data.details.join(', ') : data.error);
+            } else {
+                const suggestedAddress = data.suggestedAddress;
+                return { ...data, suggestedAddress };
             }
-            return data;
         } catch (error) {
             console.error("Error validating address:", error);
             throw error;
         }
-    };
+    }
 
-    const handleSuggestedAddressClick = () => {
+    const handleSuggestedAddressClick = async () => {
         if (suggestedAddress) {
-            const addressParts = suggestedAddress.split(',');
-            if (addressParts.length >= 3) {
-                const stateZip = addressParts[2].trim().split(' ');
-                if (stateZip.length >= 2) {
-                    setStreet(addressParts[0].trim());
-                    setCity(addressParts[1].trim());
-                    
-                    const fullZip = stateZip[1];
-                    const fiveDigitZip = fullZip.substring(0, 5);
-                    setZipCode(fiveDigitZip);
-                    
-                    const stateAbbreviation = stateZip[0];
-                    const stateFullName = states.find(state => state.value === stateAbbreviation)?.label;
-                    if (stateFullName) {
-                        setLocationState(stateFullName);
+
+            console.log("sug add: ", suggestedAddress);
+
+            try {
+
+                const addressParts = suggestedAddress.split(',');
+                if (addressParts.length >= 3) {
+                    const stateZip = addressParts[2].trim().split(' ');
+                    if (stateZip.length >= 2) {
+                        setStreet(addressParts[0].trim());
+                        setCity(addressParts[1].trim());
+                        const fullZip = stateZip[1];
+                        const fiveDigitZip = fullZip.substring(0, 5);
+                        setZipCode(fiveDigitZip);
+                        const stateAbbreviation = stateZip[0];
+                        const stateFullName = states.find(state => state.value === stateAbbreviation)?.label;
+                        if (stateFullName) {
+                            setLocationState(stateFullName);
+                        }
+                    } else {
+                        console.error('Invalid address format in suggested address:', suggestedAddress);
+                        setError('Suggested address has invalid format');
                     }
-    
-                    setSuggestedAddress(null);
+                } else {
+                    console.error('Suggested address has less than 3 parts:', suggestedAddress);
+                    setError('Suggested address has invalid format');
                 }
+
+            } catch (error) {
+                console.error('Error validating suggested address:', error);
+                setError(`Error validating suggested address: ${error.message}`);
             }
         }
     };
@@ -205,25 +198,38 @@ const EmailFinderPage = () => {
                 }
                 const address = `${street}, ${city}, ${locationState} ${zipCode}`;
 
-                const validationResult = await validateAddress(address);
+                const validationResult = await validateAddress(address, false);
+
+                //console
+                console.log(validationResult.suggestedAddress);
+                console.log(validationResult.valid);
+
+                
                 if (!validationResult.valid) {
                     if (validationResult.suggestedAddress) {
-                        setSuggestedAddress(validationResult.suggestedAddress);
-                        throw new Error(`Address formatted incorrectly: ${validationResult.details.join(', ')}. Click the suggested address to use it.`);
+                        const confirmedSuggestedAddress = await validateAddress(validationResult.suggestedAddress, true);
+                        console.log('confirmed sugg add', confirmedSuggestedAddress);
+                        if (confirmedSuggestedAddress.valid) {
+                            setSuggestedAddress(validationResult.suggestedAddress);
+                        } else {
+                            throw new Error(`Address formatted incorrectly: ${validationResult.details.join(', ')}`);
+                        }
                     } else {
                         throw new Error(`Address formatted incorrectly: ${validationResult.details.join(', ')}`);
                     }
+                    throw new Error(`Address formatted incorrectly: ${validationResult.details.join(', ')}`)
                 }
 
                 const geocodeResponse = await fetch(`/api/geocode?address=${encodeURIComponent(validationResult.formattedAddress)}`);
                 const geocodeData = await geocodeResponse.json();
 
                 if (!geocodeResponse.ok) {
+                    console.log('geocode data: ',geocodeData);
                     throw new Error(geocodeData.error || 'An error occurred while geocoding');
                 }
 
                 const { lat, lng } = geocodeData;
-                response = await fetch(`/api/coords?latitude=${lat}&longitude=${lng}&radius=${mileRadius}`);
+                response = await fetch(`/api/coords?latitude=${lat}&longitude=${lng}&radius=${mileRadius}&uid=${user.uid}`);
             } else {
                 response = await fetch(`/api/data?city=${city}&locationState=${locationState}&street=${street}&zipCode=${zipCode}&uid=${user.uid}`);
             }
@@ -247,10 +253,9 @@ const EmailFinderPage = () => {
         <div className='flex'>
             <Sidebar
                 structure='basis-[18%]' />
-            <div className={`${styles.boxWidth} m-auto basis-[82%] z-50`}>
+            <div className={`${styles.boxWidth} m-auto basis-[82%] z-[49]`}>
                 <Navbar></Navbar>
                 <div className={`py-[5rem] px-[3rem] min-h-[100vh] flex flex-col items-center m-auto`}>
-
 
                     <form
                         onSubmit={fetchData}
@@ -393,19 +398,25 @@ const EmailFinderPage = () => {
                                 Clear
                             </Button>
 
-                            <Button
-                                variant='contained'
-                                onClick={handleOpenRequestModal}
-                                className='lightest-box-shadow mt-4 font-'
-                            >
-                                Request
-                            </Button>
+
 
                             <InfoPopUp />
                         </div>
                     </form>
 
                     {loading && <p className='mb-[2rem]'>Loading...</p>}
+                    
+                    {suggestedAddress && (
+                        <div className="mb-[2rem]">
+                            <p className='text-center'>Did you mean:</p>
+                            <button
+                                onClick={handleSuggestedAddressClick}
+                                className="blue-text soft-blue-bg border dark-border rounded py-[0.25rem] px-[1rem] hover:bg-gray-200"
+                            >
+                                {suggestedAddress}
+                            </button>
+                        </div>
+                    )}
 
                     {error && (
                         <p className="red-text soft-red-bg border dark-border rounded py-[0.25rem] px-[1rem] mb-[3rem]">
@@ -413,50 +424,13 @@ const EmailFinderPage = () => {
                         </p>
                     )}
 
-                    {suggestedAddress && (
-                        <div className="mb-[2rem]">
-                            <p>Suggested address:</p>
-                            <button
-                                onClick={handleSuggestedAddressClick}
-                                className="blue-text soft-blue-bg border dark-border rounded py-[0.25rem] px-[1rem]"
-                            >
-                                {suggestedAddress}
-                            </button>
-                        </div>
-                    )}
+                    
 
                     <div className="w-full">
                         <SearchTable schoolInformation={data} />
                     </div>
 
-                    {showRequestModal && (
-                        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                            <div className="bg-white p-6 rounded-lg">
-                                <h2 className="text-xl font-bold mb-4">Request</h2>
-                                <textarea
-                                    value={newRequest}
-                                    onChange={(e) => setNewRequest(e.target.value)}
-                                    className="w-full h-32 p-2 border rounded"
-                                    placeholder="Enter your request here..."
-                                />
-                                <div className="flex justify-end mt-4">
-                                    <Button
-                                        variant='outlined'
-                                        onClick={handleCloseRequestModal}
-                                        className='mr-2'
-                                    >
-                                        Cancel
-                                    </Button>
-                                    <Button
-                                        variant='contained'
-                                        onClick={handleAddRequest}
-                                    >
-                                        Submit Request
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+
 
                 </div>
                 <Footer />
