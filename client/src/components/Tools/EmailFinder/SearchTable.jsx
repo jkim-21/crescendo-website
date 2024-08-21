@@ -1,21 +1,63 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMemo } from 'react';
 import {
   MaterialReactTable,
   useMaterialReactTable,
 } from 'material-react-table';
+import {Box} from '@mui/material'
 import { usePreviousUrlKeyword } from '../../../context/PrevUrlKeyword';
+import {useAuth} from '../../../context/AuthContext'
 
-const SearchTable = ({ data }) => {
+const SearchTable = ({ schoolInformation }) => {
   const navigate = useNavigate();
   const {setPreviousUrlKeyword} = usePreviousUrlKeyword();
+  const {user} = useAuth();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(schoolInformation)
+  }, [schoolInformation])
 
 
   const handleSchoolClick = (indexNumber) => {
     setPreviousUrlKeyword('school');
     navigate(`/tools/email-finder-system/school/${encodeURIComponent(indexNumber)}`);
   }
+
+  const handleSave = async (schoolIndex) => {
+    if (!user || !user.uid || !schoolIndex) return;
+  
+    try {
+      const response = await fetch(`/api/save-school`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          uid: user.uid,
+          schoolIndex: schoolIndex
+        }),
+      });
+      const data = await response.json();
+  
+      if (!response.ok) {
+        console.log(response)
+        throw new Error(data.error || 'Failed to save school') 
+      }
+      if (data.success) {
+        setData((prevSchools) =>
+          prevSchools.map((school) =>
+            school.INDEX_NUMBER === schoolIndex
+              ? {...school, isSaved: !school.isSaved} 
+              : school
+            ));
+      };
+      
+    } catch (err) {
+      console.error('Error saving school:', err.message);
+    }
+  };
 
   // Repeat of School Detail Search Table Page
   const toTitleCase = (str) => {
@@ -66,6 +108,28 @@ const SearchTable = ({ data }) => {
       header: 'Street',
       size: 150,
     },
+    {
+      accessorKey: 'isSaved',
+      header: 'Saved Status',
+      size: 150,
+      Cell: ({ cell }) => {
+        const schoolRow = cell.row.original;
+        return (
+        <Box
+          onClick={() => handleSave(schoolRow.INDEX_NUMBER)}
+          sx={{
+            backgroundColor: cell.getValue() === true ? '#22c55e' : '#006fff',
+            borderRadius: '0.25rem',
+            color: 'black',
+            maxWidth: 'fit-content',
+            p: '0.5rem',
+            cursor: 'pointer'
+          }}
+        >
+          {cell.getValue() ? 'Saved': 'Not Saved'}
+        </Box>
+        )}
+    }
   ], [navigate]);
 
   const table = useMaterialReactTable({

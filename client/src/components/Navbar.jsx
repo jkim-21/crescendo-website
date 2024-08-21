@@ -69,17 +69,18 @@ const Navbar = ({ pageStyles }) => {
                 user_id: result.user.uid,
                 email: result.user.email,
                 displayName: result.user.displayName,
+                photoUrl: result.user.photoURL
             }),
           });
           if (!response.ok) {
             throw new Error('Failed to store user information!')
           }
         }
-        navigate('/');
+        navigate('/tools');
       }
       else {
         await auth.signOut();
-        console.error('You must use an @crescendoforacause.com email to access this page.');
+        alert('You must use an @crescendoforacause.com email to access this page.');
       }
     }  
     catch (error) {

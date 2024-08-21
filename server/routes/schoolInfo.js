@@ -42,6 +42,7 @@ router.post("/add-user", async (req, res) => {
       "INSERT INTO users (USER_ID, EMAIL, DISPLAY_NAME, PHOTO_URL) VALUES (?, ?, ?, ?)",
       [user_id, email, displayName, photoUrl]
     );
+
     if (result.affectedRows > 0) {
       res.json({ success: true });
     } else {
@@ -59,6 +60,7 @@ router.get("/data", async (req, res) => {
     locationState = "",
     street = "",
     zipCode = "",
+    uid,
   } = req.query;
   try {
     const cityParam = city ? `${city}%` : "%";
@@ -70,7 +72,20 @@ router.get("/data", async (req, res) => {
       "SELECT INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1 FROM school_emails_website WHERE SCRAPED_EMAILS IS NOT NULL AND LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ? AND LZIP LIKE ?",
       [cityParam, stateParam, streetParam, zipCodeParam]
     );
-    res.json(data);
+
+    const [savedSchools] = await db.query(
+      "SELECT SCHOOL_ID FROM user_saved_schools WHERE USER_ID = ?",
+      [uid]
+    );
+
+    const savedSchoolIds = new Set(savedSchools.map((row) => row.SCHOOL_ID));
+
+    const schoolsWithSaveStatus = data.map((school) => ({
+      ...school,
+      isSaved: savedSchoolIds.has(school.INDEX_NUMBER),
+    }));
+
+    res.json(schoolsWithSaveStatus);
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({
@@ -141,7 +156,18 @@ router.get("/coords", async (req, res) => {
         LSTREET1,
       }));
 
-    res.json(filteredData);
+    const [savedSchools] = await db.query(
+      "SELECT SCHOOL_ID FROM user_saved_schools WHERE USER_ID = ?",
+      [uid]
+    );
+    const savedSchoolIds = new Set(savedSchools.map((row) => row.SCHOOL_ID));
+
+    const schoolsWithSaveStatus = filteredData.map((school) => ({
+      ...school,
+      isSaved: savedSchoolIds.has(school.INDEX_NUMBER),
+    }));
+
+    res.json(schoolsWithSaveStatus);
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({
@@ -283,21 +309,22 @@ router.post("/report-school/:indexNumber", async (req, res) => {
 
 // Saving Schools and Saved Schools to Users
 
-router.post("/check-saved-school", async (req, res) => {
-  const { email, schoolIndex } = req.body;
+router.get("/check-saved-school", async (req, res) => {
+  const { uid, schoolIndex } = req.query;
+
+  if (!uid || !schoolIndex) {
+    return res
+      .status(400)
+      .json({ error: "User ID and school index are required" });
+  }
 
   try {
-    const [user] = await db.query(
-      "SELECT SAVED_SCHOOLS FROM users WHERE EMAIL = ?",
-      [email]
+    const [savedSchool] = await db.query(
+      "SELECT * FROM user_saved_schools WHERE USER_ID = ? AND SCHOOL_ID = ?",
+      [uid, schoolIndex]
     );
 
-    if (user.length === 0) {
-      return res.json({ isSaved: false });
-    }
-
-    const savedSchools = JSON.parse(user[0].SAVED_SCHOOLS || "[]");
-    const isSaved = savedSchools.includes(schoolIndex.toString());
+    const isSaved = savedSchool.length > 0;
 
     res.json({ isSaved });
   } catch (err) {
@@ -307,57 +334,43 @@ router.post("/check-saved-school", async (req, res) => {
 });
 
 router.post("/save-school", async (req, res) => {
-  const { email, schoolIndex } = req.body;
-
-  if (!schoolIndex) {
-    return res.status(400).json({ error: "School index is required" });
-  }
+  const { uid, schoolIndex } = req.body;
 
   try {
-    let connection;
-    try {
-      connection = await db.getConnection();
-      await connection.beginTransaction();
-
-      const [users] = await connection.query(
-        "SELECT USER_ID, SAVED_SCHOOLS FROM users WHERE EMAIL = ?",
-        [email]
-      );
-
-      let userId;
-      let savedSchools = [];
-
-      if (users.length === 0) {
-        const [result] = await connection.query(
-          "INSERT INTO users (EMAIL, SAVED_SCHOOLS) VALUES (?, ?)",
-          [email, "[]"]
-        );
-        userId = result.insertId;
-      } else {
-        userId = users[0].USER_ID;
-        savedSchools = JSON.parse(users[0].SAVED_SCHOOLS || "[]");
-      }
-
-      const index = savedSchools.indexOf(schoolIndex);
-      if (index > -1) {
-        savedSchools.splice(index, 1);
-      } else {
-        savedSchools.push(schoolIndex);
-      }
-
-      await connection.query(
-        "UPDATE users SET SAVED_SCHOOLS = ? WHERE USER_ID = ?",
-        [JSON.stringify(savedSchools), userId]
-      );
-
-      await connection.commit();
-      res.json({ success: true, isSaved: index === -1 });
-    } catch (err) {
-      if (connection) await connection.rollback();
-      throw err;
-    } finally {
-      if (connection) connection.release();
+    if (!uid || !schoolIndex) {
+      return res
+        .status(400)
+        .json({ error: "User ID and School ID are required" });
     }
+
+    const [rows] = await db.query(
+      "SELECT * FROM user_saved_schools WHERE USER_ID = ? AND SCHOOL_ID = ?",
+      [uid, schoolIndex]
+    );
+
+    if (rows.length > 0) {
+      const deletedResult = await db.query(
+        "DELETE FROM user_saved_schools WHERE USER_ID = ? AND SCHOOL_ID = ?",
+        [uid, schoolIndex]
+      );
+
+      if (deletedResult[0].affectedRows > 0) {
+        return res.json({
+          isSaved: false,
+          success: true,
+        });
+      } else {
+        return res.status(404).json({
+          message: "School not found or already removed",
+        });
+      }
+    }
+    await db.query(
+      "INSERT INTO user_saved_schools (USER_ID, SCHOOL_ID) VALUES (?, ?)",
+      [uid, schoolIndex]
+    );
+
+    res.json({ isSaved: true, success: true });
   } catch (err) {
     console.error("Error saving school:", err);
     res.status(500).json({ error: "Error updating database" });
@@ -365,26 +378,23 @@ router.post("/save-school", async (req, res) => {
 });
 
 router.get("/saved-schools", async (req, res) => {
-  const { email } = req.query;
-
+  const { uid } = req.query;
   try {
-    const [user] = await db.query(
-      "SELECT SAVED_SCHOOLS FROM users WHERE EMAIL = ?",
-      [email]
-    );
-
-    if (user.length === 0) {
+    if (!uid) {
       return res.json([]);
     }
 
-    const savedSchools = JSON.parse(user[0].SAVED_SCHOOLS || "[]");
-
-    const [schools] = await db.query(
-      "SELECT INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1 FROM school_emails_website WHERE INDEX_NUMBER IN (?)",
-      [savedSchools]
+    const [savedSchools] = await db.query(
+      "SELECT sew.* FROM school_emails_website sew JOIN user_saved_schools uss ON sew.INDEX_NUMBER = uss.SCHOOL_ID WHERE uss.USER_ID = ?",
+      [uid]
     );
 
-    res.json(schools);
+    const schoolsWithSaveStatus = savedSchools.map((school) => ({
+      ...school,
+      isSaved: true,
+    }));
+
+    res.json(schoolsWithSaveStatus);
   } catch (err) {
     console.error("Error fetching saved schools:", err);
     res.status(500).json({ error: "Error querying database" });

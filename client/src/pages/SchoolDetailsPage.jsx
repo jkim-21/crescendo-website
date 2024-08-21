@@ -28,7 +28,6 @@ const SchoolDetailsPage = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const [showReportModal, setShowReportModal] = useState(false);
   const [reportReason, setReportReason] = useState('');
@@ -92,8 +91,6 @@ const SchoolDetailsPage = () => {
           schoolResponse.json(),
           emailsResponse.json()
         ]);
-
-        console.log(schoolData)
   
         setSchoolData(schoolData);
         setEmails(emailsData);
@@ -109,7 +106,6 @@ const SchoolDetailsPage = () => {
         setGeneralWebsite(schoolData.SCRAPED_WEBSITE);
       } catch (err) {
         console.error('Error fetching data:', err);
-        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -118,6 +114,8 @@ const SchoolDetailsPage = () => {
     fetchData();
   }, [indexNumber]);
 
+
+  // Render links and formatting for phone number and website information
   const renderSchoolDetails = (schoolDetail) => {
     if (schoolDetail.id === 'general-website-detail') {
       return (
@@ -146,23 +144,20 @@ const SchoolDetailsPage = () => {
 
   useEffect(() => {
     const checkSavedStatus = async () => {
-      if (!user || !user.email || !schoolIndex) return;
+      if (!user || !user.uid || !schoolIndex) return;
   
       try {
-        const response = await fetch('/api/check-saved-school', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: user.email,
-            schoolIndex: schoolIndex
-          }),
-        });
+        const response = await fetch(`/api/check-saved-school?uid=${user.uid}&schoolIndex=${schoolIndex}`);
+
+        if (!response.ok) {
+          throw new Error('Failed to check saved status');
+        }
+
         const data = await response.json();
         setIsSaved(data.isSaved);
       } catch (err) {
         console.error('Error checking saved status:', err);
+        alert(err.message);
       }
     };
   
@@ -170,7 +165,7 @@ const SchoolDetailsPage = () => {
   }, [user, schoolIndex]);
 
   const handleSave = async () => {
-    if (!user || !user.email || !schoolIndex) return;
+    if (!user || !user.uid || !schoolIndex) return;
   
     try {
       const response = await fetch(`/api/save-school`, {
@@ -179,17 +174,22 @@ const SchoolDetailsPage = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: user.email,
+          uid: user.uid,
           schoolIndex: schoolIndex
         }),
       });
       const data = await response.json();
+
+      if (!response.ok) {
+        console.log(response)
+        throw new Error(data.error || 'Failed to save school') 
+      }
       if (data.success) {
         setIsSaved(data.isSaved);
       }
+      
     } catch (err) {
-      console.error('Error saving school:', err);
-      alert('Failed to save school');
+      console.error('Error saving school:', err.message);
     }
   };
 

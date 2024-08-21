@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SearchTable, Footer, Sidebar } from '../components';
 import { styles } from '../style'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
 import { TextField, MenuItem, Button } from '@mui/material';
 import { states, miles } from '../data/tools-pages'
@@ -225,7 +225,7 @@ const EmailFinderPage = () => {
                 const { lat, lng } = geocodeData;
                 response = await fetch(`/api/coords?latitude=${lat}&longitude=${lng}&radius=${mileRadius}`);
             } else {
-                response = await fetch(`/api/data?city=${city}&locationState=${locationState}&street=${street}&zipCode=${zipCode}`);
+                response = await fetch(`/api/data?city=${city}&locationState=${locationState}&street=${street}&zipCode=${zipCode}&uid=${user.uid}`);
             }
 
             if (!response.ok) {
@@ -426,7 +426,7 @@ const EmailFinderPage = () => {
                     )}
 
                     <div className="w-full">
-                        <SearchTable data={data} />
+                        <SearchTable schoolInformation={data} />
                     </div>
 
                     {showRequestModal && (

@@ -35,10 +35,10 @@ const SavedSchoolsPage = () => {
     // Fetch School Data
     useEffect(() => {
         const fetchSavedSchools = async () => {
-            if (!user || !user.email) return;
+            if (!user || !user.uid) return;
 
             try {
-                const response = await fetch(`/api/saved-schools?email=${encodeURIComponent(user.email)}`);
+                const response = await fetch(`/api/saved-schools?uid=${encodeURIComponent(user.uid)}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch saved schools');
                 }
@@ -74,8 +74,8 @@ const SavedSchoolsPage = () => {
                             Saved Schools
                         </h4>
                         <div className='ml-[0.5rem]'>
-                            {!schoolError && !schoolLoading && savedSchoolDropdown && (
-                                <SavedSchoolsTable data = {savedSchools}/>
+                            {savedSchoolDropdown && (
+                                <SavedSchoolsTable savedSchools = {savedSchools}/>
                             )}
                         </div>
                     </div>
