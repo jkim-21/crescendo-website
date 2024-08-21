@@ -49,4 +49,5 @@ export {
   SchoolDetails,
   Sidebar,
   SchoolDetailSearchTable,
+  SavedSchoolsTable,
 };
