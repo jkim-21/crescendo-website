@@ -113,8 +113,6 @@ router.get("/coords", async (req, res) => {
   }
 
   const { latitude = "", longitude = "", radius = "10", uid = "" } = req.query;
-
-  console.log("what");
   
   try {
     const lat = parseFloat(latitude);

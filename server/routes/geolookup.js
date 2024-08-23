@@ -30,14 +30,14 @@ router.post("/validate-address", async (req, res) => {
     });
 
     const data = await response.json();
-    console.log("Full API response:", JSON.stringify(data, null, 2));
+    //console.log("Full API response:", JSON.stringify(data, null, 2));
 
     if (data.result && data.result.address) {
       const validatedAddress = data.result.address;
-      console.log("Validated address:", JSON.stringify(validatedAddress, null, 2));
+      //console.log("Validated address:", JSON.stringify(validatedAddress, null, 2));
 
       if (!validatedAddress) {
-        console.log("Validated address is missing");
+        //console.log("Validated address is missing");
         return res.json({ valid: false, error: 'Missing address', suggestedAddress: null });
       }
 
@@ -48,10 +48,10 @@ router.post("/validate-address", async (req, res) => {
       const postalCodeComponent = addressComponents.find(c => c.componentType === 'postal_code');
       const streetNumberComponent = addressComponents.find(c => c.componentType === 'street_number');
 
-      console.log("State:", stateComponent);
-      console.log("City:", cityComponent);
-      console.log("Postal Code:", postalCodeComponent);
-      console.log("Street Number", streetNumberComponent);
+      //console.log("State:", stateComponent);
+      //console.log("City:", cityComponent);
+      //console.log("Postal Code:", postalCodeComponent);
+      //console.log("Street Number", streetNumberComponent);
 
       let contradictions = [];
       
@@ -80,7 +80,7 @@ router.post("/validate-address", async (req, res) => {
       if (contradictions.length === 0) {
         
         const formattedAddress = validatedAddress.formattedAddress.replace(/(\d{5})-\d{4}/, '$1');
-        console.log("Address validated successfully");
+        //console.log("Address validated successfully");
         res.json({ 
           valid: true, 
           formattedAddress: formattedAddress,
@@ -89,7 +89,7 @@ router.post("/validate-address", async (req, res) => {
       } else {
         
         const suggestedAddress = validatedAddress.formattedAddress.replace(/(\d{5})-\d{4}/, '$1');
-        console.log("Address validation failed:", contradictions);
+        //console.log("Address validation failed:", contradictions);
         res.json({ 
           valid: false, 
           error: 'Address has contradictions or missing components',
@@ -131,7 +131,7 @@ router.get("/geocode", async (req, res) => {
     }
 
     const { lat, lng } = data.results[0].geometry.location;
-    console.log(lat, lng);
+    //console.log(lat, lng);
     res.json({ lat, lng });
   } catch (err) {
     console.error("Error in geocoding:", err);

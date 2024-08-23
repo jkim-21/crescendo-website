@@ -64,12 +64,9 @@ const EmailFinderPage = () => {
                     streetNumberComponent?.confirmationLevel === 'CONFIRMED';
 
                 if (allComponentsConfirmed) {
-                    console.log('all components confirmed');
                     return { ...data, confirmed: true, suggestedAddress: null };
                 } else {
                     const suggestedAddress = data.suggestedAddress;
-                    console.log('Address validation failed:', data.details);
-                    console.log('suggested address: ', suggestedAddress);
                     return { ...data, suggestedAddress };
                 }
             } else {
@@ -85,10 +82,7 @@ const EmailFinderPage = () => {
     const handleSuggestedAddressClick = async () => {
         if (suggestedAddress) {
 
-            console.log("sug add: ", suggestedAddress);
-
             try {
-
                 const addressParts = suggestedAddress.split(',');
                 if (addressParts.length >= 3) {
                     const stateZip = addressParts[2].trim().split(' ');
@@ -200,15 +194,11 @@ const EmailFinderPage = () => {
 
                 const validationResult = await validateAddress(address, false);
 
-                //console
-                console.log(validationResult.suggestedAddress);
-                console.log(validationResult.valid);
 
                 
                 if (!validationResult.valid) {
                     if (validationResult.suggestedAddress) {
                         const confirmedSuggestedAddress = await validateAddress(validationResult.suggestedAddress, true);
-                        console.log('confirmed sugg add', confirmedSuggestedAddress);
                         if (confirmedSuggestedAddress.valid) {
                             setSuggestedAddress(validationResult.suggestedAddress);
                         } else {
@@ -224,7 +214,6 @@ const EmailFinderPage = () => {
                 const geocodeData = await geocodeResponse.json();
 
                 if (!geocodeResponse.ok) {
-                    console.log('geocode data: ',geocodeData);
                     throw new Error(geocodeData.error || 'An error occurred while geocoding');
                 }
 
