@@ -75,7 +75,11 @@ import ucsbcon2 from "./ucsbcon2.png";
 import colbycon1 from "./colbycon1.png";
 
 import projectImagePlaceholder from "./project-image-placeholder.png";
-import instructions from "./instructions.png";
+import emailFinderSystemPreview from "./email-finder-system-preview.png";
+import mentorMenteeSystemPreview from "./mentor-mentee-system-preview.png";
+import mentorMenteeInstructions1 from "./mentor-mentee-instructions-1.png";
+import mentorMenteeInstructions2 from "./mentor-mentee-instructions-2.png";
+import mentorMenteeInstructions3 from "./mentor-mentee-instructions-3.png";
 import toolsLogo from "./c4c-tools-logo.png";
 import logoTitle from "./logo-title.png";
 import toolsLogo2 from "./tools-logo2.png";
@@ -144,5 +148,9 @@ export {
   projectImagePlaceholder,
   toolsLogo,
   logoTitle,
-  instructions,
+  emailFinderSystemPreview,
+  mentorMenteeSystemPreview,
+  mentorMenteeInstructions1,
+  mentorMenteeInstructions2,
+  mentorMenteeInstructions3,
 };

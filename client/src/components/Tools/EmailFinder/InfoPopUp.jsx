@@ -24,11 +24,11 @@ const InfoPopUp = () => {
                 <HelpOutlineIcon />
             </IconButton>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>What what how?!</DialogTitle>
-                <DialogContent>
+                <DialogTitle>Directions and Guidelines</DialogTitle>
+                <DialogContent className='flex flex-col gap-[1rem]'>
                     <p>
                         This email finder system allows you to search for email addresses based on location. 
-                        You must be in Maine, Massachusetts, or Illinois to use the current location feature. 
+                        You must be in one of the states provided in the state dropdown options to use the current location feature. 
                         You can enter an address manually or use your current location if you're in one of these states.
                     </p>
                     <p>

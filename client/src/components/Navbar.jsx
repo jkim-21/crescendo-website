@@ -110,13 +110,13 @@ const Navbar = ({ pageStyles }) => {
         </HashLink>
         <ul className='hidden items-center list-none relative
                       navbar-custom:flex'>
-          {filteredNavLinks.map((nav, i) => (
+          {filteredNavLinks.map((nav) => (
             <li
               key={nav.id}
               id={`nav-item-${nav.id}`}
               onMouseEnter={() => showDropdown(nav)}
               onMouseLeave={hideDropdown}
-              className={`${nav.dropdown ? 'dropdown-item' : 'nav-link'} navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
+              className={`${nav.dropdown ? 'mt-[0.9rem]' : 'nav-link'} mx-[0.7rem] font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
                 <div className={`${pageStyles} ${nav.dropdown ? 'pb-3' : null}`}>
                   {nav.id === 'tools' ? (
                     <Link
@@ -137,7 +137,7 @@ const Navbar = ({ pageStyles }) => {
                 </div>
                 {nav.dropdown ? 
                 (<div className={
-                  `${activeDropdownId === nav.id ? 'block' : 'hidden'} ${nav.id === 'chapters' ? 'max-w-[12.5rem]': null} dropdown-animation dropdown-background absolute dark-text rounded cursor-default py-[1rem] px-[0.5rem]
+                  `${activeDropdownId === nav.id ? 'block' : 'hidden'} ${nav.id === 'chapters' ? 'max-w-[12.5rem]': null} dropdown dropdown-animation dropdown-background absolute dark-text rounded cursor-default py-[1rem] px-[0.5rem]
                   lg:px-[1rem]`}>
                   {nav.id === 'tools' ? (
                     <p className='text-blue-800 text-center mb-[0.5rem]'>
@@ -156,7 +156,7 @@ const Navbar = ({ pageStyles }) => {
                 ) : null}
             </li>
           ))}
-          <li className={`${pageStyles} navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
+          <li className={`${pageStyles} mx-[0.7rem]  font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
             {user ? (
               <button 
               onClick={handleLogout}>Logout</button>
@@ -178,12 +178,12 @@ const Navbar = ({ pageStyles }) => {
               onClick={() => setToggle((previous) => !previous)}
               className='fixed inset-0 bg-black bg-opacity-50 z-1'>
             </div> : null}
-          <div className={`${toggle ? 'flex' : 'hidden'} sidebar absolute top-20 right-0 dropdown-background border-[black] border-[1px] shadow-2xl rounded-xl py-[1.5rem] px-[1.5rem] mx-[1rem]`}>
+          <div className={`${toggle ? 'flex' : 'hidden'} nav-sidebar absolute top-20 right-0 dropdown-background border-[black] border-[1px] shadow-2xl rounded-xl py-[1.5rem] px-[1.5rem] mx-[1rem]`}>
             <ul className='list-none flex flex-col w-full'>
               {filteredNavLinks.map((nav, i) => (
                 <li
                   key={nav.id}
-                  className={`${i === navLinks.length - 1 ? 'mb-0' : 'mb-[0.25rem]'} sidebar-link dark-text`}>
+                  className={`${i === navLinks.length - 1 ? 'mb-0' : 'mb-[0.25rem]'} nav-sidebar-link dark-text`}>
                      <HashLink
                     to={`/#${nav.id}`}
                     onClick={() => setToggle((previous) => !previous)}>
@@ -191,7 +191,7 @@ const Navbar = ({ pageStyles }) => {
                   </HashLink>
                 </li>
               ))}
-              <li className='sidebar-link dark-text'>
+              <li className='nav-sidebar-link dark-text'>
                 {user ? (
                   <button onClick={handleLogout}>Logout</button>
                 ) : (

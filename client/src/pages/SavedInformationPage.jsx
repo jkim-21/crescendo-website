@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Footer, Sidebar, SavedSchoolsTable } from '../components';
+import { Footer, Sidebar, SavedSchoolsTable, UserHeading } from '../components';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
 import {styles} from '../style';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -65,7 +65,9 @@ const SavedSchoolsPage = () => {
         <div className='flex'>
             <Sidebar structure='lightest-blue-bg basis-[18%]' />
             <div className='m-auto basis-[82%] z-[50]'>
-                <div className={`${styles.boxWidth} pt-[5rem] pb-[2rem] m-auto min-h-[100vh]`}>
+                <div className='my-[1rem] mx-[1rem] m-auto min-h-[100vh]
+                                xl:max-w-[1280px]'>
+                    <UserHeading structure='mb-[3rem]'/>
                     <div className='mb-[2rem]'>
                         <h4
                         onClick = {() => handleDropdown('school')}

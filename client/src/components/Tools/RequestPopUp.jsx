@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx';
-import { Button, MenuItem, TextField } from '@mui/material';
+import { Button, MenuItem, Select, TextField } from '@mui/material';
+import {styles} from '../../style'
 
 const RequestPopUp = ({ onClose }) => {
     const { user } = useAuth();
-    const [newRequest, setNewRequest] = useState('');
+    const [requestMessage, setRequestMessage] = useState('');
     const [requestReason, setRequestReason] = useState('');
     const [error, setError] = useState('');
 
     const handleAddRequest = async () => {
-        if (!user || !user.email) {
+        if (!user || !user.uid) {
           setError('You must be logged in to add a request');
           return;
         }
       
-        if (!newRequest) {
+        if (!requestMessage) {
           setError('Please enter your request');
           return;
         }
       
         try {
+          setError(null)
 
-            if (!user.email) {
+            if (!user.uid) {
                 console.log("email is missing");
             }
 
@@ -30,65 +32,77 @@ const RequestPopUp = ({ onClose }) => {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: user.email, requestReason, requestMessage: newRequest }),
+            body: JSON.stringify({ userId: user.uid, requestReason: requestReason, requestMessage: requestMessage }),
           });
       
           if (!response.ok) {
-            throw new Error('Failed to add request');
+            setError(error.message);
           }
       
           const data = await response.json();
+          
           if (data.success) {
-            setNewRequest('');
+            setRequestMessage('');
             setRequestReason('');
             onClose();
+            setError('')
           }
         } catch (error) {
           console.error('Error adding request:', error);
-          setError(error.message);
         }
       };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[50]">
-            <div className="bg-white p-6 rounded-lg">
-                <h2 className="text-xl font-bold mb-4">Request</h2>
-                <TextField
-                    select
-                    label="Reason"
-                    value={requestReason}
-                    onChange={(e) => setRequestReason(e.target.value)}
-                    className="w-full mb-4"
-                >
-                    <MenuItem value="">Select a reason (optional)</MenuItem>
-                    <MenuItem value="Request for specific school">Request for specific school</MenuItem>
-                    <MenuItem value="Request for specific city">Request for specific city</MenuItem>
-                    <MenuItem value="Request for specific state">Request for specific state</MenuItem>
-                    <MenuItem value="Request for future tools">Request for future tools</MenuItem>
-                    <MenuItem value="General feedback/ideas">Give general feedback / ideas</MenuItem>
-                </TextField>
-                <textarea
-                    value={newRequest}
-                    onChange={(e) => setNewRequest(e.target.value)}
-                    className="w-full h-32 p-2 border rounded mb-4"
-                    placeholder="Enter your request here..."
-                />
-                <div className="flex justify-end">
-                    <Button
-                        variant='outlined'
+            <div className="p-[1.5rem] rounded-[0.5rem] bg-white">
+                <h2 className={`${styles.heading4} mb-[1rem]`}>
+                  Request
+                </h2>
+                <div className='flex flex-col items-stretch min-w-[25rem]'>
+                  <Select
+                      displayEmpty
+                      value={requestReason}
+                      onChange={(e) => setRequestReason(e.target.value)}
+                      required
+                      className="mb-[1rem]"
+                  >
+                      <MenuItem value="" disabled>
+                        Select a reason
+                      </MenuItem>
+                      <MenuItem value="Request for specific school">Request for specific school</MenuItem>
+                      <MenuItem value="Request for specific city">Request for specific city</MenuItem>
+                      <MenuItem value="Request for specific state">Request for specific state</MenuItem>
+                      <MenuItem value="Request for future tools">Request for future tools</MenuItem>
+                      <MenuItem value="General feedback/ideas">Give general feedback / ideas</MenuItem>
+                  </Select>
+                  <TextField
+                      value={requestMessage}
+                      onChange={(e) => setRequestMessage(e.target.value)}
+                      placeholder="Enter your request here..."
+                      multiline
+                      rows={4}
+                      required
+                      className="rounded"
+                      sx={{mb:'2rem'}}
+                  
+                  />
+                  {error && <div className='mb-[2rem] py-[0.5rem] px-[1rem] w-full text-center rounded error-red-bg '>{error}</div>}
+                </div>
+                <div className="flex justify-end gap-[0.75rem]">
+                    <button
                         onClick={onClose}
-                        className='mr-2'
+                        className="px-[1rem] py-[0.5rem] text-black rounded lighter-gray-bg hover:bg-gray-300"
                     >
                         Cancel
-                    </Button>
+                    </button>
                     <Button
                         variant='contained'
                         onClick={handleAddRequest}
+                        sx={{boxShadow:1}}
                     >
                         Submit Request
                     </Button>
                 </div>
-                {error && <div className='bg-red-400 p-2 rounded mt-4'>{error}</div>}
             </div>
         </div>
     );

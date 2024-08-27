@@ -28,6 +28,7 @@
   --dark-blue: #0a162f;
   --dark-red: #8b0000;
   --red: #ef4444;
+  --error-red: #ff3333;
   --soft-red: #fca5a5;
   --green: #22c55e;
 
@@ -174,8 +175,16 @@ body {
   background-color: var(--sea-blue)
 }
 
+.error-red-bg {
+  background: var(--error-red)
+}
+
 .soft-red-bg {
   background: var(--soft-red);
+}
+
+.lighter-gray-bg {
+  background: var(--lighter-gray)
 }
 
 .gray-bg {
@@ -219,6 +228,10 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+.strong-box-shadow {
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4);
+}
+
 .three-d-box-shadow-1 {
   box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12)
 }
@@ -226,7 +239,7 @@ body {
 /******* Component/Device Styling **************/
 
 /* Navbar Mobile */
-.sidebar {
+.nav-sidebar {
   -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
@@ -291,7 +304,7 @@ body {
   background-color: #e8ecfc;
 }
 
-.sidebar-link {
+.nav-sidebar-link {
   transition: background-color 0.3s ease;
   border-radius: 0.25rem;
   padding: 0.5rem;
@@ -299,8 +312,8 @@ body {
   text-align: center;
 }
 
-.sidebar-link:hover,
-.sidebar-link:focus {
+.nav-sidebar-link:hover,
+.nav-sidebar-link:focus {
   background-color: #e8ecfc;
 }
 
@@ -317,11 +330,11 @@ body {
 
 .dropdown-animation {
   animation: popover 0.2s ease-in-out;
-  border: 1px solid black;
 }
 
 .dropdown-background {
   background: linear-gradient(to bottom, #cbd5e1 0%, #cbd5e1 50%, #94a3b8 100%);
+  border: 1px solid black;
 }
 
 .dropdown::before,
@@ -438,15 +451,6 @@ body {
   text-shadow: 2px 2px 2px black;
 }
 
-.navbar-item {
-  margin: 0 10px; /* Adjust the value to set the desired spacing */
-}
-
-.dropdown-item {
-  margin-top: 0.9rem; /* Adjust this value to align the text properly */
-}
-
-
 /******************************* Tools *********************************/
 
 /* General Tools Page */
@@ -489,75 +493,19 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Mentor Mentee Matching System */
-.dropzone {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 400px;
-  border-radius: 20px;
-  background-size: cover;
-  background-position: center;
-  cursor: pointer;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4);
-}
 
-.dropzone-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center; /* This ensures even spacing */
-}
-
-.dropzone-content p {
-  margin-top: 20px; /* Reset margin for p elements within dropzone-content */
-}
-
-.dropzone-content .or {
-  margin: 0px 0; /* Adjust margins to equally space "OR" */
-  opacity: 0.5;
-}
-
-.dropzone-content .text-above-or {
-  margin-bottom: 20px; /* Adjust this value to set the desired spacing */
-}
-
-.dropzone-content .text-below-or {
-  margin-top: 50px; /* Adjust this value to set the desired spacing */
-}
-
-.dropzone-content button {
-  padding: 0.5rem 1rem;
-  background-color: transparent;
-  border: 2px solid var(--dark-blue); /* Add a white border */
-  border-radius: 4px;
-  cursor: pointer;
-  color: var(--dark-blue);
+.dropzone-button {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.dropzone-content button:hover {
-  color: #007bff;
+.dropzone-button:hover {
+  color: var(--sea-blue);
   background-color: var(--dark-blue)
+}
+.upload-button:hover {
+  background-color: #0056b3;
+  color: white
 }
 
 @keyframes uploading-animation {
@@ -572,45 +520,8 @@ body {
   }
 }
 
-.upload-button {
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.upload-button:hover {
-  background-color: #0056b3;
-}
-
 .uploading {
-  background-color: #ffffff;
-  color: #007bff;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
   animation: uploading-animation 1s infinite;
-}
-
-.choose-different-file-button {
-  padding: 0.5rem 1rem;
-  background-color: #e0e0e0;
-
-  color: #333;
-
-  border: none;
-
-  border-radius: 4px;
-
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.choose-different-file-button:hover {
-  background-color: #ccc;
 }
 
 .pairings {

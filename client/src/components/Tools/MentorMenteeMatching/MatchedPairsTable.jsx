@@ -1,6 +1,6 @@
 import React from 'react';
 import TableRows from './TableRows';
-import { tableHeaders } from './data';
+import { tableHeaders } from '../../../data/tools-pages';
 
 const MatchedPairsTable = ({ pairings }) => {
   return (

@@ -54,6 +54,45 @@ router.post("/add-user", async (req, res) => {
   }
 });
 
+// Retrieving User Information for Personalization
+
+router.get("/personal-info", async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const info = await db.query("SELECT * FROM users WHERE EMAIL = ?", [email]);
+
+    res.json(info);
+  } catch (error) {
+    res.status(500).json({ error: "error getting personal info" });
+    console.error("error querying personal data: ", error);
+  }
+});
+
+// User Request Submission of School Information
+
+router.post("/add-request", async (req, res) => {
+  const { userId, requestReason, requestMessage } = req.body;
+
+  if (!requestMessage || !requestReason || !userId) {
+    return res.status(400).json({ error: "Request message is required" });
+  }
+
+  try {
+    await db.query(
+      "INSERT INTO user_requests (USER_ID, REASON, MESSAGE) VALUES (?, ?, ?)",
+      [userId, requestReason, requestMessage]
+    );
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Error adding request:", err);
+    res.status(500).json({ error: "Error updating database" });
+  }
+});
+
+// Fetching School Information Data Based on Location Filtration and Mile Radius
+
 router.get("/data", async (req, res) => {
   const {
     city = "",
@@ -96,7 +135,6 @@ router.get("/data", async (req, res) => {
 });
 
 router.get("/coords", async (req, res) => {
-
   function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371; //earth
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -113,7 +151,7 @@ router.get("/coords", async (req, res) => {
   }
 
   const { latitude = "", longitude = "", radius = "10", uid = "" } = req.query;
-  
+
   try {
     const lat = parseFloat(latitude);
     const lon = parseFloat(longitude);
@@ -176,6 +214,8 @@ router.get("/coords", async (req, res) => {
     });
   }
 });
+
+// Fetching School-Specific Information and Email for School Details Page
 
 router.get("/school-data/:indexNumber", async (req, res) => {
   const { indexNumber } = req.params;
@@ -272,43 +312,34 @@ router.get("/school-emails/:indexNumber", async (req, res) => {
 
 router.post("/report-school/:indexNumber", async (req, res) => {
   const { indexNumber } = req.params;
-  const { reason, message } = req.body;
+  const { userId, reason, message } = req.body;
 
-  if (!reason || !message) {
-    return res.status(400).json({ error: "Reason and message are required" });
+  if (!reason || !message || !userId) {
+    return res
+      .status(400)
+      .json({ error: "User id, reason and message are required" });
   }
 
   try {
-    const [prev] = await db.query(
-      "SELECT REPORT FROM school_emails_website WHERE INDEX_NUMBER = ?",
-      [indexNumber]
-    );
-
-    const previousReports =
-      prev && prev.length > 0 && prev[0].REPORT ? prev[0].REPORT : "";
-    const newReport = previousReports
-      ? `${previousReports}; ${reason}:${message}`
-      : `${reason}:${message}`;
-
     const [result] = await db.query(
-      "UPDATE school_emails_website SET REPORT = ? WHERE INDEX_NUMBER = ?",
-      [newReport, indexNumber]
+      "INSERT INTO school_reports (SCHOOL_ID, USER_ID, REASON, MESSAGE) VALUES (?, ?, ?, ?)",
+      [indexNumber, userId, reason, message]
     );
 
     if (result.affectedRows > 0) {
-      res.json({ message: "School reported successfully" });
+      res.json({ success: true });
     } else {
-      throw new Error("School not found");
+      throw new Error("Error inserting report");
     }
   } catch (err) {
     console.error("Error reporting school:", err);
     res.status(500).json({
-      error: "Error updating database",
+      error: "Error inserting report into database",
     });
   }
 });
 
-// Saving Schools and Saved Schools to Users
+// Saving Schools and Checking Saved Schools for Users
 
 router.get("/check-saved-school", async (req, res) => {
   const { uid, schoolIndex } = req.query;
@@ -400,64 +431,6 @@ router.get("/saved-schools", async (req, res) => {
     console.error("Error fetching saved schools:", err);
     res.status(500).json({ error: "Error querying database" });
   }
-});
-
-router.post("/add-request", async (req, res) => {
-  const { email, requestReason, requestMessage } = req.body;
-
-  if (!requestMessage) {
-    return res.status(400).json({ error: "Request message is required" });
-  }
-
-  try {
-    const [user] = await db.query(
-      "SELECT REQUESTS FROM users WHERE EMAIL = ?",
-      [email]
-    );
-
-    let requests = [];
-    if (user.length > 0) {
-      requests = JSON.parse(user[0].REQUESTS || "[]");
-    }
-
-    const newRequest = {
-      reason: requestReason || null,
-      message: requestMessage,
-    };
-
-    requests.push(newRequest);
-
-    await db.query(
-      "UPDATE users SET REQUESTS = ? WHERE EMAIL = ?",
-      [JSON.stringify(requests), email]
-    );
-
-    res.json({ success: true, requests });
-  } catch (err) {
-    console.error("Error adding request:", err);
-    res.status(500).json({ error: "Error updating database" });
-  }
-});
-
-router.get("/personal-info", async (req, res) => {
-  const { email } = req.body;
-
-  try {
-
-    const info = await db.query(
-      "SELECT * FROM users WHERE EMAIL = ?",
-      [email]
-    );
-
-    res.json(info);
-
-  } catch (error) {
-    res.status(500).json({ error: "error getting personal info" });
-    console.error("error querying personal data: ",error);
-  }
-
-
-
 });
 
 export default router;

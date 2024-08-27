@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
-import {Sidebar, SchoolDetailSearchTable, AnimationLayout, Footer} from '../components';
+import {Sidebar, SchoolDetailSearchTable, AnimationLayout, Footer, UserHeading} from '../components';
 import { styles } from '../style';
 import { schoolDetails } from '../data/tools-pages';
 import { usePreviousUrlKeyword } from '../context/PrevUrlKeyword'
+import { MenuItem, Select, TextField, Button } from '@mui/material';
 
 const SchoolDetailsPage = () => {
   useBodyBackgroundColor('#f6f8fe');
@@ -32,6 +33,7 @@ const SchoolDetailsPage = () => {
   const [showReportModal, setShowReportModal] = useState(false);
   const [reportReason, setReportReason] = useState('');
   const [reportMessage, setReportMessage] = useState('');
+  const [reportError, setReportError] = useState(false);
 
   const [isSaved, setIsSaved] = useState(false);
 
@@ -195,9 +197,17 @@ const SchoolDetailsPage = () => {
 
   //Reporting the school information
 
+  useEffect(() => {
+    if (!showReportModal) {
+      setReportReason('');  
+      setReportMessage(''); 
+      setReportError('')
+    }
+  }, [showReportModal]);
+
   const handleReport = async () => {
     if (!reportReason || !reportMessage) {
-      alert('Please select a reason and enter a message for reporting');
+      setReportError('Please select a reason and enter a message for reporting');
       return;
     }
 
@@ -207,19 +217,25 @@ const SchoolDetailsPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ reason: reportReason, message: reportMessage }),
+        body: JSON.stringify({ 
+          userId: user.uid, 
+          reason: reportReason, 
+          message: reportMessage 
+        }),
       });
       if (!response.ok) {
-        throw new Error('Failed to report school');
+        setReportError('Failed to report school');
       }
       const data = await response.json();
-      alert(data.message);
-      setReportReason('');
-      setReportMessage('');
-      setShowReportModal(false);
+
+      if (data.success) {
+        setReportReason('');
+        setReportMessage('');
+        setShowReportModal(false);
+      }
+
     } catch (err) {
-      console.error('Error reporting school:', err);
-      alert('Failed to report school');
+      setReportError('Failed to report school');
     }
   };
 
@@ -235,8 +251,9 @@ const SchoolDetailsPage = () => {
           schoolIndex = {encodeURIComponent(indexNumber)}
         />
         <div className={`basis-[82%] m-auto z-50`}>
-          <div className='min-h-[98vh] m-[0.5rem] dark-white-bg three-d-box-shadow-1 lighter-gray-border border-[1px] rounded-[0.75rem]'>
-            <div className='m-auto py-[1rem]
+          <div className='mx-[0.5rem] my-[1rem]'>
+            <UserHeading structure='mb-[1rem] xl:max-w-[1280px]'/>
+            <div className='m-auto py-[1rem] min-h-[88vh] dark-white-bg three-d-box-shadow-1 lighter-gray-border border-[1px] rounded-[0.75rem]
                             xl:max-w-[1280px]'>
               <div className={`${styles.subparagraph} flex items-center gap-[1rem] px-[1rem] pb-[1rem] border-b-[1px] lighter-gray-border text-white`}>
                 <div className='flex-grow'>
@@ -300,39 +317,59 @@ const SchoolDetailsPage = () => {
 
       
       {showReportModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[50]">
-          <div className="bg-white p-6 rounded-lg w-96">
-            <h2 className="text-xl font-bold mb-4">Report School</h2>
-            <select
-              value={reportReason}
-              onChange={(e) => setReportReason(e.target.value)}
-              className="w-full p-2 mb-4 border rounded"
-            >
-              <option value="">Select reason for reporting</option>
-              <option value="Incorrect information">Incorrect information</option>
-              <option value="Outdated information">Outdated information</option>
-              <option value="Duplicate entry">Duplicate entry</option>
-              <option value="Other">Other</option>
-            </select>
-            <textarea
-              value={reportMessage}
-              onChange={(e) => setReportMessage(e.target.value)}
-              placeholder="Enter your report message"
-              className="w-full p-2 mb-4 border rounded h-32"
-            />
-            <div className="flex justify-end">
+        <div className="fixed inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 z-[50]">
+          <div className="p-[1.5rem] rounded-[0.5rem] bg-white min-w-[25rem]">
+            <h2 className={`${styles.heading4} mb-[1rem]`}>
+              Report School
+            </h2>
+            <div className='flex flex-col item-stretch'>
+              <Select
+                value={reportReason}
+                onChange={(e) => setReportReason(e.target.value)}
+                required
+                displayEmpty
+                className="mb-[1rem]"
+              >
+                <MenuItem value="" disabled>
+                  Select reason for reporting
+                </MenuItem>
+                <MenuItem value="Incorrect information">Incorrect information</MenuItem>
+                <MenuItem value="Outdated information">Outdated information</MenuItem>
+                <MenuItem value="Duplicate entry">Duplicate entry</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </Select>
+              <TextField
+                value={reportMessage}
+                onChange={(e) => setReportMessage(e.target.value)}
+                placeholder="Enter your report message here..."
+                multiline
+                rows={4}
+                required
+                className="rounded"
+                sx={{mb:'2rem'}}
+              />
+              {reportError && <div className='mb-[2rem] py-[0.5rem] px-[1rem] rounded error-red-bg'>{reportError}</div>}
+            </div>
+            <div className="flex justify-end gap-[0.75rem]">
               <button
                 onClick={() => setShowReportModal(false)}
-                className="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 mr-2"
+                className="px-[1rem] py-[0.5rem] text-black rounded lighter-gray-bg hover:bg-gray-300"
               >
                 Cancel
               </button>
-              <button
+              <Button
                 onClick={handleReport}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                className=""
+                sx={{backgroundColor:'#ef4444', color:'white', boxShadow: 1,
+                  '&:hover': {
+                    color: 'white',
+                    backgroundColor: '#dc2626',
+                    boxShadow:3
+                  },
+                }}
               >
                 Submit Report
-              </button>
+              </Button>
             </div>
           </div>
         </div>

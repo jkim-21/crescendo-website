@@ -6,8 +6,11 @@ import SouthIcon from '@mui/icons-material/South';
 import { projectDescriptions } from '../data/tools-pages.js';
 import {useNavigate} from 'react-router-dom';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
+import { useAuth } from '../context/AuthContext';
 
 const ToolsPage = () => {
+
+    const {user} = useAuth();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -20,12 +23,12 @@ const ToolsPage = () => {
         <div className='flex'>
             <Sidebar
                 structure='lightest-blue-bg basis-[18%] z-[1]'/>
-            <div className={`${styles.boxWidth} m-auto black-text basis-[82%] z-[50]`}>
+            <div className={`m-auto black-text basis-[82%] z-[50]`}>
                 <div className={`w-[80%] m-auto pt-[2rem] pb-[2rem]
-                            md:pt-[4rem] md:pb-[4rem]`}>
+                                md:pt-[4rem] md:pb-[4rem] xl:max-w-[1280px]`}>
                     <div className='flex justify-between items-center mb-[5rem]'>
                         <h2 className = {`${styles.heading2} basis-[40%] font-[500] leading-[3.75rem]`}>
-                            Hello, Crescendo for a Cause
+                            Hi, {user.displayName}
                         </h2>
                         <h3 className={`${styles.heading4} basis-[50%] font-normal`}>
                             Welcome to your tools dashboard. Please select one of the tools to use down below.

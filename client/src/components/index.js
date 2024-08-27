@@ -6,23 +6,35 @@ import Hero from "./Hero";
 import Navbar from "./Navbar";
 import Impact from "./Impact";
 import Work from "./Work";
-import Involvements from "./Chapter/Involvements";
-import Officers from "./Chapter/Officers";
 import Contacts from "./Contacts";
 import Slideshow from "./Slideshow";
-import DonationForm from "./Donation/DonationForm";
-import QueryProvider from "./Donation/QueryProvider";
-import DonationInput from "./Donation/DonationInput";
 import Events from "./Events";
 import YoutubeVideo from "./YoutubeVideo";
 import AnimationLayout from "./AnimationLayout";
 import News from "./News";
-import MentorMenteePairing from "./Tools/MentorMenteeMatching/MentorMenteePairing";
-import SearchTable from "./Tools/EmailFinder/SearchTable";
-import SchoolDetails from "./Tools/EmailFinder/SchoolDetails";
+
+import Involvements from "./Chapter/Involvements";
+import Officers from "./Chapter/Officers";
+
+import DonationForm from "./Donation/DonationForm";
+import QueryProvider from "./Donation/QueryProvider";
+import DonationInput from "./Donation/DonationInput";
+
 import Sidebar from "./Tools/Sidebar";
+import RequestPopUp from "./Tools/RequestPopUp";
+import UserHeading from "./Tools/UserHeading";
+
+import SearchTable from "./Tools/EmailFinder/SearchTable";
 import SchoolDetailSearchTable from "./Tools/EmailFinder/SchoolDetailSearchTable";
 import SavedSchoolsTable from "./Tools/SavedInformation/SavedSchoolsTable";
+import CurrentLocationButton from "./Tools/EmailFinder/CurrentLocationButton";
+import InfoPopUp from "./Tools/EmailFinder/InfoPopUp";
+
+import FileUpload from "./Tools/MentorMenteeMatching/FileUpload";
+import HelpModal from "./Tools/MentorMenteeMatching/HelpModal";
+import MatchedPairsTable from "./Tools/MentorMenteeMatching/MatchedPairsTable";
+import TableRows from "./Tools/MentorMenteeMatching/TableRows";
+import UnmatchedTable from "./Tools/MentorMenteeMatching/UnmatchedTable";
 
 export {
   AboutUs,
@@ -44,10 +56,17 @@ export {
   YoutubeVideo,
   AnimationLayout,
   News,
-  MentorMenteePairing,
   SearchTable,
-  SchoolDetails,
   Sidebar,
   SchoolDetailSearchTable,
   SavedSchoolsTable,
+  CurrentLocationButton,
+  InfoPopUp,
+  FileUpload,
+  HelpModal,
+  MatchedPairsTable,
+  TableRows,
+  UnmatchedTable,
+  UserHeading,
+  RequestPopUp,
 };

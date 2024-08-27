@@ -1,7 +1,7 @@
 import "react-slideshow-image/dist/styles.css";
 
 const styles = {
-  boxWidth: "max-w-[90%] xl:max-w-[1280px] ",
+  boxWidth: "max-w-[90%] xl:max-w-[1280px]",
   maxBoxWidth: "xl:max-w-[1280px]",
 
   heading1:

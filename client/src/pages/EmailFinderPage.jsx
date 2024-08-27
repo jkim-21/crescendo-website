@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { SearchTable, Footer, Sidebar } from '../components';
+import { SearchTable, Footer, Sidebar, CurrentLocationButton, InfoPopUp, UserHeading} from '../components';
 import { styles } from '../style'
-import { useNavigate, useLocation } from 'react-router-dom';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
 import { TextField, MenuItem, Button } from '@mui/material';
 import { states, miles } from '../data/tools-pages'
 import SearchIcon from '@mui/icons-material/Search';
-import CurrentLocationButton from '../components/Tools/EmailFinder/CurrentLocationButton';
 import ClearIcon from '@mui/icons-material/Clear';
-import InfoPopUp from '../components/Tools/EmailFinder/InfoPopUp';
-import Navbar from '../components/Tools/Navbar';
 import { useAuth } from '../context/AuthContext';
 
 const EmailFinderPage = () => {
     const { user } = useAuth();
-    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -31,7 +26,6 @@ const EmailFinderPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-
 
     async function validateAddress(address, isSuggestedAddress = false) {
         try {
@@ -105,7 +99,6 @@ const EmailFinderPage = () => {
                     console.error('Suggested address has less than 3 parts:', suggestedAddress);
                     setError('Suggested address has invalid format');
                 }
-
             } catch (error) {
                 console.error('Error validating suggested address:', error);
                 setError(`Error validating suggested address: ${error.message}`);
@@ -195,7 +188,6 @@ const EmailFinderPage = () => {
                 const validationResult = await validateAddress(address, false);
 
 
-                
                 if (!validationResult.valid) {
                     if (validationResult.suggestedAddress) {
                         const confirmedSuggestedAddress = await validateAddress(validationResult.suggestedAddress, true);
@@ -242,187 +234,179 @@ const EmailFinderPage = () => {
         <div className='flex'>
             <Sidebar
                 structure='basis-[18%]' />
-            <div className={`${styles.boxWidth} m-auto basis-[82%] z-[49]`}>
-                <Navbar></Navbar>
-                <div className={`py-[5rem] px-[3rem] min-h-[100vh] flex flex-col items-center m-auto`}>
-
-                    <form
-                        onSubmit={fetchData}
-                        className="school-inputs flex flex-wrap justify-center items-center mb-[3rem] gap-y-[2rem] px-[2rem] py-[2rem] w-full shadow-sm"
-                    >
-                        <TextField
-                            id='outlined-select-currency'
-                            select
-                            label="State"
-                            value={locationState}
-                            onChange={handleLocationChange}
-                            helperText='Required'
-                            {...stateIncluded ? {} : { error: true }}
-                            SelectProps={{
-                                MenuProps: {
-                                    PaperProps: {
-                                        style: {
-                                            maxHeight: 170,
-                                            overflow: 'auto',
+            <div className={`m-auto basis-[82%] z-[49] mt-[1rem]`}>
+                <div className='mx-[0.5rem] mb-[0.5rem] min-h-[100vh] flex flex-col
+                                xl:max-w-[1280px]'>
+                    <UserHeading structure='px-[0.5rem] mb-[1rem]'/>
+                    <div className={`flex flex-col items-center p-[1rem] dark-white-bg three-d-box-shadow-1 lighter-gray-border border-[1px] rounded-[0.75rem]`}>
+                    <h5 className={`self-start ${styles.heading4} mb-[2rem]`}>
+                        Email Finder System
+                    </h5>
+                        <form
+                            onSubmit={fetchData}
+                            className="school-inputs flex flex-wrap justify-center items-center mb-[3rem] gap-y-[2rem] px-[2rem] py-[2rem] w-full shadow-sm"
+                        >
+                            <TextField
+                                id='outlined-select-state'
+                                select
+                                label="State"
+                                value={locationState}
+                                onChange={handleLocationChange}
+                                helperText='Required'
+                                {...stateIncluded ? {} : { error: true }}
+                                SelectProps={{
+                                    MenuProps: {
+                                        PaperProps: {
+                                            style: {
+                                                maxHeight: 170,
+                                                overflow: 'auto',
+                                            },
                                         },
                                     },
-                                },
-                            }}
-                            sx={{
-                                width: '10rem', borderRadius: 1, bgcolor: 'white', borderTopRightRadius: 0,
-                                borderBottomRightRadius: 0,
-                                '& fieldset': {
-                                    borderTopRightRadius: 0,
+                                }}
+                                sx={{
+                                    width: '10rem', borderRadius: 1, bgcolor: 'white', borderTopRightRadius: 0,
                                     borderBottomRightRadius: 0,
-                                },
-                                '& .MuiFormHelperText-root': {
-                                    position: 'absolute',
-                                    bottom: '-1.5rem',
-                                    left: '-1rem',
-                                    padding: '0 0.5rem',
-                                },
-                            }}
-                            className='lightest-box-shadow'
-                        >
-                            {states.map((state) => (
-                                <MenuItem
-                                    key={state.id}
-                                    value={state.value}
-                                >
-                                    {state.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField
-                            label="City"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                            sx={{
-                                bgcolor: 'white', borderRadius: 0,
-                                '& fieldset': {
-                                    borderRadius: 0
-                                },
-                            }}
-                            className='lightest-box-shadow'
-                        />
-                        <TextField
-                            label="Street / Street Address"
-                            value={street}
-                            onChange={(e) => setStreet(e.target.value)}
-                            sx={{
-                                bgcolor: 'white', borderRadius: 0,
-                                '& fieldset': {
-                                    borderRadius: 0
-                                },
-                            }}
-                            className='lightest-box-shadow'
-                        />
-                        <TextField
-                            label="Zip Code"
-                            value={zipCode}
-                            onChange={(e) => setZipCode(e.target.value)}
-                            sx={{
-                                bgcolor: 'white', borderRadius: 0,
-                                '& fieldset': {
-                                    borderRadius: 0
-                                },
-                            }}
-                            className='lightest-box-shadow max-w-[7rem]'
-                        />
-
-                        <TextField
-                            id='outlined-select-mile-radius'
-                            select
-                            value={mileRadius}
-                            label='Mile Radius'
-                            onChange={(e) => setMileRadius(e.target.value)}
-                            SelectProps={{
-                                MenuProps: {
-                                    PaperProps: {
-                                        style: {
-                                            maxHeight: 170,
-                                            overflow: 'auto',
+                                    '& fieldset': {
+                                        borderTopRightRadius: 0,
+                                        borderBottomRightRadius: 0,
+                                    },
+                                    '& .MuiFormHelperText-root': {
+                                        position: 'absolute',
+                                        bottom: '-1.5rem',
+                                        left: '-1rem',
+                                        padding: '0 0.5rem',
+                                    },
+                                }}
+                                className='lightest-box-shadow'
+                            >
+                                {states.map((state) => (
+                                    <MenuItem
+                                        key={state.id}
+                                        value={state.value}
+                                    >
+                                        {state.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                id='outlined-select-city'
+                                label="City"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                                sx={{
+                                    bgcolor: 'white', borderRadius: 0,
+                                    '& fieldset': {
+                                        borderRadius: 0
+                                    },
+                                }}
+                                className='lightest-box-shadow'
+                            />
+                            <TextField
+                                id='outlined-select-street'
+                                label="Street / Street Address"
+                                value={street}
+                                onChange={(e) => setStreet(e.target.value)}
+                                sx={{
+                                    bgcolor: 'white', borderRadius: 0,
+                                    '& fieldset': {
+                                        borderRadius: 0
+                                    },
+                                }}
+                                className='lightest-box-shadow'
+                            />
+                            <TextField
+                                label="Zip Code"
+                                value={zipCode}
+                                onChange={(e) => setZipCode(e.target.value)}
+                                sx={{
+                                    bgcolor: 'white', borderRadius: 0,
+                                    '& fieldset': {
+                                        borderRadius: 0
+                                    },
+                                }}
+                                className='lightest-box-shadow max-w-[7rem]'
+                            />
+                            <TextField
+                                id='outlined-select-mile-radius'
+                                select
+                                value={mileRadius}
+                                label='Mile Radius'
+                                onChange={(e) => setMileRadius(e.target.value)}
+                                SelectProps={{
+                                    MenuProps: {
+                                        PaperProps: {
+                                            style: {
+                                                maxHeight: 170,
+                                                overflow: 'auto',
+                                            },
                                         },
                                     },
-                                },
-                            }}
-                            sx={{
-                                borderRadius: 1, bgcolor: 'white', width: '6rem', borderTopLeftRadius: 0,
-                                borderBottomLeftRadius: 0,
-                                '& fieldset': {
-                                    borderTopLeftRadius: 0,
+                                }}
+                                sx={{
+                                    borderRadius: 1, bgcolor: 'white', width: '6rem', borderTopLeftRadius: 0,
                                     borderBottomLeftRadius: 0,
-                                },
-                            }}
-                            className='lightest-box-shadow'
-                        >
-                            {miles.map((mile) => (
-                                <MenuItem
-                                    key={mile.id}
-                                    value={mile.value}
+                                    '& fieldset': {
+                                        borderTopLeftRadius: 0,
+                                        borderBottomLeftRadius: 0,
+                                    },
+                                }}
+                                className='lightest-box-shadow'
+                            >
+                                {miles.map((mile) => (
+                                    <MenuItem
+                                        key={mile.id}
+                                        value={mile.value}
+                                    >
+                                        {mile.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <div className="flex gap-2 mt-4">
+                                <CurrentLocationButton onAddressFound={handleAddressFound} />
+                                <Button
+                                    variant='contained'
+                                    startIcon={<SearchIcon />}
+                                    type='submit'
+                                    className='lightest-box-shadow'
                                 >
-                                    {mile.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <div className="flex gap-2 mt-4">
-
-                            <CurrentLocationButton onAddressFound={handleAddressFound} />
-
-                            <Button
-                                variant='contained'
-                                startIcon={<SearchIcon />}
-                                type='submit'
-                                className='lightest-box-shadow'
-                            >
-                                Fetch Data
-                            </Button>
-
-                            <Button
-                                variant='outlined'
-                                startIcon={<ClearIcon />}
-                                onClick={handleClear}
-                                className='lightest-box-shadow'
-                            >
-                                Clear
-                            </Button>
-
-
-
-                            <InfoPopUp />
-                        </div>
-                    </form>
-
-                    {loading && <p className='mb-[2rem]'>Loading...</p>}
+                                    Fetch Data
+                                </Button>
+                                <Button
+                                    variant='outlined'
+                                    startIcon={<ClearIcon />}
+                                    onClick={handleClear}
+                                    className='lightest-box-shadow'
+                                >
+                                    Clear
+                                </Button>
+                                <InfoPopUp />
+                            </div>
+                        </form>
+                        {loading && <p className='mb-[2rem]'>Loading...</p>}
                     
-                    {suggestedAddress && (
-                        <div className="mb-[2rem]">
-                            <p className='text-center'>Did you mean:</p>
-                            <button
-                                onClick={handleSuggestedAddressClick}
-                                className="blue-text soft-blue-bg border dark-border rounded py-[0.25rem] px-[1rem] hover:bg-gray-200"
-                            >
-                                {suggestedAddress}
-                            </button>
+                        {suggestedAddress && (
+                            <div className="mb-[2rem]">
+                                <p className='text-center'>Did you mean:</p>
+                                <button
+                                    onClick={handleSuggestedAddressClick}
+                                    className="blue-text soft-blue-bg border dark-border rounded py-[0.25rem] px-[1rem] hover:bg-gray-200"
+                                >
+                                    {suggestedAddress}
+                                </button>
+                            </div>
+                        )}
+                        {error && (
+                            <p className="red-text soft-red-bg border dark-border rounded py-[0.25rem] px-[1rem] mb-[3rem]">
+                                Error: {error}
+                            </p>
+                        )}
+                        <div className="min-w-full">
+                            <SearchTable schoolInformation={data} />
                         </div>
-                    )}
-
-                    {error && (
-                        <p className="red-text soft-red-bg border dark-border rounded py-[0.25rem] px-[1rem] mb-[3rem]">
-                            Error: {error}
-                        </p>
-                    )}
-
-                    
-
-                    <div className="w-full">
-                        <SearchTable schoolInformation={data} />
                     </div>
-
-
-
                 </div>
-                <Footer />
+                <Footer structure='px-0'/>
             </div>
         </div>
     )

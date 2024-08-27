@@ -1,4 +1,39 @@
-import { projectImagePlaceholder } from "../assets";
+import {
+  projectImagePlaceholder,
+  emailFinderSystemPreview,
+  mentorMenteeSystemPreview,
+  mentorMenteeInstructions1,
+  mentorMenteeInstructions2,
+  mentorMenteeInstructions3,
+} from "../assets";
+
+// General Tools Data
+
+export const timeData = {
+  monthNames: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
+  dayNames: [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ],
+};
 
 export const projectDescriptions = [
   {
@@ -9,7 +44,7 @@ export const projectDescriptions = [
       "The AEFS (Automated Email Finder System) finds emails from websites of over 90,000 K-12 public schools across the United States. Filter by your state, city, steet, zipcode, or school, or all the above to find the emails of your desired schools.",
     subDescription:
       "For precise results, feel free to use the mile radius option based on the desired state, city, and street location.",
-    image: projectImagePlaceholder,
+    image: emailFinderSystemPreview,
     link: "email-finder-system",
   },
   {
@@ -20,7 +55,7 @@ export const projectDescriptions = [
       "The MMMS (Mentor Mentee Matchmaking System) takes the excel file response based on the google form sign-ups provided to you. Based on the availablity of the individuals of the two respective groups, you will receive two excel files: one pertaining all matched pairs and the other containing all unmatched mentees / available mentors.",
     subDescription:
       "For complete matching of all potential pairs between mentors and mentees, please utilize the system multiple times with the unmatched mentor/mentee excel file until no more matching possibilities are observed.",
-    image: projectImagePlaceholder,
+    image: mentorMenteeSystemPreview,
     link: "mentor-mentee-matching-system",
   },
 ];
@@ -70,6 +105,8 @@ export const dynamicToolLinks = (schoolName, urlPathname) => {
     ...toolLinks.slice(insertIndex + 1),
   ];
 };
+
+// Email Finder System Data
 
 export const tableInputs = [
   {
@@ -138,19 +175,14 @@ export const miles = [
     label: "10",
   },
   {
-    id: "10-miles",
+    id: "20-miles",
     value: 20,
     label: "20",
   },
   {
-    id: "10-miles",
+    id: "30-miles",
     value: 30,
     label: "30",
-  },
-  {
-    id: "320-miles",
-    value: 30,
-    label: "320",
   },
 ];
 
@@ -199,5 +231,56 @@ export const schoolDetails = [
     id: "general-website-detail",
     title: "General Website:",
     key: "SCRAPED_WEBSITE",
+  },
+];
+
+// Mentor Mentee Data
+
+export const tableHeaders = {
+  matchedPairs: [
+    "Mentor Name",
+    "Mentor Contact",
+    "Mentee Name",
+    "Mentee Contact",
+    "Mentor Instrument",
+    "Mentee Instrument",
+    "Time of Lesson (day, time)",
+    "In-Person or Online",
+  ],
+  unmatched: [
+    "Name",
+    "Contact Info",
+    "Instrument",
+    "Preferred Lesson Mode",
+    "Type",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+    "Available Spots",
+  ],
+};
+
+export const instructionPieces = [
+  {
+    id: "instruction-1",
+    img: mentorMenteeInstructions1,
+    alt: "First instruction",
+    className: "",
+  },
+  {
+    id: "instruction-2",
+    img: mentorMenteeInstructions2,
+    alt: "first instruction",
+    className: "",
+  },
+  {
+    id: "instruction-3",
+    img: mentorMenteeInstructions3,
+    alt: "first instruction",
+    className: "",
   },
 ];

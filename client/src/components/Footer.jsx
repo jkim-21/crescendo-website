@@ -3,9 +3,9 @@ import {styles} from '../style'
 import { socialMedias } from '../data/global'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Footer = () => {
+const Footer = ({structure}) => {
   return (
-      <section className={`dark-bg w-full py-[2.5rem] lg:py-[2.5rem]`}>
+      <section className={`${structure} dark-bg w-full py-[2.5rem] lg:py-[2.5rem]`}>
         <div className={`${styles.boxWidth} flex justify-between items-center flex-col m-auto
                         md:flex-row`}>
           <p className={`${styles.paragraph} font-normal text-center text-white`}>
