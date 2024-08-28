@@ -1,17 +1,19 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
-import {FileUpload, MatchedPairsTable, UnmatchedTable, Sidebar, Footer, UserHeading} from '../components' 
+import {FileUpload, MatchedPairsContainer, UnmatchedPairsContainer, Sidebar, Footer, UserHeading} from '../components' 
 import { utils, writeFile } from 'xlsx';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
 
 const MentorMenteeMatchingPage = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [file, setFile] = useState(null);
+
     const [uploading, setUploading] = useState(false);
 
     const [pairings, setPairings] = useState([]);
     const [unmatchedMentees, setUnmatchedMentees] = useState([]);
     const [unmatchedMentors, setUnmatchedMentors] = useState([]);
+    const [unmatchedIndividuals, setUnmatchedIndividuals] = useState([]);
 
     const baseURL = import.meta.env.VITE_DONATION_BASE_URL || '';
     
@@ -48,27 +50,27 @@ const MentorMenteeMatchingPage = () => {
 
         try {
             const response = await fetch(`${baseURL}/upload`, {
-            method: 'POST',
-            body: formData
+                method: 'POST',
+                body: formData
             });
 
             if (!response.ok) {
-            throw new Error('Network response was not ok');
+                setErrorMessage('Can not upload this file.');
             }
 
             const data = await response.json();
-
-            if (data.pairings && data.unmatchedMentees && data.unmatchedMentors) {
-            setPairings(data.pairings);
-            setUnmatchedMentees(data.unmatchedMentees);
-            setUnmatchedMentors(data.unmatchedMentors);
+            
             if (data.pairings.length === 0) {
                 setErrorMessage("There are no perfect mentor-mentee pairs, please manually review your responses.");
-            } else {
-                setErrorMessage("");
             }
-            } else {
-            setErrorMessage("Unexpected response structure");
+            else if (data.pairings && data.unmatchedMentees && data.unmatchedMentors) {
+                setPairings(data.pairings);
+                setUnmatchedMentees(data.unmatchedMentees);
+                setUnmatchedMentors(data.unmatchedMentors);
+                setUnmatchedIndividuals(data.unmatchedIndvidiuals);
+            } 
+            else {
+                setErrorMessage("Unexpected response structure");
             }
         }
         catch (error) {
@@ -94,27 +96,31 @@ const MentorMenteeMatchingPage = () => {
         <div className='m-auto min-h-[100vh] my-[1rem]
                         xl:max-w-[1280px]'>
             <UserHeading structure='px-[0.5rem] mb-[5rem]'/>
-            <div className={`flex flex-col items-center justify-center m-auto mx-[2rem]`}>
+            <div className={`flex flex-col items-center justify-center m-auto mx-[2rem] mb-[1rem] dark-white-bg`}>
                 {pairings.length === 0 ? (
                     <FileUpload
-                    file={file}
-                    uploading={uploading}
-                    open={open}
-                    getRootProps={getRootProps}
-                    getInputProps={getInputProps}
-                    isDragActive={isDragActive}
-                    setFile={setFile}
-                    handleFileUpload={handleFileUpload}
+                        file={file}
+                        uploading={uploading}
+                        open={open}
+                        getRootProps={getRootProps}
+                        getInputProps={getInputProps}
+                        isDragActive={isDragActive}
+                        setFile={setFile}
+                        handleFileUpload={handleFileUpload}
                     />
                 ) : (
-                    <>
-                    <MatchedPairsTable pairings={pairings} />
-                    <UnmatchedTable 
-                    unmatchedMentees={unmatchedMentees} 
-                    unmatchedMentors={unmatchedMentors} />
-                    </>
+                    <div className='flex flex-col gap-[2rem] w-full'>
+                        <MatchedPairsContainer 
+                            pairings={pairings} 
+                            jsonToXLSX={jsonToXLSX}
+                        />
+                        <UnmatchedPairsContainer 
+                            unmatchedIndividuals = {unmatchedIndividuals}
+                            jsonToXLSX={jsonToXLSX}
+                        />
+                    </div>
                 )}
-                {errorMessage && <p className="message text-white mt-4">{errorMessage}</p>}
+                {errorMessage && <p className="message text-white mb-[1rem]">{errorMessage}</p>}
             </div>
         </div>
         <Footer/>

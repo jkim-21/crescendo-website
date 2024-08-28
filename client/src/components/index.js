@@ -32,9 +32,10 @@ import InfoPopUp from "./Tools/EmailFinder/InfoPopUp";
 
 import FileUpload from "./Tools/MentorMenteeMatching/FileUpload";
 import HelpModal from "./Tools/MentorMenteeMatching/HelpModal";
+import MatchedPairsContainer from "./Tools/MentorMenteeMatching/MatchedPairsContainer";
 import MatchedPairsTable from "./Tools/MentorMenteeMatching/MatchedPairsTable";
-import TableRows from "./Tools/MentorMenteeMatching/TableRows";
-import UnmatchedTable from "./Tools/MentorMenteeMatching/UnmatchedTable";
+import UnmatchedPairsContainer from "./Tools/MentorMenteeMatching/UnmatchedPairsContainer";
+import UnmatchedPairsTable from "./Tools/MentorMenteeMatching/UnmatchedPairsTable";
 
 export {
   AboutUs,
@@ -64,9 +65,10 @@ export {
   InfoPopUp,
   FileUpload,
   HelpModal,
-  MatchedPairsTable,
-  TableRows,
-  UnmatchedTable,
+  MatchedPairsContainer,
+  UnmatchedPairsContainer,
   UserHeading,
   RequestPopUp,
+  MatchedPairsTable,
+  UnmatchedPairsTable,
 };

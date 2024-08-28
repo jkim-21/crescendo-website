@@ -24,6 +24,7 @@
   --lightest-blue: #f6f8fe;
   --light-gray-blue: #cbd5e1;
   --sea-blue: #006fff;
+  --light-navy: #2954b3;
   --navy: #002e5d;
   --dark-blue: #0a162f;
   --dark-red: #8b0000;
@@ -175,6 +176,10 @@ body {
   background-color: var(--sea-blue)
 }
 
+.light-navy-bg {
+  background-color:var(--light-navy)
+}
+
 .error-red-bg {
   background: var(--error-red)
 }
@@ -222,6 +227,10 @@ body {
 /* Box Shadow */
 .lightest-box-shadow {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+}
+
+.light-box-shadow{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .standard-box-shadow {
@@ -489,10 +498,6 @@ body {
 }
 
 
-
-
-
-
 /* Mentor Mentee Matching System */
 
 .dropzone-button {
@@ -506,105 +511,4 @@ body {
 .upload-button:hover {
   background-color: #0056b3;
   color: white
-}
-
-@keyframes uploading-animation {
-  0% {
-    background-color: #f0f0f0;
-  }
-  50% {
-    background-color: #e0e0e0;
-  }
-  100% {
-    background-color: #f0f0f0;
-  }
-}
-
-.uploading {
-  animation: uploading-animation 1s infinite;
-}
-
-.pairings {
-  margin-top: 2rem;
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 1rem;
-  font-family: Arial, sans-serif;
-  overflow: auto;
-}
-
-.pairings h2 {
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #333;
-}
-
-.pairings-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.pairings-table th,
-.pairings-table td {
-  padding: 10px;
-  border: 1px solid #2954b3;
-  text-align: left;
-  border-right: 1px solid #2954b3;
-}
-
-.pairings-table th {
-  background-color: #2954b3;
-  color: white;
-}
-
-.unmatched {
-  margin: 2rem 2rem;
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.unmatched h2 {
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #333;
-}
-
-.message {
-  color: white;
-}
-
-.table-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px; /* Adjust as needed */
-}
-
-.download-button {
-  background-color: #2954b3; /* Blue background */
-  border: none; /* Remove borders */
-  color: white; /* White text */
-  padding: 10px 20px; /* Some padding */
-  text-align: center; /* Center the text */
-  text-decoration: none; /* Remove underline */
-  display: inline-block; /* Make the button inline-block */
-  font-size: 16px; /* Increase font size */
-  margin: 10px 2px; /* Add some margin */
-  cursor: pointer; /* Add a pointer cursor on hover */
-  border-radius: 12px; /* Rounded corners */
-}
-
-.download-button:hover {
-  background-color: #002f5c; /* Darker blue on hover */
 }

@@ -7,14 +7,14 @@ import {
 } from 'material-react-table';
 import {useAuth} from '../../../context/AuthContext'
 
-const MatchedPairsTable = ({ studentPairings }) => {
+const MatchedPairsTable = ({ unmatchedIndividuals }) => {
   const navigate = useNavigate();
   const {user} = useAuth();
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(studentPairings)
-  }, [studentPairings])
+    setData(unmatchedIndividuals)
+  }, [unmatchedIndividuals])
 
   const handleSave = async (schoolIndex) => {
     if (!user || !user.uid || !schoolIndex) return;
@@ -52,43 +52,68 @@ const MatchedPairsTable = ({ studentPairings }) => {
 
   const columns = useMemo(() => [
     {
-        accessorKey: 'mentorName',
-        header: 'Mentor Name',
+        accessorKey: 'name',
+        header: 'Name',
         size: 150,
     },
     {
-        accessorKey: 'mentorContact',
-        header: 'Mentor Contact',
+        accessorKey: 'type',
+        header: 'Type',
         size: 150,
     },
     {
-        accessorKey: 'menteeName',
-        header: 'Mentee Name',
+        accessorKey: 'contact',
+        header: 'Contact',
         size: 150,
     },
     {
-        accessorKey: 'menteeContact',
-        header: 'Mentee Contact',
+        accessorKey: 'instrument',
+        header: 'Instrument',
         size: 150,
     },
     {
-        accessorKey: 'mentorInstrument',
-        header: 'Mentor Instrument',
+        accessorKey: 'lessonType',
+        header: 'Lesson Type',
         size: 150,
     },
     {
-        accessorKey: 'menteeInstrument',
-        header: 'Mentee Instrument',
+        accessorKey: 'mondayAvailability',
+        header: 'Monday Availability',
+        size: 200,
+    },
+    {
+        accessorKey: 'tuesdayAvailability',
+        header: 'Tuesday Availability',
+        size: 250,
+    },
+    {
+        accessorKey: 'wednesdayAvailability',
+        header: 'Wednesday Availability',
+        size: 250,
+    },
+    {
+        accessorKey: 'thursdayAvailability',
+        header: 'Thursday Availability',
+        size: 250,
+    },
+    {
+        accessorKey: 'fridayAvailability',
+        header: 'Friday Availability',
+        size: 200,
+    },
+    {
+        accessorKey: 'saturdayAvailability',
+        header: 'Saturday Availability',
+        size: 250,
+    },
+    {
+        accessorKey: 'sundayAvailability',
+        header: 'Sunday Availability',
         size: 150,
     },
     {
-        accessorKey: 'timeOfLesson',
-        header: 'Time of Lesson (day, time)',
-        size: 275,
-    },
-    {
-        accessorKey: 'inPersonOrOnline',
-        header: 'In-Person or Online',
+        accessorKey: 'availabilityLeft',
+        header: 'Availability Left',
         size: 150,
     },
   ], [navigate]);
@@ -97,7 +122,7 @@ const MatchedPairsTable = ({ studentPairings }) => {
     columns,
     data,
     muiPaginationProps: {
-      rowsPerPageOptions: [10, 20, 50, 100],
+      rowsPerPageOptions: [5, 10, 30, 50],
       variant: 'outlined',
     },
     muiTableBodyRowProps: {
@@ -123,7 +148,7 @@ const MatchedPairsTable = ({ studentPairings }) => {
     },
     muiTableContainerProps: {
       sx: {
-        maxHeight: '85vh',
+        maxHeight: '85vh'
       }
     }
   });

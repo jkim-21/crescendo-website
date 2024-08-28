@@ -51,7 +51,9 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <AnimationLayout>
+          <ThemeProvider theme={tableTheme}>
             <MentorMenteePage />
+          </ThemeProvider>
         </AnimationLayout>
       </ProtectedRoute>
     ),

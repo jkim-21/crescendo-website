@@ -80,7 +80,7 @@ const FileUpload = ({ file, uploading, open, getRootProps, getInputProps, isDrag
               </div>
             )}
             {uploading && (
-              <div className='text-center p-[1rem] dark-bg rounded-[0.5rem] uploading'>
+              <div className='text-center p-[1rem] rounded-[0.5rem]'>
                 <p>
                   Uploading...
                 </p>
