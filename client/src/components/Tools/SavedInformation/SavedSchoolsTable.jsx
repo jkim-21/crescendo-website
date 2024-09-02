@@ -19,7 +19,7 @@ const SearchTable = ({ savedSchools }) => {
   const [data, setData] = useState('');
 
   const handleSchoolClick = (indexNumber) => {
-    setPreviousUrlKeyword('school');
+    setPreviousUrlKeyword('save');
     navigate(`/tools/email-finder-system/school/${encodeURIComponent(indexNumber)}`);
   }
 

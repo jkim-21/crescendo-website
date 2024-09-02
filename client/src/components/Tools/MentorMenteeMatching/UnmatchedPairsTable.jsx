@@ -16,40 +16,6 @@ const MatchedPairsTable = ({ unmatchedIndividuals }) => {
     setData(unmatchedIndividuals)
   }, [unmatchedIndividuals])
 
-  const handleSave = async (schoolIndex) => {
-    if (!user || !user.uid || !schoolIndex) return;
-  
-    try {
-      const response = await fetch(`/api/save-school`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          uid: user.uid,
-          schoolIndex: schoolIndex
-        }),
-      });
-      const data = await response.json();
-  
-      if (!response.ok) {
-        console.log(response)
-        throw new Error(data.error || 'Failed to save school') 
-      }
-      if (data.success) {
-        setData((prevSchools) =>
-          prevSchools.map((school) =>
-            school.INDEX_NUMBER === schoolIndex
-              ? {...school, isSaved: !school.isSaved} 
-              : school
-            ));
-      };
-      
-    } catch (err) {
-      console.error('Error saving school:', err.message);
-    }
-  };
-
   const columns = useMemo(() => [
     {
         accessorKey: 'name',
@@ -148,7 +114,7 @@ const MatchedPairsTable = ({ unmatchedIndividuals }) => {
     },
     muiTableContainerProps: {
       sx: {
-        maxHeight: '85vh'
+        maxHeight: '85vh',
       }
     }
   });

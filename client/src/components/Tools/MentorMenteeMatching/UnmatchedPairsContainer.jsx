@@ -2,16 +2,16 @@ import React from 'react';
 import {UnmatchedPairsTable} from '../../../components'
 import {styles} from '../../../style'
 
-const UnmatchedPairsContainer = ({ unmatchedIndividuals, jsonToXLSX }) => {
+const UnmatchedPairsContainer = ({ unmatchedIndividuals, jsonToXLSX, textFormat, buttonFormat }) => {
   return (
-    <div className="w-full p-[2rem] rounded-[8px] overflow-hidden">
-      <div className="header-container flex justify-between items-center mb-8">
-        <h4 className={`${styles.heading4} mb-[0.75rem] font-[800]`}>
+    <div className="w-full rounded-[8px]">
+      <div className="header-container flex justify-between items-center mb-[1rem]">
+        <h4 className={`${textFormat ? textFormat : styles.heading4}`}>
           Unmatched Mentors and Mentees
         </h4>
         <button 
           onClick={() => jsonToXLSX(unmatchedIndividuals, 'unmatched-indviduals.xlsx')}
-          className="px-[1.25rem] py-[0.75rem] border-none white-text text-center rounded-md light-navy-bg hover:bg-[var(--navy)]" 
+          className={`${buttonFormat ? buttonFormat : 'px-[1.25rem] py-[0.75rem]'} border-none white-text text-center rounded-md light-navy-bg hover:bg-[var(--navy)]`} 
         >
           Download Unmatched Individuals as XLSX
         </button>

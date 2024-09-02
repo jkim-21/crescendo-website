@@ -2,6 +2,7 @@ import { Router } from "express";
 import xlsx from "xlsx";
 import fs from "fs";
 import multer from "multer";
+import db from "./dbConnection.js";
 
 const router = Router();
 const upload = multer({ dest: "uploads/" });
@@ -186,6 +187,140 @@ router.post("/", upload.single("file"), (req, res) => {
   } catch (error) {
     console.error("Error processing file:", error);
     res.status(500).send("An error occurred while processing the file.");
+  }
+});
+
+// Saving and Retrieiving Mentor Mentee Result Tables
+router.post("/create-pair-table", async (req, res) => {
+  const { userId, sessionName, pairings, unmatchedIndividuals } = req.body;
+
+  try {
+    await db.query(
+      `INSERT INTO pairing_sessions (USER_ID, SESSION_NAME) VALUES (?, ?)`,
+      [userId, sessionName]
+    );
+
+    if (pairings && pairings.length > 0) {
+      const insertMatchedPairsQuery = `
+        INSERT INTO mentor_mentee_pairs (SESSION_NAME, USER_ID, MENTOR_NAME, MENTOR_CONTACT, MENTOR_INSTRUMENT, MENTEE_NAME, MENTEE_CONTACT, MENTEE_INSTRUMENT, TIME_OF_LESSON, IN_PERSON_OR_ONLINE)
+        VALUES ?
+      `;
+      const matchedPairsData = pairings.map((pair) => [
+        sessionName,
+        userId,
+        pair.mentorName,
+        pair.mentorContact,
+        pair.mentorInstrument,
+        pair.menteeName,
+        pair.menteeContact,
+        pair.menteeInstrument,
+        pair.timeOfLesson,
+        pair.inPersonOrOnline,
+      ]);
+
+      await db.query(insertMatchedPairsQuery, [matchedPairsData]);
+    }
+
+    if (unmatchedIndividuals && unmatchedIndividuals.length > 0) {
+      const insertUnmatchedIndividualsQuery = `
+        INSERT INTO unmatched_individuals (SESSION_NAME, USER_ID, PERSON_NAME, PERSON_TYPE, CONTACT, INSTRUMENT, LESSON_TYPE, MONDAY_AVAILABILITY, TUESDAY_AVAILABILITY, WEDNESDAY_AVAILABILITY, THURSDAY_AVAILABILITY, FRIDAY_AVAILABILITY, SATURDAY_AVAILABILITY, SUNDAY_AVAILABILITY, AVAILABILITY_LEFT)
+        VALUES ?
+      `;
+      const unmatchedIndividualsData = unmatchedIndividuals.map(
+        (individual) => [
+          sessionName,
+          userId,
+          individual.name,
+          individual.type,
+          individual.contact,
+          individual.instrument,
+          individual.lessonType,
+          individual.mondayAvailability,
+          individual.tuesdayAvailability,
+          individual.wednesdayAvailability,
+          individual.thursdayAvailability,
+          individual.fridayAvailability,
+          individual.saturdayAvailability,
+          individual.sundayAvailability,
+          individual.availabilityLeft,
+        ]
+      );
+      await db.query(insertUnmatchedIndividualsQuery, [
+        unmatchedIndividualsData,
+      ]);
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ error: "Failed to create tables for pairing sessions." });
+  }
+});
+
+router.delete("/delete-table", async (req, res) => {
+  const { sessionName } = req.query;
+
+  try {
+    await db.query(`DELETE FROM mentor_mentee_pairs WHERE SESSION_NAME = ?`, [
+      sessionName,
+    ]);
+    await db.query(`DELETE FROM unmatched_individuals WHERE SESSION_NAME = ?`, [
+      sessionName,
+    ]);
+    await db.query(`DELETE FROM pairing_sessions WHERE SESSION_NAME = ?`, [
+      sessionName,
+    ]);
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete table." });
+  }
+});
+
+router.get("/get-user-sessions/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const [sessions] = await db.query(
+      `SELECT SESSION_NAME FROM pairing_sessions WHERE USER_ID = ?`,
+      [userId]
+    );
+
+    if (sessions.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No sessions found for user." });
+    }
+
+    res.json({ sucess: true, sessions });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to retrieve sessions for user." });
+  }
+});
+
+router.get("/get-session-data/", async (req, res) => {
+  const { userId, sessionName } = req.query;
+  try {
+    const [pairedInfo] = await db.query(
+      `SELECT * FROM mentor_mentee_pairs WHERE USER_ID = ? AND SESSION_NAME = ?`,
+      [userId, sessionName]
+    );
+
+    const [unpairedInfo] = await db.query(
+      `SELECT * FROM unmatched_individuals WHERE USER_ID = ? AND SESSION_NAME = ?`,
+      [userId, sessionName]
+    );
+
+    if (pairedInfo.length === 0 || unpairedInfo.length === 0) {
+      return;
+    }
+
+    res.json({ success: true, pairedInfo, unpairedInfo });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to retrieve tables for user." });
   }
 });
 

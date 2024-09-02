@@ -7,9 +7,11 @@ import { states, miles } from '../data/tools-pages'
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useAuth } from '../context/AuthContext';
+import { usePreviousUrlKeyword } from '../context/PrevUrlKeyword'
 
 const EmailFinderPage = () => {
     const { user } = useAuth();
+    const { setPreviousUrlKeyword } = usePreviousUrlKeyword();
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -25,6 +27,7 @@ const EmailFinderPage = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        setPreviousUrlKeyword('school')
     }, []);
 
     async function validateAddress(address, isSuggestedAddress = false) {

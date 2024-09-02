@@ -10,6 +10,7 @@ const styles = {
 
   heading3: "font-bold text-[1.5rem] lg:text-[2rem]",
   heading4: "font-medium text-[1.25rem] lg:text-[1.5rem]",
+  heading5: "font-medium text-[1rem] lg:text-[1.25rem]",
 
   paragraph: "font-normal text-[1rem] leading-[1.5rem] lg:leading-[1.875rem]",
   subparagraph:

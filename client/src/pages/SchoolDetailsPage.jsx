@@ -66,6 +66,7 @@ const SchoolDetailsPage = () => {
 
 
   const handleBack = () => {
+    console.log(previousUrlKeyword);
     if (previousUrlKeyword === 'school') {
       navigate('/tools/email-finder-system');
     }

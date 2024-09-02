@@ -1,17 +1,7 @@
 import { Router } from "express";
-import mysql from "mysql2/promise";
-import dotenv from "dotenv";
+import db from "./dbConnection.js";
 
 const router = Router();
-dotenv.config();
-
-const db = mysql.createPool({
-  host: "127.0.0.1",
-  user: "root",
-  password: process.env.DB_PASSWORD,
-  database: "USER_INFO",
-  connectionLimit: 10,
-});
 
 // Checking and Adding User Information
 
