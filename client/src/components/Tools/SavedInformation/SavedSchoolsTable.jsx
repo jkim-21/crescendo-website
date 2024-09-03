@@ -8,6 +8,8 @@ import {
 import {
   Box
 } from '@mui/material';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { useAuth } from '../../../context/AuthContext';
 import { usePreviousUrlKeyword } from '../../../context/PrevUrlKeyword';
 
@@ -113,23 +115,26 @@ const handleSave = async (schoolIndex) => {
     },
     {
       accessorKey: 'isSaved',
-      header: 'Saved Status',
+      header: 'Saved',
       size: 150,
       Cell: ({ cell }) => {
         const schoolRow = cell.row.original;
         return (
-        <Box
+          <Box
           onClick={() => handleSave(schoolRow.INDEX_NUMBER)}
           sx={{
-            backgroundColor: cell.getValue() === true ? '#22c55e' : '#006fff',
-            borderRadius: '0.25rem',
-            color: 'black',
-            maxWidth: 'fit-content',
+            justifyContent: 'center',
+            alignItems: 'center',
             p: '0.5rem',
+            paddingLeft: '2rem',
             cursor: 'pointer'
           }}
         >
-          {cell.getValue() ? 'Saved': 'Not Saved'}
+          {cell.getValue() ? (
+            <BookmarkIcon sx={{ color: '#006fff' }} />
+          ) : (
+            <BookmarkBorderIcon sx={{ color: '#006fff' }} />
+          )}
         </Box>
         )}
     }

@@ -30,7 +30,7 @@ router.post("/validate-address", async (req, res) => {
     });
 
     const data = await response.json();
-    //console.log("Full API response:", JSON.stringify(data, null, 2));
+    console.log("Full API response:", JSON.stringify(data, null, 2));
 
     if (data.result && data.result.address) {
       const validatedAddress = data.result.address;

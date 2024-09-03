@@ -7,12 +7,15 @@ import { styles } from '../style';
 import { schoolDetails } from '../data/tools-pages';
 import { usePreviousUrlKeyword } from '../context/PrevUrlKeyword'
 import { MenuItem, Select, TextField, Button } from '@mui/material';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+
 
 const SchoolDetailsPage = () => {
   useBodyBackgroundColor('#f6f8fe');
   const { user } = useAuth();
   const navigate = useNavigate();
-  const {previousUrlKeyword} = usePreviousUrlKeyword();
+  const { previousUrlKeyword } = usePreviousUrlKeyword();
 
   const [schoolData, setSchoolData] = useState(null);
   const [emails, setEmails] = useState({});
@@ -34,13 +37,51 @@ const SchoolDetailsPage = () => {
   const [reportReason, setReportReason] = useState('');
   const [reportMessage, setReportMessage] = useState('');
   const [reportError, setReportError] = useState(false);
+  const [sortedEmails, setSortedEmails] = useState([]);
 
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-}, []);
+  }, []);
+
+  const sortAndGroupEmails = (emailsData) => {
+    //console.log("Raw emailsData:", emailsData);  (THIS IS VERY USEFUL FOR DEBUGGING)
   
+    if (!emailsData || typeof emailsData !== 'object') {
+      console.error("Invalid emailsData:", emailsData);
+      return {};
+    }
+  
+    const groupedByLinks = {};
+    Object.entries(emailsData).forEach(([email, links]) => {
+      links.forEach(link => {
+        if (!groupedByLinks[link]) {
+          groupedByLinks[link] = [];
+        }
+        groupedByLinks[link].push(email);
+      });
+    });
+  
+    const sortedLinks = Object.keys(groupedByLinks).sort();
+  
+    const sortedAndGroupedEmails = {};
+    sortedLinks.forEach(link => {
+      const sortedEmails = groupedByLinks[link].sort((a, b) => 
+        a.toLowerCase().localeCompare(b.toLowerCase())
+      );
+      sortedEmails.forEach(email => {
+        if (!sortedAndGroupedEmails[email]) {
+          sortedAndGroupedEmails[email] = [];
+        }
+        sortedAndGroupedEmails[email].push(link);
+      });
+    });
+  
+    //console.log("Sorted output here:", sortedAndGroupedEmails);
+    return sortedAndGroupedEmails;
+  };
+
   const toTitleCase = (str) => {
     if (typeof str !== 'string' || str.includes('https://') || str.includes('http://')) {
       return str
@@ -49,7 +90,7 @@ const SchoolDetailsPage = () => {
     const lowerCasedWords = lowerCasedStr.split(' ');
 
     const titleCasedWords = lowerCasedWords.map((word) => {
-        return word.charAt(0).toUpperCase() + word.slice(1);
+      return word.charAt(0).toUpperCase() + word.slice(1);
     });
     const titleCasedStr = titleCasedWords.join(' ');
     return titleCasedStr;
@@ -73,11 +114,11 @@ const SchoolDetailsPage = () => {
     else if (previousUrlKeyword === 'save') {
       navigate('/tools/saved-information');
     }
-    
+
   };
 
   //Fetching page data: useeffect: fetchData
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -97,6 +138,9 @@ const SchoolDetailsPage = () => {
   
         setSchoolData(schoolData);
         setEmails(emailsData);
+  
+        const sortedAndGroupedEmails = sortAndGroupEmails(emailsData);
+        setSortedEmails(sortedAndGroupedEmails);
 
         setSchoolIndex(schoolData.INDEX_NUMBER);
         setSchoolName(schoolData.SCH_NAME);
@@ -113,7 +157,7 @@ const SchoolDetailsPage = () => {
         setLoading(false);
       }
     };
-  
+
     fetchData();
   }, [indexNumber]);
 
@@ -122,22 +166,24 @@ const SchoolDetailsPage = () => {
   const renderSchoolDetails = (schoolDetail) => {
     if (schoolDetail.id === 'general-website-detail') {
       return (
-      <a
-        href={generalWebsite}
-        className="sea-blue-text text-left hover:underline break-words"
-      >
-        {toTitleCase(generalWebsite)}
-      </a>
-      );}
+        <a
+          href={generalWebsite}
+          className="sea-blue-text text-left hover:underline break-words"
+        >
+          {toTitleCase(generalWebsite)}
+        </a>
+      );
+    }
     else if (schoolDetail.id === 'phone-number-detail') {
       return (
-      <a
-        href={`tel:${phoneNumber}`}
-        className="sea-blue-text text-left hover:underline break-words"
-      >
-        {formatPhoneNumber(phoneNumber)}
-      </a>
-    );}
+        <a
+          href={`tel:${phoneNumber}`}
+          className="sea-blue-text text-left hover:underline break-words"
+        >
+          {formatPhoneNumber(phoneNumber)}
+        </a>
+      );
+    }
     else {
       return toTitleCase(schoolData[schoolDetail.key])
     }
@@ -148,7 +194,7 @@ const SchoolDetailsPage = () => {
   useEffect(() => {
     const checkSavedStatus = async () => {
       if (!user || !user.uid || !schoolIndex) return;
-  
+
       try {
         const response = await fetch(`/api/check-saved-school?uid=${user.uid}&schoolIndex=${schoolIndex}`);
 
@@ -163,13 +209,13 @@ const SchoolDetailsPage = () => {
         alert(err.message);
       }
     };
-  
+
     checkSavedStatus();
   }, [user, schoolIndex]);
 
   const handleSave = async () => {
     if (!user || !user.uid || !schoolIndex) return;
-  
+
     try {
       const response = await fetch(`/api/save-school`, {
         method: 'POST',
@@ -185,12 +231,12 @@ const SchoolDetailsPage = () => {
 
       if (!response.ok) {
         console.log(response)
-        throw new Error(data.error || 'Failed to save school') 
+        throw new Error(data.error || 'Failed to save school')
       }
       if (data.success) {
         setIsSaved(data.isSaved);
       }
-      
+
     } catch (err) {
       console.error('Error saving school:', err.message);
     }
@@ -200,8 +246,8 @@ const SchoolDetailsPage = () => {
 
   useEffect(() => {
     if (!showReportModal) {
-      setReportReason('');  
-      setReportMessage(''); 
+      setReportReason('');
+      setReportMessage('');
       setReportError('')
     }
   }, [showReportModal]);
@@ -218,10 +264,10 @@ const SchoolDetailsPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          userId: user.uid, 
-          reason: reportReason, 
-          message: reportMessage 
+        body: JSON.stringify({
+          userId: user.uid,
+          reason: reportReason,
+          message: reportMessage
         }),
       });
       if (!response.ok) {
@@ -249,11 +295,11 @@ const SchoolDetailsPage = () => {
         <Sidebar
           structure='lightest-blue-bg basis-[18%]'
           schoolName={schoolName}
-          schoolIndex = {encodeURIComponent(indexNumber)}
+          schoolIndex={encodeURIComponent(indexNumber)}
         />
         <div className={`basis-[82%] m-auto z-50`}>
           <div className='mx-[0.5rem] my-[1rem]'>
-            <UserHeading structure='mb-[1rem] xl:max-w-[1280px]'/>
+            <UserHeading structure='mb-[1rem] xl:max-w-[1280px]' />
             <div className='m-auto py-[1rem] min-h-[88vh] dark-white-bg three-d-box-shadow-1 lighter-gray-border border-[1px] rounded-[0.75rem]
                             xl:max-w-[1280px]'>
               <div className={`${styles.subparagraph} flex items-center gap-[1rem] px-[1rem] pb-[1rem] border-b-[1px] lighter-gray-border text-white`}>
@@ -267,9 +313,12 @@ const SchoolDetailsPage = () => {
                 </div>
                 <button
                   onClick={handleSave}
-                  className={`${isSaved ? 'green-bg hover:bg-green-600' : 'sea-blue-bg hover:bg-blue-600'} px-4 py-2 rounded`}
                 >
-                  {isSaved ? 'Unsave' : 'Save'}
+                  {isSaved ? (
+                    <BookmarkIcon sx={{ color: '#006fff' }} />
+                  ) : (
+                    <BookmarkBorderIcon sx={{ color: '#006fff' }} />
+                  )}
                 </button>
                 <button
                   onClick={() => setShowReportModal(true)}
@@ -285,8 +334,8 @@ const SchoolDetailsPage = () => {
                   </h4>
                   <div className='overflow-y-auto'>
                     <SchoolDetailSearchTable
-                        jsonData = {emails}
-                        height = '25rem'
+                      jsonData={sortedEmails}
+                      height='25rem'
                     />
                   </div>
                 </div>
@@ -294,7 +343,7 @@ const SchoolDetailsPage = () => {
                   <h4 className={`${styles.heading4} mb-[1rem] w-full ml-[0.5rem]`}>
                     School Details
                   </h4>
-                    {schoolData && (
+                  {schoolData && (
                     <div className='flex flex-col justify-between p-[1rem] flex-grow border-[1px] white-bg lighter-gray-border rounded-[0.75rem]'>
                       {schoolDetails.map((schoolDetail) => (
                         <p
@@ -307,16 +356,16 @@ const SchoolDetailsPage = () => {
                         </p>
                       ))}
                     </div>
-                    )}
+                  )}
                 </div>
               </div>
             </div>
           </div>
-          <Footer/>
+          <Footer />
         </div>
       </div>
 
-      
+
       {showReportModal && (
         <div className="fixed inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 z-[50]">
           <div className="p-[1.5rem] rounded-[0.5rem] bg-white min-w-[25rem]">
@@ -347,7 +396,7 @@ const SchoolDetailsPage = () => {
                 rows={4}
                 required
                 className="rounded"
-                sx={{mb:'2rem'}}
+                sx={{ mb: '2rem' }}
               />
               {reportError && 
                 <ErrorButton 
@@ -365,11 +414,12 @@ const SchoolDetailsPage = () => {
               <Button
                 onClick={handleReport}
                 className=""
-                sx={{backgroundColor:'#ef4444', color:'white', boxShadow: 1,
+                sx={{
+                  backgroundColor: '#ef4444', color: 'white', boxShadow: 1,
                   '&:hover': {
                     color: 'white',
                     backgroundColor: '#dc2626',
-                    boxShadow:3
+                    boxShadow: 3
                   },
                 }}
               >
