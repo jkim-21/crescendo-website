@@ -195,6 +195,17 @@ router.post("/create-pair-table", async (req, res) => {
   const { userId, sessionName, pairings, unmatchedIndividuals } = req.body;
 
   try {
+    const [existingPairs] = await db.query(
+      `SELECT COUNT(*) as pairCount FROM pairing_sessions WHERE USER_ID = ?`,
+      [userId]
+    );
+
+    if (existingPairs[0].pairCount >= 5) {
+      return res
+        .status(400)
+        .json({ error: "You have reached the maximum limit of 5 pairs" });
+    }
+
     await db.query(
       `INSERT INTO pairing_sessions (USER_ID, SESSION_NAME) VALUES (?, ?)`,
       [userId, sessionName]

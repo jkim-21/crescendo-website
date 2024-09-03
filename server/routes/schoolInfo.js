@@ -98,7 +98,7 @@ router.get("/data", async (req, res) => {
     const zipCodeParam = zipCode ? `%${zipCode}%` : "%";
 
     const [data] = await db.query(
-      "SELECT INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1 FROM school_emails_website WHERE SCRAPED_EMAILS IS NOT NULL AND LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ? AND LZIP LIKE ?",
+      "SELECT INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1 FROM school_emails_website WHERE LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ? AND LZIP LIKE ?",
       [cityParam, stateParam, streetParam, zipCodeParam]
     );
 

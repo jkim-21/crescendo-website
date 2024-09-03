@@ -162,19 +162,22 @@ const MentorMenteeMatchingPage = () => {
                         />
                     ) : (
                         <div className='flex flex-col gap-[2rem] w-full'>
-                            <button
-                                onClick={() => {
-                                    if (isSaved) {
-                                        unsaveMentorMenteeTable(sessionId)
-                                    }
-                                    else {
-                                        saveMentorMenteeTable(user.uid)
-                                    }
-                                }}
-                                className={`${isSaved ? 'green-bg hover:bg-green-600' : 'sea-blue-bg hover:bg-blue-600'} px-4 py-2 rounded`}
-                            >
-                                {isSaved ? 'Unsave' : 'Save'}
-                            </button>
+                            <div className='flex items-center gap-[1rem]'>
+                                <button
+                                    onClick={() => {
+                                        if (isSaved) {
+                                            unsaveMentorMenteeTable(sessionId)
+                                        }
+                                        else {
+                                            saveMentorMenteeTable(user.uid)
+                                        }
+                                    }}
+                                    className={`${isSaved ? 'green-bg hover:bg-green-600' : 'sea-blue-bg hover:bg-blue-600'} text-end max-w-fit px-[1.5rem] py-[0.75rem] rounded-[0.5rem] text-white`}
+                                >
+                                    {isSaved ? 'Unsave' : 'Save'}
+                                </button>
+                                {errorMessage && <p className="max-w-fit py-[0.5rem] px-[1rem] text-center rounded error-red-bg text-white">{errorMessage}</p>}
+                            </div>
                             <MatchedPairsContainer 
                                 pairings={pairings} 
                                 jsonToXLSX={jsonToXLSX}
@@ -185,7 +188,6 @@ const MentorMenteeMatchingPage = () => {
                             />
                         </div>
                     )}
-                    {errorMessage && <p className="message text-white mb-[1rem]">{errorMessage}</p>}
                 </div>
             </div>
         <Footer/>

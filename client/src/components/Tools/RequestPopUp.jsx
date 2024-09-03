@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { Button, MenuItem, Select, TextField } from '@mui/material';
-import {styles} from '../../style'
+import {styles} from '../../style';
+import {ErrorButton} from '../../components'
 
 const RequestPopUp = ({ onClose }) => {
     const { user } = useAuth();
@@ -86,7 +87,11 @@ const RequestPopUp = ({ onClose }) => {
                       sx={{mb:'2rem'}}
                   
                   />
-                  {error && <div className='mb-[2rem] py-[0.5rem] px-[1rem] w-full text-center rounded error-red-bg '>{error}</div>}
+                  {error && 
+                    <ErrorButton 
+                    errorMessage={error}
+                    format='mb-[2rem]'/>
+                  }
                 </div>
                 <div className="flex justify-end gap-[0.75rem]">
                     <button

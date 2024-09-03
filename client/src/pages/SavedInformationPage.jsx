@@ -1,20 +1,21 @@
 // SavedSchoolsPage.jsx
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Footer, Sidebar, SavedSchoolsTable, UserHeading, MatchedPairsContainer, UnmatchedPairsContainer } from '../components';
+import { Footer, Sidebar, SavedSchoolsTable, UserHeading} from '../components';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
 import {styles} from '../style';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { usePreviousUrlKeyword } from '../context/PrevUrlKeyword';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+
+const MatchedPairsContainer = React.lazy(() => import('../components/Tools/MentorMenteeMatching/MatchedPairsContainer'));
+const UnmatchedPairsContainer = React.lazy(() => import('../components/Tools/MentorMenteeMatching/UnmatchedPairsContainer'));
 
 const SavedSchoolsPage = () => {
     const { user } = useAuth();
     useBodyBackgroundColor('#f6f8fe');
 
     const [savedSchools, setSavedSchools] = useState([]);
-    const [schoolLoading, setSchoolLoading] = useState(true);
     const [schoolError, setSchoolError] = useState(null);
     
     const [savedSchoolDropdown, setSavedSchoolDropdown] = useState(true);
@@ -53,8 +54,6 @@ const SavedSchoolsPage = () => {
             } catch (err) {
                 console.error('Error fetching saved schools:', err);
                 setSchoolError(err.message);
-            } finally {
-                setSchoolLoading(false);
             }
         };
         fetchSavedSchools();
@@ -137,27 +136,25 @@ const SavedSchoolsPage = () => {
         if (!userId || !sessionName) return;
       
         try {
-        setMentorMenteeLoading(true);
-          const response = await fetch(`/upload/get-session-data?userId=${encodeURIComponent(userId)}&sessionName=${encodeURIComponent(sessionName)}`);
-      
-          if (!response.ok) {
-            throw new Error('Failed to fetch saved sessions');
-          }
-      
-          const data = await response.json();
-          const pairedInfo = data.pairedInfo.map(transformPairedKeys);
-          const unpairedInfo = data.unpairedInfo.map(transformUnpairedKeys);
-
-          console.log(pairedInfo)
-          
-          return { pairedInfo, unpairedInfo };
-        } catch (err) {
-          console.error('Error fetching saved sessions:', err);
-          setSchoolError(err.message); 
-        }
-        finally {
-            setMentorMenteeLoading(false);
-        }
+            setMentorMenteeLoading(true);
+            const response = await fetch(`/upload/get-session-data?userId=${encodeURIComponent(userId)}&sessionName=${encodeURIComponent(sessionName)}`);
+        
+            if (!response.ok) {
+                throw new Error('Failed to fetch saved sessions');
+            }
+        
+            const data = await response.json();
+            const pairedInfo = data.pairedInfo.map(transformPairedKeys);
+            const unpairedInfo = data.unpairedInfo.map(transformUnpairedKeys);
+            
+            return { pairedInfo, unpairedInfo };
+            } catch (err) {
+            console.error('Error fetching saved sessions:', err);
+            setSchoolError(err.message); 
+            }
+            finally {
+                setMentorMenteeLoading(false);
+            }
       };
 
     useEffect(() => {
@@ -176,6 +173,8 @@ const SavedSchoolsPage = () => {
         fetchAllSavedSessions();
     }, [user.uid, userSessions]);
 
+    // Toggling the dropdown for the correct school
+
     const toggleDropdown = (sessionName) => {
         setOpenDropdowns((prevState) => ({
           ...prevState,
@@ -183,6 +182,47 @@ const SavedSchoolsPage = () => {
         }));
       };
 
+    useEffect(() => {
+        if (sessionData) {
+            const initialDropdownState = sessionData.reduce((acc, session) => {
+                acc[session.sessionName] = false;
+                return acc;
+            }, {});
+
+            setOpenDropdowns(initialDropdownState);
+        }
+    }, [sessionData]);
+
+
+    // Deleting Saved School Information as necessary
+    const unsaveMentorMenteeTable = async (sessionName) => {
+        try {
+            console.log(sessionName)
+            const response = await fetch(`/upload/delete-table?sessionName=${encodeURIComponent(sessionName)}`, {
+                method:'DELETE',
+            });
+            const data = await response.json();
+
+            if (!response.ok) {
+                setErrorMessage(data.error);
+                console.log(data.error)
+            }
+            else {
+                setSessionData((prevSessions) =>
+                    prevSessions.filter((session) => session.sessionName !== sessionName)
+                );
+
+                setOpenDropdowns((prevState) => {
+                    const updatedState = { ...prevState };
+                    delete updatedState[sessionName];
+                    return updatedState;
+                  });
+            }
+        }
+        catch (err) {
+            setErrorMessage('An error occurred while deleting the table.');
+        }
+    }
 
     return (
         <div className='flex'>
@@ -215,40 +255,62 @@ const SavedSchoolsPage = () => {
                         </h4>
                         {!mentorMenteeError && mentorMenteeDropdown && (
                             <ul className='w-full px-[1rem] '>
-                                {sessionData && sessionData.map((session, index) => (
+                                {sessionData ? sessionData.map((session, index) => (
                                     <div key={index}>
                                         <div
-                                            onClick={() => toggleDropdown(session.SESSION_NAME)}
-                                            className={`${styles.heading5} p-[0.5rem] mb-[0.5rem] mx-[1rem] cursor-pointer rounded-[0.75rem] hover:bg-[#e0e0e4]`}
+                                            onClick={() => toggleDropdown(session.sessionName)}
+                                            className={`${styles.heading5} flex justify-between items-center p-[0.5rem] mb-[0.5rem] mx-[1rem] cursor-pointer rounded-[0.75rem] hover:bg-[#e0e0e4]`}
                                         >
-                                            {openDropdowns[session.SESSION_NAME] ? <KeyboardArrowDownIcon sx={{fontSize:'1.5rem', mb:'0.1rem'}}/> : <KeyboardArrowRightIcon sx={{fontSize:'1.5rem', mb:'0.3rem'}}/>}
-                                            Saved Mentor Mentee Table {index + 1}
+                                            <div>
+                                                {openDropdowns[session.sessionName] ? <KeyboardArrowDownIcon sx={{fontSize:'1.5rem', mb:'0.1rem'}}/> : <KeyboardArrowRightIcon sx={{fontSize:'1.5rem', mb:'0.3rem'}}/>}
+                                                Saved Mentor Mentee Table {index + 1}
+                                            </div>
+                                            <DeleteOutlineIcon
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                unsaveMentorMenteeTable(session.sessionName)}}
+                                            sx={{
+                                                backgroundColor:'red',
+                                                color:'white',
+                                                fontSize:'1.75rem',
+                                                borderRadius:'0.2rem',
+                                                '&:hover': {
+                                                    backgroundColor: '#A52A2A'
+                                                },
+                                            }}
+                                            />
                                         </div>
-                                        {mentorMenteeLoading && openDropdowns[session.SESSION_NAME] ? (
+                                        {mentorMenteeLoading && openDropdowns[session.sessionName] ? (
                                             <div className="spinner m-auto"></div>
                                         ) : (
-                                            openDropdowns[session.SESSION_NAME] && (
-                                                <div
-                                                    key={index}
-                                                    className='flex flex-col gap-[2rem] mr-[1rem] ml-[2.5rem] mb-[2rem]'
-                                                >
-                                                    <MatchedPairsContainer
-                                                        pairings={session.pairedInfo}
-                                                        jsonToXLSX={jsonToXLSX}
-                                                        textFormat = 'font-[500] text-[1rem] lg:text-[1rem]'
-                                                        buttonFormat = 'font-[400] text-[1rem] lg:text-[1rem] px-[0.75rem] py-[0.25rem]'
-                                                    />
-                                                    <UnmatchedPairsContainer
-                                                        unmatchedIndividuals = {session.unpairedInfo}
-                                                        jsonToXLSX={jsonToXLSX}
-                                                        textFormat = 'font-[500] text-[1rem] lg:text-[1rem]'
-                                                        buttonFormat = 'font-[400] text-[1rem] lg:text-[1rem] px-[0.75rem] py-[0.25rem]'
-                                                    />
-                                                </div>
+                                            openDropdowns[session.sessionName] && (
+                                                <Suspense fallback={<div className="spinner m-auto"></div>}>
+                                                    <div
+                                                        key={index}
+                                                        className='flex flex-col gap-[2rem] mr-[1rem] ml-[2.5rem] mb-[2rem]'
+                                                    >
+                                                        <MatchedPairsContainer
+                                                            pairings={session.pairedInfo}
+                                                            jsonToXLSX={jsonToXLSX}
+                                                            textFormat = 'font-[500] text-[1rem] lg:text-[1rem]'
+                                                            buttonFormat = 'font-[400] text-[1rem] lg:text-[1rem] px-[0.75rem] py-[0.25rem]'
+                                                        />
+                                                        <UnmatchedPairsContainer
+                                                            unmatchedIndividuals = {session.unpairedInfo}
+                                                            jsonToXLSX={jsonToXLSX}
+                                                            textFormat = 'font-[500] text-[1rem] lg:text-[1rem]'
+                                                            buttonFormat = 'font-[400] text-[1rem] lg:text-[1rem] px-[0.75rem] py-[0.25rem]'
+                                                        />
+                                                    </div>
+                                                </Suspense>
                                             )
                                         )}
                                     </div>
-                                ))}
+                                )) : (
+                                    <div className='gray-text italic text-center my-[1rem]'>
+                                        No records to display
+                                    </div>)
+                                }
                             </ul>
                         )}
                     </div>

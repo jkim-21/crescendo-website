@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import useBodyBackgroundColor from '../hooks/useBodyBackgroundColor';
-import {Sidebar, SchoolDetailSearchTable, AnimationLayout, Footer, UserHeading} from '../components';
+import {Sidebar, SchoolDetailSearchTable, AnimationLayout, Footer, UserHeading, ErrorButton} from '../components';
 import { styles } from '../style';
 import { schoolDetails } from '../data/tools-pages';
 import { usePreviousUrlKeyword } from '../context/PrevUrlKeyword'
@@ -349,7 +349,11 @@ const SchoolDetailsPage = () => {
                 className="rounded"
                 sx={{mb:'2rem'}}
               />
-              {reportError && <div className='mb-[2rem] py-[0.5rem] px-[1rem] rounded error-red-bg'>{reportError}</div>}
+              {reportError && 
+                <ErrorButton 
+                  errorMessage={reportError}
+                  format='mb-[2rem]'
+                />}
             </div>
             <div className="flex justify-end gap-[0.75rem]">
               <button

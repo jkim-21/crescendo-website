@@ -37,6 +37,8 @@ import MatchedPairsTable from "./Tools/MentorMenteeMatching/MatchedPairsTable";
 import UnmatchedPairsContainer from "./Tools/MentorMenteeMatching/UnmatchedPairsContainer";
 import UnmatchedPairsTable from "./Tools/MentorMenteeMatching/UnmatchedPairsTable";
 
+import ErrorButton from "./componentLib/ErrorButton.jsx";
+
 export {
   AboutUs,
   Chapters,
@@ -71,4 +73,5 @@ export {
   RequestPopUp,
   MatchedPairsTable,
   UnmatchedPairsTable,
+  ErrorButton,
 };
