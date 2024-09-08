@@ -63,7 +63,7 @@ const SchoolDetailsPage = () => {
       });
     });
   
-    const sortedLinks = Object.keys(groupedByLinks).sort();
+    const sortedLinks = Object.keys(groupedByLinks);//.sort();
   
     const sortedAndGroupedEmails = {};
     sortedLinks.forEach(link => {
@@ -334,7 +334,7 @@ const SchoolDetailsPage = () => {
                   </h4>
                   <div className='overflow-y-auto'>
                     <SchoolDetailSearchTable
-                      jsonData={sortedEmails}
+                      jsonData={sortedEmails} //also works with "emails" as well
                       height='25rem'
                     />
                   </div>
