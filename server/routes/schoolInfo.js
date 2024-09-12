@@ -98,7 +98,7 @@ router.get("/data", async (req, res) => {
     const zipCodeParam = zipCode ? `%${zipCode}%` : "%";
 
     const [data] = await db.query(
-      "SELECT INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1 FROM school_emails_website WHERE LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ? AND LZIP LIKE ?",
+      "SELECT INDEX_NUMBER, SCH_NAME, STATENAME, LCITY, LSTREET1, SCRAPED_EMAILS FROM school_emails_website WHERE LCITY LIKE ? AND STATENAME LIKE ? AND LSTREET1 LIKE ? AND LZIP LIKE ?",
       [cityParam, stateParam, streetParam, zipCodeParam]
     );
 
@@ -162,10 +162,9 @@ router.get("/coords", async (req, res) => {
     const lonMax = lon + lonDegrees;
 
     const [data] = await db.query(
-      `SELECT INDEX_NUMBER, SCH_NAME, LCITY, LSTREET1, LAT, LON, STATENAME
+      `SELECT INDEX_NUMBER, SCH_NAME, LCITY, LSTREET1, LAT, LON, STATENAME, SCRAPED_EMAILS
       FROM school_emails_website
-      WHERE SCRAPED_EMAILS IS NOT NULL
-      AND LAT BETWEEN ? AND ?
+      WHERE LAT BETWEEN ? AND ?
       AND LON BETWEEN ? AND ?`,
       [latMin, latMax, lonMin, lonMax]
     );
@@ -177,13 +176,23 @@ router.get("/coords", async (req, res) => {
       }))
       .filter((school) => school.distance <= radiusKm)
       .sort((a, b) => a.distance - b.distance)
-      .map(({ INDEX_NUMBER, SCH_NAME, LCITY, LSTREET1, STATENAME }) => ({
-        INDEX_NUMBER,
-        SCH_NAME,
-        STATENAME,
-        LCITY,
-        LSTREET1,
-      }));
+      .map(
+        ({
+          INDEX_NUMBER,
+          SCH_NAME,
+          LCITY,
+          LSTREET1,
+          STATENAME,
+          SCRAPED_EMAILS,
+        }) => ({
+          INDEX_NUMBER,
+          SCH_NAME,
+          STATENAME,
+          LCITY,
+          LSTREET1,
+          SCRAPED_EMAILS,
+        })
+      );
 
     const [savedSchools] = await db.query(
       "SELECT SCHOOL_ID FROM user_saved_schools WHERE USER_ID = ?",

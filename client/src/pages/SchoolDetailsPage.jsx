@@ -46,7 +46,6 @@ const SchoolDetailsPage = () => {
   }, []);
 
   const sortAndGroupEmails = (emailsData) => {
-    //console.log("Raw emailsData:", emailsData);  (THIS IS VERY USEFUL FOR DEBUGGING)
   
     if (!emailsData || typeof emailsData !== 'object') {
       console.error("Invalid emailsData:", emailsData);
@@ -315,9 +314,9 @@ const SchoolDetailsPage = () => {
                   onClick={handleSave}
                 >
                   {isSaved ? (
-                    <BookmarkIcon sx={{ color: '#006fff' }} />
+                    <BookmarkIcon sx={{ color: '#006fff', fontSize:'3rem' }} />
                   ) : (
-                    <BookmarkBorderIcon sx={{ color: '#006fff' }} />
+                    <BookmarkBorderIcon sx={{ color: '#006fff', fontSize:'3rem' }} />
                   )}
                 </button>
                 <button

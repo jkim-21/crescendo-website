@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {useLocation} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx';
 import {RequestPopUp} from '..';
 import {styles} from '../../style.js'
@@ -16,7 +16,9 @@ const UserHeading = ({structure}) => {
     const [time, setTime] = useState(null);
     const [greeting, setGreeting] = useState('');
 
-    const [toggleUserOptions, setToggleUserOptions] = useState(false)
+    const [toggleUserOptions, setToggleUserOptions] = useState(false);
+
+    const navigate = useNavigate();
 
     // Retrieving Heading Data
 
@@ -83,6 +85,7 @@ const UserHeading = ({structure}) => {
             }
         }
         getGreeting();
+        console.log(user.photoURL)
     }, [])
 
     
@@ -111,6 +114,16 @@ const UserHeading = ({structure}) => {
         setShowRequestModal(false);
     }
 
+    const handleLogout = async () => {
+        try {
+            await logout();
+            navigate('/');
+        }
+        catch (error) {
+            alert(error);
+        }
+    }
+
     const renderUserProfile = () => {
         return (
             toggleUserOptions ?
@@ -128,7 +141,7 @@ const UserHeading = ({structure}) => {
                             <li className='pl-[0.5rem] py-[0.5rem] rounded hover:bg-[#f5f5f5] cursor-pointer'>
                                 <button
                                     variant='contained'
-                                    onClick={logout}
+                                    onClick={handleLogout}
                                 >
                                     Logout
                                 </button>

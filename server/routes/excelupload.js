@@ -299,9 +299,10 @@ router.get("/get-user-sessions/:userId", async (req, res) => {
     );
 
     if (sessions.length === 0) {
-      return res
-        .status(404)
-        .json({ success: false, message: "No sessions found for user." });
+      return res.json({
+        sessions: null,
+        message: "No sessions found for user.",
+      });
     }
 
     res.json({ sucess: true, sessions });

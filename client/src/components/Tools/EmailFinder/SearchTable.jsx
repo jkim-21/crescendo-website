@@ -5,11 +5,11 @@ import {
   MaterialReactTable,
   useMaterialReactTable,
 } from 'material-react-table';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import {Box} from '@mui/material'
 import { usePreviousUrlKeyword } from '../../../context/PrevUrlKeyword';
-import {useAuth} from '../../../context/AuthContext'
+import {useAuth} from '../../../context/AuthContext';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 const SearchTable = ({ schoolInformation }) => {
   const navigate = useNavigate();
@@ -111,8 +111,15 @@ const SearchTable = ({ schoolInformation }) => {
       size: 150,
     },
     {
+      accessorKey: 'totalEmails',
+      header: 'Email Count',
+      enableSorting: true,        
+      sortingFn: 'basic',
+      size: 150,
+    },
+    {
       accessorKey: 'isSaved',
-      header: 'Saved',
+      header: 'Saved Status',
       size: 150,
       Cell: ({ cell }) => {
         const schoolRow = cell.row.original;
@@ -122,8 +129,6 @@ const SearchTable = ({ schoolInformation }) => {
           sx={{
             justifyContent: 'center',
             alignItems: 'center',
-            p: '0.5rem',
-            paddingLeft: '2rem',
             cursor: 'pointer'
           }}
         >
@@ -140,6 +145,9 @@ const SearchTable = ({ schoolInformation }) => {
   const table = useMaterialReactTable({
     columns,
     data,
+    initialState: {
+      sorting: [{ id: 'totalEmails', desc: true }] 
+    },
     muiPaginationProps: {
       rowsPerPageOptions: [10, 20, 50, 100],
       variant: 'outlined',

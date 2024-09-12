@@ -1,18 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {useLocation, Link} from 'react-router-dom';
+import {useLocation, Link, useNavigate} from 'react-router-dom';
 import '../../index.css';
 import {logos} from '../../data/global';
 import {dynamicToolLinks, toolLinks} from '../../data/tools-pages';
 import { useAuth } from '../../context/AuthContext';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-const Sidebar = ({structure, schoolName, schoolIndex}) => {
+const Sidebar = ({structure, schoolName, schoolIndex, restriction}) => {
 
     // Sidebar piece
     const location = useLocation();
     const [linksToRender, setLinksToRender] = useState(toolLinks);
     const [activeLink, setActiveLink] = useState(null);
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         const links = schoolName ? dynamicToolLinks(schoolName, schoolIndex) : toolLinks;
@@ -26,9 +26,16 @@ const Sidebar = ({structure, schoolName, schoolIndex}) => {
     const handleLogout = async () => {
         try {
             await logout();
+            navigate('/');
         }
         catch (error) {
             alert(error);
+        }
+    }
+
+    const handleClick = (e) => {
+        if (restriction) {
+            e.preventDefault();
         }
     }
 
@@ -38,6 +45,7 @@ const Sidebar = ({structure, schoolName, schoolIndex}) => {
             <div className='fixed flex flex-col h-full pt-[2rem] pb-[2rem]'>
                 <Link 
                 to='/'
+                onClick={handleClick}
                 className='flex items-center ml-[1em] gap-[0.5rem] w-[20%] mb-[3rem]'>
                     <div className='basis-[30%]'>
                         <img
@@ -55,6 +63,7 @@ const Sidebar = ({structure, schoolName, schoolIndex}) => {
                         <Link
                         key={toolLink.id}
                         to={toolLink.pageLink}
+                        onClick={handleClick}
                         className={`${activeLink === toolLink.pageLink ? 'active-link' : null} ${toolLink.dropdown ? 'ml-[1rem] text-[90%]' : null} tool-links rounded-[0.4rem] gray-text font-[500] p-[0.5rem]`}>
                             <div className='flex justify-between items-start'>
                                 {toolLink.name}
@@ -67,7 +76,7 @@ const Sidebar = ({structure, schoolName, schoolIndex}) => {
                 <div className='max-w-[15%] flex ml-[1.25rem] mr-[2.25rem]'>
                     <Link
                     to='/'
-                    onClick={handleLogout}
+                    onClick={restriction ? handleClick : handleLogout}
                     className='tool-links w-full px-[0.5rem] py-[0.5rem] rounded-[0.4rem] font-[500] gray-text'
                     >
                         Logout

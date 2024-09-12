@@ -225,6 +225,17 @@ const EmailFinderPage = () => {
             }
 
             let result = await response.json();
+
+
+            result.forEach((school) => {
+                let emailCount = 0;
+                if (school.SCRAPED_EMAILS) {
+                    emailCount = Object.keys(school.SCRAPED_EMAILS).length;
+                }
+                school.totalEmails = emailCount;
+                console.log(school);
+            });
+
             setData(result);
         } catch (error) {
             console.error("Full error:", error);

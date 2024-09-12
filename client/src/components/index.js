@@ -23,6 +23,8 @@ import DonationInput from "./Donation/DonationInput";
 import Sidebar from "./Tools/Sidebar";
 import RequestPopUp from "./Tools/RequestPopUp";
 import UserHeading from "./Tools/UserHeading";
+import RestrictedDashboard from "./Tools/RestrictedDashboard.jsx";
+import RestrictedSidebar from "./Tools/RestrictedSidebar.jsx";
 
 import SearchTable from "./Tools/EmailFinder/SearchTable";
 import SchoolDetailSearchTable from "./Tools/EmailFinder/SchoolDetailSearchTable";
@@ -74,4 +76,6 @@ export {
   MatchedPairsTable,
   UnmatchedPairsTable,
   ErrorButton,
+  RestrictedDashboard,
+  RestrictedSidebar,
 };

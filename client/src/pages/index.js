@@ -4,6 +4,7 @@ import MentorMenteePage from "./MentorMenteePage";
 import SchoolDetailsPage from "./SchoolDetailsPage";
 import ToolsDashboardPage from "./ToolsDashboardPage";
 import SavedInformationPage from "./SavedInformationPage";
+import RestrictedPage from "./RestrictedPage";
 
 export {
   ChapterPage,
@@ -12,4 +13,5 @@ export {
   SchoolDetailsPage,
   ToolsDashboardPage,
   SavedInformationPage,
+  RestrictedPage,
 };

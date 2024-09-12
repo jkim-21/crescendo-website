@@ -69,8 +69,9 @@ const SavedSchoolsPage = () => {
                 if (!response.ok) {
                     setMentorMenteeError(data.error);
                 }
-                else if (data.sessions.length === 0) {
-                    setSessionNames([]);
+
+                else if (data.sessions === null) {
+                    setUserSessions(null);
                 }
                 else {
                     const sessions = data.sessions;
@@ -78,6 +79,7 @@ const SavedSchoolsPage = () => {
                 }
             }
             catch(err) {
+                console.error(err)
                 setMentorMenteeError('An error occurred while fetching user sessions.')
             }
         };

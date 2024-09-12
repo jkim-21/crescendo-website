@@ -55,8 +55,8 @@ export const navLinks = [
   },
   {
     id: "tools",
-    title: "Tools",
-    dropdown: true,
+    title: "Dashboard",
+    dashboard: true,
   },
 ];
 
