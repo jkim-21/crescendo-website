@@ -15,6 +15,7 @@
   --dark-gray: #222832;
   --white:#ffffff;
   --dark-white:#fafafa; 
+  --dark-gray: '#333';
   --gray: #586069;
   --light-gray: #9ca3af;
   --lighter-gray: #e0e0e4;
@@ -122,6 +123,10 @@ body {
 
 .dark-white-text {
   color: var(--dark-white);
+}
+
+.dark-gray-text {
+  color: var(--dark-gray);
 }
 
 .gray-text {

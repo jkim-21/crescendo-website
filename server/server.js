@@ -23,7 +23,7 @@ const corsOptions = {
   methods: ["POST", "GET", "PUT"],
 };
 
-const uri = `mongodb+srv://jjkjon21:${process.env.DATABASE_PASSWORD}@crescendowebsite.ssxyrz4.mongodb.net/?retryWrites=true&w=majority&appName=CrescendoWebsite`;
+const uri = `mongodb+srv://jjkjon21:${process.env.MONGO_DATABASE_PASSWORD}@crescendowebsite.ssxyrz4.mongodb.net/?retryWrites=true&w=majority&appName=CrescendoWebsite`;
 
 async function connect() {
   try {
@@ -41,7 +41,7 @@ app.use(express.json());
 app.use(stripeRoutes);
 app.use("/api", schoolInfoRoutes);
 app.use("/upload", excelUploadRoutes);
-app.use("/api",geolookupRoutes);
+app.use("/api", geolookupRoutes);
 
 app.use((error, req, res, next) => {
   res.status(500).json({ error: error.message });
