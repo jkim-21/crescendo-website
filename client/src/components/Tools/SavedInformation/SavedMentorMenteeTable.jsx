@@ -3,7 +3,7 @@ import { MatchedPairsContainer, UnmatchedPairsContainer} from '../components';
 
 
 const SavedMentorMenteeTable = ({userId, sessionName }) => {
-    const baseURL = import.meta.env.HEROKU_BASE_URL || "";
+    const baseURL = import.meta.env.VITE_HEROKU_BASE_URL || "";
 
     const [matchedData, setMatchedData] = useState([]);
     const [unmatchedData, setUnmatchedData] = useState([]);

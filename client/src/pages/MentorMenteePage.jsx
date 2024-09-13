@@ -18,7 +18,7 @@ const MentorMenteeMatchingPage = () => {
     
     const [isSaved, setIsSaved] = useState(false);
 
-    const baseURL = import.meta.env.HEROKU_BASE_URL || '';
+    const baseURL = import.meta.env.VITE_HEROKU_BASE_URL || '';
     const { user } = useAuth();
     
     useBodyBackgroundColor('#f6f8fe');

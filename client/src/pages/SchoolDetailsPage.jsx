@@ -12,7 +12,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 
 const SchoolDetailsPage = () => {
-  const baseURL = import.meta.env.HEROKU_BASE_URL || '';
+  const baseURL = import.meta.env.VITE_HEROKU_BASE_URL || '';
 
   useBodyBackgroundColor('#f6f8fe');
   const { user } = useAuth();

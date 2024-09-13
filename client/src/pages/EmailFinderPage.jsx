@@ -10,7 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import { usePreviousUrlKeyword } from '../context/PrevUrlKeyword'
 
 const EmailFinderPage = () => {
-    const baseURL = import.meta.env.HEROKU_BASE_URL || "";
+    const baseURL = import.meta.env.VITE_HEROKU_BASE_URL || "";
     const { user } = useAuth();
     const { setPreviousUrlKeyword } = usePreviousUrlKeyword();
 

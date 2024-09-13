@@ -5,7 +5,7 @@ import {styles} from '../../style';
 import {ErrorButton} from '../../components'
 
 const RequestPopUp = ({ onClose }) => {
-    const baseURL = import.meta.env.HEROKU_BASE_URL || "";
+    const baseURL = import.meta.env.VITE_HEROKU_BASE_URL || "";
     const { user } = useAuth();
     const [requestMessage, setRequestMessage] = useState('');
     const [requestReason, setRequestReason] = useState('');

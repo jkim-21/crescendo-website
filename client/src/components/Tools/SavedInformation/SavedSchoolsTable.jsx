@@ -15,7 +15,7 @@ import { usePreviousUrlKeyword } from '../../../context/PrevUrlKeyword';
 
 
 const SearchTable = ({ savedSchools }) => {
-  const baseURL = import.meta.env.HEROKU_BASE_URL || "";
+  const baseURL = import.meta.env.VITE_HEROKU_BASE_URL || "";
   const { user } = useAuth();
   const navigate = useNavigate();
   const {setPreviousUrlKeyword} = usePreviousUrlKeyword();

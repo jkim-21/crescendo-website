@@ -12,7 +12,7 @@ const MatchedPairsContainer = React.lazy(() => import('../components/Tools/Mento
 const UnmatchedPairsContainer = React.lazy(() => import('../components/Tools/MentorMenteeMatching/UnmatchedPairsContainer'));
 
 const SavedSchoolsPage = () => {
-    const baseURL = import.meta.env.HEROKU_BASE_URL || '';
+    const baseURL = import.meta.env.VITE_HEROKU_BASE_URL || '';
     const { user } = useAuth();
     useBodyBackgroundColor('#f6f8fe');
 

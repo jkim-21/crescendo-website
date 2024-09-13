@@ -4,7 +4,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const CurrentLocationButton = ({ onAddressFound }) => {
     const [loading, setLoading] = useState(false);
-    const baseURL = import.meta.env.HEROKU_BASE_URL || "";
+    const baseURL = import.meta.env.VITE_HEROKU_BASE_URL || "";
 
     const handleGetCurrentLocation = () => {
         setLoading(true);
