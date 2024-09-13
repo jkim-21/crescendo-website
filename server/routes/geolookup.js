@@ -5,28 +5,27 @@ import dotenv from "dotenv";
 const router = Router();
 dotenv.config();
 
-const GOOGLE_MAPS_API_KEY = process.env.VITE_GOOGLE_MAPS_API_KEY;
+const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 router.post("/validate-address", async (req, res) => {
-
   const { address, isSuggestedAddress } = req.body;
 
   if (!address) {
-    return res.status(400).json({ error: 'Address is required' });
+    return res.status(400).json({ error: "Address is required" });
   }
 
   try {
     const validationUrl = `https://addressvalidation.googleapis.com/v1:validateAddress?key=${GOOGLE_MAPS_API_KEY}`;
     const response = await fetch(validationUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         address: {
-          addressLines: [address]
-        }
-      })
+          addressLines: [address],
+        },
+      }),
     });
 
     const data = await response.json();
@@ -38,15 +37,27 @@ router.post("/validate-address", async (req, res) => {
 
       if (!validatedAddress) {
         //console.log("Validated address is missing");
-        return res.json({ valid: false, error: 'Missing address', suggestedAddress: null });
+        return res.json({
+          valid: false,
+          error: "Missing address",
+          suggestedAddress: null,
+        });
       }
 
       const addressComponents = validatedAddress.addressComponents || [];
-      
-      const stateComponent = addressComponents.find(c => c.componentType === 'administrative_area_level_1');
-      const cityComponent = addressComponents.find(c => c.componentType === 'locality');
-      const postalCodeComponent = addressComponents.find(c => c.componentType === 'postal_code');
-      const streetNumberComponent = addressComponents.find(c => c.componentType === 'street_number');
+
+      const stateComponent = addressComponents.find(
+        (c) => c.componentType === "administrative_area_level_1"
+      );
+      const cityComponent = addressComponents.find(
+        (c) => c.componentType === "locality"
+      );
+      const postalCodeComponent = addressComponents.find(
+        (c) => c.componentType === "postal_code"
+      );
+      const streetNumberComponent = addressComponents.find(
+        (c) => c.componentType === "street_number"
+      );
 
       //console.log("State:", stateComponent);
       //console.log("City:", cityComponent);
@@ -54,59 +65,74 @@ router.post("/validate-address", async (req, res) => {
       //console.log("Street Number", streetNumberComponent);
 
       let contradictions = [];
-      
-      if (!stateComponent || stateComponent.confirmationLevel !== 'CONFIRMED') {
+
+      if (!stateComponent || stateComponent.confirmationLevel !== "CONFIRMED") {
         contradictions.push("State not confirmed");
       }
-      if (!cityComponent || cityComponent.confirmationLevel !== 'CONFIRMED') {
+      if (!cityComponent || cityComponent.confirmationLevel !== "CONFIRMED") {
         contradictions.push("City not confirmed");
       }
-      if (!postalCodeComponent || postalCodeComponent.confirmationLevel !== 'CONFIRMED') {
+      if (
+        !postalCodeComponent ||
+        postalCodeComponent.confirmationLevel !== "CONFIRMED"
+      ) {
         contradictions.push("Postal code not confirmed");
       } else if (postalCodeComponent.componentName.text.length !== 5) {
         contradictions.push("Postal code not 5 digits");
       } else if (postalCodeComponent.replaced === true) {
         contradictions.push("postal code could not be confirmed");
       }
-      if (!streetNumberComponent || streetNumberComponent.confirmationLevel !== 'CONFIRMED') {
+      if (
+        !streetNumberComponent ||
+        streetNumberComponent.confirmationLevel !== "CONFIRMED"
+      ) {
         contradictions.push("Street Number not confirmed");
       }
       if (cityComponent.replaced) {
-        if ( !isSuggestedAddress ){
+        if (!isSuggestedAddress) {
           contradictions.push("City could not be confirmed");
         }
       }
 
       if (contradictions.length === 0) {
-        
-        const formattedAddress = validatedAddress.formattedAddress.replace(/(\d{5})-\d{4}/, '$1');
+        const formattedAddress = validatedAddress.formattedAddress.replace(
+          /(\d{5})-\d{4}/,
+          "$1"
+        );
         //console.log("Address validated successfully");
-        res.json({ 
-          valid: true, 
+        res.json({
+          valid: true,
           formattedAddress: formattedAddress,
-          geocode: data.result.geocode
+          geocode: data.result.geocode,
         });
       } else {
-        
-        const suggestedAddress = validatedAddress.formattedAddress.replace(/(\d{5})-\d{4}/, '$1');
+        const suggestedAddress = validatedAddress.formattedAddress.replace(
+          /(\d{5})-\d{4}/,
+          "$1"
+        );
         //console.log("Address validation failed:", contradictions);
-        res.json({ 
-          valid: false, 
-          error: 'Address has contradictions or missing components',
+        res.json({
+          valid: false,
+          error: "Address has contradictions or missing components",
           details: contradictions,
-          suggestedAddress: suggestedAddress
+          suggestedAddress: suggestedAddress,
         });
       }
     } else {
       console.log("Could not validate address: No result in API response");
-      res.json({ valid: false, error: 'Could not validate address', suggestedAddress: null });
+      res.json({
+        valid: false,
+        error: "Could not validate address",
+        suggestedAddress: null,
+      });
     }
   } catch (err) {
     console.error("Error validating address:", err);
     res.status(500).json({
-      error: "An error occurred while validating the address. Please try again later.",
+      error:
+        "An error occurred while validating the address. Please try again later.",
       details: [err.message],
-      suggestedAddress: null
+      suggestedAddress: null,
     });
   }
 });
