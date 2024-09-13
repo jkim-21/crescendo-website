@@ -18,7 +18,7 @@ const MentorMenteeMatchingPage = () => {
     
     const [isSaved, setIsSaved] = useState(false);
 
-    const baseURL = import.meta.env.VITE_DONATION_BASE_URL || '';
+    const baseURL = import.meta.env.HEROKU_BASE_URL || '';
     const { user } = useAuth();
     
     useBodyBackgroundColor('#f6f8fe');
@@ -96,7 +96,7 @@ const MentorMenteeMatchingPage = () => {
         setSessionId(newSessionId)
 
         try {
-            const response = await fetch(`/upload/create-pair-table`, {
+            const response = await fetch(`${baseURL}/upload/create-pair-table`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

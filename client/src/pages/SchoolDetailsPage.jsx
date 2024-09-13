@@ -12,6 +12,8 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 
 const SchoolDetailsPage = () => {
+  const baseURL = import.meta.env.HEROKU_BASE_URL || '';
+
   useBodyBackgroundColor('#f6f8fe');
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -122,8 +124,8 @@ const SchoolDetailsPage = () => {
     const fetchData = async () => {
       try {
         const [schoolResponse, emailsResponse] = await Promise.all([
-          fetch(`/api/school-data/${encodeURIComponent(indexNumber)}`),
-          fetch(`/api/school-emails/${encodeURIComponent(indexNumber)}`)
+          fetch(`${baseURL}/api/school-data/${encodeURIComponent(indexNumber)}`),
+          fetch(`${baseURL}/api/school-emails/${encodeURIComponent(indexNumber)}`)
         ]);
   
         if (!schoolResponse.ok || !emailsResponse.ok) {
@@ -195,7 +197,7 @@ const SchoolDetailsPage = () => {
       if (!user || !user.uid || !schoolIndex) return;
 
       try {
-        const response = await fetch(`/api/check-saved-school?uid=${user.uid}&schoolIndex=${schoolIndex}`);
+        const response = await fetch(`${baseURL}/api/check-saved-school?uid=${user.uid}&schoolIndex=${schoolIndex}`);
 
         if (!response.ok) {
           throw new Error('Failed to check saved status');
@@ -216,7 +218,7 @@ const SchoolDetailsPage = () => {
     if (!user || !user.uid || !schoolIndex) return;
 
     try {
-      const response = await fetch(`/api/save-school`, {
+      const response = await fetch(`${baseURL}/api/save-school`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -258,7 +260,7 @@ const SchoolDetailsPage = () => {
     }
 
     try {
-      const response = await fetch(`/api/report-school/${encodeURIComponent(indexNumber)}`, {
+      const response = await fetch(`${baseURL}/api/report-school/${encodeURIComponent(indexNumber)}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

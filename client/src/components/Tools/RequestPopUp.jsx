@@ -5,6 +5,7 @@ import {styles} from '../../style';
 import {ErrorButton} from '../../components'
 
 const RequestPopUp = ({ onClose }) => {
+    const baseURL = import.meta.env.HEROKU_BASE_URL || "";
     const { user } = useAuth();
     const [requestMessage, setRequestMessage] = useState('');
     const [requestReason, setRequestReason] = useState('');
@@ -28,7 +29,7 @@ const RequestPopUp = ({ onClose }) => {
                 console.log("email is missing");
             }
 
-          const response = await fetch('/api/add-request', {
+          const response = await fetch(`${baseURL}/api/add-request`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

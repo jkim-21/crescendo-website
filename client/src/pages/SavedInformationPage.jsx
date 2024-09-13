@@ -12,6 +12,7 @@ const MatchedPairsContainer = React.lazy(() => import('../components/Tools/Mento
 const UnmatchedPairsContainer = React.lazy(() => import('../components/Tools/MentorMenteeMatching/UnmatchedPairsContainer'));
 
 const SavedSchoolsPage = () => {
+    const baseURL = import.meta.env.HEROKU_BASE_URL || '';
     const { user } = useAuth();
     useBodyBackgroundColor('#f6f8fe');
 
@@ -45,7 +46,7 @@ const SavedSchoolsPage = () => {
             if (!user || !user.uid) return;
 
             try {
-                const response = await fetch(`/api/saved-schools?uid=${encodeURIComponent(user.uid)}`);
+                const response = await fetch(`${baseURL}/api/saved-schools?uid=${encodeURIComponent(user.uid)}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch saved schools');
                 }
@@ -63,7 +64,7 @@ const SavedSchoolsPage = () => {
     useEffect(() => {
         const fetchUserSessions = async (userId) => {
             try {
-                const response = await fetch(`/upload/get-user-sessions/${encodeURIComponent(userId)}`);
+                const response = await fetch(`${baseURL}/upload/get-user-sessions/${encodeURIComponent(userId)}`);
                 const data = await response.json();
 
                 if (!response.ok) {
@@ -139,7 +140,7 @@ const SavedSchoolsPage = () => {
       
         try {
             setMentorMenteeLoading(true);
-            const response = await fetch(`/upload/get-session-data?userId=${encodeURIComponent(userId)}&sessionName=${encodeURIComponent(sessionName)}`);
+            const response = await fetch(`${baseURL}/upload/get-session-data?userId=${encodeURIComponent(userId)}&sessionName=${encodeURIComponent(sessionName)}`);
         
             if (!response.ok) {
                 throw new Error('Failed to fetch saved sessions');
@@ -200,7 +201,7 @@ const SavedSchoolsPage = () => {
     const unsaveMentorMenteeTable = async (sessionName) => {
         try {
             console.log(sessionName)
-            const response = await fetch(`/upload/delete-table?sessionName=${encodeURIComponent(sessionName)}`, {
+            const response = await fetch(`${baseURL}/upload/delete-table?sessionName=${encodeURIComponent(sessionName)}`, {
                 method:'DELETE',
             });
             const data = await response.json();

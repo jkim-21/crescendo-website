@@ -3,6 +3,8 @@ import { MatchedPairsContainer, UnmatchedPairsContainer} from '../components';
 
 
 const SavedMentorMenteeTable = ({userId, sessionName }) => {
+    const baseURL = import.meta.env.HEROKU_BASE_URL || "";
+
     const [matchedData, setMatchedData] = useState([]);
     const [unmatchedData, setUnmatchedData] = useState([]);
     const [tableError, setTableError] = useState(null);
@@ -16,7 +18,7 @@ const SavedMentorMenteeTable = ({userId, sessionName }) => {
 
     const fetchSessionData = async () => {
         try {
-            const response = await fetch (`/upload/get-sessions-data/${userId}/${encodeURIComponent(sessionName)}`);
+            const response = await fetch (`${baseURL}/upload/get-sessions-data/${userId}/${encodeURIComponent(sessionName)}`);
             const data = await response.json();
 
 

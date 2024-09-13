@@ -10,6 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import { usePreviousUrlKeyword } from '../context/PrevUrlKeyword'
 
 const EmailFinderPage = () => {
+    const baseURL = import.meta.env.HEROKU_BASE_URL || "";
     const { user } = useAuth();
     const { setPreviousUrlKeyword } = usePreviousUrlKeyword();
 
@@ -32,7 +33,7 @@ const EmailFinderPage = () => {
 
     async function validateAddress(address, isSuggestedAddress = false) {
         try {
-            const response = await fetch('/api/validate-address', {
+            const response = await fetch(`${baseURL}/api/validate-address`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -205,7 +206,7 @@ const EmailFinderPage = () => {
                     throw new Error(`Address formatted incorrectly: ${validationResult.details.join(', ')}`)
                 }
 
-                const geocodeResponse = await fetch(`/api/geocode?address=${encodeURIComponent(validationResult.formattedAddress)}`);
+                const geocodeResponse = await fetch(`${baseURL}/api/geocode?address=${encodeURIComponent(validationResult.formattedAddress)}`);
                 const geocodeData = await geocodeResponse.json();
 
                 if (!geocodeResponse.ok) {
@@ -213,9 +214,9 @@ const EmailFinderPage = () => {
                 }
 
                 const { lat, lng } = geocodeData;
-                response = await fetch(`/api/coords?latitude=${lat}&longitude=${lng}&radius=${mileRadius}&uid=${user.uid}`);
+                response = await fetch(`${baseURL}/api/coords?latitude=${lat}&longitude=${lng}&radius=${mileRadius}&uid=${user.uid}`);
             } else {
-                response = await fetch(`/api/data?city=${city}&locationState=${locationState}&street=${street}&zipCode=${zipCode}&uid=${user.uid}`);
+                response = await fetch(`${baseURL}/api/data?city=${city}&locationState=${locationState}&street=${street}&zipCode=${zipCode}&uid=${user.uid}`);
             }
 
             if (!response.ok) {

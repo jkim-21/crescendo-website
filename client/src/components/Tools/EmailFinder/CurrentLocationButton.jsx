@@ -4,6 +4,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const CurrentLocationButton = ({ onAddressFound }) => {
     const [loading, setLoading] = useState(false);
+    const baseURL = import.meta.env.HEROKU_BASE_URL || "";
 
     const handleGetCurrentLocation = () => {
         setLoading(true);
@@ -12,7 +13,7 @@ const CurrentLocationButton = ({ onAddressFound }) => {
                 async (position) => {
                     try {
                         const { latitude, longitude } = position.coords;
-                        const response = await fetch(`/api/reverse-geocode?lat=${latitude}&lng=${longitude}`);
+                        const response = await fetch(`${baseURL}/api/reverse-geocode?lat=${latitude}&lng=${longitude}`);
                         if (!response.ok) {
                             throw new Error('Failed to get address');
                         }

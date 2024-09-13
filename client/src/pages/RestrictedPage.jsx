@@ -7,9 +7,11 @@ import { useAuth } from '../context/AuthContext.jsx';
 
 
 const RestrictedPage = () => {
+    const baseURL = import.meta.env.HEROKU_BASE_URL || '';
+
     const { user, setUser } = useAuth();
     const [error, setError] = useState('');
-
+    
     const handleGoogleSignIn = async () => {
         const provider = new GoogleAuthProvider();
     
@@ -19,11 +21,11 @@ const RestrictedPage = () => {
             if (email.endsWith('@crescendoforacause.com')) {
                 setUser(result.user);
 
-                const userCheck = await fetch(`/api/check-user?email=${encodeURIComponent(result.user.email)}`);
+                const userCheck = await fetch(`${baseURL}/api/check-user?email=${encodeURIComponent(result.user.email)}`);
                 const userData = await userCheck.json();
 
                 if (!userData.exists) {
-                    const response = await fetch(`/api/add-user`, {
+                    const response = await fetch(`${baseURL}/api/add-user`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

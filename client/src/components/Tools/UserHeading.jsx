@@ -85,7 +85,6 @@ const UserHeading = ({structure}) => {
             }
         }
         getGreeting();
-        console.log(user.photoURL)
     }, [])
 
     

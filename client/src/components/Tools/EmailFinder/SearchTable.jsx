@@ -12,6 +12,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 const SearchTable = ({ schoolInformation }) => {
+  const baseURL = import.meta.env.HEROKU_BASE_URL || "";
   const navigate = useNavigate();
   const {setPreviousUrlKeyword} = usePreviousUrlKeyword();
   const {user} = useAuth();
@@ -31,7 +32,7 @@ const SearchTable = ({ schoolInformation }) => {
     if (!user || !user.uid || !schoolIndex) return;
   
     try {
-      const response = await fetch(`/api/save-school`, {
+      const response = await fetch(`${baseURL}/api/save-school`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
