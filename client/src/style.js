@@ -1,7 +1,8 @@
 import "react-slideshow-image/dist/styles.css";
 
 const styles = {
-  boxWidth: "w-[90%] xl:max-w-[1280px] ",
+  boxWidth: "max-w-[90%] xl:max-w-[1280px]",
+  maxBoxWidth: "xl:max-w-[1280px]",
 
   heading1:
     "font-bold text-[2.5rem] md:leading-[4.5rem] md:text-[3.25rem] lg:text-[3.75rem] lg:leading-[5rem]",
@@ -9,6 +10,7 @@ const styles = {
 
   heading3: "font-bold text-[1.5rem] lg:text-[2rem]",
   heading4: "font-medium text-[1.25rem] lg:text-[1.5rem]",
+  heading5: "font-medium text-[1rem] lg:text-[1.25rem]",
 
   paragraph: "font-normal text-[1rem] leading-[1.5rem] lg:leading-[1.875rem]",
   subparagraph:

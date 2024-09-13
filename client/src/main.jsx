@@ -3,18 +3,24 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import {ChapterPage} from "./pages";
-import {MentorMenteePage} from "./pages";
-import {EmailFinderPage} from "./pages";
-import {ToolsDashboardPage} from "./pages";
 import AuthProvider from "./context/AuthContext";
-import {SchoolDetailsPage} from "./pages";
+import PreviousUrlKeyword from './context/PrevUrlKeyword'
 import ProtectedRoute from "./routes/ProtectedRoute";
+import {AnimationLayout} from "./components"
+import { ThemeProvider } from "@mui/material/styles";
+import {theme, tableTheme} from "./themes/theme";
+import {
+  ChapterPage, 
+  ToolsDashboardPage, 
+  MentorMenteePage, 
+  EmailFinderPage, 
+  SchoolDetailsPage, 
+  SavedInformationPage,
+} from "./pages";
+
 import {
   createBrowserRouter,
   RouterProvider,
-  Routes,
-  Route,
 } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -24,13 +30,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/chapters/:chapterName",
-    element: <ChapterPage />,
+    element: (
+      <AnimationLayout>
+          <ChapterPage />
+      </AnimationLayout>
+    ),
   },
   {
     path: "/tools",
     element: (
       <ProtectedRoute>
-        <ToolsDashboardPage />
+        <AnimationLayout>
+            <ToolsDashboardPage />
+        </AnimationLayout>
       </ProtectedRoute>
     ),
   },
@@ -38,18 +50,45 @@ const router = createBrowserRouter([
     path: "/tools/mentor-mentee-matching-system",
     element: (
       <ProtectedRoute>
-        <MentorMenteePage />
+        <AnimationLayout>
+          <ThemeProvider theme={tableTheme}>
+            <MentorMenteePage />
+          </ThemeProvider>
+        </AnimationLayout>
       </ProtectedRoute>
     ),
   },
   {
-    path: "/tools/email-finder-system/*",
+    path: "/tools/email-finder-system",
     element: (
       <ProtectedRoute>
-        <Routes>
-          <Route path="/" element={<EmailFinderPage />} />
-          <Route path="display/:schoolName" element={<SchoolDetailsPage />} />
-        </Routes>
+        <AnimationLayout>
+          <ThemeProvider theme={tableTheme}>
+              <EmailFinderPage />
+          </ThemeProvider>
+        </AnimationLayout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/tools/email-finder-system/school/:indexNumber",
+    element: (
+      <ProtectedRoute>
+        <AnimationLayout>
+            <SchoolDetailsPage />
+        </AnimationLayout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/tools/saved-information",
+    element: (
+      <ProtectedRoute>
+        <AnimationLayout>
+          <ThemeProvider theme={tableTheme}>
+            <SavedInformationPage />
+          </ThemeProvider>
+        </AnimationLayout>
       </ProtectedRoute>
     ),
   },
@@ -58,7 +97,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <PreviousUrlKeyword>
+        <RouterProvider router={router}/>
+      </PreviousUrlKeyword>
     </AuthProvider>
   </React.StrictMode>
 );

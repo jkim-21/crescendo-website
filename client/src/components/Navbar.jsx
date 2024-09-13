@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { navLinks, chapters, tools } from '../data/home-page.js';
 import { HashLink } from 'react-router-hash-link';
 import { Link, useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { auth } from '../config/firebaseConfig';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { useAuth } from '../context/AuthContext.jsx';
 
 import { styles } from '../style.js';
 import { close, menu } from '../assets';
@@ -14,12 +11,8 @@ import {logos} from '../data/global'
 const Navbar = ({ pageStyles }) => {
   const [toggle, setToggle] = useState(false);
   const [activeDropdownId, setActiveDropdownId] = useState(null);
-  const [error, setError] = useState(null);
-  const { user, setUser, logout } = useAuth();
+
   const navigate = useNavigate();
-
-  const filteredNavLinks = user ? navLinks : navLinks.filter(nav => nav.id !== 'tools');
-
 
   const showDropdown = (nav) => {
     if (nav.dropdown) {
@@ -34,57 +27,9 @@ const Navbar = ({ pageStyles }) => {
   const getDropdownItems = (navId) => {
     if (navId === 'chapters') {
       return chapters;
-    } else if (navId === 'tools') {
-      return tools;
-    }
+    } 
     return [];
   };
-
-  const handleToolClick = (link) => {
-    if (!user) {
-      handleGoogleSignIn();
-    } else {
-      navigate(link);
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const email = result.user.email;
-      if (email.endsWith('@crescendoforacause.com')) {
-        setUser(result.user);
-        navigate('/'); // Redirect to home after successful login
-      } else {
-        await auth.signOut();
-        setError('You must use an @crescendoforacause.com email to access this page.');
-      }
-    } 
-    
-    catch (error) {
-      setError(error.message);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      setUser(null);
-      navigate('/');
-    } 
-    catch (error) {
-      console.error("Logout error: ", error);
-    }
-  };
-
-
-  useEffect(() => {
-    if (error) {
-      alert(error); // Simple error handling, you can improve this
-    }
-  }, [error]);
 
   return (
     <nav className='dark-bg sticky top-0 z-50 shadow-md py-[0.75rem]'>
@@ -97,17 +42,19 @@ const Navbar = ({ pageStyles }) => {
         </HashLink>
         <ul className='hidden items-center list-none relative
                       navbar-custom:flex'>
-          {filteredNavLinks.map((nav, i) => (
+          {navLinks.map((nav) => (
             <li
               key={nav.id}
               id={`nav-item-${nav.id}`}
               onMouseEnter={() => showDropdown(nav)}
               onMouseLeave={hideDropdown}
-              className={`${nav.dropdown ? 'dropdown-item' : 'nav-link'} navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
+              className={`${nav.dropdown ? 'mt-[0.9rem]' : nav.dashboard ? '' : 'nav-link'} mx-[0.7rem] font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
                 <div className={`${pageStyles} ${nav.dropdown ? 'pb-3' : null}`}>
                   {nav.id === 'tools' ? (
                     <Link
-                    to ={``}>
+                      to={`/${nav.id}`}
+                      className='dashboard border rounded-[2rem] px-[1rem] py-[0.5rem] lighter-gray-border'
+                    >
                       {nav.title}
                     </Link>
                   ) : (
@@ -123,19 +70,16 @@ const Navbar = ({ pageStyles }) => {
                   {nav.dropdown ? <ExpandMoreIcon/> : null}
                 </div>
                 {nav.dropdown ? 
-                (<div className={
-                  `${activeDropdownId === nav.id ? 'block' : 'hidden'} ${nav.id === 'chapters' ? 'max-w-[12.5rem]': null} dropdown-animation dropdown-background absolute dark-text rounded cursor-default py-[1rem] px-[0.5rem]
-                  lg:px-[1rem]`}>
-                  {nav.id === 'tools' ? (
-                    <p className='text-blue-800 text-center mb-[0.5rem]'>
-                      Note: Tools can only be accessed by organization staff
-                    </p>
-                  ) : null}
+                (<div 
+                  className={
+                  `${activeDropdownId === nav.id ? 'block' : 'hidden'} ${nav.id === 'chapters' ? 'max-w-[12.5rem]': null} dropdown dropdown-animation dropdown-background absolute dark-text rounded cursor-default py-[1rem] px-[0.5rem]
+                  lg:px-[1rem]`
+                }>
                   {getDropdownItems(nav.id).map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => nav.id === 'tools' ? handleToolClick(item.link) : navigate(item.link)}
-                      className={`${nav.id === 'tools' ? 'mb-[0.5rem]' : null} dropdown-link`}>
+                      onClick={() => nav.id === 'chapters' ? navigate(item.link) : 'null'}
+                      className={`dropdown-link`}>
                       {item.name}
                     </button>
                   ))}
@@ -143,14 +87,6 @@ const Navbar = ({ pageStyles }) => {
                 ) : null}
             </li>
           ))}
-          <li className={`${pageStyles} navbar-item font-normal cursor-pointer text-[1rem] min-w-[max-content] text-white px-3 py-1`}>
-            {user ? (
-              <button 
-              onClick={handleLogout}>Logout</button>
-            ) : (
-              <button onClick={handleGoogleSignIn}>Login</button>
-            )}
-          </li>
         </ul>
         <div className='flex flex-1 justify-end items-center 
                         navbar-custom:hidden'>
@@ -165,26 +101,27 @@ const Navbar = ({ pageStyles }) => {
               onClick={() => setToggle((previous) => !previous)}
               className='fixed inset-0 bg-black bg-opacity-50 z-1'>
             </div> : null}
-          <div className={`${toggle ? 'flex' : 'hidden'} sidebar absolute top-20 right-0 dropdown-background border-[black] border-[1px] shadow-2xl rounded-xl py-[1.5rem] px-[1.5rem] mx-[1rem]`}>
+          <div className={`${toggle ? 'flex' : 'hidden'} nav-sidebar absolute top-20 right-0 dropdown-background border-[black] border-[1px] shadow-2xl rounded-xl py-[1.5rem] px-[1.5rem] mx-[1rem]`}>
             <ul className='list-none flex flex-col w-full'>
-              {filteredNavLinks.map((nav, i) => (
+              {navLinks.map((nav, i) => (
                 <li
                   key={nav.id}
-                  className={`${i === navLinks.length - 1 ? 'mb-0' : 'mb-[0.25rem]'} sidebar-link dark-text`}>
-                     <HashLink
-                    to={`/#${nav.id}`}
-                    onClick={() => setToggle((previous) => !previous)}>
-                        {nav.title}
-                  </HashLink>
+                  className={`${i === navLinks.length - 1 ? 'mb-0' : 'mb-[0.25rem]'} nav-sidebar-link dark-text`}>
+                    {nav.id === 'tools' ? (
+                    <Link
+                      to={`/${nav.id}`}
+                    >
+                      {nav.title}
+                    </Link>
+                  ) : (
+                    <HashLink
+                      to={`/#${nav.id}`}
+                      onClick={() => setToggle((previous) => !previous)}>
+                          {nav.title}
+                    </HashLink>
+                  )}
                 </li>
               ))}
-              <li className='sidebar-link dark-text'>
-                {user ? (
-                  <button onClick={handleLogout}>Logout</button>
-                ) : (
-                  <button onClick={handleGoogleSignIn}>Login</button>
-                )}
-              </li>
             </ul>
           </div>
         </div>
