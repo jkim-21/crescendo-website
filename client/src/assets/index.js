@@ -154,7 +154,6 @@ export {
   projectImagePlaceholder,
   toolsLogo,
   logoTitle,
-  instructions,
   juliafranco,
   johnnylin,
   miapaul,
