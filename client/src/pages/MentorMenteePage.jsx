@@ -121,7 +121,6 @@ const MentorMenteeMatchingPage = () => {
     
     const unsaveMentorMenteeTable = async (sessionName) => {
         try {
-            console.log(sessionName)
             const response = await fetch(`/upload/delete-table?sessionName=${encodeURIComponent(sessionName)}`, {
                 method:'DELETE',
             });
@@ -129,7 +128,6 @@ const MentorMenteeMatchingPage = () => {
 
             if (!response.ok) {
                 setErrorMessage(data.error);
-                console.log(data.error)
             }
             else {
                 setIsSaved(false)

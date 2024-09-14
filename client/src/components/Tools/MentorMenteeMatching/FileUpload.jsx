@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import HelpModal from './HelpModal';
-import {styles} from '../../../style'
 import {instructionPieces} from '../../../data/tools-pages'
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import UploadFileIcon from '@mui/icons-material/UploadFile';

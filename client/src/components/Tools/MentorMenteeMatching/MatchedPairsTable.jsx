@@ -34,7 +34,6 @@ const MatchedPairsTable = ({ studentPairings }) => {
       const data = await response.json();
   
       if (!response.ok) {
-        console.log(response)
         throw new Error(data.error || 'Failed to save school') 
       }
       if (data.success) {

@@ -79,7 +79,6 @@ const SchoolDetailsPage = () => {
       });
     });
   
-    //console.log("Sorted output here:", sortedAndGroupedEmails);
     return sortedAndGroupedEmails;
   };
 
@@ -108,7 +107,6 @@ const SchoolDetailsPage = () => {
 
 
   const handleBack = () => {
-    console.log(previousUrlKeyword);
     if (previousUrlKeyword === 'school') {
       navigate('/tools/email-finder-system');
     }
@@ -231,7 +229,6 @@ const SchoolDetailsPage = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        console.log(response)
         throw new Error(data.error || 'Failed to save school')
       }
       if (data.success) {
