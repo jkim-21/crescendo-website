@@ -125,7 +125,6 @@ const DonationForm = () => {
         }
         else {
             subscriptionMutate(amount, firstName, lastName, donorEmail);
-            console.log(subscriptionData)
         }
     };
 

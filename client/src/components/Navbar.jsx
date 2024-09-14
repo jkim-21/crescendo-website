@@ -79,7 +79,7 @@ const Navbar = ({ pageStyles }) => {
                     <button
                       key={item.id}
                       onClick={() => nav.id === 'chapters' ? navigate(item.link) : 'null'}
-                      className={`dropdown-link`}>
+                      className={`dropdown-link text-black`}>
                       {item.name}
                     </button>
                   ))}

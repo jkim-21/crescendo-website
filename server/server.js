@@ -19,7 +19,7 @@ const corsOptions = {
   origin: ["https://crescendoforacause.com", "http://localhost:5173"],
   optionsSuccessStatus: 200,
   credentials: true,
-  methods: ["POST", "GET", "PUT"],
+  methods: ["POST", "GET", "PUT", "DELETE"],
 };
 
 const uri = `mongodb+srv://jjkjon21:${process.env.MONGO_DATABASE_PASSWORD}@crescendowebsite.ssxyrz4.mongodb.net/?retryWrites=true&w=majority&appName=CrescendoWebsite`;

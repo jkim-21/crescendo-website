@@ -28,6 +28,7 @@ const SavedSchoolsPage = () => {
     const [mentorMenteeLoading, setMentorMenteeLoading] = useState(false);
 
     const [openDropdowns, setOpenDropdowns] = useState({});
+    const [errorMessage, setErrorMessage] = useState('');
 
 
     // Handle Dropdown
@@ -200,7 +201,6 @@ const SavedSchoolsPage = () => {
     // Deleting Saved School Information as necessary
     const unsaveMentorMenteeTable = async (sessionName) => {
         try {
-            console.log(sessionName)
             const response = await fetch(`${baseURL}/upload/delete-table?sessionName=${encodeURIComponent(sessionName)}`, {
                 method:'DELETE',
             });
@@ -208,7 +208,6 @@ const SavedSchoolsPage = () => {
 
             if (!response.ok) {
                 setErrorMessage(data.error);
-                console.log(data.error)
             }
             else {
                 setSessionData((prevSessions) =>

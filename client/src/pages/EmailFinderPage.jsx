@@ -234,7 +234,6 @@ const EmailFinderPage = () => {
                     emailCount = Object.keys(school.SCRAPED_EMAILS).length;
                 }
                 school.totalEmails = emailCount;
-                console.log(school);
             });
 
             setData(result);
