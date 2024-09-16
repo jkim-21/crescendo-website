@@ -63,6 +63,7 @@ import annmariefan from "./annmariefan.png";
 import miapaul from "./miapaul.png";
 import johnnylin from "./johnnylin.png";
 import juliafranco from "./juliafranco.png";
+import ellaney from "./ellaney.png";
 
 import stevensonBackground from "./stevenson-background.png";
 
@@ -165,4 +166,5 @@ export {
   mentorMenteeInstructions1,
   mentorMenteeInstructions2,
   mentorMenteeInstructions3,
+  ellaney,
 };
