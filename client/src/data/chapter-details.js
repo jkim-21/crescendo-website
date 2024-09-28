@@ -24,6 +24,7 @@ import {
   miapaul,
   johnnylin,
   juliafranco,
+  ellaney,
 } from "../assets";
 
 export const colby = {
@@ -137,8 +138,14 @@ export const harvard = {
     {
       id: "Kaiya-Brooks",
       name: "Kaiya Brooks",
-      title: "President",
+      title: "Co-President",
       headshot: kaiyabrooks,
+    },
+    {
+      id: "Ellaney-Matarese",
+      name: "Ellaney Matarese",
+      title: "Co-President",
+      headshot: ellaney,
     },
   ],
 };
