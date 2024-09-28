@@ -44,9 +44,13 @@ import harvardBackground from "./harvard-background.jpg";
 import kaiyabrooks from "./kaiya-brooks.png";
 
 import northwesternBackground from "./northwestern-background.jpg";
-import alexValdes from "./alex-valdes.png";
-import katieHe from "./katie-he.png";
 import nicoleCeriani from "./nicole-ceriani.png";
+import yujinTartar from "./yujin-tatar.png";
+import benKim from "./ben-kim.png";
+import ethanCorriel from "./ethan-corriel.png";
+import nedYu from "./ned-yu.png";
+import erikaYamamoto from "./erika-yamamoto.png";
+
 import jonathanChen from "./jonathan-chen.png";
 import gloriaWang from "./gloria-wang.png";
 import kevinXian from "./kevin-xian.png";
@@ -91,11 +95,12 @@ import logoTitle from "./logo-title.png";
 import toolsLogo2 from "./tools-logo2.png";
 
 export {
-  toolsLogo2,
-  alexValdes,
   allen,
   ameliaRaymond,
   annaXian,
+  annaxian2,
+  annmariefan,
+  benKim,
   c4cDonation,
   chapterBackground,
   chicagoTribune,
@@ -111,30 +116,39 @@ export {
   donationPic,
   donationRecipient,
   dongLee,
-  erickFuerte,
+  emailFinderSystemPreview,
+  erikaYamamoto,
+  ethanCorriel,
   financeEvent,
-  gloriaWang,
   harvard,
   harvardBackground,
   heritageEvent,
   instrument,
   instrumentDonation,
   involvementLogo,
+  jasonli,
+  johnnylin,
   jonathanChen,
   jonathanRaymond,
   joshChan,
+  juliafranco,
   juliaOng,
   justinKim,
   kaiyabrooks,
   karisLee,
-  katieHe,
-  kevinXian,
   kiranMohan,
   kritiMohan,
   logo,
+  logoTitle,
+  mentorMenteeInstructions1,
+  mentorMenteeInstructions2,
+  mentorMenteeInstructions3,
+  mentorMenteeSystemPreview,
   menu,
   merionEvent,
+  miapaul,
   musubiEvent,
+  nedYu,
   najiYerokun,
   nicoleCeriani,
   northwestern,
@@ -145,24 +159,14 @@ export {
   nwcon3,
   performance,
   placeholder,
+  projectImagePlaceholder,
   stevenson,
   stevensonBackground,
+  toolsLogo,
+  toolsLogo2,
   ucsb,
   ucsbBackground,
   ucsbcon1,
   ucsbcon2,
-  projectImagePlaceholder,
-  toolsLogo,
-  logoTitle,
-  juliafranco,
-  johnnylin,
-  miapaul,
-  annaxian2,
-  jasonli,
-  annmariefan,
-  emailFinderSystemPreview,
-  mentorMenteeSystemPreview,
-  mentorMenteeInstructions1,
-  mentorMenteeInstructions2,
-  mentorMenteeInstructions3,
+  yujinTartar,
 };
