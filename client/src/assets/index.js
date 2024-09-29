@@ -68,6 +68,7 @@ import miapaul from "./miapaul.png";
 import johnnylin from "./johnnylin.png";
 import juliafranco from "./juliafranco.png";
 import ellaney from "./ellaney.png";
+import michelledoe from "./michelledoe.png";
 
 import stevensonBackground from "./stevenson-background.png";
 
@@ -171,4 +172,5 @@ export {
   ucsbcon2,
   yujinTartar,
   ellaney,
+  michelledoe
 };

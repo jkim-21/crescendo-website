@@ -25,6 +25,7 @@ import {
   johnnylin,
   juliafranco,
   ellaney,
+  michelledoe,
 } from "../assets";
 
 export const colby = {
@@ -321,6 +322,12 @@ export const ucsb = {
       name: "Julia Franco",
       title: "Mentorship Coordinator",
       headshot: juliafranco,
+    },
+    {
+      id: "michelle-doe",
+      name: "Michelloe Doe",
+      title: "Mentorship Coordinator",
+      headshot: michelledoe,
     },
   ],
 };
