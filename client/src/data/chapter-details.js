@@ -325,7 +325,7 @@ export const ucsb = {
     },
     {
       id: "michelle-doe",
-      name: "Michelloe Doe",
+      name: "Michelle Doe",
       title: "Mentorship Coordinator",
       headshot: michelledoe,
     },
