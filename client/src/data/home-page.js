@@ -200,6 +200,16 @@ export const news = [
 
 export const executiveBoard = [
   {
+    id: "jonathan-executive",
+    img: jonathanRaymond,
+    name: "Jonathan Raymond",
+    title: "",
+    content: {
+      content1:
+        "Jonathan Raymond is a co-founder of Crescendo for a Cause and a graduate of the University of Illinois Urbana-Champaign, with a bachelor's degree in Chemistry. He has played piano since the age of four and picked up trumpet at ten. When Jonathan isn’t at the research bench, he loves to take time to play in jam sessions and compose music. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. Jonathan's favorite musical memories are during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble.",
+    },
+  },
+  {
     id: "kiran-executive",
     img: kiranMohan,
     name: "Kiran Mohan",
@@ -227,16 +237,6 @@ export const executiveBoard = [
     content: {
       content1:
         "Allen Beckwith is a co-founder of Crescendo for a Cause and a graduate of Northwestern University, where he completed a Bachelor of Science degree in Electrical Engineering. He currently works at AT&T as a Network Engineer in Dallas, TX. Allen’s musical experience spans 18 years, having begun playing the piano at age 4 and the clarinet at age 10. Throughout college, Allen performed with the Symphonic Band of Northwestern’s Bienen School of Music. His favorite composer is Sergei Rachmaninoff, although he enjoys music ranging from the Classical and Romantic eras, along with jazz and contemporary artists. Allen’s favorite musical memories consist of his 2 years as Drum Major at Adlai E. Stevenson High School, where he gained lifelong friends and valuable leadership skills.",
-    },
-  },
-  {
-    id: "jonathan-executive",
-    img: jonathanRaymond,
-    name: "Jonathan Raymond",
-    title: "",
-    content: {
-      content1:
-        "Jonathan Raymond is a co-founder of Crescendo for a Cause and a graduate of the University of Illinois Urbana-Champaign, with a bachelor's degree in Chemistry. He has played piano since the age of four and picked up trumpet at ten. When Jonathan isn’t at the bench doing research, he loves to take time to play in jazz bands around campus and compose music. Some of his favorite musicians and composers consist of Chick Corea, Oscar Peterson, Tito Carrillo and Frédéric Chopin. Jonathan's favorite musical memories are during his two summers in the Birch Creek Music Performance Center, Summer Music Academy Jazz Program, and performing in the 2020 Illinois Music Education Association All-State Honors Jazz Ensemble. Jonathan will shortly be joining the lab of Diana Bianchi as an IRTA Postbac at the National Institutes of Health.",
     },
     lastOfficer: true,
   },
