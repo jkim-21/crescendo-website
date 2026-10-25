@@ -82,10 +82,10 @@ import placeholder from "./placeholder.png";
 
 import ameliaRaymond from "./amelia-raymond.png";
 import kritiMohan from "./kriti-mohan.png";
-import benjaminFei from "./benjamin-fei.JPG";
+import benjaminFei from "./benjamin-fei.jpg";
 import drishtiGohi from "./drishti-gohi.jpeg";
-import florenceLee from "./florence-lee.JPG";
-import christopherMertz from "./christopher-mertz.JPG";
+import florenceLee from "./florence-lee.jpg";
+import christopherMertz from "./christopher-mertz.jpg";
 
 import nwcon1 from "./nwcon1.png";
 import nwcon2 from "./nwcon2.png";
