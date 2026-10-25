@@ -29,7 +29,11 @@ import {
   rachelGarich,
   nathanielPistorius,
   jubileeChen,
-  elizabethHsu
+  elizabethHsu,
+  benjaminFei,
+  drishtiGohi,
+  florenceLee,
+  christopherMertz,
 } from "../assets";
 
 export const colby = {
@@ -393,16 +397,28 @@ export const stevenson = {
   ],
   officers: [
     {
-      id: "kriti-mohan",
-      name: "Kriti Mohan",
+      id: "benjamin-fei",
+      name: "Benjamin Fei",
       title: "Co-President",
-      headshot: kritiMohan,
+      headshot: benjaminFei,
     },
     {
-      id: "amelia-raymond",
-      name: "Amelia Raymond",
+      id: "drishti-gohi",
+      name: "Drishti Gohi",
       title: "Co-President",
-      headshot: ameliaRaymond,
+      headshot: drishtiGohi,
+    },
+    {
+      id: "florence-lee",
+      name: "Florence Lee",
+      title: "Treasurer",
+      headshot: florenceLee,
+    },
+    {
+      id: "christopher-mertz",
+      name: "Christopher Mertz",
+      title: "Director of Performance",
+      headshot: christopherMertz,
     },
   ],
 };
