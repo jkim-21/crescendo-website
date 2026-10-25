@@ -82,6 +82,10 @@ import placeholder from "./placeholder.png";
 
 import ameliaRaymond from "./amelia-raymond.png";
 import kritiMohan from "./kriti-mohan.png";
+import benjaminFei from "./benjamin-fei.JPG";
+import drishtiGohi from "./drishti-gohi.jpeg";
+import florenceLee from "./florence-lee.JPG";
+import christopherMertz from "./christopher-mertz.JPG";
 
 import nwcon1 from "./nwcon1.png";
 import nwcon2 from "./nwcon2.png";
@@ -180,5 +184,9 @@ export {
   rachelGarich,
   nathanielPistorius,
   jubileeChen,
-  elizabethHsu
+  elizabethHsu,
+  benjaminFei,
+  drishtiGohi,
+  florenceLee,
+  christopherMertz,
 };
